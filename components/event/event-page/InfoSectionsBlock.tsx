@@ -115,7 +115,7 @@ export function InfoSectionsBlock({
                       <input
                         style={S.inp}
                         type="text"
-                        placeholder="Suggested donation amount (optional, e.g. 15)"
+                        placeholder="Voorgestelde bijdrage (optioneel, bijvoorbeeld 15)"
                         value={editDraft.title}
                         onChange={(e) => setEditDraft((d) => ({ ...d, title: e.target.value }))}
                       />
@@ -123,7 +123,7 @@ export function InfoSectionsBlock({
                     <input
                       style={S.inp}
                       type="url"
-                      placeholder="Link (optional)"
+                      placeholder="Link (optioneel)"
                       value={editDraft.url}
                       onChange={(e) => setEditDraft((d) => ({ ...d, url: e.target.value }))}
                     />
@@ -132,10 +132,10 @@ export function InfoSectionsBlock({
                         onClick={() => commitEditSection(sec.id)}
                         style={{ ...S.btn, flex: 1, padding: "8px" }}
                       >
-                        Save
+                        Opslaan
                       </button>
                       <button onClick={() => setEditingSection(null)} style={S.mutedBtn}>
-                        Cancel
+                        Annuleren
                       </button>
                     </div>
                   </div>
@@ -168,7 +168,7 @@ export function InfoSectionsBlock({
                       )}
                       {sec.title && (sec.type === "zelle" || sec.type === "venmo") && (
                         <span style={{ marginLeft: "6px", color: t.textMuted, fontSize: "12px" }}>
-                          (Suggested: ${sec.title})
+                          (Voorgestelde bijdrage: ${sec.title})
                         </span>
                       )}
                     </div>
@@ -185,7 +185,7 @@ export function InfoSectionsBlock({
                               padding: "2px",
                               flexShrink: 0,
                             }}
-                            title="Move Up"
+                            title="Omhoog verplaatsen"
                           >
                             <ChevronUp size={13} />
                           </button>
@@ -201,7 +201,7 @@ export function InfoSectionsBlock({
                               padding: "2px",
                               flexShrink: 0,
                             }}
-                            title="Move Down"
+                            title="Omlaag verplaatsen"
                           >
                             <ChevronDown size={13} />
                           </button>
@@ -263,7 +263,7 @@ export function InfoSectionsBlock({
             backdropFilter: "blur(8px)",
           }}
         >
-          <span style={{ fontSize: "13px", color: t.textSecondary }}>Section removed</span>
+          <span style={{ fontSize: "13px", color: t.textSecondary }}>Sectie verwijderd</span>
           <button
             onClick={undoDeleteSection}
             style={{
@@ -278,7 +278,7 @@ export function InfoSectionsBlock({
               fontFamily: "inherit",
             }}
           >
-            Undo
+            Ongedaan maken
           </button>
         </div>
       )}
@@ -304,7 +304,7 @@ export function InfoSectionsBlock({
               <input
                 style={{ ...S.inp, marginBottom: "10px" }}
                 type="text"
-                placeholder="Suggested donation amount (optional, e.g. 15)"
+                placeholder="Voorgestelde bijdrage (optioneel, bijvoorbeeld 15)"
                 value={sectionDraft.title}
                 onChange={(e) => setSectionDraft((d) => ({ ...d, title: e.target.value }))}
               />
@@ -312,16 +312,16 @@ export function InfoSectionsBlock({
             <input
               style={{ ...S.inp, marginBottom: "10px" }}
               type="url"
-              placeholder="Link (optional)"
+              placeholder="Link (optioneel)"
               value={sectionDraft.url}
               onChange={(e) => setSectionDraft((d) => ({ ...d, url: e.target.value }))}
             />
             <div style={{ display: "flex", gap: "8px" }}>
               <button onClick={commitInfoSection} style={{ ...S.btn, flex: 1, padding: "10px" }}>
-                Save
+                Opslaan
               </button>
               <button onClick={() => setAddingSection(false)} style={S.mutedBtn}>
-                Cancel
+                Annuleren
               </button>
             </div>
           </EventCard>
@@ -355,7 +355,7 @@ export function InfoSectionsBlock({
               style={getChipStyle(true)}
             >
               <Plus size={13} />
-              Add Custom
+              Aangepast toevoegen
             </button>
           </div>
         ))}

@@ -52,7 +52,7 @@ export function PollsSection({
           >
             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
               <BarChart3 size={16} style={{ color: t.accent }} />
-              <span style={{ fontWeight: 700 }}>Polls</span>
+              <span style={{ fontWeight: 700 }}>Peilingen</span>
             </div>
             {isHost && (
               <a
@@ -66,7 +66,7 @@ export function PollsSection({
 
           {isPendingGuest && (
             <div style={pendingNoticeStyle}>
-              You must be an approved guest to vote. Your RSVP is awaiting host approval.
+              Je moet een goedgekeurde gast zijn om te stemmen. Je aanmelding wacht op goedkeuring van de organisator.
             </div>
           )}
 
@@ -122,7 +122,7 @@ export function PollsSection({
                             color: "#f87171",
                           }}
                         >
-                          🔒 Locked
+                          🔒 Vergrendeld
                         </span>
                       )}
                       {poll.hideVoters && (
@@ -136,15 +136,15 @@ export function PollsSection({
                             color: t.textSecondary,
                           }}
                         >
-                          🕶️ Anonymous
+                          🕶️ Anoniem
                         </span>
                       )}
                     </div>
                   </div>
 
                   <div style={{ fontSize: "11px", color: t.textMuted, marginBottom: "12px" }}>
-                    {poll.multiChoice ? "Select multiple" : "Select one"}
-                    {poll.allowGuestsToAdd && " • Guests can suggest options"}
+                    {poll.multiChoice ? "Meerdere opties kiezen" : "Eén optie kiezen"}
+                    {poll.allowGuestsToAdd && " • Gasten kunnen opties voorstellen"}
                   </div>
 
                   <div
@@ -232,7 +232,7 @@ export function PollsSection({
                                     fontStyle: "italic",
                                   }}
                                 >
-                                  (by {opt.creatorName})
+                                  (door {opt.creatorName})
                                 </span>
                               )}
                             </label>
@@ -272,7 +272,7 @@ export function PollsSection({
                               {shouldShowVoters ? (
                                 opt.votes.map((v) => v.voterName).join(", ")
                               ) : (
-                                <span style={{ fontStyle: "italic" }}>Voters hidden</span>
+                                <span style={{ fontStyle: "italic" }}>Stemmen zijn verborgen</span>
                               )}
                             </div>
                           )}
@@ -286,7 +286,7 @@ export function PollsSection({
                     <div style={{ display: "flex", gap: "6px", marginTop: "12px" }}>
                       <input
                         style={{ ...S.inp, padding: "8px 12px", fontSize: "12.5px" }}
-                        placeholder="Suggest another option..."
+                        placeholder="Stel een andere optie voor..."
                         value={newPollOptionTexts[poll.id] ?? ""}
                         onChange={(e) => {
                           setNewPollOptionTexts((prev) => ({
@@ -308,7 +308,7 @@ export function PollsSection({
                           whiteSpace: "nowrap",
                         }}
                       >
-                        Suggest
+                        Voorstellen
                       </button>
                     </div>
                   )}
@@ -325,7 +325,7 @@ export function PollsSection({
                         gap: "4px",
                       }}
                     >
-                      🔒 RSVP (GOING or MAYBE) to vote and suggest options!
+                      🔒 Meld je aan als aanwezig of misschien om te stemmen en opties voor te stellen!
                     </div>
                   )}
 
@@ -341,7 +341,7 @@ export function PollsSection({
                         gap: "4px",
                       }}
                     >
-                      🔒 This poll is locked. Voting is closed.
+                      🔒 Deze peiling is vergrendeld. Stemmen is gesloten.
                     </div>
                   )}
                 </div>

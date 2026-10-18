@@ -1,80 +1,81 @@
 # RSVP to Me
 
-A beautiful, self-hosted, social-first event and RSVP platform for personal events (house parties, wine nights, dinners). Inspired by Partiful's expressive aesthetic. No payments, no ticketing — just invite links, RSVPs, connection, and social coordination.
+Een mooi, zelf te hosten platform voor evenementen en aanmeldingen, gericht op persoonlijk contact — voor huisfeesten, wijnavonden, diners en meer. Geïnspireerd op de expressieve stijl van Partiful. Geen betalingen of ticketverkoop: alleen uitnodigingslinks, aanmeldingen, contact en samen plannen.
 
-[Screenshots](#screenshots) · [Features](#core-features) · [Quick Start](#quick-start) · [Host Guide](docs/host/getting-started.md) · [Admin Guide](docs/admin/installation.md) · [Releases](https://github.com/joe-cole1/rsvp-to-me/releases)
+[Schermvoorbeelden](#schermvoorbeelden) · [Belangrijkste functies](#belangrijkste-functies) · [Snel starten](#snel-starten) · [Handleiding voor organisatoren](docs/host/getting-started.md) · [Beheerdershandleiding](docs/admin/installation.md) · [Releases](https://github.com/joe-cole1/rsvp-to-me/releases)
 
-## Screenshots
+## Schermvoorbeelden
 
-### Guest event page
+### Evenementpagina voor gasten
 
-![Wine Night guest event page with a cover image and Going, Maybe, and Can't go RSVP choices](public/docs/images/event-guest-view.png)
+![Evenementpagina voor Wijnavond met omslagafbeelding en de aanmeldopties Aanwezig, Misschien en Afwezig](public/docs/images/event-guest-view.png)
 
-Guests see a themed invitation and can respond directly from the event page.
+Gasten zien een uitnodiging in het gekozen thema en kunnen rechtstreeks op de evenementpagina reageren.
 
-### Host dashboard
+### Dashboard voor organisatoren
 
-![Host dashboard showing event filters, a New event card, and the upcoming Wine Night event](public/docs/images/host-dashboard.png)
+![Dashboard voor organisatoren met evenementfilters, een kaart Nieuw evenement en het aankomende evenement Wijnavond](public/docs/images/host-dashboard.png)
 
-Hosts can create events, review upcoming gatherings, and track responses from their dashboard.
+Organisatoren kunnen evenementen aanmaken, aankomende bijeenkomsten bekijken en reacties volgen vanuit hun dashboard.
 
-Explore [guest management](docs/host/guest-list.md#guest-management-preview) and [theme customization](docs/host/customizing-your-page.md#theme-customization-preview) in the host guides.
+Bekijk ook [gastenbeheer](docs/host/guest-list.md#voorbeeld-van-gastenbeheer) en [thema-aanpassing](docs/host/customizing-your-page.md#voorbeeld-van-thema-aanpassing) in de handleidingen voor organisatoren.
 
-## How It Works
+## Hoe het werkt
 
-1. **Create an event:** Set the title, date, time, and location.
-2. **Make it yours:** Choose a theme, add a cover image, and set visibility and RSVP options.
-3. **Invite your guests:** Share the event link or send email and optional SMS invitations.
-4. **Manage the gathering:** Track responses, coordinate food and plans, send updates, and check guests in.
+1. **Maak een evenement aan:** stel de titel, datum, tijd en locatie in.
+2. **Geef het je eigen stijl:** kies een thema, voeg een omslagafbeelding toe en stel de zichtbaarheid en aanmeldopties in.
+3. **Nodig gasten uit:** deel de evenementlink of verstuur uitnodigingen per e-mail en eventueel sms.
+4. **Beheer de bijeenkomst:** volg aanmeldingen, stem eten en plannen af, verstuur updates en check gasten in.
 
-**Hosts** sign in with a magic link. **Guests** can RSVP without creating an account and use their personal edit link to update their response while changes are allowed. Private events still require the appropriate invitation or access. See the [Host Guide](docs/host/getting-started.md) for the full workflow.
+**Organisatoren** loggen in met een eenmalige inloglink. **Gasten** kunnen zich aanmelden zonder account en hun persoonlijke wijzigingslink gebruiken om hun reactie aan te passen zolang wijzigingen zijn toegestaan. Voor privé-evenementen is de juiste uitnodiging of toegangsverlening nog steeds vereist. Zie de [handleiding voor organisatoren](docs/host/getting-started.md) voor de volledige werkwijze.
 
-## Core Features
+## Belangrijkste functies
 
-### Make each event your own
+### Geef elk evenement een eigen stijl
 
-- **Themes and covers:** Dark, Soft, and Bold base themes, seasonal presets, custom colors, and cover image uploads.
-- **Fonts and effects:** Event-title fonts and optional animated backgrounds, with matching static email styling.
-- **Privacy controls:** Public, unlisted, and private events, password protection, and guest-list visibility settings.
+- **Thema’s en omslagafbeeldingen:** de basisthema’s Donker, Zacht en Gedurfd, seizoensgebonden thema’s, eigen kleuren en uploads van omslagafbeeldingen.
+- **Lettertypen en effecten:** lettertypen voor evenementtitels en optionele bewegende achtergronden, met bijpassende statische e-mails.
+- **Privacyinstellingen:** openbare, niet-vermelde en privé-evenementen, wachtwoordbeveiliging en instellingen voor de zichtbaarheid van de gastenlijst.
 
-### Keep guests connected
+### Houd contact met gasten
 
-- **Simple RSVPs:** Going, Maybe, or No responses, plus-ones, approval rules, capacity limits, and custom questionnaires.
-- **Shared planning:** Threaded comments, interactive polls, and potluck claims.
-- **Invitations and updates:** Email invitations, automatic reminders, host messages, and optional Twilio SMS.
+- **Eenvoudig aanmelden:** de opties Aanwezig, Misschien en Afwezig, extra gasten, goedkeuringsregels, capaciteitslimieten en eigen vragenlijsten.
+- **Samen plannen:** reacties in gesprekken, interactieve peilingen en toezeggingen op de meeneemlijst.
+- **Uitnodigingen en updates:** e-mailuitnodigingen, automatische herinneringen, berichten van organisatoren en optionele sms via Twilio.
 
-### Give hosts the tools they need
+### Geef organisatoren de juiste hulpmiddelen
 
-- **Passwordless access:** Email or optional SMS magic links, plus co-host support.
-- **Guest management:** Search and filter responses, check in parties, add walk-ins, and export the guest list and questionnaire answers to CSV.
-- **Administration:** Manage users, events, host invite codes, and system configuration from the Admin Control Panel.
+- **Inloggen zonder wachtwoord:** eenmalige inloglinks via e-mail of optioneel sms, met ondersteuning voor mede-organisatoren.
+- **Gastenbeheer:** reacties zoeken en filteren, gezelschappen inchecken, gasten ter plaatse toevoegen en de gastenlijst en antwoorden op vragenlijsten exporteren naar CSV.
+- **Beheer:** beheer gebruikers, evenementen, uitnodigingscodes voor organisatoren en systeeminstellingen via het beheerpaneel.
 
-## Before You Install
+## Voor de installatie
 
-| Requirement               | What to expect                                                                                                                   |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Docker and Docker Compose | The release Compose file runs the app with PostgreSQL and Redis; you do not need to install Node.js on the host.                 |
-| A reachable app URL       | Use localhost for a local trial, or a stable URL reachable by your guests for a shared deployment.                               |
-| Email delivery            | Configure SMTP or a supported Cloudflare provider before production sign-in. Production images do not print magic links in logs. |
-| SMS (optional)            | Connect Twilio if you want text-message sign-in, invitations, or updates.                                                        |
+| Vereiste | Wat je kunt verwachten |
+|---|---|
+| Docker en Docker Compose | Het release-Compose-bestand start de app met PostgreSQL en Redis. Node.js hoeft niet op de host te worden geïnstalleerd. |
+| Een bereikbaar app-adres | Gebruik localhost voor een lokale test of een stabiel adres dat gasten kunnen bereiken voor een gedeelde installatie. |
+| E-mailbezorging | Configureer SMTP of een ondersteunde Cloudflare-provider voordat je in productie inlogt. Productie-images tonen geen inloglinks in logbestanden. |
+| Sms (optioneel) | Koppel Twilio als je wilt inloggen, uitnodigingen of updates via sms wilt versturen. |
 
-For a populated local test instance, see [Sample Data and Screenshots](docs/admin/sample-data.md). It explains the seeded accounts and development sign-in workflow.
+Zie [Voorbeeldgegevens en schermafbeeldingen](docs/admin/sample-data.md) voor een lokale testinstallatie met gegevens. Daar worden de aangemaakte testaccounts en de ontwikkelwerkwijze voor inloggen uitgelegd.
 
 ---
 
-## Quick Start
+## Snel starten
 
-This section gets your **RSVP to Me** installation up and running in a few steps. For the full guide, see [docs/admin/installation.md](docs/admin/installation.md).
+Met deze stappen krijg je **RSVP to Me** aan de praat. Bekijk [docs/admin/installation.md](docs/admin/installation.md) voor de volledige handleiding.
 
-### Prerequisites
+### Benodigdheden
 
-- [Docker and Docker Compose](https://docs.docker.com/compose/install/) installed on your machine.
-- A stable URL or IP address (e.g., `http://localhost:3000` or `https://rsvp.yourdomain.com`) where you and your guests can reach the application.
+- [Docker en Docker Compose](https://docs.docker.com/compose/install/) moeten op je machine zijn geïnstalleerd.
+- Een stabiel webadres of IP-adres (bijvoorbeeld `http://localhost:3000` of `https://rsvp.jouwdomein.nl`) waarop jij en je gasten de applicatie kunnen bereiken.
 
-### Step-by-Step Setup
+### Installatie in stappen
 
-1. **Get the files**
-   Open a terminal and run the following command to download the required deployment files:
+1. **Download de bestanden**
+
+   Open een terminal en voer deze opdrachten uit om de benodigde deploymentbestanden te downloaden:
 
    ```bash
    mkdir rsvp-to-me && cd rsvp-to-me
@@ -82,13 +83,13 @@ This section gets your **RSVP to Me** installation up and running in a few steps
    curl -fLO https://raw.githubusercontent.com/joe-cole1/rsvp-to-me/main/.env.example
    ```
 
-   Use `docker-compose.release.yml` explicitly even if you cloned the repository.
-   The root `docker-compose.yml` builds from source, and its automatic override
-   is for native development.
+   Gebruik expliciet `docker-compose.release.yml`, ook als je de repository hebt gekloond.
+   Het bestand `docker-compose.yml` in de hoofdmap bouwt vanuit de broncode; de automatische override is bedoeld voor lokale ontwikkeling.
 
-2. **Create your configuration file**
-   Create a `.env` file by copying the example template:
-   - **Linux/Mac (Terminal):**
+2. **Maak je configuratiebestand aan**
+
+   Maak een `.env`-bestand door het voorbeeld te kopiëren:
+   - **Linux/Mac (terminal):**
      ```bash
      cp .env.example .env
      ```
@@ -97,51 +98,54 @@ This section gets your **RSVP to Me** installation up and running in a few steps
      Copy-Item .env.example .env
      ```
 
-3. **Configure the minimum required values**
-   Open the `.env` file in your preferred text editor (like Notepad on Windows or Nano on Linux/Mac) and configure these variables:
-   - `POSTGRES_PASSWORD` and `REDIS_PASSWORD`: Strong passwords for the bundled database and cache containers. Docker Compose uses these to run PostgreSQL/Redis and to build the app's connection URLs. Both are required — there are no default passwords, and `docker compose -f docker-compose.release.yml up` fails fast if either is unset.
-   - `SESSION_SECRET`: A secure, random string (at least 32 characters) used to encrypt cookies. You can generate one with the command `openssl rand -base64 32` or via [generate-secret.vercel.app/32](https://generate-secret.vercel.app/32).
-   - `NEXT_PUBLIC_APP_URL`: The URL where guests will visit your app (e.g. `http://localhost:3000` or `https://rsvp.yourdomain.com`). No trailing slash.
-   - `INITIAL_ADMIN_EMAIL`: Your email address. When you log in with this email, your account is promoted to Administrator.
-   - Configure SMTP or the optional email worker using the [Email Setup Guide](docs/admin/email.md) before your first sign-in. Production images do not print magic links in logs.
-   - `HOST_INVITE_CODE`: A code used to restrict host registration to people you know. The example ships an obvious placeholder that the app rejects at startup in production — replace it with a strong value (e.g. `openssl rand -hex 8`).
+3. **Stel de minimaal vereiste waarden in**
 
-4. **Start the application**
-   Run the following command in the same directory as your `docker-compose.release.yml` to pull images and start the services:
+   Open het bestand `.env` in een teksteditor, zoals Kladblok op Windows of Nano op Linux/Mac, en stel de volgende variabelen in:
+   - `POSTGRES_PASSWORD` en `REDIS_PASSWORD`: sterke wachtwoorden voor de meegeleverde database- en cachecontainers. Docker Compose gebruikt deze om PostgreSQL en Redis te starten en de verbindingsadressen voor de app op te bouwen. Beide zijn verplicht; er zijn geen standaardwachtwoorden. Als één van beide ontbreekt, stopt `docker compose -f docker-compose.release.yml up` met een foutmelding.
+   - `SESSION_SECRET`: een veilige, willekeurige tekenreeks van minstens 32 tekens om sessiecookies te versleutelen. Genereer er een met `openssl rand -base64 32` of via [generate-secret.vercel.app/32](https://generate-secret.vercel.app/32).
+   - `NEXT_PUBLIC_APP_URL`: het adres waarop gasten de app openen (bijvoorbeeld `http://localhost:3000` of `https://rsvp.jouwdomein.nl`). Gebruik geen afsluitende slash.
+   - `INITIAL_ADMIN_EMAIL`: je e-mailadres. Wanneer je met dit adres inlogt, krijgt je account de rol Beheerder.
+   - Configureer SMTP of de optionele e-mailworker via de [handleiding voor e-mailinstellingen](docs/admin/email.md) voordat je voor het eerst inlogt. Productie-images tonen geen inloglinks in logbestanden.
+   - `HOST_INVITE_CODE`: een code om registratie als organisator te beperken tot mensen die je kent. De voorbeeldconfiguratie bevat een duidelijk herkenbare tijdelijke waarde die de app in productie weigert. Vervang deze door een sterke waarde, bijvoorbeeld met `openssl rand -hex 8`.
+
+4. **Start de applicatie**
+
+   Voer deze opdracht uit in dezelfde map als `docker-compose.release.yml` om de images op te halen en de services te starten:
 
    ```bash
    docker compose -f docker-compose.release.yml up -d
    ```
 
-5. **Verify the container logs**
-   Check the web server logs to make sure the app started successfully:
+5. **Controleer de containerlogboeken**
+
+   Controleer de logboeken van de webserver om na te gaan of de app goed is gestart:
 
    ```bash
    docker compose -f docker-compose.release.yml logs -f app
    ```
 
-   Press `Ctrl+C` to exit the logs view once you see `▲ Next.js ready on http://0.0.0.0:3000`.
+   Druk op `Ctrl+C` om het volgen van de logboeken te stoppen zodra je `▲ Next.js ready on http://0.0.0.0:3000` ziet.
 
-6. **Log in and configure Admin Access**
-   - Open your browser and navigate to the URL you configured in `NEXT_PUBLIC_APP_URL`.
-   - Click **Sign In** and log in using the email address you set in `INITIAL_ADMIN_EMAIL`.
-   - Check your inbox for the login email. Click the link to log in.
-   - Once logged in, visit `/admin` to verify that you have admin access.
+6. **Log in en controleer beheerderstoegang**
+   - Open de browser en ga naar het adres dat je bij `NEXT_PUBLIC_APP_URL` hebt ingesteld.
+   - Klik op **Inloggen** en gebruik het e-mailadres dat je bij `INITIAL_ADMIN_EMAIL` hebt ingesteld.
+   - Controleer je inbox op de inlogmail en klik op de link.
+   - Ga na het inloggen naar `/admin` om te controleren of je beheerderstoegang hebt.
 
 ---
 
-## Detailed Documentation Guides
+## Uitgebreide documentatie
 
-For in-depth explanations of specific features, configurations, and operations, refer to the guides below:
+Raadpleeg de onderstaande handleidingen voor gedetailleerde uitleg over functies, configuratie en beheer:
 
-| Guide                                                    | Description                                                                                 |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| [Installation Guide](docs/admin/installation.md)         | Full setup walkthrough, Docker setup, data backups, and HTTPS reverse proxies.              |
-| [Configuration Reference](docs/admin/configuration.md)   | Comprehensive list and explanation of every environment variable.                           |
-| [Email Setup Guide](docs/admin/email.md)                 | Setting up SMTP (Gmail, Outlook, SES, etc.) or Cloudflare Email Routing.                    |
-| [SMS Setup Guide](docs/admin/sms.md)                     | Connecting Twilio to enable text message logins, invitations, and blasts.                   |
-| [Admin Panel Guide](docs/admin/admin.md)                 | Managing user accounts, event moderation, custom invite codes, and system configurations.   |
-| [Host Guides](docs/host/)                                | Step-by-step guides for event hosts: creating events, RSVPs, invitations, and more.         |
-| [Safe Upgrading Guide](docs/admin/upgrading.md)          | Instructions on updating to new versions safely without losing any database data.           |
-| [Sample Data and Screenshots](docs/admin/sample-data.md) | Seeded test accounts, local sign-in, and the desktop screenshot checklist.                  |
-| [Architecture Map](ARCHITECTURE.md)                      | Developer map of runtime boundaries, subsystems, entry points, and common change locations. |
+| Handleiding | Beschrijving |
+|---|---|
+| [Installatiehandleiding](docs/admin/installation.md) | Volledige installatie, Docker, gegevensback-ups en HTTPS-reverse-proxy’s. |
+| [Configuratieoverzicht](docs/admin/configuration.md) | Overzicht en uitleg van alle omgevingsvariabelen. |
+| [E-mail instellen](docs/admin/email.md) | SMTP instellen (Gmail, Outlook, SES enz.) of Cloudflare Email Routing. |
+| [Sms instellen](docs/admin/sms.md) | Twilio koppelen voor inloggen per sms, uitnodigingen en groepsberichten. |
+| [Handleiding voor beheerders](docs/admin/admin.md) | Gebruikersaccounts, evenementenmoderatie, uitnodigingscodes en systeeminstellingen beheren. |
+| [Handleidingen voor organisatoren](docs/host/) | Stapsgewijze uitleg over evenementen aanmaken, aanmeldingen beheren, uitnodigingen en meer. |
+| [Veilig upgraden](docs/admin/upgrading.md) | RSVP to Me bijwerken zonder databasegegevens te verliezen. |
+| [Voorbeeldgegevens en schermafbeeldingen](docs/admin/sample-data.md) | Testaccounts, lokaal inloggen en de checklist voor schermafbeeldingen. |
+| [Architectuuroverzicht](ARCHITECTURE.md) | Ontwikkelaarsoverzicht van runtimegrenzen, subsystemen, ingangspunten en plekken waar wijzigingen vaak nodig zijn. |

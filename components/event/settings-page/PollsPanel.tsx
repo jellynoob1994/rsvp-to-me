@@ -89,7 +89,7 @@ export function PollsPanel({
           <div style={{ marginBottom: "12px" }}>
             <input
               style={S.inp}
-              placeholder="Ask a question... (e.g. What day works best?)"
+              placeholder="Stel een vraag... (bijv. Welke dag komt het beste uit?)"
               value={newPollQuestion}
               onChange={(e) => setNewPollQuestion(e.target.value)}
             />
@@ -103,7 +103,7 @@ export function PollsPanel({
               marginBottom: "12px",
             }}
           >
-            <div style={{ fontSize: "12px", fontWeight: 700, color: t.textMuted }}>Options:</div>
+            <div style={{ fontSize: "12px", fontWeight: 700, color: t.textMuted }}>Opties:</div>
             {newPollOptions.map((opt, idx) => (
               <div key={idx} style={{ display: "flex", gap: "6px" }}>
                 <input
@@ -180,7 +180,7 @@ export function PollsPanel({
                 onChange={(e) => setNewPollMultiChoice(e.target.checked)}
                 style={{ cursor: "pointer" }}
               />
-              <span>Allow voting for multiple options</span>
+              <span>Sta stemmen op meerdere opties toe</span>
             </label>
             <label
               style={{
@@ -198,7 +198,7 @@ export function PollsPanel({
                 onChange={(e) => setNewPollAllowGuestsToAdd(e.target.checked)}
                 style={{ cursor: "pointer" }}
               />
-              <span>Allow guests to suggest options</span>
+              <span>Laat gasten opties voorstellen</span>
             </label>
             <label
               style={{
@@ -216,7 +216,7 @@ export function PollsPanel({
                 onChange={(e) => setNewPollHideVoters(e.target.checked)}
                 style={{ cursor: "pointer" }}
               />
-              <span>Hide voter names from other guests</span>
+              <span>Verberg de namen van stemmers voor andere gasten</span>
             </label>
           </div>
 
@@ -390,7 +390,7 @@ export function PollsPanel({
                   <div style={{ display: "flex", gap: "6px", marginTop: "4px" }}>
                     <input
                       style={{ ...S.inp, padding: "6px 10px", fontSize: "12px" }}
-                      placeholder="Add option..."
+                      placeholder="Optie toevoegen..."
                       value={newPollOptionTexts[poll.id] ?? ""}
                       onChange={(e) =>
                         setNewPollOptionTexts({

@@ -63,7 +63,7 @@ export function AdminMobileDrawer({
           >
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <h3 style={{ fontSize: "16px", fontWeight: 800, color: APP_SHELL.textPrimary }}>
-                🛡️ Admin Navigation
+                🛡️ Beheernavigatie
               </h3>
               <button
                 type="button"
@@ -96,15 +96,15 @@ export function AdminMobileDrawer({
             >
               {(
                 [
-                  { id: "overview", label: "📊 Overview" },
-                  { id: "users", label: "👥 User Management" },
-                  { id: "events", label: "🎈 Event Moderation" },
-                  { id: "invites", label: "🔑 Host Settings" },
-                  { id: "email", label: "📧 Email Settings" },
-                  { id: "sms", label: "💬 SMS Settings" },
-                  { id: "themes", label: "🎨 Theme Presets" },
-                  { id: "backups", label: "💾 Database Backups" },
-                  { id: "docs", label: "📚 Documentation" },
+                  { id: "overview", label: "📊 Overzicht" },
+                  { id: "users", label: "👥 Gebruikersbeheer" },
+                  { id: "events", label: "🎈 Evenementenbeheer" },
+                  { id: "invites", label: "🔑 Organisatie-instellingen" },
+                  { id: "email", label: "📧 E-mailinstellingen" },
+                  { id: "sms", label: "💬 Sms-instellingen" },
+                  { id: "themes", label: "🎨 Thema-voorinstellingen" },
+                  { id: "backups", label: "💾 Databaseback-ups" },
+                  { id: "docs", label: "📚 Documentatie" },
                 ] as const
               ).map((tab) => (
                 <button

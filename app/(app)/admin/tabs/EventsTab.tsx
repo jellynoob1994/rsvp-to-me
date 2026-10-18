@@ -19,7 +19,7 @@ export function EventsTab({
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <AppInput
         type="text"
-        placeholder="Search events by title, slug, or host details..."
+        placeholder="Zoek evenementen op titel, slug of organisator..."
         value={eventSearch}
         onChange={(e) => handleEventSearch(e.target.value)}
         style={{ padding: "12px 16px" }}
@@ -41,10 +41,10 @@ export function EventsTab({
                   textAlign: "left",
                 }}
               >
-                <th style={{ padding: "16px" }}>Event Info</th>
-                <th style={{ padding: "16px" }}>Host</th>
-                <th style={{ padding: "16px" }}>Stats</th>
-                <th style={{ padding: "16px", textAlign: "right" }}>Actions</th>
+                <th style={{ padding: "16px" }}>Evenementinformatie</th>
+                <th style={{ padding: "16px" }}>Organisator</th>
+                <th style={{ padding: "16px" }}>Statistieken</th>
+                <th style={{ padding: "16px", textAlign: "right" }}>Acties</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +58,7 @@ export function EventsTab({
                       color: APP_SHELL.textMuted,
                     }}
                   >
-                    No events found.
+                    Geen evenementen gevonden.
                   </td>
                 </tr>
               ) : (
@@ -73,7 +73,7 @@ export function EventsTab({
                           marginTop: "2px",
                         }}
                       >
-                        Date: {new Date(e.startAt).toLocaleString()} · status: {e.status}
+                        Datum: {new Date(e.startAt).toLocaleString("nl-NL")} · status: {e.status}
                       </div>
                     </td>
                     <td style={{ padding: "16px" }}>
@@ -83,7 +83,7 @@ export function EventsTab({
                       </div>
                     </td>
                     <td style={{ padding: "16px" }}>
-                      <div style={{ color: APP_SHELL.textPrimary }}>{e.rsvpCount} RSVPs</div>
+                      <div style={{ color: APP_SHELL.textPrimary }}>{e.rsvpCount} aanmeldingen</div>
                       <span
                         style={{
                           fontSize: "10px",
@@ -91,7 +91,7 @@ export function EventsTab({
                           textTransform: "uppercase",
                         }}
                       >
-                        {e.visibility}
+                        {e.visibility === "PUBLIC" ? "Openbaar" : e.visibility === "UNLISTED" ? "Niet vermeld" : "Privé"}
                       </span>
                     </td>
                     <td style={{ padding: "16px", textAlign: "right" }}>
@@ -107,7 +107,7 @@ export function EventsTab({
                           marginRight: "16px",
                         }}
                       >
-                        Moderate
+                        Modereren
                       </a>
                       <button
                         onClick={() => handleEventDelete(e.id, e.title)}
@@ -120,7 +120,7 @@ export function EventsTab({
                           fontSize: "13px",
                         }}
                       >
-                        Delete
+                        Verwijderen
                       </button>
                     </td>
                   </tr>

@@ -98,7 +98,7 @@ export default function DocsPanel({ docs }: { docs: PanelDoc[] }) {
   if (docs.length === 0) {
     return (
       <div style={{ color: APP_SHELL.textMuted, fontSize: "14px" }}>
-        No documentation is available.
+        Er is geen documentatie beschikbaar.
       </div>
     );
   }
@@ -120,7 +120,7 @@ export default function DocsPanel({ docs }: { docs: PanelDoc[] }) {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search docs…"
+            placeholder="Documentatie doorzoeken…"
             style={{
               width: "100%",
               boxSizing: "border-box",
@@ -138,7 +138,7 @@ export default function DocsPanel({ docs }: { docs: PanelDoc[] }) {
         <nav style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {grouped.length === 0 && (
             <div style={{ color: APP_SHELL.textMuted, fontSize: "13px", padding: "8px 4px" }}>
-              No matching docs.
+              Geen overeenkomende documenten.
             </div>
           )}
           {grouped.map((group) => (

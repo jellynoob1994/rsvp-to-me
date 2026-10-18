@@ -1,132 +1,99 @@
 ---
-title: Your Guest List
-description: Filters, guest-list visibility, showing names, and CSV export.
-category: Guests & RSVPs
+title: Je gastenlijst
+description: Filters, zichtbaarheid van de gastenlijst, namen tonen en exporteren naar CSV.
+category: Gasten en aanmeldingen
 audience: host
 order: 70
 ---
 
-# Your Guest List
+# Je gastenlijst
 
-The guest list (at `/e/[slug]/guests`) is where you see who's coming and manage everyone in one place.
+Op de gastenlijst (via `/e/[slug]/guests`) zie je wie er komt en beheer je alle gasten op één plek.
 
-The **Guests** card on your event page is always visible to you and your co-hosts, even before the
-first RSVP arrives. Use **View all →** to open the full guest list, or use the settings cog to jump
-directly to RSVP settings.
+De kaart **Gasten** op je evenementpagina is altijd zichtbaar voor jou en je mede-organisatoren, ook voordat de eerste aanmelding binnenkomt. Kies **Alles bekijken →** om de volledige gastenlijst te openen of gebruik het tandwiel om rechtstreeks naar de aanmeldinstellingen te gaan.
 
-## Guest Management Preview
+## Voorbeeld van gastenbeheer
 
-![Wine Night guest management with attendance totals, filters, CSV export, walk-in, and guest check-in controls](../../public/docs/images/guest-management.png)
+![Gastenbeheer voor Wijnavond met aanwezigheidsaantallen, filters, CSV-export, gasten ter plaatse en incheckbediening](../../public/docs/images/guest-management.png)
 
-Track responses and arrivals, check in guests, add walk-ins, and export the guest list from one view.
+Volg reacties en aankomsten, check gasten in, voeg gasten zonder aanmelding toe en exporteer de gastenlijst vanuit één overzicht.
 
 ---
 
 ## Filters
 
-Filter the list by status to focus on what matters:
+Filter de lijst op status om snel te vinden wat je zoekt:
 
-- **All** — everyone associated with the event, including invited guests who have not responded
-- **Going**, **Maybe**, **No**
-- **Invited** — invited but not yet responded
-- **Awaiting Approval** — pending your approve/decline
+- **Iedereen** — iedereen die bij het evenement hoort, inclusief uitgenodigde gasten die nog niet hebben gereageerd
+- **Aanwezig**, **Misschien** en **Afwezig**
+- **Uitgenodigd** — uitgenodigd, maar nog niet gereageerd
+- **Wacht op goedkeuring** — wacht op jouw beslissing om goed te keuren of af te wijzen
 
-Hosts and co-hosts can also search by guest name, email, phone, or named plus-one and filter the
-list to **Arrived** or **Not arrived** parties.
-
----
-
-## Event Check-In and Walk-Ins
-
-Every RSVP record has a **Check in** button, including guests who have not replied, answered
-**Can't make it**, or are awaiting approval. This lets the host accept walk-ins and last-minute
-changes of plan at the door without changing the guest's RSVP first. A check-in covers the primary
-guest and every plus-one on that RSVP. The attendance summary updates immediately with both party
-progress and total people arrived. Use **Undo check-in** and confirm inline if you tapped the wrong
-party; checking the party in again records a new arrival time.
-
-Use **+ Add walk-in** when someone arrives without an RSVP. Enter their name, total party size, and
-optionally an enabled email or SMS contact. The host-only action creates an approved Going RSVP and
-checks the party in without sending a message. If the contact matches an existing RSVP, that party
-is checked in instead of creating a duplicate.
-
-Unanswered invitees also have a **Resend invite** action. It sends a fresh invitation through the
-original email or SMS destination while retaining the normal delivery validation, rate limits, and
-activity history. If an older invitation record is no longer connected to an RSVP, you can remove
-that invitation history without removing the guest's RSVP; a later RSVP with the same email or
-phone reconnects the invitation automatically.
-
-Check-in changes appear immediately on the device making them. Other open host devices see the
-latest attendance after refreshing.
+Organisatoren en mede-organisatoren kunnen ook zoeken op gastnaam, e-mailadres, telefoonnummer of de naam van een extra gast. Daarnaast kunnen ze filteren op gezelschappen die **Aangekomen** of **Nog niet aangekomen** zijn.
 
 ---
 
-## Who Can See the Guest List
+## Inchecken en gasten ter plaatse
 
-Choose how much guests can see in Settings:
+Elk aanmeldrecord heeft een knop **Inchecken**, ook voor gasten die nog niet hebben gereageerd, hebben aangegeven **Afwezig** te zijn of op goedkeuring wachten. Zo kan de organisator gasten zonder aanmelding en lastminute-wijzigingen bij de deur verwerken zonder eerst de aanmelding te veranderen. Een check-in geldt voor de hoofdgast en alle extra gasten bij die aanmelding. Het aanwezigheidsoverzicht wordt direct bijgewerkt met zowel de voortgang per gezelschap als het totale aantal aangekomen personen. Gebruik **Check-in ongedaan maken** en bevestig dit direct op de pagina als je het verkeerde gezelschap hebt ingecheckt. Als je het gezelschap daarna opnieuw incheckt, wordt een nieuwe aankomsttijd vastgelegd.
 
-- **Everyone can see** — any visitor can view the list.
-- **Going guests only** — visible to your guests (anyone who has RSVP'd or opened their personal invite link) and to you and your co-hosts. Anonymous visitors who just have the link can't see it.
-- **Host only** — hidden from guests; visible to you and your co-hosts.
+Gebruik **+ Gast ter plaatse toevoegen** wanneer iemand arriveert zonder aanmelding. Vul de naam, de totale groepsgrootte en eventueel een beschikbaar e-mailadres of telefoonnummer in. Deze actie is alleen beschikbaar voor organisatoren: de gast krijgt een goedgekeurde aanmelding met status Aanwezig en wordt ingecheckt, zonder dat er een bericht wordt verstuurd. Komt de contactinformatie overeen met een bestaande aanmelding, dan wordt dat gezelschap ingecheckt in plaats van dubbel aangemaakt.
 
-This setting is enforced on the server, not just hidden in the page — with **Going guests only** or **Host only**, the restricted list is never sent to a browser that shouldn't see it, including on the dedicated guest-list page at `/e/[slug]/guests`.
+Bij uitgenodigde gasten die nog niet hebben gereageerd, staat ook de actie **Uitnodiging opnieuw versturen**. Die stuurt een nieuwe uitnodiging naar het oorspronkelijke e-mailadres of telefoonnummer en behoudt de gebruikelijke controles voor bezorging, snelheidslimieten en de activiteitengeschiedenis. Als een oude uitnodiging niet meer aan een aanmelding is gekoppeld, kun je de uitnodigingsgeschiedenis verwijderen zonder de aanmelding van de gast te verwijderen. Meldt dezelfde gast zich later aan met hetzelfde e-mailadres of telefoonnummer, dan wordt de uitnodiging automatisch opnieuw gekoppeld.
 
-RSVP activity follows the same privacy setting. New, changed, deleted, and invited-guest activity
-entries can include a guest's name or RSVP note, so the server omits those entire entries whenever
-the viewer cannot see the guest list. Check-in, undo, and walk-in activity remains organizer-only
-regardless of the guest-list setting.
-
-If your event is **Private** or password-protected, the guest list is gated the same way as the event page — a visitor who hasn't been let in can't reach it, regardless of the setting above.
-
-**Guests' personal details stay private.** Even when the list is visible to guests, contact information (email, phone) and the per-guest edit links are shown **only to you and your co-hosts**. Guests see names and RSVP status, never each other's contact details or private questionnaire answers.
+Check-ins zijn direct zichtbaar op het apparaat waarop ze worden uitgevoerd. Andere apparaten waarop de organisator de pagina open heeft staan, zien de bijgewerkte aanwezigheid nadat de pagina is vernieuwd.
 
 ---
 
-## Guest-facing RSVP Display
+## Wie kan de gastenlijst zien?
 
-Open **Settings → Display Options → Guest-facing RSVP display**, directly below
-**Guest list visibility**. Going, Maybe, and Can't make it each have their own
-group of display controls and an interactive guest preview with example responses.
+Bepaal in de instellingen hoeveel gasten mogen zien:
 
-**These settings affect guests only. Hosts and co-hosts always see complete lists
-and exact counts on the event page and in guest management.**
+- **Iedereen kan de lijst zien** — elke bezoeker kan de lijst bekijken.
+- **Alleen aanwezige gasten** — zichtbaar voor je gasten (iedereen die zich heeft aangemeld of de persoonlijke uitnodigingslink heeft geopend) en voor jou en je mede-organisatoren. Anonieme bezoekers die alleen de link hebben, kunnen de lijst niet zien.
+- **Alleen organisatoren** — verborgen voor gasten en zichtbaar voor jou en je mede-organisatoren.
 
-| Control               | Choice             | What guests see                                                                                                                                    |
-| --------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Guest names           | Show immediately   | Names appear when the page opens.                                                                                                                  |
-| Guest names           | Show after a click | A collapsed heading opens the names. On the full guest list, selecting that response filter reveals them; All starts with only the expanded lists. |
-| Guest names           | Do not display     | That response type, its names, and its count are omitted from guest-facing lists.                                                                  |
-| Count shown to guests | Exact count        | The actual number appears beside the response type.                                                                                                |
-| Count shown to guests | No count           | The response label appears without a number, even after opening the names.                                                                         |
-| Count shown to guests | Limit to 3+        | Available for Can't make it: show 1 or 2, then 3+ for three or more responses, including after opening the list.                                   |
+Deze instelling wordt op de server afgedwongen en niet alleen op de pagina verborgen. Bij **Alleen aanwezige gasten** of **Alleen organisatoren** wordt de afgeschermde lijst nooit verstuurd naar een browser die deze niet mag zien, ook niet op de speciale gastenlijstpagina `/e/[slug]/guests`.
 
-The count control disappears when you choose **Do not display**. Summary totals
-and filter badges follow the same choices; the combined response total is omitted
-when it would reveal a hidden or capped count. Guest names can still be counted
-when a list is opened: these are presentation choices, not additional access rules.
+Ook de RSVP-activiteit volgt dezelfde privacyinstelling. Nieuwe, gewijzigde, verwijderde en uitgenodigde-gastactiviteiten kunnen de naam van een gast of een notitie bij diens aanmelding bevatten. Daarom laat de server die volledige activiteiten weg wanneer de bezoeker de gastenlijst niet mag zien. Activiteit rond inchecken, het ongedaan maken van een check-in en gasten ter plaatse toevoegen blijft altijd alleen zichtbaar voor organisatoren, ongeacht de instelling.
 
-For new events, Going and Maybe start expanded with exact counts. Can't make it
-starts collapsed with no count. Existing events retain expanded lists and exact
-counts until a host changes them.
+Is je evenement **Privé** of beveiligd met een wachtwoord, dan is de gastenlijst op dezelfde manier afgeschermd als de evenementpagina. Een bezoeker die geen toegang heeft gekregen, kan de lijst niet openen, ongeacht de instelling hierboven.
 
-**Guest list visibility** still decides who may access the list. When it is
-**Host only**, guest display controls are disabled and retain their saved choices
-for later. Changing display settings does not change any RSVP, available RSVP
-buttons, capacity calculation, notification, check-in record, or CSV export.
-Opening a collapsed list never submits or changes a guest's RSVP.
+**Persoonlijke gegevens van gasten blijven privé.** Ook als gasten de lijst mogen zien, zijn contactgegevens (e-mail en telefoon) en persoonlijke links om een aanmelding te wijzigen **alleen zichtbaar voor jou en je mede-organisatoren**. Gasten zien namen en aanmeldstatussen, maar nooit elkaars contactgegevens of privéantwoorden op vragenlijsten.
 
 ---
 
-## CSV Export
+## Aanmeldingen tonen aan gasten
 
-Download your guest list as a spreadsheet for check-in lists, name tags, or your own records. The export includes these columns:
+Open **Instellingen → Weergaveopties → Aanmeldingen tonen aan gasten**, direct onder **Zichtbaarheid van de gastenlijst**. Voor Aanwezig, Misschien en Afwezig zijn aparte weergaveopties en een interactieve voorbeeldlijst met voorbeeldreacties beschikbaar.
 
-The export includes every RSVP record with these columns:
+**Deze instellingen gelden alleen voor gasten. Organisatoren en mede-organisatoren blijven op de evenementpagina en in het gastenbeheer de volledige lijsten en exacte aantallen zien.**
 
-**Name, Email, Phone, Status, Plus Ones, Approved, event-local RSVP Date, event-local Check-In
-Time, one column per questionnaire field, RSVP Date (UTC), and Check-In Time (UTC).**
+| Instelling | Keuze | Wat gasten zien |
+|---|---|---|
+| Gastnamen | Direct tonen | Namen verschijnen zodra de pagina wordt geopend. |
+| Gastnamen | Tonen na een klik | Een ingeklapte kop kan worden geopend om de namen te tonen. In de volledige gastenlijst toont het selecteren van het bijbehorende antwoordfilter de namen; bij Iedereen beginnen alleen de reeds uitgeklapte lijsten open. |
+| Gastnamen | Niet tonen | Dit type reactie, de namen en het aantal worden weggelaten uit de gastenweergave. |
+| Aantal voor gasten | Exact aantal | Het werkelijke aantal staat naast het type reactie. |
+| Aantal voor gasten | Geen aantal | Het label van de reactie wordt zonder aantal getoond, ook nadat de namen zijn geopend. |
+| Aantal voor gasten | Maximaal 3+ tonen | Beschikbaar voor Afwezig: toon 1 of 2 en daarna 3+ bij drie of meer reacties, ook nadat de lijst is geopend. |
 
-Questionnaire columns follow the configured order. Missing answers and check-ins are blank, and
-duplicate question labels are numbered so spreadsheet headers stay unique.
+De instelling voor aantallen verdwijnt wanneer je **Niet tonen** kiest. Totalen en filterbadges volgen dezelfde keuzes. Het gecombineerde totaal wordt weggelaten wanneer het anders een verborgen of begrensd aantal zou onthullen. Namen kunnen nog steeds worden geteld wanneer een lijst wordt geopend: dit zijn weergavekeuzes, geen extra toegangsregels.
 
-> Co-hosts and admins can download the export too.
+Bij nieuwe evenementen staan Aanwezig en Misschien standaard uitgeklapt met exacte aantallen. Afwezig begint ingeklapt en zonder aantal. Bij bestaande evenementen blijven lijsten uitgeklapt en aantallen exact totdat een organisator dit wijzigt.
+
+**Zichtbaarheid van de gastenlijst** bepaalt nog steeds wie toegang heeft tot de lijst. Wanneer **Alleen organisatoren** is gekozen, zijn de weergaveopties voor gasten uitgeschakeld en blijven de opgeslagen keuzes bewaard voor later. Het wijzigen van weergaveopties verandert geen aanmeldingen, beschikbare aanmeldknoppen, capaciteitsberekeningen, meldingen, incheckgegevens of CSV-export. Het openen van een ingeklapte lijst verstuurt of wijzigt nooit een aanmelding.
+
+---
+
+## CSV-export
+
+Download je gastenlijst als spreadsheet voor inchecklijsten, naamkaartjes of je eigen administratie. De export bevat de volgende kolommen:
+
+De export bevat voor elke aanmelding deze kolommen:
+
+**Naam, e-mail, telefoon, status, extra gasten, goedgekeurd, datum van aanmelding in de lokale tijd van het evenement, inchecktijd in de lokale tijd van het evenement, één kolom per vragenlijstveld, aanmelddatum (UTC) en inchecktijd (UTC).**
+
+De kolommen voor de vragenlijst volgen de ingestelde volgorde. Ontbrekende antwoorden en incheckgegevens zijn leeg. Dubbele vraaglabels krijgen een nummer zodat de kolomkoppen in de spreadsheet uniek blijven.
+
+> Mede-organisatoren en beheerders kunnen de export ook downloaden.

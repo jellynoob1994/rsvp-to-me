@@ -7,22 +7,22 @@ export default function PreviewIndex() {
       style={{ background: "#fafafa" }}
     >
       <div className="text-center">
-        <h1 className="text-2xl font-bold mb-2">Style Previews</h1>
+        <h1 className="text-2xl font-bold mb-2">Stijlvoorbeelden</h1>
         <p className="text-sm mb-8" style={{ color: "#71717a" }}>
-          Pick the vibe for rsvp-to-me
+          Kies de sfeer voor RSVP to Me
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
           {[
-            { href: "/preview/dark", label: "🌑 Dark & Moody", desc: "Deep dark, glowing purples" },
+            { href: "/preview/dark", label: "🌑 Donker en sfeervol", desc: "Diepe tinten met gloeiende paarse accenten" },
             {
               href: "/preview/soft",
-              label: "🌸 Soft & Dreamy",
-              desc: "Pastels, blurred gradients",
+              label: "🌸 Zacht en dromerig",
+              desc: "Pastelkleuren en zachte kleurverlopen",
             },
             {
               href: "/preview/bold",
-              label: "⚡ Bold & Colorful",
-              desc: "High-contrast, clean card",
+              label: "⚡ Gedurfd en kleurrijk",
+              desc: "Hoog contrast en een strakke kaart",
             },
           ].map((s) => (
             <Link

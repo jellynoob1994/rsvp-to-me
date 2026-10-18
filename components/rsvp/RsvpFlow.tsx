@@ -270,7 +270,7 @@ export function RsvpFlow({
         >
           <div style={{ fontSize: "36px", marginBottom: "12px" }}>🔒</div>
           <h1 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "8px" }}>
-            RSVP editing is closed
+            Je RSVP wijzigen is niet meer mogelijk
           </h1>
           <p style={{ color: t.textSecondary, fontSize: "14px", lineHeight: 1.6 }}>
             {readOnlyReason}
@@ -286,7 +286,7 @@ export function RsvpFlow({
           >
             <div style={{ fontWeight: 700 }}>{existingRsvp.guestName}</div>
             <div style={{ color: t.textSecondary, marginTop: "4px", fontSize: "14px" }}>
-              {RSVP_STATUS_LABELS[existingRsvp.status]} · Party of {1 + existingRsvp.plusOneCount}
+              {RSVP_STATUS_LABELS[existingRsvp.status]} · Aantal personen: {1 + existingRsvp.plusOneCount}
             </div>
             {existingRsvp.note && (
               <p style={{ color: t.textMuted, fontSize: "13px", margin: "10px 0 0" }}>
@@ -305,7 +305,7 @@ export function RsvpFlow({
               fontWeight: 700,
             }}
           >
-            Return to event
+            Terug naar het evenement
           </a>
         </div>
       </div>
@@ -343,19 +343,19 @@ export function RsvpFlow({
           <div style={{ fontSize: "52px", marginBottom: "16px" }}>{RSVP_STATUS_EMOJIS[status]}</div>
           <h2 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "8px" }}>
             {isEdit && !justCreated
-              ? "RSVP updated!"
+              ? "RSVP bijgewerkt!"
               : status === "GOING"
                 ? "You're in!"
                 : status === "MAYBE"
-                  ? "Noted!"
-                  : "Got it."}
+                  ? "Genoteerd!"
+                  : "Begrepen."}
           </h2>
           <p style={{ color: t.textSecondary, fontSize: "15px", marginBottom: "28px" }}>
             {status === "GOING"
-              ? "See you there!"
+              ? "Tot dan!"
               : status === "MAYBE"
-                ? "Hope you can make it."
-                : "Sorry you can't make it."}
+                ? "Hopelijk kun je erbij zijn."
+                : "Jammer dat je er niet bij kunt zijn."}
           </p>
           {!email.trim() && !phone.trim() && savedEditToken && (
             <div
@@ -377,7 +377,7 @@ export function RsvpFlow({
                   marginBottom: "8px",
                 }}
               >
-                ⚠️ Save your Edit Link
+                ⚠️ Bewaar je wijzigingslink
               </div>
               <p
                 style={{
@@ -387,7 +387,7 @@ export function RsvpFlow({
                   lineHeight: 1.5,
                 }}
               >
-                Since you didn&apos;t add an email or phone, copy this link to change your RSVP
+                Since you didn&apos;t add an email or phone, bewaar deze link om je RSVP later te wijzigen
                 later:
               </p>
               <div style={{ display: "flex", gap: "8px" }}>
@@ -435,7 +435,7 @@ export function RsvpFlow({
                   }}
                 >
                   {linkCopied ? <Check size={12} /> : null}
-                  {linkCopied ? "Copied!" : "Copy"}
+                  {linkCopied ? "Gekopieerd!" : "Kopiëren"}
                 </button>
               </div>
             </div>
@@ -462,7 +462,7 @@ export function RsvpFlow({
                     marginBottom: "12px",
                   }}
                 >
-                  👉 Next Steps
+                  👉 Volgende stappen
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                   {event.polls && event.polls.length > 0 && (
@@ -482,7 +482,7 @@ export function RsvpFlow({
                         fontWeight: 600,
                       }}
                     >
-                      <span>📊 Vote in the polls</span>
+                      <span>📊 Stem op de stellingen</span>
                       <span style={{ color: t.accent }}>→</span>
                     </a>
                   )}
@@ -503,7 +503,7 @@ export function RsvpFlow({
                         fontWeight: 600,
                       }}
                     >
-                      <span>🥗 Bring something (Potluck)</span>
+                      <span>🥗 Neem iets mee (gezamenlijke maaltijd)</span>
                       <span style={{ color: t.accent }}>→</span>
                     </a>
                   )}
@@ -527,7 +527,7 @@ export function RsvpFlow({
               boxShadow: t.accentShadow,
             }}
           >
-            {returnPath ? "Back to guest list" : "Back to event"}
+            {returnPath ? "Terug naar de gastenlijst" : "Terug naar het evenement"}
           </a>
         </div>
       </div>
@@ -652,7 +652,7 @@ export function RsvpFlow({
                 marginBottom: "4px",
               }}
             >
-              {isEdit ? "Update RSVP" : "RSVP"}
+              {isEdit ? "RSVP wijzigen" : "RSVP"}
             </div>
             <h1 style={{ fontSize: "22px", fontWeight: 800, margin: "0 0 4px", lineHeight: 1.2 }}>
               {event.title}
@@ -691,7 +691,7 @@ export function RsvpFlow({
               ) : (
                 <input
                   style={S.inp}
-                  placeholder="Your name (required)"
+                  placeholder="Je naam (verplicht)"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -702,7 +702,7 @@ export function RsvpFlow({
                     <input
                       style={S.inp}
                       type="email"
-                      placeholder="Email (optional — for updates)"
+                      placeholder="E-mailadres (optioneel, voor updates)"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -711,7 +711,7 @@ export function RsvpFlow({
                     <input
                       style={S.inp}
                       type="tel"
-                      placeholder="Phone (optional — for SMS updates)"
+                      placeholder="Telefoonnummer (optioneel, voor sms-updates)"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
@@ -724,7 +724,7 @@ export function RsvpFlow({
           {/* Attendee Count dropdown — only for GOING */}
           {event.plusOneAllowed && event.plusOneMax > 0 && status === "GOING" && (
             <div style={S.group}>
-              <div style={S.label}>Attendee Count</div>
+              <div style={S.label}>Aantal personen</div>
               <select
                 style={{ ...S.inp, cursor: "pointer" }}
                 value={plusOneNames.length + 1}
@@ -819,7 +819,7 @@ export function RsvpFlow({
               alignItems: "center",
             }}
           >
-            Cancel
+            Annuleren
           </a>
           <button
             onClick={handleContinue}
@@ -827,12 +827,12 @@ export function RsvpFlow({
             style={{ ...S.primaryBtn, opacity: !canProceedStep1 || isPending ? 0.5 : 1 }}
           >
             {isPending
-              ? "Saving…"
+              ? "Bezig met opslaan…"
               : step < maxStep
-                ? "Continue →"
+                ? "Verder →"
                 : isEdit
-                  ? "Update RSVP"
-                  : "Confirm RSVP"}
+                  ? "RSVP wijzigen"
+                  : "RSVP bevestigen"}
           </button>
         </div>
       </div>
@@ -860,14 +860,14 @@ export function RsvpFlow({
             fontFamily: "inherit",
           }}
         >
-          ← Back
+          ← Terug
         </button>
         <div style={{ marginBottom: "8px" }}>
           <h1 style={{ fontSize: "20px", fontWeight: 800, margin: "0 0 4px" }}>
-            Questions from the host
+            Vragen van de organisator
           </h1>
           <p style={{ color: t.textMuted, fontSize: "13px", margin: 0 }}>
-            Only the host can see your answers
+            Alleen de organisator kan je antwoorden zien
           </p>
         </div>
       </div>
@@ -889,7 +889,7 @@ export function RsvpFlow({
                 <span
                   style={{ color: "#ef4444", fontSize: "12px", marginLeft: "4px", fontWeight: 400 }}
                 >
-                  (required)
+                  (verplicht)
                 </span>
               )}
             </label>
@@ -906,7 +906,7 @@ export function RsvpFlow({
                 value={answers[f.id] ?? ""}
                 onChange={(e) => setAnswerValue(f.id, e.target.value)}
               >
-                <option value="">Select…</option>
+                <option value="">Selecteer…</option>
                 {parseOptions(f.options).map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
@@ -953,14 +953,14 @@ export function RsvpFlow({
 
       <div style={S.footer}>
         <button onClick={() => setStep(1)} style={S.cancelBtn}>
-          ← Back
+          ← Terug
         </button>
         <button
           onClick={submit}
           disabled={requiredUnanswered.length > 0 || isPending}
           style={{ ...S.primaryBtn, opacity: requiredUnanswered.length > 0 || isPending ? 0.5 : 1 }}
         >
-          {isPending ? "Saving…" : isEdit ? "Update RSVP" : "Submit"}
+          {isPending ? "Bezig met opslaan…" : isEdit ? "RSVP wijzigen" : "Verzenden"}
         </button>
       </div>
     </div>

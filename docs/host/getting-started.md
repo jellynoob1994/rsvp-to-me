@@ -1,56 +1,56 @@
 ---
-title: Getting Started as a Host
-description: What RSVP to Me is, how to sign in, and the typical event workflow.
-category: Getting Started
+title: Aan de slag als organisator
+description: Wat RSVP to Me is, hoe je inlogt en hoe een evenement doorgaans verloopt.
+category: Aan de slag
 audience: host
 order: 10
 ---
 
-# Getting Started as a Host
+# Aan de slag als organisator
 
-**RSVP to Me** lets you create a beautiful event page, invite guests, collect RSVPs, and keep everyone in the loop — no spreadsheets, no group-text chaos. This guide gets you oriented; the rest of the guides cover each step in detail.
-
----
-
-## Signing In
-
-RSVP to Me is **passwordless** — you sign in with a magic link instead of a password.
-
-1. On the Sign In page, enter your email address (or phone number, if texting is enabled).
-2. A one-time sign-in link is emailed or texted to you.
-3. Click the link to sign in.
-
-A few things to know:
-
-- Magic links expire after **15 minutes** and can only be used once.
-- Once you're in, your session lasts **7 days** before you'll need a fresh link.
-- To sign out, click your avatar in the top navigation and choose **Sign Out**.
-- To protect user privacy and prevent email/phone enumeration, the sign-in page displays a generic "Sign-in failed" card if the email or phone is not linked to an active account, or if the delivery fails. If you see this, check that you have typed your address correctly or contact the administrator to verify your registration.
-
-See [Your Profile & Account](faq.md) for managing your name, photo, and notification preferences.
+Met **RSVP to Me** maak je een mooie evenementpagina, nodig je gasten uit, verzamel je aanmeldingen en houd je iedereen op de hoogte — zonder spreadsheets of eindeloze groepsapps. Deze handleiding helpt je op weg; de andere handleidingen leggen elke stap uitgebreider uit.
 
 ---
 
-## The Host Dashboard
+## Inloggen
 
-After signing in, your **Dashboard** is home base. It shows:
+RSVP to Me werkt **zonder wachtwoord**: je logt in met een eenmalige inloglink.
 
-- **Upcoming events you're hosting**
-- **Past events you hosted** (for reference)
-- **Events you're attending** (where you've RSVP'd Going or Maybe)
-- **Pending approvals** — a heads-up when guests are waiting for you to approve their RSVP
+1. Vul op de pagina **Inloggen** je e-mailadres in (of je telefoonnummer als sms is ingeschakeld).
+2. Je ontvangt een eenmalige inloglink per e-mail of sms.
+3. Klik op de link om in te loggen.
+
+Een paar dingen om te weten:
+
+- Inloglinks verlopen na **15 minuten** en kunnen maar één keer worden gebruikt.
+- Nadat je bent ingelogd, blijft je sessie **7 dagen** geldig. Daarna heb je een nieuwe link nodig.
+- Klik op je avatar in de bovenste navigatie en kies **Uitloggen** om uit te loggen.
+- Om de privacy van gebruikers te beschermen en te voorkomen dat e-mailadressen of telefoonnummers kunnen worden achterhaald, toont de inlogpagina een algemene melding dat inloggen is mislukt als het adres of nummer niet aan een actief account is gekoppeld of als de bezorging mislukt. Controleer in dat geval je invoer of vraag de beheerder om je registratie te controleren.
+
+Zie [Je profiel en account](faq.md) voor het beheren van je naam, foto en meldingsvoorkeuren.
 
 ---
 
-## The Typical Workflow
+## Het dashboard voor organisatoren
 
-Most events follow the same path:
+Na het inloggen is je **Dashboard** je startpunt. Je ziet hier:
 
-1. **Create your event** — title, date, time, location. It goes live immediately. → [Creating Your Event](creating-an-event.md)
-2. **Make it yours** — pick a theme, add a cover photo, edit details in place. → [Customizing Your Event Page](customizing-your-page.md)
-3. **Set who can see it** — public, unlisted, or private. → [Visibility & Privacy](visibility-and-privacy.md)
-4. **Invite your guests** — by email, text, or a shared link. → [Inviting Guests](inviting-guests.md)
-5. **Manage responses** — approve guests, track headcount, read answers. → [Managing RSVPs](managing-rsvps.md)
-6. **Keep everyone posted** — automatic reminders and your own update messages. → [Messaging Guests & Reminders](messaging-and-reminders.md)
+- **Aankomende evenementen die je organiseert**
+- **Eerdere evenementen die je hebt georganiseerd** (ter referentie)
+- **Evenementen waaraan je deelneemt** (waar je hebt aangegeven dat je aanwezig bent of misschien komt)
+- **Openstaande goedkeuringen** — een melding wanneer gasten wachten tot je hun aanmelding goedkeurt
 
-Stuck on something? Start with the [Host FAQ & Troubleshooting](faq.md).
+---
+
+## De gebruikelijke werkwijze
+
+De meeste evenementen verlopen volgens dezelfde stappen:
+
+1. **Maak je evenement aan** — titel, datum, tijd en locatie. Het wordt meteen gepubliceerd. → [Een evenement aanmaken](creating-an-event.md)
+2. **Geef het je eigen uitstraling** — kies een thema, voeg een omslagfoto toe en bewerk gegevens direct op de pagina. → [Je evenementpagina aanpassen](customizing-your-page.md)
+3. **Bepaal wie het kan zien** — openbaar, niet vermeld of privé. → [Zichtbaarheid en privacy](visibility-and-privacy.md)
+4. **Nodig je gasten uit** — per e-mail, sms of via een gedeelde link. → [Gasten uitnodigen](inviting-guests.md)
+5. **Beheer de reacties** — keur gasten goed, houd het aantal aanwezigen bij en bekijk antwoorden. → [Aanmeldingen beheren](managing-rsvps.md)
+6. **Houd iedereen op de hoogte** — met automatische herinneringen en je eigen berichten. → [Berichten en herinneringen](messaging-and-reminders.md)
+
+Kom je ergens niet uit? Kijk dan bij de [veelgestelde vragen en probleemoplossing voor organisatoren](faq.md).

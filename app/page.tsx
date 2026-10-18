@@ -11,14 +11,11 @@ import { MessageSquare } from "lucide-react";
 // Helper to format date Partiful-style
 const formatPartifulDate = (dateVal: Date | string) => {
   const d = new Date(dateVal);
-  const weekday = d.toLocaleDateString("en-US", { weekday: "short" });
-  const dateStr = d.toLocaleDateString("en-US", { month: "numeric", day: "numeric" });
-  const hour = d.getHours();
-  const minute = d.getMinutes();
-  const ampm = hour >= 12 ? "pm" : "am";
-  const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
-  const formattedMin = minute === 0 ? "" : `:${minute.toString().padStart(2, "0")}`;
-  return `${weekday} ${dateStr} at ${formattedHour}${formattedMin}${ampm}`;
+  const weekday = d.toLocaleDateString("nl-NL", { weekday: "short" });
+  const dateStr = d.toLocaleDateString("nl-NL", { day: "numeric", month: "short" });
+  const hour = d.getHours().toString().padStart(2, "0");
+  const minute = d.getMinutes().toString().padStart(2, "0");
+  return `${weekday} ${dateStr} om ${hour}:${minute}`;
 };
 
 function AvatarBubble({
@@ -136,8 +133,7 @@ export default async function Home() {
               lineHeight: 1.6,
             }}
           >
-            Beautiful, personal event pages for wine nights, dinner parties, and everything in
-            between.
+            Mooie, persoonlijke evenementpagina’s voor wijnavonden, diners en alles daartussen.
           </p>
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
             <a
@@ -152,7 +148,7 @@ export default async function Home() {
                 fontWeight: 700,
               }}
             >
-              Sign in
+              Inloggen
             </a>
             <a
               href="/auth/register"
@@ -167,7 +163,7 @@ export default async function Home() {
                 fontWeight: 700,
               }}
             >
-              Create account
+              Account aanmaken
             </a>
           </div>
         </div>
@@ -185,7 +181,7 @@ export default async function Home() {
                 paddingBottom: "12px",
               }}
             >
-              Upcoming Public Events
+              Aankomende openbare evenementen
             </h2>
             <div
               style={{
@@ -205,7 +201,7 @@ export default async function Home() {
                 );
                 const accent = resolved.accent;
                 const coverUrl = event.theme?.coverImageUrl;
-                const hostName = event.host?.name || event.host?.email?.split("@")[0] || "Host";
+                const hostName = event.host?.name || event.host?.email?.split("@")[0] || "Organisator";
                 const goingCount = event.rsvps.filter((r) => r.status === "GOING").length;
                 const commentCount = event.comments.length;
 
@@ -316,7 +312,7 @@ export default async function Home() {
                         }}
                       >
                         <span style={{ color: APP_SHELL.textSecondary, fontSize: "11px" }}>
-                          Hosted by
+                          Georganiseerd door
                         </span>
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <AvatarBubble
@@ -338,7 +334,7 @@ export default async function Home() {
                           fontSize: "11px",
                         }}
                       >
-                        <span>{goingCount} going</span>
+                        <span>{goingCount} aanwezig</span>
                         {commentCount > 0 && (
                           <div style={{ display: "flex", alignItems: "center", gap: "3px" }}>
                             <span>·</span>

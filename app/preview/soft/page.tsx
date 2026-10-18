@@ -61,13 +61,13 @@ export default function SoftPreview() {
             className="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full"
             style={{ background: t.badgeBg, color: t.badgeText }}
           >
-            Friday, June 27
+            Vrijdag 27 juni
           </span>
           <span
             className="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full"
             style={{ background: t.badgeBg, color: t.badgeText }}
           >
-            8:00 PM
+            20:00
           </span>
         </div>
 
@@ -79,7 +79,7 @@ export default function SoftPreview() {
             fontFamily: t.headingFont,
           }}
         >
-          Wine Night ✨
+          Wijnavond ✨
         </h1>
 
         {/* Host */}
@@ -90,7 +90,7 @@ export default function SoftPreview() {
           >
             J
           </div>
-          <span style={{ color: t.textSecondary }}>Hosted by Joe</span>
+          <span style={{ color: t.textSecondary }}>Georganiseerd door Joe</span>
         </div>
 
         {/* Location */}
@@ -107,9 +107,9 @@ export default function SoftPreview() {
 
         {/* Description */}
         <p className="mb-8 leading-relaxed" style={{ color: t.textSecondary }}>
-          Monthly wine night at my place! Bring a bottle you love and be ready to share what you
-          enjoy about it. I&apos;ll have snacks and plenty of glasses. This month&apos;s theme is
-          anything from Burgundy. 🍇
+          Maandelijkse wijnavond bij mij thuis! Neem een fles mee die je lekker vindt en vertel wat je
+          eraan waardeert. Ik zorg voor hapjes en voldoende glazen. Het thema van deze maand is
+          iets uit de Bourgogne. 🍇
         </p>
 
         {/* RSVP Card */}
@@ -126,9 +126,9 @@ export default function SoftPreview() {
           </h2>
           <div className="flex gap-3 mb-5">
             {[
-              { label: "Going", emoji: "🎉", active: true },
-              { label: "Maybe", emoji: "🤔", active: false },
-              { label: "Can't go", emoji: "😔", active: false },
+              { label: "Aanwezig", emoji: "🎉", active: true },
+              { label: "Misschien", emoji: "🤔", active: false },
+              { label: "Afwezig", emoji: "😔", active: false },
             ].map((opt) => (
               <button
                 key={opt.label}
@@ -156,7 +156,7 @@ export default function SoftPreview() {
           <div className="space-y-3">
             <input
               className="w-full px-4 py-3 rounded-xl text-sm outline-none"
-              placeholder="Your name"
+              placeholder="Je naam"
               style={{
                 background: t.inputBg,
                 border: `1px solid ${t.inputBorder}`,
@@ -165,7 +165,7 @@ export default function SoftPreview() {
             />
             <input
               className="w-full px-4 py-3 rounded-xl text-sm outline-none"
-              placeholder="Email (optional — for updates)"
+              placeholder="E-mailadres (optioneel, voor updates)"
               style={{
                 background: t.inputBg,
                 border: `1px solid ${t.inputBorder}`,
@@ -181,7 +181,7 @@ export default function SoftPreview() {
                 border: "none",
               }}
             >
-              Send RSVP
+              Aanmelding versturen
             </button>
           </div>
         </div>
@@ -195,8 +195,8 @@ export default function SoftPreview() {
           }}
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold">Going (8)</h3>
-            <span style={{ color: t.textMuted, fontSize: "13px" }}>3 maybe</span>
+            <h3 className="font-semibold">Aanwezig (8)</h3>
+            <span style={{ color: t.textMuted, fontSize: "13px" }}>3 misschien</span>
           </div>
           <div className="flex gap-2 flex-wrap">
             {["Sarah", "Mike", "Emma", "James", "Priya", "Tom", "Leila", "Raj"].map((name) => (
@@ -228,15 +228,15 @@ export default function SoftPreview() {
             border: `1px solid ${t.cardBorder}`,
           }}
         >
-          <h3 className="font-semibold mb-4">Vibes 💬</h3>
+          <h3 className="font-semibold mb-4">Sfeer 💬</h3>
           <div className="space-y-3 mb-4">
             {[
               {
                 name: "Sarah",
-                msg: "Cannot wait!! Bringing a Pinot I've been saving 🍷",
-                time: "2h ago",
+                msg: "Ik kan niet wachten! Ik neem een Pinot mee die ik heb bewaard 🍷",
+                time: "2 uur geleden",
               },
-              { name: "Mike", msg: "YES. Bringing something from Burgundy!", time: "1h ago" },
+              { name: "Mike", msg: "JA! Ik neem iets uit de Bourgogne mee!", time: "1 uur geleden" },
             ].map((c) => (
               <div key={c.name} className="flex gap-3">
                 <div
@@ -261,7 +261,7 @@ export default function SoftPreview() {
           <div className="flex gap-2">
             <input
               className="flex-1 px-3 py-2 rounded-xl text-sm outline-none"
-              placeholder="Say something..."
+              placeholder="Schrijf een berichtje..."
               style={{
                 background: t.inputBg,
                 border: `1px solid ${t.inputBorder}`,
@@ -276,7 +276,7 @@ export default function SoftPreview() {
                 border: `1px solid ${t.accentBorder}`,
               }}
             >
-              Post
+              Plaatsen
             </button>
           </div>
         </div>

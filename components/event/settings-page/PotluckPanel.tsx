@@ -60,7 +60,7 @@ export function PotluckPanel({
           <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
             <input
               style={{ ...S.inp, flex: 1 }}
-              placeholder="Item name (e.g. Red wine, cups, chips)"
+              placeholder="Naam van het item (bijv. rode wijn, bekers, chips)"
               value={newPotluckLabel}
               onChange={(e) => setNewPotluckLabel(e.target.value)}
               onKeyDown={(e) => {
@@ -81,7 +81,7 @@ export function PotluckPanel({
                   setNewPotluckQty(isNaN(num) ? "" : Math.max(1, num));
                 }
               }}
-              placeholder="Qty"
+              placeholder="Aantal"
             />
           </div>
           <div style={{ display: "flex", gap: "8px" }}>

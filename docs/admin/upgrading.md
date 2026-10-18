@@ -1,38 +1,38 @@
 ---
-title: Upgrading
-description: Safe upgrade procedures, backups, migrations, and rollback.
-category: Maintenance
+title: Upgraden
+description: Veilige upgrades, back-ups, migraties en terugrollen.
+category: Onderhoud
 audience: admin
 order: 60
 ---
 
-# Safe Upgrading Guide
+# Handleiding voor veilig upgraden
 
-This guide explains how to safely pull new versions of **RSVP to Me**, perform database backups, run migrations, and verify your upgrade.
-
----
-
-## Table of Contents
-
-1. [How Updates Work](#how-updates-work)
-2. [Before You Upgrade — Back Up Your Data](#before-you-upgrade--back-up-your-data)
-3. [Checking the Current Version](#checking-the-current-version)
-4. [Performing the Upgrade](#performing-the-upgrade)
-5. [Database Migrations](#database-migrations)
-6. [Verifying the Upgrade](#verifying-the-upgrade)
-7. [Rolling Back](#rolling-back)
-8. [Setting Up Automatic Backups](#setting-up-automatic-backups)
+Deze handleiding legt uit hoe je veilig nieuwe versies van **RSVP to Me** ophaalt, back-ups maakt, migraties uitvoert en controleert of de upgrade is geslaagd.
 
 ---
 
-## How Updates Work
+## Inhoudsopgave
 
-RSVP to Me is distributed as a pre-built Docker image. When a new version is released:
+1. [How Updates Work](#hoe-updates-werken)
+2. [Before You Upgrade — Back Up Your Data](#maak-een-back-up-vóór-het-upgraden)
+3. [Checking the Current Version](#huidige-versie-controleren)
+4. [Performing the Upgrade](#de-upgrade-uitvoeren)
+5. [Database Migrations](#databasemigraties)
+6. [Verifying the Upgrade](#de-upgrade-controleren)
+7. [Rolling Back](#terugrollen-naar-de-vorige-versie)
+8. [Setting Up Automatic Backups](#automatische-back-ups-instellen)
 
-- A new Docker image is pushed to our container registry.
-- Stable releases receive an exact version tag, a minor-version alias, and `latest`.
-- Prereleases receive only the exact version tag and do not move stable aliases.
-- Database migrations (if any) are applied automatically when the new container starts.
+---
+
+## Hoe updates werken
+
+RSVP to Me wordt verspreid als een vooraf gebouwde Docker-image. Wanneer er een nieuwe versie verschijnt:
+
+- Er wordt een nieuwe Docker-image naar het containerregister gepubliceerd.
+- Stabiele releases krijgen een exacte versietag, een alias voor de minorversie en de tag `latest`.
+- Pre-releases krijgen alleen de exacte versietag en wijzigen de stabiele aliassen niet.
+- Eventuele databasemigraties worden automatisch uitgevoerd wanneer de nieuwe container start.
 
 The production `docker-compose.release.yml` uses `latest` by default. For a
 controlled rollout, pin its app image to a version or digest before pulling.
@@ -44,9 +44,9 @@ retaining its project name, mounts, `.env`, and secrets. If your deployment uses
 a custom Compose file or additional overrides, use those same files throughout;
 do not replace a working configuration or move its data as part of this upgrade.
 
-> **Note:** Docker does not automatically update running containers. You must manually pull and restart services to run the updated code.
+> **Let op:** Docker werkt draaiende containers niet automatisch bij. Je moet de nieuwe image zelf ophalen en de services opnieuw starten.
 
-### Who can publish container images
+### Wie containerimages mag publiceren
 
 The Release workflow's publishing job requires both `github.actor` (the original
 publisher) and `github.triggering_actor` (the person starting this run or rerun)
@@ -77,7 +77,7 @@ guide](https://docs.github.com/en/actions/how-tos/administer/control-workflow-ex
 
 ---
 
-## v1.4.1 maintenance release
+## Onderhoudsrelease v1.4.1
 
 This batch updates Next.js and its ESLint configuration to 16.3.6, Sharp to
 0.35.4 in both the application and the optional email worker, Nodemailer to
@@ -130,7 +130,7 @@ Docker browser image are updated together. Dotenv 18.0.4 preserves ordinary
 `dotenv_config_*` CLI arguments. Custom source-installation tooling that uses
 those removed interfaces needs a separate adjustment.
 
-### Release tags and publication checklist
+### Releasetags en publicatiechecklist
 
 The release tag validator accepts `vMAJOR.MINOR.PATCH` and optional SemVer
 prerelease suffixes. Build metadata (`+build`) is rejected because Docker tags
@@ -175,7 +175,7 @@ local image used by Container QC. Verify the published image as well. Source
 builds still fetch fonts through Next.js and can hit the tracked upstream font
 query failure; the application serves those fonts locally at runtime.
 
-### Container QC before publishing
+### Container-QC vóór publicatie
 
 The Docker Actions batch pins QEMU 4.4.0, Buildx 4.4.1, and Build/Push 7.4.0.
 The separate **Container QC** workflow runs on pull requests, pushes to `main`,
@@ -216,15 +216,15 @@ bash scripts/container-smoke.sh rsvp-container-qc:local x64
 
 ---
 
-## Before You Upgrade — Back Up Your Data
+## Maak een back-up vóór het upgraden
 
 Always perform a backup before upgrading.
 
 > **Also back up your `.env` file.** Your secrets (`SESSION_SECRET`, `ENCRYPTION_KEY`, provider credentials) live only in `.env`. If you ever need to roll back or rebuild, you'll need the original values — losing `ENCRYPTION_KEY` in particular means stored credentials can no longer be decrypted. Copy it somewhere safe: `cp .env ./env-backup-$(date +%Y%m%d)`.
 
-### Method 1: pg_dump via the Postgres Container (recommended)
+### Methode 1: pg_dump via de Postgres-container (aanbevolen)
 
-Use `pg_dump` to create a consistent SQL snapshot while the application is running:
+Gebruik `pg_dump` om een consistente SQL-snapshot te maken terwijl de applicatie draait:
 
 ```bash
 mkdir -p ./data/backups
@@ -237,11 +237,11 @@ Also back up your uploaded images:
 cp -r ./data/uploads ./uploads-backup-$(date +%Y%m%d-%H%M%S)
 ```
 
-### Method 2: Built-in Admin Backup Panel
+### Methode 2: ingebouwd back-uppaneel in het beheerpaneel
 
-Navigate to `/admin` → **Backups** and click **Back Up Now** to create a `pg_dump` snapshot via the Admin UI.
+Ga naar `/admin` → **Back-ups** en klik op **Nu back-up maken** om via het beheerpaneel een `pg_dump`-snapshot te maken.
 
-### Where to Store Backups
+### Waar je back-ups bewaart
 
 - On a separate machine, drive, or local NAS.
 - Encrypted cloud storage (e.g. Google Drive, Dropbox, Backblaze B2).
@@ -249,7 +249,7 @@ Navigate to `/admin` → **Backups** and click **Back Up Now** to create a `pg_d
 
 ---
 
-## Checking the Current Version
+## Huidige versie controleren
 
 To see which image version your system is currently running:
 
@@ -266,21 +266,21 @@ docker image inspect --format '{{json .RepoDigests}}' "$image_id"
 
 ---
 
-## Performing the Upgrade
+## De upgrade uitvoeren
 
-### Step 1: Read the Release Notes
+### Stap 1: Lees de releasenotities
 
-Check the [Releases Page](https://github.com/joe-cole1/rsvp-to-me/releases) for breaking changes, required `.env` variables, or custom instructions.
+Controleer de [releases](https://github.com/joe-cole1/rsvp-to-me/releases) op wijzigingen die niet achterwaarts compatibel zijn, verplichte `.env`-variabelen of speciale instructies.
 
 > **Upgrading from a version with default database passwords:** the compose files no longer ship fallback passwords for `POSTGRES_PASSWORD` / `REDIS_PASSWORD` — both must now be set in `.env` or the stack refuses to start. If your existing installation ever ran **without** these variables set, PostgreSQL initialized its data volume with the old built-in default (`postgres_password_here`). Set `POSTGRES_PASSWORD` to that existing value first so the app can still connect, then rotate it to a strong password with: `docker compose -f docker-compose.release.yml exec postgres psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'new-strong-password';"` and update `.env` to match before restarting. Redis reads its password from the compose command on every start, so `REDIS_PASSWORD` can simply be set to a new strong value. The old compose files also published PostgreSQL on host port `5432`; that mapping has been removed, so external tools must now go through `docker compose -f docker-compose.release.yml exec postgres ...` instead of connecting to `localhost:5432` — or use a loopback-only override / shared Docker network as described in the [Installation Guide's "Connecting Database Tools" section](./installation.md#connecting-database-tools).
 
-### Step 2: Back Up the Database
+### Stap 2: Maak een databaseback-up
 
 Follow [Method 1](#method-1-pg_dump-via-the-postgres-container-recommended) and also save uploads and `.env`. Record the current image digest before pulling.
 
-### Step 3: Pull the New Image
+### Stap 3: Haal de nieuwe image op
 
-For v1.4.1, edit only the app image in the Compose file used by your deployment:
+Wijzig voor v1.4.1 alleen de app-image in het Compose-bestand dat je uitrol gebruikt:
 
 ```yaml
 services:
@@ -288,8 +288,8 @@ services:
     image: ghcr.io/joe-cole1/rsvp-to-me:1.4.1
 ```
 
-Wait for the published release's image build to succeed, then pull only the app.
-Do not combine this maintenance rollout with PostgreSQL or Redis upgrades:
+Wacht totdat de imagebuild van de gepubliceerde release is geslaagd en haal daarna alleen de app-image op.
+Combineer deze onderhoudsupgrade niet met een upgrade van PostgreSQL of Redis:
 
 ```bash
 docker compose -f docker-compose.release.yml pull app
@@ -297,9 +297,9 @@ docker compose -f docker-compose.release.yml pull app
 
 _Note:_ This downloads the image layers in the background without affecting your active site.
 
-### Step 4: Re-Launch the App
+### Stap 4: Start de app opnieuw
 
-Recreate only the app container, leaving database and cache services running:
+Maak alleen de app-container opnieuw aan en laat de database- en cacheservices draaien:
 
 ```bash
 docker compose -f docker-compose.release.yml up -d --no-deps app
@@ -325,11 +325,11 @@ vulnerable 0.34.x line.
 
 ---
 
-## Database Migrations
+## Databasemigraties
 
 RSVP to Me handles database migrations automatically when the container starts. On boot, the `app` container runs a migration script (`scripts/migrate-db.js`) that first takes an automatic pre-migration database snapshot, then applies any new schema updates with `prisma migrate deploy`. If a migration step errors transiently, the script retries a few times with a short backoff before giving up, and surfaces an actionable hint (e.g. a `prisma migrate resolve` command) in the logs for a stuck migration.
 
-### Guest RSVP Display Preferences (#667)
+### Weergavevoorkeuren voor aanmeldingen (#667)
 
 The upgrade containing this feature adds six event presentation fields through
 the `20260927044500_guest_rsvp_display` migration. It preserves expanded lists and
@@ -345,7 +345,7 @@ exact counts. RSVP records, capacity, notifications, and exports are unaffected.
 The existing guest-list visibility controls continue to enforce access; the new
 preferences only change presentation. No environment variable is required.
 
-### If a Migration Fails
+### Als een migratie mislukt
 
 If a migration fails on startup:
 
@@ -359,11 +359,11 @@ If a migration fails on startup:
    ```
 3. Look for errors containing `migrate deploy` or database locking.
 4. **Do not repeatedly restart the container.** If a migration failed halfway through, continuous restarts may corrupt the database structure.
-5. Preserve the logs and backups, review [Rolling Back](#rolling-back), and open an issue on the project's GitHub before attempting database recovery.
+5. Preserve the logs and backups, review [Rolling Back](#terugrollen-naar-de-vorige-versie), and open an issue on the project's GitHub before attempting database recovery.
 
 ---
 
-## Verifying the Upgrade
+## De upgrade controleren
 
 Verify that the upgrade went smoothly:
 
@@ -382,19 +382,19 @@ _Expected Health Response:_ `{"status":"ok"}`
 
 > To confirm the database migrations applied cleanly, query the health endpoint with your `HEALTH_CHECK_TOKEN` (optional `.env` variable — see the [Configuration Reference](./configuration.md#health_check_token)): `curl -H "x-health-token: <your token>" http://localhost:3000/api/health` should include `"migrations":"ok"`. Without the token the endpoint returns only the minimal status above.
 
-Go to your event page and test functionality:
+Open je evenementpagina en test de belangrijkste functies:
 
-- Log in and verify that your dashboard loads.
-- Open an event in an incognito window and test submitting an RSVP.
+- Log in en controleer of je dashboard wordt geladen.
+- Open een evenement in een privévenster en test het versturen van een aanmelding.
 - Go to `/admin` > **System Configuration** and click **Send Test Email** to verify mail delivery.
 
 ---
 
-## Rolling Back
+## Terugrollen naar de vorige versie
 
-If you experience issues, you can roll back your application to the previous working version.
+Als je problemen ondervindt, kun je de applicatie terugzetten naar de vorige werkende versie.
 
-### Routine v1.4.1 rollback: change only the app image
+### Standaardterugrol voor v1.4.1: wijzig alleen de app-image
 
 v1.4.1 adds no schema changes relative to v1.4.0. Restore the previously recorded
 image digest (preferred) in the existing Compose file, or use this version tag:
@@ -416,7 +416,7 @@ Do not restore an old database for a routine image rollback: that would discard
 RSVPs and other changes received after the backup. Keep the same `.env`, secrets,
 uploads, and database mounts.
 
-### Database recovery after a migration or data loss
+### Databaseherstel na een migratie of gegevensverlies
 
 For releases that change the schema, review that release's recovery instructions
 before downgrading the image. Stop app writes and take a current backup first.
@@ -427,15 +427,15 @@ database while the app is connected.
 
 ---
 
-## Setting Up Automatic Backups
+## Automatische back-ups instellen
 
-### Option A: Built-in Admin Backup Scheduler
+### Optie A: ingebouwde back-upplanner in het beheerpaneel
 
 Navigate to `/admin` → **Backups** and configure a cron schedule (e.g. `0 3 * * *` for daily at 3 AM). The application runs `pg_dump` on schedule and stores the results in `./data/backups/`. Rotation and download are also managed from this panel.
 
 ---
 
-### Option B: Host-Level Cron Script (Linux/Mac)
+### Optie B: cron-script op de host (Linux/Mac)
 
 For an extra layer of offsite protection, you can run a host cron job alongside the built-in scheduler.
 
@@ -469,7 +469,7 @@ For an extra layer of offsite protection, you can run a host cron job alongside 
 
 ---
 
-## Node.js Runtime Version
+## Node.js-runtimeversie
 
 The Node.js runtime is bundled inside the pre-built Docker image, so **self-hosters running via Docker do not need to install or manage Node directly** — a `docker compose -f docker-compose.release.yml pull` always brings the correct runtime.
 
@@ -488,7 +488,7 @@ being proposed independently by Dependabot.
 
 ---
 
-## Upgrading the PostgreSQL Major Version
+## De hoofdversie van PostgreSQL upgraden
 
 RSVP to Me uses PostgreSQL 18. When a new major PostgreSQL version is released and you want to upgrade, use the dump-and-restore method (not `pg_upgrade`, which requires native binary installations).
 

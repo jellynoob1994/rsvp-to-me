@@ -38,10 +38,10 @@ export function GuestInviteFriendCard({
           return;
         }
         setStatus("error");
-        setErrorMsg(res.error ?? "Failed to send invitation");
+        setErrorMsg(res.error ?? "Uitnodiging versturen is mislukt");
       } catch (reason) {
         setStatus("error");
-        setErrorMsg(reason instanceof Error ? reason.message : "Security check failed");
+        setErrorMsg(reason instanceof Error ? reason.message : "Beveiligingscontrole mislukt");
       }
     });
   };
@@ -57,12 +57,12 @@ export function GuestInviteFriendCard({
             color: t.textPrimary,
           }}
         >
-          Invite a friend
+          Nodig een vriend uit
         </span>
       </div>
       <p style={{ fontSize: "13px", color: t.textSecondary, margin: "0 0 12px", lineHeight: 1.4 }}>
-        This event is private. You can invite friends by entering their email address or phone
-        number below:
+        Dit evenement is privé. Nodig vrienden uit door hieronder hun e-mailadres of telefoonnummer
+        in te vullen:
       </p>
       <div style={{ display: "flex", gap: "8px", width: "100%" }}>
         <input
@@ -78,7 +78,7 @@ export function GuestInviteFriendCard({
             outline: "none",
             boxSizing: "border-box",
           }}
-          placeholder="friend@email.com or +15551234567"
+          placeholder="E-mailadres of telefoonnummer"
           value={target}
           disabled={isPending}
           onChange={(e) => setTarget(e.target.value)}
@@ -104,12 +104,12 @@ export function GuestInviteFriendCard({
             whiteSpace: "nowrap",
           }}
         >
-          {isPending ? "Sending…" : "Send"}
+          {isPending ? "Bezig met verzenden…" : "Versturen"}
         </button>
       </div>
       {status === "success" && (
         <div style={{ fontSize: "12.5px", color: "#4ade80", fontWeight: 600, marginTop: "8px" }}>
-          ✓ Invitation sent successfully!
+          ✓ De uitnodiging is succesvol verstuurd!
         </div>
       )}
       {status === "error" && (

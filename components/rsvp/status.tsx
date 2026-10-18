@@ -6,9 +6,9 @@ export const RSVP_RESPONSE_STATUSES = ["GOING", "MAYBE", "NO"] as const;
 export type RsvpResponseStatus = (typeof RSVP_RESPONSE_STATUSES)[number];
 
 export const RSVP_STATUS_LABELS: Record<RsvpResponseStatus, string> = {
-  GOING: "Going",
-  MAYBE: "Maybe",
-  NO: "Can't go",
+  GOING: "Aanwezig",
+  MAYBE: "Misschien",
+  NO: "Afwezig",
 };
 
 export const RSVP_STATUS_EMOJIS: Record<RsvpResponseStatus, string> = {

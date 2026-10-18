@@ -53,7 +53,7 @@ export function InvitesTab({
         >
           <div>
             <div style={{ fontWeight: 700, fontSize: "15px", color: APP_SHELL.textPrimary }}>
-              Open Host Registration
+              Open registratie voor organisatoren
             </div>
             <div
               style={{
@@ -62,7 +62,7 @@ export function InvitesTab({
                 marginTop: "4px",
               }}
             >
-              Allow anyone to sign up as a host without entering an invite code.
+              Iedereen kan zich als organisator registreren zonder een uitnodigingscode in te voeren.
             </div>
           </div>
           <button
@@ -114,11 +114,11 @@ export function InvitesTab({
               marginBottom: "6px",
             }}
           >
-            Open Registration is Active
+            Open registratie is actief
           </div>
           <div style={{ fontSize: "13px", color: APP_SHELL.textSecondary }}>
-            Invite codes are not required while open registration is enabled. Disable it above to
-            manage invite codes.
+            Uitnodigingscodes zijn niet nodig zolang open registratie is ingeschakeld. Schakel dit hierboven uit om
+            uitnodigingscodes te beheren.
           </div>
         </div>
       ) : (
@@ -141,7 +141,7 @@ export function InvitesTab({
                   margin: 0,
                 }}
               >
-                Generate Host Invite Code
+                Uitnodigingscode voor organisator aanmaken
               </h3>
             </div>
 
@@ -155,12 +155,12 @@ export function InvitesTab({
                   marginBottom: "6px",
                 }}
               >
-                Invite Code String
+                Uitnodigingscode
               </label>
               <input
                 type="text"
                 required
-                placeholder="e.g. VIPHOST2026"
+                placeholder="bijv. VIPHOST2026"
                 value={newCode}
                 onChange={(e) => setNewCode(e.target.value)}
                 style={{
@@ -187,11 +187,11 @@ export function InvitesTab({
                   marginBottom: "6px",
                 }}
               >
-                Max Uses (Optional)
+                Maximaal aantal gebruiken (optioneel)
               </label>
               <input
                 type="number"
-                placeholder="Unlimited if empty"
+                placeholder="Onbeperkt indien leeg"
                 value={maxUses}
                 onChange={(e) => setMaxUses(e.target.value === "" ? "" : Number(e.target.value))}
                 style={{
@@ -218,7 +218,7 @@ export function InvitesTab({
                   marginBottom: "6px",
                 }}
               >
-                Expires At (Optional)
+                Verloopt op (optioneel)
               </label>
               <input
                 type="datetime-local"
@@ -248,11 +248,11 @@ export function InvitesTab({
                   marginBottom: "6px",
                 }}
               >
-                Note / Description
+                Opmerking / beschrijving
               </label>
               <input
                 type="text"
-                placeholder="e.g. Invite code for VIP sponsors"
+                placeholder="bijv. uitnodigingscode voor sponsors"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 style={{
@@ -285,7 +285,7 @@ export function InvitesTab({
                   opacity: isPending ? 0.6 : 1,
                 }}
               >
-                Generate Code
+                Code aanmaken
               </button>
             </div>
           </form>
@@ -308,9 +308,9 @@ export function InvitesTab({
                     }}
                   >
                     <th style={{ padding: "16px" }}>Code</th>
-                    <th style={{ padding: "16px" }}>Usage</th>
-                    <th style={{ padding: "16px" }}>Expirations / Notes</th>
-                    <th style={{ padding: "16px", textAlign: "right" }}>Actions</th>
+                    <th style={{ padding: "16px" }}>Gebruik</th>
+                    <th style={{ padding: "16px" }}>Vervaldatum / opmerkingen</th>
+                    <th style={{ padding: "16px", textAlign: "right" }}>Acties</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -324,7 +324,7 @@ export function InvitesTab({
                           color: APP_SHELL.textMuted,
                         }}
                       >
-                        No active invite codes.
+                        Geen actieve uitnodigingscodes.
                       </td>
                     </tr>
                   ) : (
@@ -343,15 +343,15 @@ export function InvitesTab({
                           </span>
                         </td>
                         <td style={{ padding: "16px", color: APP_SHELL.textPrimary }}>
-                          {c.uses} / {c.maxUses ?? "∞"} uses
+                          {c.uses} / {c.maxUses ?? "∞"} keer gebruikt
                         </td>
                         <td style={{ padding: "16px" }}>
                           {c.expiresAt ? (
                             <div style={{ fontSize: "12px", color: "#f87171" }}>
-                              Expires: {new Date(c.expiresAt).toLocaleDateString()}
+                              Verloopt: {new Date(c.expiresAt).toLocaleDateString("nl-NL")}
                             </div>
                           ) : (
-                            <div style={{ fontSize: "12px", color: "#4ade80" }}>Never expires</div>
+                            <div style={{ fontSize: "12px", color: "#4ade80" }}>Verloopt nooit</div>
                           )}
                           {c.note && (
                             <div
@@ -361,7 +361,7 @@ export function InvitesTab({
                                 marginTop: "2px",
                               }}
                             >
-                              Note: {c.note}
+                              Opmerking: {c.note}
                             </div>
                           )}
                         </td>
@@ -377,7 +377,7 @@ export function InvitesTab({
                               fontSize: "13px",
                             }}
                           >
-                            Revoke
+                            Intrekken
                           </button>
                         </td>
                       </tr>

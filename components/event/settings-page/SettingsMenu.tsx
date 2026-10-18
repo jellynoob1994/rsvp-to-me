@@ -20,46 +20,46 @@ export function SettingsMenu({
         [
           {
             id: "hosts" as const,
-            title: "👥 Hosts & Co-hosts",
+            title: "👥 Organisatoren en mede-organisatoren",
             desc: isOwner
-              ? "Manage who can edit this event"
-              : "View hosts and manage your co-host profile",
+              ? "Beheer wie dit evenement kan bewerken"
+              : "Bekijk de organisatoren en beheer je mede-organisatorprofiel",
           },
           {
             id: "privacy",
-            title: "🔒 Display Options",
-            desc: "Guest list access, guest RSVP display, and event privacy",
+            title: "🔒 Weergaveopties",
+            desc: "Toegang tot de gastenlijst, weergave van aanmeldingen en privacy van het evenement",
           },
           {
             id: "rsvp",
-            title: "✉️ RSVP Options",
-            desc: "+1 settings, RSVP approval, and maybe options",
+            title: "✉️ Aanmeldopties",
+            desc: "Instellingen voor extra gasten, goedkeuring van aanmeldingen en de misschien-optie",
           },
-          { id: "theme", title: "🎨 Theme", desc: "Change base theme and accent color" },
+          { id: "theme", title: "🎨 Thema", desc: "Wijzig het basisthema en de accentkleur" },
           {
             id: "reminders",
-            title: "🔔 Auto-Reminders",
-            desc: "Set up automatic emails and texts before/after event",
+            title: "🔔 Automatische herinneringen",
+            desc: "Stel automatische e-mails en sms-berichten in voor en na het evenement",
           },
           ...(emailEnabled
             ? [
                 {
                   id: "emails" as const,
-                  title: "💌 Emails",
-                  desc: "Preview this event's themed emails and send yourself a test",
+                  title: "💌 E-mails",
+                  desc: "Bekijk de e-mails voor dit evenement en stuur jezelf een test",
                 },
               ]
             : []),
-          { id: "polls", title: "📊 Polls", desc: "Create and manage polls for guests" },
+          { id: "polls", title: "📊 Peilingen", desc: "Maak peilingen voor gasten en beheer ze" },
           {
             id: "questionnaire",
-            title: "📋 Questionnaire",
-            desc: "Ask custom questions to guests during RSVP",
+            title: "📋 Vragenlijst",
+            desc: "Stel gasten aangepaste vragen tijdens hun aanmelding",
           },
           {
             id: "potluck",
-            title: "🍽️ Potluck",
-            desc: "Manage items guests can sign up to bring",
+            title: "🍽️ Meeneemlijst",
+            desc: "Beheer wat gasten kunnen toezeggen om mee te nemen",
           },
         ] as {
           id: SettingsSection;

@@ -4,8 +4,8 @@ import ProfileClient from "./ProfileClient";
 import { getChannelConfig } from "@/lib/config";
 
 export const metadata = {
-  title: "Profile Settings | RSVP",
-  description: "Manage your RSVP account and notification preferences.",
+  title: "Profielinstellingen | RSVP",
+  description: "Beheer je RSVP-account en voorkeuren voor meldingen.",
 };
 
 export default async function ProfilePage() {

@@ -1,6 +1,6 @@
 import type { EmailTheme } from "@/lib/email-theme";
 
-/** "Hosted by" attribution with the themed avatar-gradient monogram. */
+/** "Georganiseerd door" attribution with the themed avatar-gradient monogram. */
 export function HostFlourish({ theme, hostName }: { theme: EmailTheme; hostName: string }) {
   const initial = (hostName.trim()[0] || "?").toUpperCase();
   return (
@@ -44,7 +44,7 @@ export function HostFlourish({ theme, hostName }: { theme: EmailTheme; hostName:
               className="dm-text-muted"
               style={{ margin: 0, fontSize: "12px", color: theme.textMuted }}
             >
-              Hosted by
+              Georganiseerd door
             </p>
             <p
               className="dm-text-primary"

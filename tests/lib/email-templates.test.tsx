@@ -114,7 +114,7 @@ describe("email templates", () => {
     const { html, text } = await renderEmail(element);
     expect(html).toContain("rsvp?token=sample-token");
     // html-to-text uppercases headings in the plain-text part
-    expect(text.toUpperCase()).toContain("YOU'RE GOING!");
+    expect(text.toUpperCase()).toContain("JE AANMELDING: AANWEZIG");
   });
 
   it("magic link and welcome render the sign-in URL in html and text parts", async () => {

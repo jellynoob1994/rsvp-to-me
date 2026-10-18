@@ -1,47 +1,47 @@
 ---
-title: Co-Hosting
-description: Share event management with other people, and what co-hosts can do.
-category: Communication & Engagement
+title: Samen organiseren
+description: Deel het beheer van een evenement met anderen en ontdek wat mede-organisatoren kunnen doen.
+category: Communicatie en betrokkenheid
 audience: host
 order: 100
 ---
 
-# Co-Hosting
+# Samen organiseren
 
-Planning with someone else? Add them as a co-host so you can share the work.
-
----
-
-## Adding a Co-Host
-
-From the event's host controls, search for any registered user by name or email and add them as a co-host. They'll be able to help manage the event right away.
+Plan je samen met iemand anders? Voeg die persoon toe als mede-organisator, zodat jullie het werk kunnen verdelen.
 
 ---
 
-## What Co-Hosts Can Do
+## Een mede-organisator toevoegen
 
-Co-hosts can do (almost) everything you can on the event:
-
-- Edit the event page — title, description, date and time, location, theme, cover image, and info sections
-- Edit event settings (privacy, password, capacity, RSVP options) and reminder schedules
-- Manage the guest list: approve, decline, or remove RSVPs
-- Invite guests and send email/SMS update blasts
-- Manage the potluck list, polls, and questionnaire fields
-- Download the guest list
-- Delete the event
+Gebruik de organisatorbediening van het evenement om een geregistreerde gebruiker op naam of e-mailadres te zoeken en als mede-organisator toe te voegen. Die persoon kan meteen helpen bij het beheren van het evenement.
 
 ---
 
-## What Co-Hosts Can't Do
+## Wat mede-organisatoren kunnen doen
 
-To keep the event safe, co-hosts **cannot**:
+Mede-organisatoren kunnen vrijwel alles doen wat jij op het evenement kunt doen:
 
-- Add or remove co-hosts
-
-Those actions stay with the original host.
+- De evenementpagina bewerken: titel, beschrijving, datum en tijd, locatie, thema, omslagafbeelding en informatieblokken
+- Evenementinstellingen aanpassen (privacy, wachtwoord, capaciteit, aanmeldopties) en herinneringen plannen
+- De gastenlijst beheren: aanmeldingen goedkeuren, afwijzen of verwijderen
+- Gasten uitnodigen en groepsberichten per e-mail of sms versturen
+- De meeneemlijst, peilingen en vragenlijst beheren
+- De gastenlijst downloaden
+- Het evenement verwijderen
 
 ---
 
-## Display Name Overrides
+## Wat mede-organisatoren niet kunnen doen
 
-The main host can set a custom display name override for themselves and for any co-host under the **Hosts** settings page (?section=hosts). This override will prioritize showing the custom name instead of their default name/email on the public event page, the host dashboard, and in email/SMS blasts.
+Om het evenement veilig te houden, kunnen mede-organisatoren niet:
+
+- Mede-organisatoren toevoegen of verwijderen
+
+Deze handelingen blijven voorbehouden aan de oorspronkelijke organisator.
+
+---
+
+## Aangepaste weergavenaam
+
+De hoofdorganisator kan voor zichzelf en elke mede-organisator een aangepaste weergavenaam instellen via de instellingen voor **Organisatoren en mede-organisatoren** (`?section=hosts`). De aangepaste naam krijgt voorrang op de standaardnaam of het e-mailadres. Hij wordt getoond op de openbare evenementpagina, het dashboard voor organisatoren en in groepsberichten per e-mail en sms.

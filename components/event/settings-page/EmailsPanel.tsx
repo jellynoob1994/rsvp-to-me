@@ -75,7 +75,7 @@ export function EmailsPanel({ eventId, t }: { eventId: string; t: ResolvedTheme 
 
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
           <div style={{ flex: "1 1 240px" }}>
-            <Label t={t}>Email</Label>
+            <Label t={t}>E-mail</Label>
             <select
               value={selectedId}
               onChange={(e) => setSelectedId(e.target.value)}

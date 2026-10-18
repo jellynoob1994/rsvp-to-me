@@ -10,25 +10,25 @@ export function OverviewTab({ initialStats }: { initialStats: AdminStats }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {[
           {
-            label: "Total Users",
+            label: "Totaal aantal gebruikers",
             val: initialStats.totalUsers,
             glow: "rgba(168, 85, 247, 0.4)",
             emoji: "👥",
           },
           {
-            label: "Total Events",
+            label: "Totaal aantal evenementen",
             val: initialStats.totalEvents,
             glow: "rgba(236, 72, 153, 0.4)",
             emoji: "🎈",
           },
           {
-            label: "Total RSVPs",
+            label: "Totaal aantal aanmeldingen",
             val: initialStats.totalRsvps,
             glow: "rgba(16, 185, 129, 0.4)",
             emoji: "✓",
           },
           {
-            label: "Guest Check-Ins",
+            label: "Ingecheckte gasten",
             val: initialStats.totalCheckIns,
             glow: "rgba(14, 165, 233, 0.4)",
             emoji: "📍",

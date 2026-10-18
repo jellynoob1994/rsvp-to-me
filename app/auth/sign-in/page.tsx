@@ -6,7 +6,7 @@ import { getCaptchaSiteKey } from "@/lib/captcha";
 import { getSessionUser } from "@/lib/session-user";
 import { headers } from "next/headers";
 
-export const metadata: Metadata = { title: "Sign In" };
+export const metadata: Metadata = { title: "Inloggen" };
 
 export const dynamic = "force-dynamic";
 

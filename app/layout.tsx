@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | RSVP to Me",
   },
   description:
-    "Beautiful, personal event pages for wine nights, dinner parties, and everything in between.",
+    "Mooie, persoonlijke evenementpagina’s voor wijnavonden, diners en alles daartussen.",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -45,7 +45,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="nl"
       className={`${geistSans.variable} ${geistMono.variable} ${themeFontVariables} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

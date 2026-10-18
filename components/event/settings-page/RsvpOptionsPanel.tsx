@@ -64,7 +64,7 @@ export function RsvpOptionsPanel({
     <Section title="RSVP Options" t={t}>
       {/* Max plus-ones select dropdown */}
       <div style={{ marginBottom: "16px" }}>
-        <Label t={t}>Max plus-ones per guest</Label>
+        <Label t={t}>Maximaal aantal extra gasten per gast</Label>
         <select
           style={{ ...S.inp, cursor: "pointer" }}
           value={plusOneAllowed ? plusOneMax : 0}
@@ -189,10 +189,10 @@ export function RsvpOptionsPanel({
       />
 
       <div style={{ marginBottom: "16px", marginTop: "16px" }}>
-        <Label t={t}>Capacity limit (optional)</Label>
+        <Label t={t}>Capaciteitslimiet (optioneel)</Label>
         <input
           type="number"
-          placeholder="No limit"
+          placeholder="Geen limiet"
           value={capacity}
           onChange={(e) => setCapacity(e.target.value)}
           onBlur={() => {
@@ -210,7 +210,7 @@ export function RsvpOptionsPanel({
         />
       </div>
       <div style={{ marginBottom: "16px" }}>
-        <Label t={t}>RSVP deadline (optional)</Label>
+        <Label t={t}>RSVP-deadline (optioneel)</Label>
         <input
           type="datetime-local"
           value={rsvpDeadline}

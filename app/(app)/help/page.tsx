@@ -6,8 +6,8 @@ import { APP_SHELL } from "@/lib/theme";
 import DocsPanel from "@/components/docs/DocsPanel";
 
 export const metadata = {
-  title: "Help & Guides",
-  description: "Guides for hosting events on RSVP to Me",
+  title: "Hulp en handleidingen",
+  description: "Handleidingen voor het organiseren van evenementen met RSVP to Me",
 };
 
 export default async function HelpPage() {
@@ -27,7 +27,7 @@ export default async function HelpPage() {
             margin: "0 0 24px",
           }}
         >
-          📖 Help &amp; Guides
+          📖 Hulp en handleidingen
         </h1>
         <DocsPanel docs={docs} />
       </div>

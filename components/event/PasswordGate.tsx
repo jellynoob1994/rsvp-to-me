@@ -73,7 +73,7 @@ export function PasswordGate({ slug }: { slug: string }) {
         <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <input
             type="text"
-            placeholder="Event password"
+            placeholder="Wachtwoord van het evenement"
             value={pw}
             onChange={(e) => {
               setPw(e.target.value);
@@ -92,7 +92,7 @@ export function PasswordGate({ slug }: { slug: string }) {
               outline: "none",
             }}
           />
-          {error && <div style={{ color: "#f87171", fontSize: "13px" }}>Incorrect password</div>}
+          {error && <div style={{ color: "#f87171", fontSize: "13px" }}>Onjuist wachtwoord</div>}
           <button
             type="submit"
             disabled={!pw.trim() || loading}
@@ -108,7 +108,7 @@ export function PasswordGate({ slug }: { slug: string }) {
               fontWeight: 700,
             }}
           >
-            {loading ? "Verifying..." : "Enter Event"}
+            {loading ? "Controleren…" : "Evenement openen"}
           </button>
         </form>
       </div>

@@ -69,7 +69,7 @@ export function LocationFields({
     <div>
       {submitNames && <input type="hidden" name="locationType" value={value.type} />}
       <div style={fieldStyle}>
-        <span style={labelStyle}>Type</span>
+        <span style={labelStyle}>Soort locatie</span>
         <div style={{ display: "flex", gap: compact ? "6px" : "8px" }}>
           {(["PHYSICAL", "VIRTUAL", "TBD"] as const).map((type) => (
             <button
@@ -79,7 +79,7 @@ export function LocationFields({
               style={tabStyle(value.type === type)}
               onClick={() => set({ type })}
             >
-              {type === "PHYSICAL" ? "📍 In person" : type === "VIRTUAL" ? "💻 Virtual" : "📌 TBD"}
+              {type === "PHYSICAL" ? "📍 Op locatie" : type === "VIRTUAL" ? "💻 Online" : "📌 Nog te bepalen"}
             </button>
           ))}
         </div>
@@ -88,20 +88,20 @@ export function LocationFields({
       {value.type === "PHYSICAL" && (
         <>
           <label style={fieldStyle}>
-            <span style={labelStyle}>Venue name</span>
+            <span style={labelStyle}>Naam van de locatie</span>
             <input
               name={submitNames ? "locationName" : undefined}
-              placeholder="Venue or place name"
+              placeholder="Naam van de locatie of plek"
               value={value.name}
               onChange={(event) => set({ name: event.target.value })}
               style={inputStyle}
             />
           </label>
           <label style={fieldStyle}>
-            <span style={labelStyle}>Address</span>
+            <span style={labelStyle}>Adres</span>
             <input
               name={submitNames ? "locationAddress" : undefined}
-              placeholder="123 Main St, City"
+              placeholder="Straat, huisnummer, plaats"
               value={value.address}
               onChange={(event) => set({ address: event.target.value })}
               style={inputStyle}
@@ -112,7 +112,7 @@ export function LocationFields({
 
       {value.type === "VIRTUAL" && (
         <label style={fieldStyle}>
-          <span style={labelStyle}>Virtual link</span>
+          <span style={labelStyle}>Link naar online evenement</span>
           <input
             name={submitNames ? "virtualUrl" : undefined}
             type="url"
@@ -126,7 +126,7 @@ export function LocationFields({
 
       {value.type === "TBD" && (
         <p style={{ fontSize: "13px", color: t.textMuted, margin: "6px 0 14px", lineHeight: 1.4 }}>
-          We&apos;ll show &quot;To Be Determined (TBD)&quot; to guests until details are added.
+          Gasten zien &quot;Locatie nog niet bepaald&quot; totdat de gegevens zijn ingevuld.
         </p>
       )}
     </div>

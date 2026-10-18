@@ -1,57 +1,57 @@
 ---
-title: Creating Your Event
-description: Event fields, location types, and what happens when you publish.
-category: Your Event
+title: Een evenement aanmaken
+description: Evenementvelden, locatietypen en wat er gebeurt na publicatie.
+category: Je evenement
 audience: host
 order: 20
 ---
 
-# Creating Your Event
+# Een evenement aanmaken
 
-From your Dashboard, click **New Event** to get started.
-
----
-
-## Event Details
-
-Fill in the basics:
-
-- **Event Title** _(required)_
-- **Description** — freeform details about what's happening.
-- **Start Date & Time** _(required)_
-- **End Date & Time** _(optional)_
-- **Timezone** — defaults to `America/New_York`. Guests always see the event in this timezone, so set it to where the event takes place.
+Klik op je Dashboard op **Nieuw evenement** om te beginnen.
 
 ---
 
-## Location Type
+## Evenementgegevens
 
-Pick the kind of location that fits your event:
+Vul de basisgegevens in:
 
-- **Physical** — a street address.
-- **Virtual** — a link to Google Meet, Zoom, or any video service. Only regular web links (`http://` or `https://`) are accepted; if you paste a bare link like `zoom.us/j/123`, `https://` is added for you.
-- **TBD** — shows "Location TBD" until you decide.
-
-You can change the location (or switch types) at any time.
-
----
-
-## Publishing
-
-When you create an event, it is **published right away** and immediately open for RSVPs at its own web address (for example, `/e/housewarming-party`).
-
-If you'd rather not collect responses yet, set the [visibility](visibility-and-privacy.md) to **Private** or **Unlisted** until you're ready to share the link.
+- **Naam van het evenement** _(verplicht)_
+- **Beschrijving** — vrije tekst met informatie over wat er gaat gebeuren.
+- **Begindatum en -tijd** _(verplicht)_
+- **Einddatum en -tijd** _(optioneel)_
+- **Tijdzone** — standaard ingesteld op `Europe/Amsterdam`. Gasten zien de evenementtijd altijd in deze tijdzone. Kies daarom de zone waar het evenement plaatsvindt.
 
 ---
 
-## Cancelling an Event
+## Soort locatie
 
-To cancel, open the event's **Settings** and mark it cancelled. This closes RSVPs and shows guests that the event is no longer happening.
+Kies het locatietype dat bij je evenement past:
+
+- **Op locatie** — een straatadres.
+- **Online** — een link naar Google Meet, Zoom of een andere videodienst. Alleen gewone weblinks (`http://` of `https://`) zijn toegestaan. Plak je een link zonder protocol, zoals `zoom.us/j/123`, dan wordt `https://` automatisch toegevoegd.
+- **Nog te bepalen** — gasten zien dat de locatie nog niet is bepaald totdat je de gegevens invult.
+
+Je kunt de locatie of het locatietype op elk moment wijzigen.
 
 ---
 
-## Next Steps
+## Publiceren
 
-- [Customize your event page](customizing-your-page.md) with a theme and cover photo.
-- [Set your visibility](visibility-and-privacy.md).
-- [Invite your guests](inviting-guests.md).
+Wanneer je een evenement aanmaakt, wordt het **meteen gepubliceerd** en kunnen gasten zich direct aanmelden via het eigen webadres (bijvoorbeeld `/e/housewarming-party`).
+
+Wil je nog geen reacties verzamelen? Zet de [zichtbaarheid](visibility-and-privacy.md) dan op **Privé** of **Niet vermeld** totdat je klaar bent om de link te delen.
+
+---
+
+## Een evenement annuleren
+
+Open de **Instellingen** van het evenement en markeer het als geannuleerd. Aanmelden wordt dan gesloten en gasten zien dat het evenement niet meer doorgaat.
+
+---
+
+## Volgende stappen
+
+- [Pas je evenementpagina aan](customizing-your-page.md) met een thema en omslagfoto.
+- [Stel de zichtbaarheid in](visibility-and-privacy.md).
+- [Nodig je gasten uit](inviting-guests.md).

@@ -5,8 +5,8 @@ import type { TestEmailProps } from "../types";
 
 export function TestEmail({ theme, body }: TestEmailProps) {
   return (
-    <EmailLayout theme={theme} preview="Test email from RSVP to Me">
-      <Hero theme={theme} kicker="RSVP to Me" title="It works! ✨" showCoverImage={false} />
+    <EmailLayout theme={theme} preview="Testmail van RSVP to Me">
+      <Hero theme={theme} kicker="RSVP to Me" title="Het werkt! ✨" showCoverImage={false} />
       <table
         align="center"
         width="100%"

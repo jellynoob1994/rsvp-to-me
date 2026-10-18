@@ -43,7 +43,7 @@ export function ThemesTab({
                 margin: 0,
               }}
             >
-              Theme Presets
+              Thema-voorinstellingen
             </h3>
             <p
               style={{
@@ -53,8 +53,8 @@ export function ThemesTab({
                 marginBottom: 0,
               }}
             >
-              Manage the preset themes hosts can pick from in the event settings. Inactive presets
-              are hidden from hosts.
+              Beheer de thema's die organisatoren kunnen kiezen bij de evenementinstellingen. Inactieve thema's
+              zijn niet zichtbaar voor organisatoren.
             </p>
           </div>
           <button
@@ -84,7 +84,7 @@ export function ThemesTab({
               whiteSpace: "nowrap",
             }}
           >
-            + New Preset
+            + Nieuw thema
           </button>
         </div>
 
@@ -106,7 +106,7 @@ export function ThemesTab({
               padding: "40px 0",
             }}
           >
-            No theme presets yet. Click &quot;+ New Preset&quot; to add one.
+            Er zijn nog geen thema's. Klik op &quot;+ Nieuw thema&quot; om er een toe te voegen.
           </p>
         ) : (
           <div
@@ -185,7 +185,7 @@ export function ThemesTab({
                     }}
                   >
                     {preset.base}
-                    {preset.seasonal ? " · Seasonal" : ""}
+                    {preset.seasonal ? " · Seizoensgebonden" : ""}
                   </div>
                   <div style={{ display: "flex", gap: "6px" }}>
                     <button
@@ -218,7 +218,7 @@ export function ThemesTab({
                         cursor: "pointer",
                       }}
                     >
-                      Edit
+                      Bewerken
                     </button>
                     <button
                       onClick={() => handleTogglePresetActive(preset)}
@@ -234,7 +234,7 @@ export function ThemesTab({
                         cursor: "pointer",
                       }}
                     >
-                      {preset.active ? "Active" : "Inactive"}
+                      {preset.active ? "Actief" : "Inactief"}
                     </button>
                     <button
                       onClick={() => handleDeleteThemePreset(preset.id)}

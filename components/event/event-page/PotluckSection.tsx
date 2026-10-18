@@ -59,7 +59,7 @@ export function PotluckSection({
             >
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <UtensilsCrossed size={16} style={{ color: t.accent }} />
-                <span style={{ fontWeight: 700 }}>What to Bring</span>
+                <span style={{ fontWeight: 700 }}>Wat neem je mee?</span>
               </div>
               {isHost && (
                 <a
@@ -72,7 +72,7 @@ export function PotluckSection({
             </div>
             {isPendingGuest && (
               <div style={pendingNoticeStyle}>
-                You must be an approved guest to claim items. Your RSVP is awaiting host approval.
+                Je moet een goedgekeurde gast zijn om items toe te zeggen. Je aanmelding wacht op goedkeuring van de organisator.
               </div>
             )}
             <div
@@ -108,8 +108,8 @@ export function PotluckSection({
                           {item.label}
                         </span>
                         <span style={{ fontSize: "12px", color: t.textMuted, marginLeft: "6px" }}>
-                          (need {item.quantity}
-                          {totalClaimed > 0 && `, ${remaining} remaining`})
+                          (benodigd: {item.quantity}
+                          {totalClaimed > 0 && `, nog ${remaining} beschikbaar`})
                         </span>
                       </div>
                       {remaining > 0 &&
@@ -132,7 +132,7 @@ export function PotluckSection({
                               color: t.accent,
                             }}
                           >
-                            I&apos;ll bring it
+                            Ik neem dit mee
                           </button>
                         )}
                     </div>
@@ -165,7 +165,7 @@ export function PotluckSection({
                               <span>
                                 {claim.guestName}{" "}
                                 <span style={{ color: t.textMuted }}>
-                                  (bringing {claim.quantity})
+                                  (neemt {claim.quantity} mee)
                                 </span>
                               </span>
                               {canUnclaim && (
@@ -183,7 +183,7 @@ export function PotluckSection({
                                     justifyContent: "center",
                                     opacity: 0.8,
                                   }}
-                                  title="Remove this claim"
+                                  title="Deze toezegging verwijderen"
                                   onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
                                   onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
                                 >
@@ -207,7 +207,7 @@ export function PotluckSection({
                       >
                         <input
                           style={{ ...S.inp, flex: 1 }}
-                          placeholder="Your name"
+                          placeholder="Je naam"
                           value={claimName}
                           onChange={(e) => setClaimName(e.target.value)}
                           onKeyDown={(e) => {
@@ -227,7 +227,7 @@ export function PotluckSection({
                               Math.min(remaining, Math.max(1, parseInt(e.target.value) || 1))
                             )
                           }
-                          placeholder="Qty"
+                          placeholder="Aantal"
                         />
                         <button
                           onClick={() => claimName.trim() && claimItem(item.id, claimName.trim())}
@@ -242,10 +242,10 @@ export function PotluckSection({
                             color: t.accent,
                           }}
                         >
-                          Claim
+                          Ik neem het mee
                         </button>
                         <button onClick={() => setClaimingItemId(null)} style={S.mutedBtn}>
-                          Cancel
+                          Annuleren
                         </button>
                       </div>
                     )}

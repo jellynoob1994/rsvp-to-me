@@ -94,7 +94,7 @@ describe("lib/email.ts", () => {
       expect(mockSendMail).toHaveBeenCalledWith(
         expect.objectContaining({
           to: "user@example.com",
-          subject: "Your sign-in link for RSVP to Me",
+          subject: "Je inloglink voor RSVP to Me",
           html: expect.stringContaining("http://localhost:3000/auth/verify?token=abc"),
           text: expect.stringContaining("http://localhost:3000/auth/verify?token=abc"),
         })
@@ -283,7 +283,7 @@ describe("lib/email.ts", () => {
       expect(mockSendMail).toHaveBeenCalledWith(
         expect.objectContaining({
           to: "admin@example.com",
-          subject: "Test Email from RSVP to Me",
+          subject: "Testmail van RSVP to Me",
         })
       );
     });

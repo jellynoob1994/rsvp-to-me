@@ -156,8 +156,8 @@ export function LocationEdit({
       <>
         <Video size={18} style={{ color: t.accent, flexShrink: 0 }} />
         <div>
-          <div style={{ fontWeight: 600, fontSize: "15px" }}>Virtual Event</div>
-          <div style={{ color: t.textMuted, fontSize: "13px" }}>Click to join</div>
+          <div style={{ fontWeight: 600, fontSize: "15px" }}>Online evenement</div>
+          <div style={{ color: t.textMuted, fontSize: "13px" }}>Klik om deel te nemen</div>
         </div>
         {!isHost && <ExternalLink size={14} style={{ marginLeft: "auto", color: t.textMuted }} />}
       </>
@@ -165,7 +165,7 @@ export function LocationEdit({
       <>
         <MapPin size={18} style={{ color: t.accent, flexShrink: 0, marginTop: "2px" }} />
         <div>
-          <div style={{ fontWeight: 600, fontSize: "15px" }}>To Be Determined (TBD)</div>
+          <div style={{ fontWeight: 600, fontSize: "15px" }}>Nog te bepalen</div>
           <div style={{ color: t.textMuted, fontSize: "13px", marginTop: "2px" }}>
             Location details will be announced later
           </div>
@@ -181,7 +181,7 @@ export function LocationEdit({
           <div
             style={{ ...editCardStyle, justifyContent: "space-between" }}
             onClick={openPopover}
-            title="Click to edit location"
+            title="Klik om de locatie te bewerken"
           >
             <div style={{ display: "flex", alignItems: "flex-start", gap: "12px", flex: 1 }}>
               {locationCardInner}
@@ -263,7 +263,7 @@ export function LocationEdit({
                   <span style={{ width: "15px", fontSize: "14px", opacity: copied ? 0 : 1 }}>
                     📋
                   </span>
-                  {copied ? "Copied!" : "Copy address"}
+                  {copied ? "Gekopieerd!" : "Adres kopiëren"}
                 </button>
               </div>
             )}
@@ -330,7 +330,7 @@ export function LocationEdit({
                 opacity: isPending ? 0.5 : 1,
               }}
             >
-              {isPending ? "Saving…" : "Save"}
+              {isPending ? "Bezig met opslaan…" : "Opslaan"}
             </button>
             <button
               onClick={() => setOpen(false)}

@@ -15,19 +15,27 @@ export function RsvpConfirmationEmail({
   editUrl,
 }: RsvpConfirmationEmailProps) {
   const emoji = statusLabel === "Going" ? " 🎉" : statusLabel === "Maybe" ? " 🤞" : "";
+  const dutchStatusLabel =
+    statusLabel === "Going"
+      ? "Aanwezig"
+      : statusLabel === "Maybe"
+        ? "Misschien"
+        : statusLabel === "Can't Go"
+          ? "Afwezig"
+          : statusLabel;
   const footer = (
     <p className="dm-text-muted" style={{ margin: 0, fontSize: "13px", color: theme.textMuted }}>
-      Changed your mind?{" "}
+      Van gedachten veranderd?{" "}
       <a href={editUrl} target="_blank" rel="noopener noreferrer" style={{ color: theme.accent }}>
-        Update your RSVP
+        Wijzig je aanmelding
       </a>
     </p>
   );
   return (
-    <EmailLayout theme={theme} preview={`You're ${statusLabel} — ${event.title}`} footer={footer}>
+    <EmailLayout theme={theme} preview={`Je aanmelding: ${dutchStatusLabel} — ${event.title}`} footer={footer}>
       <Hero
         theme={theme}
-        kicker="RSVP confirmed"
+        kicker="Aanmelding bevestigd"
         title={event.title}
         showCoverImage={toggles.showCoverImage}
       />
@@ -55,8 +63,8 @@ export function RsvpConfirmationEmail({
                   color: theme.textPrimary,
                 }}
               >
-                {"You're "}
-                {statusLabel}!{emoji}
+                {"Je aanmelding: "}
+                {dutchStatusLabel}!{emoji}
               </h2>
               {splitParagraphs(body).map((paragraph, i) => (
                 <p
@@ -93,7 +101,7 @@ export function RsvpConfirmationEmail({
                   <tr>
                     <td>
                       <EmailButton theme={theme} href={eventUrl} variant="primary">
-                        View event
+                        Bekijk evenement
                       </EmailButton>
                     </td>
                   </tr>

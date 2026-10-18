@@ -6,8 +6,8 @@ import type { WelcomeEmailProps } from "../types";
 
 export function WelcomeEmail({ theme, body, magicLink }: WelcomeEmailProps) {
   return (
-    <EmailLayout theme={theme} preview="Welcome to RSVP to Me">
-      <Hero theme={theme} kicker="RSVP to Me" title="Welcome!" showCoverImage={false} />
+    <EmailLayout theme={theme} preview="Welkom bij RSVP to Me">
+      <Hero theme={theme} kicker="RSVP to Me" title="Welkom!" showCoverImage={false} />
       <table
         align="center"
         width="100%"
@@ -48,7 +48,7 @@ export function WelcomeEmail({ theme, body, magicLink }: WelcomeEmailProps) {
                   <tr>
                     <td>
                       <EmailButton theme={theme} href={magicLink} variant="primary">
-                        Sign in
+                        Inloggen
                       </EmailButton>
                     </td>
                   </tr>
@@ -58,7 +58,7 @@ export function WelcomeEmail({ theme, body, magicLink }: WelcomeEmailProps) {
                 className="dm-text-muted"
                 style={{ margin: "24px 0 0", fontSize: "12px", color: theme.textMuted }}
               >
-                {"If you weren't expecting this, you can safely ignore this email."}
+                {"Heb je deze e-mail niet verwacht? Dan kun je deze veilig negeren."}
               </p>
             </td>
           </tr>

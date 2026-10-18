@@ -116,10 +116,10 @@ export function QuestionnairePanel({
                     colorScheme: t.textPrimary === "#ffffff" ? "dark" : "light",
                   }}
                 >
-                  <option value="TEXT">Short text</option>
-                  <option value="TEXTAREA">Long text</option>
-                  <option value="SELECT">Multiple choice</option>
-                  <option value="CHECKBOX">Checkboxes</option>
+                  <option value="TEXT">Korte tekst</option>
+                  <option value="TEXTAREA">Lange tekst</option>
+                  <option value="SELECT">Meerkeuze</option>
+                  <option value="CHECKBOX">Selectievakjes</option>
                 </select>
                 <label
                   style={{
@@ -164,7 +164,7 @@ export function QuestionnairePanel({
                 onKeyDown={(e) => {
                   if (e.key === "Enter") e.currentTarget.blur();
                 }}
-                placeholder="Question text"
+                placeholder="Vraagtekst"
                 style={{
                   ...S.inp,
                   marginBottom: f.fieldType === "SELECT" || f.fieldType === "CHECKBOX" ? "8px" : 0,
@@ -178,7 +178,7 @@ export function QuestionnairePanel({
                     setOptionsDrafts((prev) => ({ ...prev, [f.id]: e.target.value }))
                   }
                   onBlur={() => handleUpdateFieldOptions(f.id)}
-                  placeholder="Options, one per line"
+                  placeholder="Opties, één per regel"
                   style={{ ...S.inp, resize: "none", marginTop: "4px" } as React.CSSProperties}
                   rows={3}
                 />
@@ -218,10 +218,10 @@ export function QuestionnairePanel({
                 colorScheme: t.textPrimary === "#ffffff" ? "dark" : "light",
               }}
             >
-              <option value="TEXT">Short text</option>
-              <option value="TEXTAREA">Long text</option>
-              <option value="SELECT">Multiple choice</option>
-              <option value="CHECKBOX">Checkboxes</option>
+              <option value="TEXT">Korte tekst</option>
+              <option value="TEXTAREA">Lange tekst</option>
+              <option value="SELECT">Meerkeuze</option>
+              <option value="CHECKBOX">Selectievakjes</option>
             </select>
             <label
               style={{
@@ -246,14 +246,14 @@ export function QuestionnairePanel({
           <input
             value={newFieldLabel}
             onChange={(e) => setNewFieldLabel(e.target.value)}
-            placeholder="Question text *"
+            placeholder="Vraagtekst *"
             style={S.inp}
           />
           {(newFieldType === "SELECT" || newFieldType === "CHECKBOX") && (
             <textarea
               value={newFieldOptions}
               onChange={(e) => setNewFieldOptions(e.target.value)}
-              placeholder="Options, one per line"
+              placeholder="Opties, één per regel"
               style={{ ...S.inp, resize: "none" } as React.CSSProperties}
               rows={3}
             />

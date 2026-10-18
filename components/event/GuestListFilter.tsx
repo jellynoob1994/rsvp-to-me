@@ -109,12 +109,12 @@ export function GuestListFilter({
 
   const statusLabel = (s: string) =>
     s === "GOING"
-      ? "Going"
+      ? "Aanwezig"
       : s === "MAYBE"
-        ? "Maybe"
+        ? "Misschien"
         : s === "INVITED"
-          ? "Invited"
-          : "Can't make it";
+          ? "Uitgenodigd"
+          : "Afwezig";
   const statusColor = (s: string) =>
     s === "GOING" ? t.badgeText : s === "MAYBE" ? t.textSecondary : t.textMuted;
 
@@ -193,21 +193,21 @@ export function GuestListFilter({
   const chips: { key: Filter; label: string; count: number | string | null }[] = [
     {
       key: "ALL",
-      label: "All",
+      label: "Iedereen",
       count: showTotal ? allRsvps.length + (isHost ? invited.length : 0) : null,
     },
     ...(isHost
       ? [
-          { key: "CHECKED_IN" as Filter, label: "Arrived", count: checkedInParties },
+          { key: "CHECKED_IN" as Filter, label: "Aangekomen", count: checkedInParties },
           {
             key: "NOT_CHECKED_IN" as Filter,
-            label: "Not arrived",
+            label: "Nog niet aangekomen",
             count: attendanceParties - checkedInParties,
           },
         ]
       : []),
     ...(isHost
-      ? [{ key: "PENDING" as Filter, label: "Pending Approval", count: pending.length }]
+      ? [{ key: "PENDING" as Filter, label: "Wacht op goedkeuring", count: pending.length }]
       : []),
     ...GUEST_RSVP_GROUPS.filter(({ status }) => display[status].list !== "HIDDEN").map(
       ({ status, label }) => ({
@@ -219,7 +219,7 @@ export function GuestListFilter({
         ),
       })
     ),
-    ...(isHost ? [{ key: "INVITED" as Filter, label: "Invited", count: invited.length }] : []),
+    ...(isHost ? [{ key: "INVITED" as Filter, label: "Uitgenodigd", count: invited.length }] : []),
   ];
 
   const chipStyle = (active: boolean): React.CSSProperties => ({
@@ -248,7 +248,7 @@ export function GuestListFilter({
   };
 
   const handleDelete = (rsvpId: string) => {
-    if (!confirm("Remove this RSVP? This cannot be undone.")) return;
+    if (!confirm("Deze aanmelding verwijderen? Dit kan niet ongedaan worden gemaakt.")) return;
     setDeletingId(rsvpId);
     startTransition(async () => {
       const result = await deleteRsvpAsHost(rsvpId);
@@ -286,7 +286,7 @@ export function GuestListFilter({
   };
 
   const handleDeleteInvited = (id: string) => {
-    if (!confirm("Remove this guest? This cannot be undone.")) return;
+    if (!confirm("Deze gast verwijderen? Dit kan niet ongedaan worden gemaakt.")) return;
     startTransition(async () => {
       const result = await deleteRsvpAsHost(id);
       if (result.success) {
@@ -296,7 +296,7 @@ export function GuestListFilter({
   };
 
   const handleDeleteInvitation = (invitationId: string) => {
-    if (!confirm("Remove this invitation? This cannot be undone.")) return;
+    if (!confirm("Deze uitnodiging verwijderen? Dit kan niet ongedaan worden gemaakt.")) return;
     setDeletingInvitationId(invitationId);
     startTransition(async () => {
       const result = await deleteInvitationAsHost(invitationId);
@@ -308,7 +308,7 @@ export function GuestListFilter({
   };
 
   const handleDecline = (rsvpId: string) => {
-    if (!confirm("Decline and remove this RSVP request?")) return;
+    if (!confirm("Deze aanmeldingsaanvraag afwijzen en verwijderen?")) return;
     startTransition(async () => {
       const res = await runWithCaptcha("rsvp_moderation", (token) =>
         declineRsvp(rsvpId, undefined, token)
@@ -352,7 +352,7 @@ export function GuestListFilter({
       } catch (error) {
         updateRsvp(rsvp.id, (item) => ({ ...item, checkIn: rsvp.checkIn }));
         setAttendanceError(
-          error instanceof Error ? error.message : "Unable to check in this party."
+          error instanceof Error ? error.message : "Dit gezelschap kan niet worden ingecheckt."
         );
       } finally {
         setCheckInPendingId(null);
@@ -374,7 +374,7 @@ export function GuestListFilter({
         await undoCheckIn(rsvp.id);
       } catch (error) {
         updateRsvp(rsvp.id, (item) => ({ ...item, checkIn: rsvp.checkIn }));
-        setAttendanceError(error instanceof Error ? error.message : "Unable to undo check-in.");
+        setAttendanceError(error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt.");
       } finally {
         setCheckInPendingId(null);
       }
@@ -401,7 +401,7 @@ export function GuestListFilter({
       } catch (error) {
         updateInvitedRsvp(guest.rsvpId!, (item) => ({ ...item, checkIn: previousCheckIn }));
         setAttendanceError(
-          error instanceof Error ? error.message : "Unable to check in this party."
+          error instanceof Error ? error.message : "Dit gezelschap kan niet worden ingecheckt."
         );
       } finally {
         setCheckInPendingId(null);
@@ -425,7 +425,7 @@ export function GuestListFilter({
         await undoCheckIn(guest.rsvpId!);
       } catch (error) {
         updateInvitedRsvp(guest.rsvpId!, (item) => ({ ...item, checkIn: previousCheckIn }));
-        setAttendanceError(error instanceof Error ? error.message : "Unable to undo check-in.");
+        setAttendanceError(error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt.");
       } finally {
         setCheckInPendingId(null);
       }
@@ -442,11 +442,11 @@ export function GuestListFilter({
         );
         setInvitationMessage(
           result.errors?.length
-            ? `Invite resent with a warning: ${result.errors.join("; ")}`
+            ? `Uitnodiging opnieuw verstuurd met een waarschuwing: ${result.errors.join("; ")}`
             : `Invite resent to ${guest.sentTo}.`
         );
       } catch (error) {
-        setInvitationMessage(error instanceof Error ? error.message : "Unable to resend invite.");
+        setInvitationMessage(error instanceof Error ? error.message : "Uitnodiging opnieuw versturen is mislukt.");
       } finally {
         setResendPendingId(null);
       }
@@ -507,7 +507,7 @@ export function GuestListFilter({
         setSearch(newRsvp.guestName);
         setHighlightedId(newRsvp.id);
       } catch (error) {
-        setAttendanceError(error instanceof Error ? error.message : "Unable to add this walk-in.");
+        setAttendanceError(error instanceof Error ? error.message : "Deze gast ter plaatse kan niet worden toegevoegd.");
       }
     });
   };
@@ -524,10 +524,10 @@ export function GuestListFilter({
             marginBottom: "16px",
           }}
         >
-          <div style={{ fontWeight: 800, fontSize: "15px" }}>Event attendance</div>
+          <div style={{ fontWeight: 800, fontSize: "15px" }}>Aanwezigheid bij het evenement</div>
           <div style={{ color: t.textSecondary, fontSize: "13px", marginTop: "4px" }}>
-            {checkedInParties} of {attendanceParties} parties · {checkedInPeople} of{" "}
-            {expectedPeople} people arrived
+            {checkedInParties} van {attendanceParties} gezelschappen · {checkedInPeople} van{" "}
+            {expectedPeople} personen aangekomen
           </div>
           <div style={{ display: "flex", gap: "8px", marginTop: "14px", flexWrap: "wrap" }}>
             <input
@@ -536,8 +536,8 @@ export function GuestListFilter({
                 setSearch(event.target.value);
                 setHighlightedId(null);
               }}
-              placeholder="Search name, email, phone…"
-              aria-label="Search guest list"
+              placeholder="Zoek op naam, e-mailadres of telefoonnummer…"
+              aria-label="Gastenlijst doorzoeken"
               style={{
                 flex: "1 1 220px",
                 minWidth: 0,
@@ -561,7 +561,7 @@ export function GuestListFilter({
                 fontWeight: 700,
               }}
             >
-              Download CSV
+              CSV downloaden
             </a>
             <button
               onClick={() => setShowWalkIn((value) => !value)}
@@ -577,7 +577,7 @@ export function GuestListFilter({
                 cursor: "pointer",
               }}
             >
-              {showWalkIn ? "Cancel" : "+ Add walk-in"}
+              {showWalkIn ? "Annuleren" : "+ Gast ter plaatse toevoegen"}
             </button>
           </div>
           {showWalkIn && (
@@ -600,8 +600,8 @@ export function GuestListFilter({
                 maxLength={100}
                 value={walkInName}
                 onChange={(event) => setWalkInName(event.target.value)}
-                placeholder="Guest name"
-                aria-label="Walk-in guest name"
+                placeholder="Naam van de gast"
+                aria-label="Naam van de gast ter plaatse"
                 style={{
                   padding: "9px",
                   borderRadius: "8px",
@@ -615,8 +615,8 @@ export function GuestListFilter({
                 max={11}
                 value={walkInPartySize}
                 onChange={(event) => setWalkInPartySize(Number(event.target.value))}
-                aria-label="Total party size"
-                title="Total party size"
+                aria-label="Aantal personen in het gezelschap"
+                title="Aantal personen in het gezelschap"
                 style={{
                   padding: "9px",
                   borderRadius: "8px",
@@ -629,8 +629,8 @@ export function GuestListFilter({
                   maxLength={100}
                   value={walkInEmail}
                   onChange={(event) => setWalkInEmail(event.target.value)}
-                  placeholder="Email (optional)"
-                  aria-label="Walk-in email"
+                  placeholder="E-mailadres (optioneel)"
+                  aria-label="E-mailadres van de gast ter plaatse"
                   style={{
                     padding: "9px",
                     borderRadius: "8px",
@@ -644,8 +644,8 @@ export function GuestListFilter({
                   maxLength={30}
                   value={walkInPhone}
                   onChange={(event) => setWalkInPhone(event.target.value)}
-                  placeholder="Phone (optional)"
-                  aria-label="Walk-in phone"
+                  placeholder="Telefoonnummer (optioneel)"
+                  aria-label="Telefoonnummer van de gast ter plaatse"
                   style={{
                     padding: "9px",
                     borderRadius: "8px",
@@ -666,7 +666,7 @@ export function GuestListFilter({
                   cursor: isPending ? "wait" : "pointer",
                 }}
               >
-                {isPending ? "Adding…" : "Add and check in"}
+                {isPending ? "Bezig met toevoegen…" : "Toevoegen en inchecken"}
               </button>
             </form>
           )}
@@ -729,10 +729,10 @@ export function GuestListFilter({
       filter !== "INVITED" ? (
         <div style={{ textAlign: "center", padding: "60px 20px", color: t.textMuted }}>
           {collapsedGroups.length > 0
-            ? "Choose a response above to open its guest list."
+            ? "Kies hierboven een antwoord om de bijbehorende gastenlijst te openen."
             : isHost
-              ? "No one here yet."
-              : "No guests to display in this view."}
+              ? "Nog niemand in deze lijst."
+              : "Geen gasten om in deze weergave te tonen."}
         </div>
       ) : (
         <>
@@ -809,7 +809,7 @@ export function GuestListFilter({
                         color: t.accent,
                       }}
                     >
-                      ✓ Arrived
+                      ✓ Aangekomen
                     </span>
                   )}
                 </div>
@@ -872,7 +872,7 @@ export function GuestListFilter({
                   </div>
                 )}
                 <div style={{ color: t.textMuted, fontSize: "11px", marginTop: "4px" }}>
-                  {new Date(r.createdAt).toLocaleDateString("en-US", {
+                  {new Date(r.createdAt).toLocaleDateString("nl-NL", {
                     month: "short",
                     day: "numeric",
                     hour: "numeric",
@@ -880,8 +880,8 @@ export function GuestListFilter({
                   })}
                   {r.checkIn && (
                     <>
-                      {" · Checked in "}
-                      {new Intl.DateTimeFormat("en-US", {
+                      {" · Ingecheckt "}
+                      {new Intl.DateTimeFormat("nl-NL", {
                         hour: "numeric",
                         minute: "2-digit",
                         timeZone: timezone,
@@ -911,12 +911,12 @@ export function GuestListFilter({
                     }}
                   >
                     {checkInPendingId === r.id
-                      ? "Saving…"
+                      ? "Bezig met opslaan…"
                       : r.checkIn
                         ? undoConfirmId === r.id
-                          ? "Confirm undo"
-                          : "Undo check-in"
-                        : "Check in"}
+                          ? "Ongedaan maken bevestigen"
+                          : "Check-in ongedaan maken"
+                        : "Inchecken"}
                   </button>
                   <button
                     onClick={() => handleApprove(r.id)}
@@ -933,7 +933,7 @@ export function GuestListFilter({
                       fontFamily: "inherit",
                     }}
                   >
-                    Approve
+                    Goedkeuren
                   </button>
                   <button
                     onClick={() => handleDecline(r.id)}
@@ -950,7 +950,7 @@ export function GuestListFilter({
                       fontFamily: "inherit",
                     }}
                   >
-                    Decline
+                    Afwijzen
                   </button>
                 </div>
               ) : (
@@ -974,12 +974,12 @@ export function GuestListFilter({
                       }}
                     >
                       {checkInPendingId === r.id
-                        ? "Saving…"
+                        ? "Bezig met opslaan…"
                         : r.checkIn
                           ? undoConfirmId === r.id
-                            ? "Confirm undo"
-                            : "Undo check-in"
-                          : "Check in"}
+                            ? "Ongedaan maken bevestigen"
+                            : "Check-in ongedaan maken"
+                          : "Inchecken"}
                     </button>
                     <a
                       href={`/e/${slug}/rsvp?token=${r.editToken}&return=guests`}
@@ -996,7 +996,7 @@ export function GuestListFilter({
                         textAlign: "center",
                       }}
                     >
-                      Edit
+                      Bewerken
                     </a>
                     <button
                       onClick={() => handleDelete(r.id)}
@@ -1013,7 +1013,7 @@ export function GuestListFilter({
                         fontFamily: "inherit",
                       }}
                     >
-                      Remove
+                      Verwijderen
                     </button>
                   </div>
                 )
@@ -1071,7 +1071,7 @@ export function GuestListFilter({
                         flexShrink: 0,
                       }}
                     >
-                      No reply
+                      Geen reactie
                     </span>
                     {inv.checkIn && (
                       <span
@@ -1084,7 +1084,7 @@ export function GuestListFilter({
                           color: t.accent,
                         }}
                       >
-                        ✓ Arrived
+                        ✓ Aangekomen
                       </span>
                     )}
                   </div>
@@ -1101,15 +1101,15 @@ export function GuestListFilter({
                     {inv.sentTo}
                   </div>
                   <div style={{ color: t.textMuted, fontSize: "12px", marginTop: "2px" }}>
-                    Invited via {inv.channel === "EMAIL" ? "email" : "SMS"} ·{" "}
-                    {new Date(inv.sentAt).toLocaleDateString("en-US", {
+                    Uitgenodigd via {inv.channel === "EMAIL" ? "e-mail" : "sms"} ·{" "}
+                    {new Date(inv.sentAt).toLocaleDateString("nl-NL", {
                       month: "short",
                       day: "numeric",
                     })}
                     {inv.checkIn && (
                       <>
-                        {" · Checked in "}
-                        {new Intl.DateTimeFormat("en-US", {
+                        {" · Ingecheckt "}
+                        {new Intl.DateTimeFormat("nl-NL", {
                           hour: "numeric",
                           minute: "2-digit",
                           timeZone: timezone,
@@ -1141,12 +1141,12 @@ export function GuestListFilter({
                         }}
                       >
                         {checkInPendingId === inv.rsvpId
-                          ? "Saving…"
+                          ? "Bezig met opslaan…"
                           : inv.checkIn
                             ? undoConfirmId === inv.rsvpId
-                              ? "Confirm undo"
-                              : "Undo check-in"
-                            : "Check in"}
+                              ? "Ongedaan maken bevestigen"
+                              : "Check-in ongedaan maken"
+                            : "Inchecken"}
                       </button>
                     )}
                     <button
@@ -1164,7 +1164,7 @@ export function GuestListFilter({
                         fontFamily: "inherit",
                       }}
                     >
-                      {resendPendingId === inv.id ? "Sending…" : "Resend invite"}
+                      {resendPendingId === inv.id ? "Bezig met verzenden…" : "Uitnodiging opnieuw versturen"}
                     </button>
                     {inv.editToken && (
                       <>
@@ -1183,7 +1183,7 @@ export function GuestListFilter({
                             textAlign: "center",
                           }}
                         >
-                          Edit
+                          Bewerken
                         </a>
                         <button
                           onClick={() => handleDeleteInvited(inv.id)}
@@ -1199,7 +1199,7 @@ export function GuestListFilter({
                             fontFamily: "inherit",
                           }}
                         >
-                          Remove
+                          Verwijderen
                         </button>
                       </>
                     )}
@@ -1219,7 +1219,7 @@ export function GuestListFilter({
                           fontFamily: "inherit",
                         }}
                       >
-                        Remove
+                        Verwijderen
                       </button>
                     )}
                   </div>
@@ -1229,7 +1229,7 @@ export function GuestListFilter({
 
           {filter === "INVITED" && displayedInvited.length === 0 && (
             <div style={{ textAlign: "center", padding: "60px 20px", color: t.textMuted }}>
-              No pending invites.
+              Geen openstaande uitnodigingen.
             </div>
           )}
         </>

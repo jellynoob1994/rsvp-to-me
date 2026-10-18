@@ -127,7 +127,7 @@ export default async function RsvpPage({ params, searchParams }: Props) {
         organizerOverride={isOrganizer}
         readOnlyReason={
           eventStarted && !isOrganizer
-            ? "This event has started, so guests can no longer change their RSVP. Contact the host if your response needs to be updated."
+            ? "Dit evenement is begonnen. Gasten kunnen hun aanmelding niet meer wijzigen. Neem contact op met de organisator als je je reactie wilt aanpassen."
             : undefined
         }
       />

@@ -128,10 +128,10 @@ export const FONT_OPTIONS: FontOption[] = [
 ];
 
 export const FONT_CATEGORY_LABELS: Record<FontCategory, string> = {
-  serif: "Elegant",
-  display: "Poster",
-  script: "Script",
-  sans: "Modern",
+  serif: "Elegante schreefletters",
+  display: "Decoratief",
+  script: "Handgeschreven",
+  sans: "Modern zonder schreef",
 };
 
 export function getFontById(id: string | null | undefined): FontOption | null {

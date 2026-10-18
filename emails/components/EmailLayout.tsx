@@ -32,7 +32,7 @@ export function EmailLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="nl">
       <head>
         <meta name="color-scheme" content="light dark" />
         <meta name="supported-color-schemes" content="light dark" />
@@ -109,7 +109,7 @@ export function EmailLayout({
                             className="dm-text-muted"
                             style={{ margin: "8px 0 0", fontSize: "12px", color: theme.textMuted }}
                           >
-                            Sent with RSVP to Me
+                            Verzonden met RSVP to Me
                           </p>
                         </td>
                       </tr>

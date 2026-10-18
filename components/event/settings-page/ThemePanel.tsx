@@ -146,7 +146,7 @@ export function ThemePanel({
               type="text"
               value={themeSearch}
               onChange={(e) => setThemeSearch(e.target.value)}
-              placeholder="Search themes…"
+              placeholder="Zoek thema’s…"
               style={{
                 width: "100%",
                 boxSizing: "border-box",
@@ -461,7 +461,7 @@ export function ThemePanel({
                 fontWeight: 600,
               }}
             >
-              <span>Customize colors</span>
+              <span>Kleuren aanpassen</span>
               <span
                 style={{
                   fontSize: "11px",
@@ -478,7 +478,7 @@ export function ThemePanel({
               <div style={{ padding: "14px", borderTop: `1px solid ${t.inputBorder}` }}>
                 {/* Style selector */}
                 <div style={{ marginBottom: "14px" }}>
-                  <Label t={t}>Style</Label>
+                  <Label t={t}>Stijl</Label>
                   <div style={{ display: "flex", gap: "8px" }}>
                     {BASE_THEMES.map((bt) => (
                       <button
@@ -523,7 +523,7 @@ export function ThemePanel({
 
                 {/* Background colors */}
                 <div style={{ marginBottom: "14px" }}>
-                  <Label t={t}>Background Colors</Label>
+                  <Label t={t}>Achtergrondkleuren</Label>
                   <div style={{ display: "flex", gap: "10px" }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: "11px", color: t.textMuted, marginBottom: "5px" }}>
@@ -619,7 +619,7 @@ export function ThemePanel({
                 </div>
 
                 {/* Accent color */}
-                <Label t={t}>Accent Color</Label>
+                <Label t={t}>Accentkleur</Label>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "7px" }}>
                   {ACCENT_PRESETS.map((p) => (
                     <button
@@ -676,7 +676,7 @@ export function ThemePanel({
 
                 {/* Card opacity */}
                 <div style={{ marginTop: "14px" }}>
-                  <Label t={t}>Card Opacity</Label>
+                  <Label t={t}>Dekking van kaarten</Label>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                     <input
                       type="range"
@@ -762,7 +762,7 @@ export function ThemePanel({
               }}
             >
               <span style={{ fontSize: "18px" }}>🚫</span>
-              <span style={{ fontSize: "10px", fontWeight: 600 }}>None</span>
+              <span style={{ fontSize: "10px", fontWeight: 600 }}>Geen</span>
             </button>
             {sortedEffectSets.map((e) => (
               <button
@@ -945,7 +945,7 @@ export function ThemePanel({
       {/* ── Event title font ── */}
       {activeTab === "font" && (
         <div style={{ marginBottom: "12px" }}>
-          <Label t={t}>Event Title Font</Label>
+          <Label t={t}>Lettertype van de evenementtitel</Label>
           <div style={{ fontSize: "11px", color: t.textMuted, marginBottom: "8px" }}>
             Applied only to your main event title. Some theme presets pick a matching font
             automatically — choose one here to override it.

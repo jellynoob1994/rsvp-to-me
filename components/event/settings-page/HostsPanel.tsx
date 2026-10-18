@@ -91,7 +91,7 @@ export function HostsPanel({
               </label>
               <input
                 style={{ ...S.inp, fontSize: "12px", padding: "6px 10px" }}
-                placeholder="Override your display name for this event..."
+                placeholder="Gebruik een andere weergavenaam voor dit evenement..."
                 value={hostDisplayName}
                 onChange={(e) => {
                   setHostDisplayName(e.target.value);

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/AppPrimitives";
 import { CaptchaForm } from "@/components/ui/CaptchaForm";
 
-export const metadata: Metadata = { title: "New Event" };
+export const metadata: Metadata = { title: "Nieuw evenement" };
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -47,56 +47,57 @@ export default async function NewEventPage() {
   return (
     <div style={{ maxWidth: "480px", margin: "0 auto", padding: "32px 16px 80px" }}>
       <CaptchaForm action={createEvent} captchaAction="event_create">
-        <Card title="Event Details">
-          <FormField label="Event name *" style={{ marginBottom: "14px" }}>
-            <AppInput name="title" required placeholder="Wine Night at Jane's" />
+        <Card title="Evenementgegevens">
+          <FormField label="Naam van het evenement *" style={{ marginBottom: "14px" }}>
+            <AppInput name="title" required placeholder="Wijnavond bij Jan" />
           </FormField>
-          <FormField label="Description" style={{ marginBottom: "14px" }}>
+          <FormField label="Beschrijving" style={{ marginBottom: "14px" }}>
             <textarea
               name="description"
-              placeholder="Come hang out! Bring a bottle to share."
+              placeholder="Kom gezellig langs! Neem iets mee om te delen."
               rows={3}
               style={{ ...appInputStyle, resize: "vertical" }}
             />
           </FormField>
         </Card>
 
-        <Card title="Date & Time">
+        <Card title="Datum en tijd">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <FormField label="Date *" style={{ marginBottom: "14px" }}>
+            <FormField label="Datum *" style={{ marginBottom: "14px" }}>
               <AppInput name="startDate" type="date" required />
             </FormField>
-            <FormField label="Time *" style={{ marginBottom: "14px" }}>
+            <FormField label="Tijd *" style={{ marginBottom: "14px" }}>
               <AppInput name="startTime" type="time" required />
             </FormField>
           </div>
-          <FormField label="Timezone" style={{ marginBottom: "14px" }}>
-            <select name="timezone" style={appInputStyle}>
-              <option value="America/New_York">Eastern (ET)</option>
-              <option value="America/Chicago">Central (CT)</option>
-              <option value="America/Denver">Mountain (MT)</option>
-              <option value="America/Los_Angeles">Pacific (PT)</option>
-              <option value="America/Anchorage">Alaska (AKT)</option>
-              <option value="Pacific/Honolulu">Hawaii (HST)</option>
-              <option value="Europe/London">London (GMT/BST)</option>
-              <option value="Europe/Paris">Paris (CET)</option>
-              <option value="Asia/Tokyo">Tokyo (JST)</option>
-              <option value="Australia/Sydney">Sydney (AEST)</option>
+          <FormField label="Tijdzone" style={{ marginBottom: "14px" }}>
+            <select name="timezone" defaultValue="Europe/Amsterdam" style={appInputStyle}>
+              <option value="Europe/Amsterdam">Nederland (CET/CEST)</option>
+              <option value="America/New_York">Oost-Amerikaanse tijd (ET)</option>
+              <option value="America/Chicago">Centraal-Amerikaanse tijd (CT)</option>
+              <option value="America/Denver">Bergtijd (MT)</option>
+              <option value="America/Los_Angeles">Pacifische tijd (PT)</option>
+              <option value="America/Anchorage">Alaskatijd (AKT)</option>
+              <option value="Pacific/Honolulu">Hawaïaanse tijd (HST)</option>
+              <option value="Europe/London">Londen (GMT/BST)</option>
+              <option value="Europe/Paris">Parijs (CET/CEST)</option>
+              <option value="Asia/Tokyo">Tokio (JST)</option>
+              <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
             </select>
           </FormField>
         </Card>
 
-        <Card title="Location">
+        <Card title="Locatie">
           <LocationSelector />
         </Card>
 
-        <Card title="Visibility">
+        <Card title="Zichtbaarheid">
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             {(
               [
-                ["UNLISTED", "Unlisted", "Only people with the link can see this"],
-                ["PUBLIC", "Public", "Anyone can find and view this event"],
-                ["PRIVATE", "Private", "Invite only — host must approve each RSVP"],
+                ["UNLISTED", "Niet vermeld", "Alleen mensen met de link kunnen dit evenement bekijken"],
+                ["PUBLIC", "Openbaar", "Iedereen kan dit evenement vinden en bekijken"],
+                ["PRIVATE", "Privé", "Alleen op uitnodiging — de organisator moet elke aanmelding goedkeuren"],
               ] as const
             ).map(([val, label, desc]) => (
               <label
@@ -140,7 +141,7 @@ export default async function NewEventPage() {
             fontSize: "16px",
           }}
         >
-          Create Event →
+          Evenement aanmaken →
         </AppButton>
       </CaptchaForm>
     </div>
