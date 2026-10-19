@@ -34,7 +34,7 @@ export const BASE_THEMES: {
 }[] = [
   {
     id: "DARK",
-    label: "Dark & Moody",
+    label: "Donker en sfeervol",
     preview: "linear-gradient(135deg, #0a0a0f, #13091f)",
     defaultGradientFrom: "#7c3aed",
     defaultGradientTo: "#1e40af",
@@ -42,7 +42,7 @@ export const BASE_THEMES: {
   },
   {
     id: "SOFT",
-    label: "Soft & Dreamy",
+    label: "Zacht en dromerig",
     preview: "linear-gradient(135deg, #fbcfe8, #e9d5ff)",
     defaultGradientFrom: "#fda4af",
     defaultGradientTo: "#ddd6fe",
@@ -50,7 +50,7 @@ export const BASE_THEMES: {
   },
   {
     id: "BOLD",
-    label: "Bold & Colorful",
+    label: "Gedurfd en kleurrijk",
     preview: "linear-gradient(135deg, #f97316, #ec4899)",
     defaultGradientFrom: "#f97316",
     defaultGradientTo: "#ec4899",
@@ -82,7 +82,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   // Dark presets
   {
     id: "dark-night",
-    name: "Dark Night",
+    name: "Donkere nacht",
     emoji: "🌙",
     base: "DARK",
     gradientFrom: "#7c3aed",
@@ -91,7 +91,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "midnight-indigo",
-    name: "Midnight Indigo",
+    name: "Middernachtindigo",
     emoji: "✨",
     base: "DARK",
     gradientFrom: "#312e81",
@@ -100,7 +100,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "obsidian",
-    name: "Obsidian",
+    name: "Obsidiaan",
     emoji: "🖤",
     base: "DARK",
     gradientFrom: "#7c2d12",
@@ -109,7 +109,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "emerald-night",
-    name: "Emerald Night",
+    name: "Smaragdnacht",
     emoji: "🌿",
     base: "DARK",
     gradientFrom: "#14532d",
@@ -118,7 +118,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "retro-synthwave",
-    name: "Retro Synthwave",
+    name: "Retro-synthwave",
     emoji: "🎛️",
     base: "DARK",
     gradientFrom: "#4a044e",
@@ -137,7 +137,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   // Soft presets
   {
     id: "rose-cloud",
-    name: "Rosé Cloud",
+    name: "Roséwolk",
     emoji: "🌸",
     base: "SOFT",
     gradientFrom: "#fda4af",
@@ -146,7 +146,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "peach-cream",
-    name: "Peach Cream",
+    name: "Perzikcrème",
     emoji: "🍑",
     base: "SOFT",
     gradientFrom: "#fde68a",
@@ -155,7 +155,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "garden-party",
-    name: "Garden Party",
+    name: "Tuinfeest",
     emoji: "🌷",
     base: "SOFT",
     gradientFrom: "#bbf7d0",
@@ -164,7 +164,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "lavender-fields",
-    name: "Lavender Fields",
+    name: "Lavendelvelden",
     emoji: "💜",
     base: "SOFT",
     gradientFrom: "#e9d5ff",
@@ -174,7 +174,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   // Bold presets
   {
     id: "sunset",
-    name: "Sunset",
+    name: "Zonsondergang",
     emoji: "🌅",
     base: "BOLD",
     gradientFrom: "#f97316",
@@ -183,7 +183,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "electric-blue",
-    name: "Electric Blue",
+    name: "Elektrisch blauw",
     emoji: "⚡",
     base: "BOLD",
     gradientFrom: "#0ea5e9",
@@ -192,7 +192,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "deep-sea",
-    name: "Deep Sea",
+    name: "Diepzee",
     emoji: "🌊",
     base: "BOLD",
     gradientFrom: "#14b8a6",
@@ -212,7 +212,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "tropical-punch",
-    name: "Tropical Punch",
+    name: "Tropische punch",
     emoji: "🍹",
     base: "BOLD",
     gradientFrom: "#f59e0b",
@@ -242,7 +242,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "citrus-pop",
-    name: "Citrus Pop",
+    name: "Citrusmix",
     emoji: "🍋",
     base: "BOLD",
     gradientFrom: "#facc15",
@@ -262,7 +262,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "blue-raspberry",
-    name: "Blue Raspberry",
+    name: "Blauwe framboos",
     emoji: "🧊",
     base: "BOLD",
     gradientFrom: "#2563eb",
@@ -272,7 +272,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "grape-soda",
-    name: "Grape Soda",
+    name: "Druivensoda",
     emoji: "🍇",
     base: "BOLD",
     gradientFrom: "#7c3aed",
@@ -283,7 +283,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   // Seasonal
   {
     id: "valentines",
-    name: "Valentine's Day",
+    name: "Valentijnsdag",
     emoji: "❤️",
     base: "SOFT",
     gradientFrom: "#fecdd3",
@@ -295,7 +295,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "st-patricks",
-    name: "St. Patrick's Day",
+    name: "St. Patrick’s Day",
     emoji: "🍀",
     base: "BOLD",
     gradientFrom: "#16a34a",
@@ -306,7 +306,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "spring",
-    name: "Spring",
+    name: "Lente",
     emoji: "🌱",
     base: "SOFT",
     gradientFrom: "#bbf7d0",
@@ -317,7 +317,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "easter",
-    name: "Easter",
+    name: "Pasen",
     emoji: "🐣",
     base: "SOFT",
     gradientFrom: "#e9d5ff",
@@ -328,7 +328,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "cherry-blossom",
-    name: "Cherry Blossom",
+    name: "Kersenbloesem",
     emoji: "🌸",
     base: "SOFT",
     gradientFrom: "#fbcfe8",
@@ -339,7 +339,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "mothers-day",
-    name: "Mother's Day",
+    name: "Moederdag",
     emoji: "🌹",
     base: "SOFT",
     gradientFrom: "#f0abfc",
@@ -350,7 +350,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "summer",
-    name: "Summer Vibes",
+    name: "Zomerse sfeer",
     emoji: "☀️",
     base: "BOLD",
     gradientFrom: "#fde68a",
@@ -361,7 +361,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "fourth-of-july",
-    name: "4th of July",
+    name: "Onafhankelijkheidsdag",
     emoji: "🇺🇸",
     base: "BOLD",
     gradientFrom: "#dc2626",
@@ -372,7 +372,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "fall",
-    name: "Fall",
+    name: "Herfst",
     emoji: "🍂",
     base: "DARK",
     gradientFrom: "#c2410c",
@@ -405,7 +405,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "winter-holidays",
-    name: "Christmas",
+    name: "Kerstmis",
     emoji: "🎄",
     base: "DARK",
     gradientFrom: "#166534",
@@ -428,7 +428,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   },
   {
     id: "new-years",
-    name: "New Year's Eve",
+    name: "Oudejaarsavond",
     emoji: "🥂",
     base: "DARK",
     gradientFrom: "#1e1b4b",

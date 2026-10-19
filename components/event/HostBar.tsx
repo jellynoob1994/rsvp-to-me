@@ -16,9 +16,9 @@ const VISIBILITY_OPTIONS: {
   label: string;
   description: string;
 }[] = [
-  { value: "PUBLIC", icon: Globe, label: "Public", description: "Anyone can find this event" },
-  { value: "UNLISTED", icon: Link2, label: "Unlisted", description: "Only people with the link" },
-  { value: "PRIVATE", icon: Lock, label: "Private", description: "Invite only, approval required" },
+  { value: "PUBLIC", icon: Globe, label: "Openbaar", description: "Iedereen kan dit evenement vinden" },
+  { value: "UNLISTED", icon: Link2, label: "Niet vermeld", description: "Alleen mensen met de link kunnen het bekijken" },
+  { value: "PRIVATE", icon: Lock, label: "Privé", description: "Alleen op uitnodiging, goedkeuring vereist" },
 ];
 
 function visibilityIcon(v: Visibility) {
@@ -86,13 +86,13 @@ export function HostBar({
         inviteGuest(eventId, inviteInput.trim(), token)
       );
       if (result.success) {
-        setInviteStatus({ success: true, message: `Invite sent to ${result.emailOrPhone}!` });
+        setInviteStatus({ success: true, message: `Uitnodiging verstuurd naar ${result.emailOrPhone}!` });
         setInviteInput("");
       }
     } catch (err: unknown) {
       setInviteStatus({
         success: false,
-        message: err instanceof Error ? err.message : "Failed to send invite.",
+        message: err instanceof Error ? err.message : "Uitnodiging versturen is mislukt.",
       });
     } finally {
       setInvitePending(false);
@@ -102,17 +102,17 @@ export function HostBar({
   const VisIcon = visibilityIcon(visibility);
 
   const actions = [
-    { id: "invite", icon: Mail, label: "Invite", href: null },
-    { id: "message", icon: MessageSquare, label: "Message", href: null },
+    { id: "invite", icon: Mail, label: "Uitnodigen", href: null },
+    { id: "message", icon: MessageSquare, label: "Bericht sturen", href: null },
     {
       id: "visibility",
       icon: VisIcon,
       label:
-        visibility === "PUBLIC" ? "Public" : visibility === "UNLISTED" ? "Unlisted" : "Private",
+        visibility === "PUBLIC" ? "Openbaar" : visibility === "UNLISTED" ? "Niet vermeld" : "Privé",
       href: null,
     },
-    { id: "settings", icon: Settings, label: "Settings", href: `/e/${eventSlug}/settings` },
-    { id: "preview", icon: Eye, label: "Preview", href: null },
+    { id: "settings", icon: Settings, label: "Instellingen", href: `/e/${eventSlug}/settings` },
+    { id: "preview", icon: Eye, label: "Voorbeeld", href: null },
   ];
 
   const handleVisibilityChange = async (next: Visibility) => {
@@ -156,8 +156,8 @@ export function HostBar({
           successCount++;
           emailStatus =
             r.sent === 0
-              ? "No guests with email addresses found."
-              : `Sent email to ${r.sent} guest${r.sent !== 1 ? "s" : ""}.`;
+              ? "Geen gasten met een e-mailadres gevonden."
+              : `E-mail verzonden naar ${r.sent} ${r.sent === 1 ? "gast" : "gasten"}.`;
         }
       }
       if (sendSms) {
@@ -168,8 +168,8 @@ export function HostBar({
           successCount++;
           smsStatus =
             r.sent === 0
-              ? "No guests with phone numbers found."
-              : `Sent SMS to ${r.sent} guest${r.sent !== 1 ? "s" : ""}.`;
+              ? "Geen gasten met een telefoonnummer gevonden."
+              : `Sms verzonden naar ${r.sent} ${r.sent === 1 ? "gast" : "gasten"}.`;
         }
       }
 
@@ -178,10 +178,10 @@ export function HostBar({
         setBlastResult(parts.join(" "));
         setMessageText("");
       } else {
-        setBlastResult("Failed to send message. Try again.");
+        setBlastResult("Bericht verzenden mislukt. Probeer het opnieuw.");
       }
     } catch (err: unknown) {
-      setBlastResult(err instanceof Error ? err.message : "Failed to send message. Try again.");
+      setBlastResult(err instanceof Error ? err.message : "Bericht verzenden mislukt. Probeer het opnieuw.");
     } finally {
       setIsSending(false);
     }
@@ -281,7 +281,7 @@ export function HostBar({
             setInviteInput("");
             setInviteStatus(null);
           }}
-          title="Invite Guests"
+          title="Gasten uitnodigen"
           onOpen={
             visibility !== "PRIVATE"
               ? async () => {
@@ -320,7 +320,7 @@ export function HostBar({
                   lineHeight: 1.6,
                 }}
               >
-                This is a private event. Guests must be invited directly via email or SMS.
+                Dit is een privé-evenement. Gasten moeten rechtstreeks per e-mail of sms worden uitgenodigd.
               </p>
               <a
                 href={`/e/${eventSlug}/settings?section=privacy`}
@@ -331,13 +331,13 @@ export function HostBar({
                   textDecoration: "none",
                 }}
               >
-                Change in Display Options →
+                Wijzig dit bij Weergaveopties →
               </a>
             </div>
           ) : (
             <>
               <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "16px" }}>
-                Share the event link or send invites directly.
+                Deel de link naar het evenement of verstuur rechtstreeks uitnodigingen.
               </p>
               <div
                 style={{
@@ -381,7 +381,7 @@ export function HostBar({
                   }}
                 >
                   {copiedLink ? <Check size={16} /> : null}
-                  {copiedLink ? "Copied!" : "Copy Link"}
+                  {copiedLink ? "Gekopieerd!" : "Link kopiëren"}
                 </button>
                 {qrDataUrl && (
                   <a
@@ -409,7 +409,7 @@ export function HostBar({
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
                   <Image
                     src={qrDataUrl}
-                    alt="Event QR code"
+                    alt="QR-code van het evenement"
                     width={160}
                     height={160}
                     unoptimized
@@ -432,8 +432,8 @@ export function HostBar({
                 textAlign: "center",
               }}
             >
-              Messaging is not configured on this server. Share the event link above to invite
-              guests.
+              Berichten versturen is niet ingesteld op deze server. Deel de link hierboven om
+              gasten uit te nodigen.
             </div>
           ) : (
             <div
@@ -444,17 +444,17 @@ export function HostBar({
               }}
             >
               <h4 style={{ color: "#fff", fontWeight: 600, fontSize: "14px", marginBottom: "8px" }}>
-                Send Direct Invite
+                Directe uitnodiging versturen
               </h4>
               <div style={{ display: "flex", gap: "8px" }}>
                 <input
                   type="text"
                   placeholder={
                     channelConfig.email && channelConfig.sms
-                      ? "emails or phones (e.g. tom@mail.com, +1555123...)"
+                      ? "e-mailadressen of telefoonnummers (bijv. tom@mail.com, +31612345678)"
                       : channelConfig.sms
-                        ? "phone numbers (e.g. +1555123...)"
-                        : "email addresses (e.g. tom@mail.com)"
+                        ? "telefoonnummers (bijv. +31612345678)"
+                        : "e-mailadressen (bijv. tom@mail.com)"
                   }
                   value={inviteInput}
                   onChange={(e) => setInviteInput(e.target.value)}
@@ -489,7 +489,7 @@ export function HostBar({
                     opacity: !inviteInput.trim() || invitePending ? 0.5 : 1,
                   }}
                 >
-                  {invitePending ? "Sending…" : "Send"}
+                  {invitePending ? "Bezig met verzenden…" : "Versturen"}
                 </button>
               </div>
               {inviteStatus && (
@@ -514,7 +514,7 @@ export function HostBar({
             setActivePanel(null);
             setBlastResult(null);
           }}
-          title="Message Guests"
+          title="Bericht sturen aan gasten"
         >
           {!channelConfig.email && !channelConfig.sms ? (
             <div
@@ -525,14 +525,14 @@ export function HostBar({
                 color: "rgba(255,255,255,0.4)",
               }}
             >
-              Messaging is not configured on this server. Enable email or SMS in admin settings to
-              send blasts to guests.
+              Berichten versturen is niet ingesteld op deze server. Schakel e-mail of sms in bij de beheerinstellingen om
+              berichten aan gasten te versturen.
             </div>
           ) : (
             <>
               <textarea
                 rows={4}
-                placeholder="Type your message…"
+                placeholder="Typ je bericht…"
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 style={{
@@ -559,11 +559,11 @@ export function HostBar({
                     padding: "8px 12px",
                     borderRadius: "8px",
                     background:
-                      blastResult.includes("Sent") || blastResult.includes("sent")
+                      blastResult.toLowerCase().includes("verzonden")
                         ? "rgba(74,222,128,0.1)"
                         : "rgba(248,113,113,0.1)",
                     color:
-                      blastResult.includes("Sent") || blastResult.includes("sent")
+                      blastResult.toLowerCase().includes("verzonden")
                         ? "#4ade80"
                         : "#f87171",
                   }}
@@ -585,7 +585,7 @@ export function HostBar({
                       marginBottom: "8px",
                     }}
                   >
-                    Delivery Channels
+                    Verzendkanalen
                   </div>
                   <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
                     {channelConfig.email && (
@@ -605,7 +605,7 @@ export function HostBar({
                           onChange={(e) => setSendEmail(e.target.checked)}
                           style={{ accentColor: t.accent }}
                         />
-                        <span>Email</span>
+                        <span>E-mail</span>
                       </label>
                     )}
                     {channelConfig.sms && (
@@ -644,16 +644,16 @@ export function HostBar({
                     marginBottom: "8px",
                   }}
                 >
-                  Recipients
+                  Ontvangers
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
                   {(
                     [
-                      { key: "ALL", label: "All" },
-                      { key: "INVITED", label: "Invited" },
-                      { key: "GOING", label: "Yes" },
-                      { key: "MAYBE", label: "Maybe" },
-                      { key: "NO", label: "No" },
+                      { key: "ALL", label: "Iedereen" },
+                      { key: "INVITED", label: "Uitgenodigd" },
+                      { key: "GOING", label: "Aanwezig" },
+                      { key: "MAYBE", label: "Misschien" },
+                      { key: "NO", label: "Afwezig" },
                     ] as const
                   ).map(({ key, label }) => {
                     const active = recipientFilters.includes(key);
@@ -712,7 +712,7 @@ export function HostBar({
                   marginTop: "8px",
                 }}
               >
-                {isSending ? "Sending…" : "Send Message"}
+                {isSending ? "Bezig met verzenden…" : "Bericht versturen"}
               </button>
             </>
           )}
@@ -720,7 +720,7 @@ export function HostBar({
       )}
 
       {activePanel === "visibility" && (
-        <SlideUp onClose={() => setActivePanel(null)} title="Event Visibility">
+        <SlideUp onClose={() => setActivePanel(null)} title="Zichtbaarheid van het evenement">
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "16px" }}>
             Control who can find and view this event.
           </p>
@@ -825,7 +825,7 @@ export function HostBar({
       )}
 
       {activePanel === "preview" && (
-        <SlideUp onClose={() => setActivePanel(null)} title="Preview as Guest">
+        <SlideUp onClose={() => setActivePanel(null)} title="Voorbeeld als gast">
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "16px" }}>
             This shows you exactly what guests see when they open your event.
           </p>

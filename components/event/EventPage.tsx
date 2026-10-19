@@ -174,8 +174,8 @@ export function EventPage({
   // server derives (RSVP name for approved guests, user record otherwise).
   const selfAuthorName =
     isApprovedGuest && !isHost && !isAdmin
-      ? guestName || "Guest"
-      : sessionUser?.name || sessionUser?.email || guestName || "Guest";
+      ? guestName || "Gast"
+      : sessionUser?.name || sessionUser?.email || guestName || "Gast";
   const [pendingDelete, setPendingDelete] = useState<{
     id: string;
     section: EventData["infoSections"][number];
@@ -425,7 +425,7 @@ export function EventPage({
         }));
         setFeedPage(1);
       } else {
-        alert(result.error || "Failed to add reply");
+        alert(result.error || "Toevoegen van de reactie is mislukt.");
       }
     });
   };

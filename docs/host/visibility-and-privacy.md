@@ -1,66 +1,61 @@
 ---
-title: Visibility & Privacy
-description: Public, unlisted, and private events, plus password protection.
-category: Your Event
+title: Zichtbaarheid en privacy
+description: Openbare, niet-vermelde en privé-evenementen en beveiliging met een wachtwoord.
+category: Je evenement
 audience: host
 order: 40
 ---
 
-# Visibility & Privacy
+# Zichtbaarheid en privacy
 
-Control who can find and view your event from **Settings → Display Options**.
-Event visibility appears first, with its private-event options directly below it,
-followed by the guest controls.
+Bepaal wie je evenement kan vinden en bekijken via **Instellingen → Weergaveopties**. De zichtbaarheid van het evenement staat bovenaan. De opties voor privé-evenementen staan er direct onder, gevolgd door de instellingen voor gasten.
 
-## Browser Page Protection
+## Beveiliging van de browserpagina
 
-Event pages receive a fresh security token each time they are opened. It lets
-the page's own scripts run while blocking unexpected inline scripts. This
-protection does not change who can find or view your event; the visibility and
-guest settings below remain the controls for that choice.
+Elke keer dat een evenementpagina wordt geopend, krijgt deze een nieuw beveiligingstoken. Hierdoor kunnen de eigen scripts van de pagina werken, terwijl onverwachte inline-scripts worden geblokkeerd. Deze beveiliging verandert niet wie je evenement kan vinden of bekijken; daarvoor blijven de instellingen voor zichtbaarheid en gasten hieronder bepalend.
 
 ---
 
-## Visibility Modes
+## Zichtbaarheidsopties
 
-- **Public** — anyone can view the event, and it may appear on the site's public event feed.
-- **Unlisted** — only people with the direct link can view it. It won't show up in any public listing.
-- **Private** — only hosts and invited guests can view it. Private events also unlock two extra options below.
-
----
-
-## Password Protection _(Private events)_
-
-For a **Private** event, you can set a password that guests must enter before they can see the page.
-
-- Once a guest enters the correct password, the event stays unlocked in their browser for a while.
-- The password never appears in the web address, so it's safe to share the link separately from the password.
+- **Openbaar** — iedereen kan het evenement bekijken. Het kan ook verschijnen in het openbare evenementenoverzicht van de site.
+- **Niet vermeld** — alleen mensen met de rechtstreekse link kunnen het evenement bekijken. Het verschijnt niet in openbare overzichten.
+- **Privé** — alleen organisatoren en uitgenodigde gasten kunnen het evenement bekijken. Bij privé-evenementen zijn ook de twee extra opties hieronder beschikbaar.
 
 ---
 
-## Let Guests Invite Friends _(Private events)_
+## Beveiliging met een wachtwoord _(privé-evenementen)_
 
-On a **Private** event, you can allow your invited guests to bring others by sending their own invitations. Turn this on in Settings when you want word-of-mouth invites; leave it off to keep the guest list strictly to people you invite.
+Bij een **Privé**-evenement kun je een wachtwoord instellen dat gasten moeten invoeren voordat ze de pagina kunnen bekijken.
 
----
-
-## What the Gate Protects
-
-Privacy and password protection cover the **whole event**, not just the main page. The same check guards every part of a Private or password-protected event:
-
-- The **event page** itself.
-- The **guest list** page.
-- The **RSVP form** (nobody can respond without being let in).
-- The **Add to Calendar** (`.ics`) download link used in your invite emails.
-
-Link previews follow the same privacy boundary. Published Public and Unlisted events can show their title, description, date, cover, and theme when their link is shared to social or messaging apps. Private, password-protected, draft, cancelled, or deleted events expose only a generic event-invitation preview. Unlisted previews work for people who receive the direct link, but remain excluded from search indexing.
-
-A visitor gets through only if they are a host or co-host, an invited guest opening their personal link, or someone who has already entered the password. Everyone else is turned away consistently across all of these — so a Private event's details, guest list, and calendar file can't be pulled up by guessing the address.
+- Nadat een gast het juiste wachtwoord heeft ingevoerd, blijft het evenement gedurende enige tijd ontgrendeld in diens browser.
+- Het wachtwoord verschijnt nooit in het webadres. Je kunt de link daarom veilig apart van het wachtwoord delen.
 
 ---
 
-## Choosing the Right Mode
+## Gasten vrienden laten uitnodigen _(privé-evenementen)_
 
-- Hosting something open to the community? **Public.**
-- Sharing with a specific group but don't need it hidden behind a login? **Unlisted.**
-- Sensitive or invite-only gathering? **Private**, optionally with a password.
+Bij een **Privé**-evenement kun je uitgenodigde gasten toestemming geven om zelf anderen uit te nodigen. Schakel dit in via de instellingen als je wilt dat uitnodigingen ook via-via worden verspreid. Laat het uitgeschakeld als de gastenlijst beperkt moet blijven tot mensen die jij zelf uitnodigt.
+
+---
+
+## Wat wordt door de afscherming beschermd?
+
+Privacy- en wachtwoordbeveiliging gelden voor het **hele evenement**, niet alleen voor de hoofdpagina. Dezelfde controle beschermt alle onderdelen van een privé-evenement of een evenement dat met een wachtwoord is beveiligd:
+
+- De **evenementpagina** zelf.
+- De pagina met de **gastenlijst**.
+- Het **aanmeldformulier**; niemand kan reageren zonder toegang te krijgen.
+- De downloadlink **Aan agenda toevoegen** (`.ics`), die in uitnodigingsmails wordt gebruikt.
+
+Ook linkvoorbeelden houden rekening met privacy. Gepubliceerde openbare en niet-vermelde evenementen kunnen hun titel, beschrijving, datum, omslagafbeelding en thema tonen wanneer de link wordt gedeeld via sociale media of berichtenapps. Privé-evenementen, evenementen met wachtwoordbeveiliging, concepten, geannuleerde evenementen en verwijderde evenementen tonen alleen een algemeen voorbeeld van een evenementuitnodiging. Voorbeelden van niet-vermelde evenementen werken voor mensen die de rechtstreekse link ontvangen, maar worden niet opgenomen in zoekindexen.
+
+Een bezoeker krijgt alleen toegang als diegene organisator of mede-organisator is, als uitgenodigde gast de persoonlijke link opent of als diegene het wachtwoord al heeft ingevoerd. Alle anderen worden op dezelfde manier geweigerd. Zo kunnen gegevens van een privé-evenement, de gastenlijst en het agenda-bestand niet worden opgehaald door adressen te raden.
+
+---
+
+## Welke optie kies je?
+
+- Organiseer je iets dat voor iedereen in de gemeenschap toegankelijk is? Kies **Openbaar**.
+- Deel je het evenement met een specifieke groep, maar wil je geen inlog- of wachtwoordscherm? Kies **Niet vermeld**.
+- Gaat het om een gevoelige bijeenkomst of een evenement alleen op uitnodiging? Kies **Privé**, eventueel met een wachtwoord.

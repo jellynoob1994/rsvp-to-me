@@ -14,8 +14,8 @@ import { getSessionUser } from "@/lib/session-user";
 import { loadDocs } from "@/lib/docs";
 
 export const metadata = {
-  title: "Admin Panel | RSVP",
-  description: "RSVP to Me System Administration Panel",
+  title: "Beheerpaneel | RSVP",
+  description: "Systeembeheer van RSVP to Me",
 };
 
 export default async function AdminPage() {

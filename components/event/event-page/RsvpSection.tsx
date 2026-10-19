@@ -15,9 +15,9 @@ const RESPONSE_SUMMARIES: Record<
   SubmittedStatus,
   { label: string; icon: typeof CircleCheck; color: string }
 > = {
-  GOING: { label: "You’re going", icon: CircleCheck, color: "#22c55e" },
-  MAYBE: { label: "Marked as maybe", icon: CircleHelp, color: "#f59e0b" },
-  NO: { label: "Can’t make it", icon: CircleX, color: "#ef4444" },
+  GOING: { label: "Je bent aangemeld als aanwezig", icon: CircleCheck, color: "#22c55e" },
+  MAYBE: { label: "Je hebt misschien aangegeven", icon: CircleHelp, color: "#f59e0b" },
+  NO: { label: "Je kunt niet komen", icon: CircleX, color: "#ef4444" },
 };
 
 export function RsvpSection({
@@ -48,7 +48,7 @@ export function RsvpSection({
   const deadline = event.rsvpDeadline ? new Date(event.rsvpDeadline) : null;
   const deadlinePassed = deadline ? deadline < now : false;
   const eventStarted = new Date(event.startAt) <= now;
-  const deadlineDate = deadline?.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+  const deadlineDate = deadline?.toLocaleDateString("nl-NL", { month: "long", day: "numeric" });
   const deadlineDays = deadline
     ? Math.ceil((deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
     : null;
@@ -56,12 +56,12 @@ export function RsvpSection({
     deadlineDays === null
       ? null
       : deadlineDays > 1
-        ? `${deadlineDays} days remaining`
+        ? `Nog ${deadlineDays} dagen`
         : deadlineDays === 1
-          ? "1 day remaining"
+          ? "Nog 1 dag"
           : deadlineDays === 0
-            ? "today"
-            : "deadline passed";
+            ? "vandaag"
+            : "aanmeldtermijn verstreken";
 
   const unansweredWindowOpen = !eventStarted && !deadlinePassed;
   const responseWindowOpen = !eventStarted && (!deadlinePassed || event.allowEditAfterDeadline);
@@ -179,11 +179,11 @@ export function RsvpSection({
                     aria-level={2}
                     style={{ fontWeight: 700, fontSize: "14px", lineHeight: 1.25 }}
                   >
-                    {rsvpApproved ? summary.label : "RSVP received"}
+                    {rsvpApproved ? summary.label : "Aanmelding ontvangen"}
                   </div>
                   {!rsvpApproved && (
                     <div style={{ color: t.textMuted, fontSize: "11px", marginTop: "2px" }}>
-                      Awaiting host approval
+                      Wacht op goedkeuring van de organisator
                     </div>
                   )}
                 </div>
@@ -199,7 +199,7 @@ export function RsvpSection({
                     textDecoration: "none",
                   }}
                 >
-                  Edit my RSVP
+                  Mijn aanmelding aanpassen
                 </a>
               )}
             </div>
@@ -218,7 +218,7 @@ export function RsvpSection({
                   id="event-rsvp-heading"
                   style={{ fontSize: "17px", fontWeight: 700, margin: 0 }}
                 >
-                  Are you going?
+                  Kom je ook?
                 </h2>
               </div>
               {deadline && (
@@ -230,7 +230,7 @@ export function RsvpSection({
                     fontWeight: deadlinePassed ? 600 : 400,
                   }}
                 >
-                  RSVPs requested no later than {deadlineDate} · {deadlineCountdown}
+Aanmelden kan tot {deadlineDate} · {deadlineCountdown}
                 </div>
               )}
 
@@ -245,12 +245,12 @@ export function RsvpSection({
                       marginBottom: "4px",
                     }}
                   >
-                    RSVPs Closed
+                    Aanmelden niet meer mogelijk
                   </div>
                   <div style={{ fontSize: "12px", color: t.textMuted }}>
                     {eventStarted
-                      ? "This event has started. Contact the host if you need to change your RSVP."
-                      : "The deadline to RSVP for this event has passed."}
+                      ? "Dit evenement is begonnen. Neem contact op met de organisator als je je aanmelding wilt wijzigen."
+                      : "De aanmeldtermijn voor dit evenement is verstreken."}
                   </div>
                 </div>
               ) : (

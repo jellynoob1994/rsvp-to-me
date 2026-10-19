@@ -58,11 +58,11 @@ export function CreateUserModal({
           id="create-user-dialog-title"
           style={{ margin: 0, color: APP_SHELL.textPrimary, fontSize: "18px" }}
         >
-          Create User
+          Gebruiker aanmaken
         </h3>
         <button
           onClick={() => setCreateUserOpen(false)}
-          aria-label="Close create user dialog"
+          aria-label="Gebruikersvenster sluiten"
           style={{
             background: "transparent",
             border: "none",
@@ -90,13 +90,13 @@ export function CreateUserModal({
               letterSpacing: "0.05em",
             }}
           >
-            Name <span style={{ color: APP_SHELL.textMuted }}>(optional)</span>
+            Naam <span style={{ color: APP_SHELL.textMuted }}>(optioneel)</span>
           </label>
           <AppInput
             type="text"
             value={createUserName}
             onChange={(e) => setCreateUserName(e.target.value)}
-            placeholder="Jane Smith"
+            placeholder="Jan de Vries"
           />
         </div>
 
@@ -112,13 +112,13 @@ export function CreateUserModal({
               letterSpacing: "0.05em",
             }}
           >
-            Email
+            E-mailadres
           </label>
           <AppInput
             type="email"
             value={createUserEmail}
             onChange={(e) => setCreateUserEmail(e.target.value)}
-            placeholder="jane@example.com"
+            placeholder="jan@voorbeeld.nl"
             required
           />
         </div>
@@ -135,13 +135,13 @@ export function CreateUserModal({
               letterSpacing: "0.05em",
             }}
           >
-            Phone <span style={{ color: APP_SHELL.textMuted }}>(optional)</span>
+            Telefoonnummer <span style={{ color: APP_SHELL.textMuted }}>(optioneel)</span>
           </label>
           <AppInput
             type="tel"
             value={createUserPhone}
             onChange={(e) => setCreateUserPhone(e.target.value)}
-            placeholder="+1 555 000 0000"
+            placeholder="+31 6 12345678"
           />
         </div>
 
@@ -157,7 +157,7 @@ export function CreateUserModal({
               letterSpacing: "0.05em",
             }}
           >
-            Role
+            Rol
           </label>
           <select
             value={createUserRole}
@@ -165,13 +165,13 @@ export function CreateUserModal({
             style={appInputStyle}
           >
             <option value="GUEST" style={{ backgroundColor: "#12091f" }}>
-              Guest
+              Gast
             </option>
             <option value="HOST" style={{ backgroundColor: "#12091f" }}>
-              Host
+              Organisator
             </option>
             <option value="ADMIN" style={{ backgroundColor: "#12091f" }}>
-              Admin
+              Beheerder
             </option>
           </select>
         </div>
@@ -188,7 +188,7 @@ export function CreateUserModal({
             marginTop: "4px",
           }}
         >
-          {isPending ? "Creating…" : "Create User"}
+          {isPending ? "Bezig met aanmaken…" : "Gebruiker aanmaken"}
         </AppButton>
       </div>
     </Dialog>

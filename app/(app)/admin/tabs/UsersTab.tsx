@@ -40,7 +40,7 @@ export function UsersTab({
       <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
         <AppInput
           type="text"
-          placeholder="Search users by name, email, or phone..."
+          placeholder="Zoek gebruikers op naam, e-mailadres of telefoonnummer..."
           value={userSearch}
           onChange={(e) => handleUserSearch(e.target.value)}
           style={{ flex: "1 1 200px", padding: "12px 16px" }}
@@ -59,10 +59,10 @@ export function UsersTab({
             colorScheme: "dark",
           }}
         >
-          <option value="ALL">All Roles</option>
-          <option value="ADMIN">ADMIN</option>
-          <option value="HOST">HOST</option>
-          <option value="GUEST">GUEST</option>
+          <option value="ALL">Alle rollen</option>
+          <option value="ADMIN">BEHEERDER</option>
+          <option value="HOST">ORGANISATOR</option>
+          <option value="GUEST">GAST</option>
         </select>
 
         {/* Status Filter */}
@@ -80,10 +80,10 @@ export function UsersTab({
             colorScheme: "dark",
           }}
         >
-          <option value="ALL">All Statuses</option>
-          <option value="ACTIVE">Active</option>
-          <option value="PENDING_DELETE">Pending Deletion</option>
-          <option value="DELETED">Deleted / Anonymized</option>
+          <option value="ALL">Alle statussen</option>
+          <option value="ACTIVE">Actief</option>
+          <option value="PENDING_DELETE">Wacht op verwijdering</option>
+          <option value="DELETED">Verwijderd / geanonimiseerd</option>
         </select>
 
         <button
@@ -100,7 +100,7 @@ export function UsersTab({
             whiteSpace: "nowrap",
           }}
         >
-          + Create User
+          + Gebruiker aanmaken
         </button>
       </div>
 
@@ -120,10 +120,10 @@ export function UsersTab({
                   textAlign: "left",
                 }}
               >
-                <th style={{ padding: "16px" }}>User</th>
-                <th style={{ padding: "16px" }}>Contact</th>
-                <th style={{ padding: "16px" }}>Role</th>
-                <th style={{ padding: "16px", textAlign: "right" }}>Actions</th>
+                <th style={{ padding: "16px" }}>Gebruiker</th>
+                <th style={{ padding: "16px" }}>Contactgegevens</th>
+                <th style={{ padding: "16px" }}>Rol</th>
+                <th style={{ padding: "16px", textAlign: "right" }}>Acties</th>
               </tr>
             </thead>
             <tbody>
@@ -137,7 +137,7 @@ export function UsersTab({
                       color: APP_SHELL.textMuted,
                     }}
                   >
-                    No users found.
+                    Geen gebruikers gevonden.
                   </td>
                 </tr>
               ) : (
@@ -145,10 +145,10 @@ export function UsersTab({
                   <tr key={u.id} style={{ borderBottom: `1px solid ${APP_SHELL.navBorder}` }}>
                     <td style={{ padding: "16px" }}>
                       <div style={{ fontWeight: 700, color: APP_SHELL.textPrimary }}>
-                        {u.name || "Unnamed User"}
+                        {u.name || "Naamloze gebruiker"}
                       </div>
                       <div style={{ fontSize: "11px", color: APP_SHELL.textMuted }}>
-                        Registered {new Date(u.createdAt).toLocaleDateString()}
+                        Geregistreerd {new Date(u.createdAt).toLocaleDateString("nl-NL")}
                       </div>
                       {u.deletionScheduledAt && (
                         <div
@@ -159,11 +159,11 @@ export function UsersTab({
                             marginTop: "4px",
                           }}
                         >
-                          Deletion requested on{" "}
+                          Verwijdering aangevraagd op{" "}
                           {u.deletionRequestedAt
-                            ? new Date(u.deletionRequestedAt).toLocaleDateString()
-                            : "unknown"}{" "}
-                          — scheduled for {new Date(u.deletionScheduledAt).toLocaleDateString()}
+                            ? new Date(u.deletionRequestedAt).toLocaleDateString("nl-NL")
+                            : "onbekend"}{" "}
+                          — gepland voor {new Date(u.deletionScheduledAt).toLocaleDateString("nl-NL")}
                         </div>
                       )}
                     </td>
@@ -197,19 +197,19 @@ export function UsersTab({
                           value="GUEST"
                           style={{ backgroundColor: "#12091f", color: "#ffffff" }}
                         >
-                          GUEST
+                          Gast
                         </option>
                         <option
                           value="HOST"
                           style={{ backgroundColor: "#12091f", color: "#ffffff" }}
                         >
-                          HOST
+                          Organisator
                         </option>
                         <option
                           value="ADMIN"
                           style={{ backgroundColor: "#12091f", color: "#ffffff" }}
                         >
-                          ADMIN
+                          Beheerder
                         </option>
                       </select>
                     </td>
@@ -222,7 +222,7 @@ export function UsersTab({
                             fontStyle: "italic",
                           }}
                         >
-                          Current Session
+                          Huidige sessie
                         </span>
                       ) : !u.email &&
                         !u.phone ? null : u // Already Deleted / Anonymized user - show nothing
@@ -236,7 +236,7 @@ export function UsersTab({
                         >
                           <button
                             onClick={() =>
-                              handleCancelDeletion(u.id, u.name || u.email || "Unknown User")
+                              handleCancelDeletion(u.id, u.name || u.email || "Onbekende gebruiker")
                             }
                             style={{
                               backgroundColor: "transparent",
@@ -249,11 +249,11 @@ export function UsersTab({
                               padding: "4px 10px",
                             }}
                           >
-                            Restore
+                            Herstellen
                           </button>
                           <button
                             onClick={() =>
-                              handleUserDeleteImmediately(u.id, u.name || u.email || "Unknown User")
+                              handleUserDeleteImmediately(u.id, u.name || u.email || "Onbekende gebruiker")
                             }
                             style={{
                               backgroundColor: "transparent",
@@ -266,13 +266,13 @@ export function UsersTab({
                               padding: "4px 10px",
                             }}
                           >
-                            Delete Now
+                            Nu verwijderen
                           </button>
                         </div>
                       ) : (
                         <button
                           onClick={() =>
-                            handleUserDelete(u.id, u.name || u.email || "Unknown User")
+                            handleUserDelete(u.id, u.name || u.email || "Onbekende gebruiker")
                           }
                           style={{
                             backgroundColor: "transparent",
@@ -283,7 +283,7 @@ export function UsersTab({
                             fontSize: "13px",
                           }}
                         >
-                          Delete
+                          Verwijderen
                         </button>
                       )}
                     </td>

@@ -17,9 +17,17 @@ export function HostRsvpAlertEmail({
   guestListUrl,
 }: HostRsvpAlertEmailProps) {
   const plusStr = plusOneCount > 0 ? ` +${plusOneCount}` : "";
+  const dutchStatusLabel =
+    statusLabel === "Going"
+      ? "Aanwezig"
+      : statusLabel === "Maybe"
+        ? "Misschien"
+        : statusLabel === "Can't Go"
+          ? "Afwezig"
+          : statusLabel;
   return (
-    <EmailLayout theme={theme} preview={`${guestName} is ${statusLabel} — ${eventTitle}`}>
-      <Hero theme={theme} kicker="New RSVP" title={eventTitle} showCoverImage={false} />
+    <EmailLayout theme={theme} preview={`${guestName}: ${dutchStatusLabel} — ${eventTitle}`}>
+      <Hero theme={theme} kicker="Nieuwe aanmelding" title={eventTitle} showCoverImage={false} />
       <table
         align="center"
         width="100%"
@@ -38,7 +46,7 @@ export function HostRsvpAlertEmail({
                 style={{ margin: 0, fontSize: "18px", fontWeight: "700", color: theme.textPrimary }}
               >
                 {guestName}
-                {plusStr} — {statusLabel}
+                {plusStr} — {dutchStatusLabel}
               </h2>
 
               {note?.trim() ? (
@@ -82,8 +90,8 @@ export function HostRsvpAlertEmail({
                 className="dm-text-muted"
                 style={{ margin: "16px 0 0", fontSize: "13px", color: theme.textMuted }}
               >
-                Current headcount: {goingCount} going · {maybeCount} maybe · {noCount}
-                {" can't go"}
+                Huidige aantallen: {goingCount} aanwezig · {maybeCount} misschien · {noCount}
+                {" afwezig"}
               </p>
 
               <table
@@ -99,7 +107,7 @@ export function HostRsvpAlertEmail({
                   <tr>
                     <td>
                       <EmailButton theme={theme} href={guestListUrl} variant="primary">
-                        View guest list
+                        Bekijk gastenlijst
                       </EmailButton>
                     </td>
                   </tr>

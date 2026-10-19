@@ -98,7 +98,7 @@ export default function ProfileClient({
     if (verified === "1") {
       setFeedback({
         type: "success",
-        message: "Contact details successfully verified and updated!",
+        message: "Contactgegevens succesvol geverifieerd en bijgewerkt!",
       });
       // Clean query params
       router.replace("/profile");
@@ -111,13 +111,13 @@ export default function ProfileClient({
     } else if (error === "email-taken") {
       setFeedback({
         type: "error",
-        message: "That email address is already taken by another account.",
+        message: "Dit e-mailadres is al in gebruik bij een ander account.",
       });
       router.replace("/profile");
     } else if (error === "phone-taken") {
       setFeedback({
         type: "error",
-        message: "That phone number is already taken by another account.",
+        message: "Dit telefoonnummer is al in gebruik bij een ander account.",
       });
       router.replace("/profile");
     }
@@ -157,7 +157,7 @@ export default function ProfileClient({
         )
       );
 
-      setFeedback({ type: "success", message: "Avatar updated successfully!" });
+      setFeedback({ type: "success", message: "Profielfoto bijgewerkt!" });
     } catch (err) {
       console.error(err);
       const message = err instanceof Error ? err.message : "Failed to upload avatar.";
@@ -191,12 +191,12 @@ export default function ProfileClient({
           if (result.messages && result.messages.length > 0) {
             setInfoMessages(result.messages);
           } else {
-            setFeedback({ type: "success", message: "Profile settings saved!" });
+            setFeedback({ type: "success", message: "Profielinstellingen opgeslagen!" });
           }
           router.refresh();
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to update profile.";
+        const message = err instanceof Error ? err.message : "Profiel bijwerken mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -254,10 +254,10 @@ export default function ProfileClient({
             marginBottom: "8px",
           }}
         >
-          Profile Settings
+          Profielinstellingen
         </h2>
         <p style={{ color: APP_SHELL.textSecondary, marginBottom: "32px", fontSize: "14px" }}>
-          Manage your account profile details, verification status, and notification preferences.
+          Beheer je profielgegevens, verificatiestatus en meldingsvoorkeuren.
         </p>
 
         <FeedbackToast feedback={feedback} onDismiss={() => setFeedback(null)} />
@@ -381,7 +381,7 @@ export default function ProfileClient({
                     (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)")
                   }
                 >
-                  Change Photo
+                  Foto wijzigen
                 </button>
                 <div style={{ color: APP_SHELL.textMuted, fontSize: "11px", marginTop: "6px" }}>
                   Max 8MB. Compressed automatically.
@@ -390,7 +390,7 @@ export default function ProfileClient({
             </div>
 
             {/* Inputs */}
-            <FormField label="Full Name" style={{ marginBottom: 0 }}>
+            <FormField label="Volledige naam" style={{ marginBottom: 0 }}>
               <AppInput
                 type="text"
                 required
@@ -400,7 +400,7 @@ export default function ProfileClient({
               />
             </FormField>
 
-            <FormField label="Email Address" style={{ marginBottom: 0 }}>
+            <FormField label="E-mailadres" style={{ marginBottom: 0 }}>
               <AppInput
                 type="email"
                 required
@@ -440,11 +440,11 @@ export default function ProfileClient({
                 if (!isPending) e.currentTarget.style.opacity = "1";
               }}
             >
-              {isPending ? "Saving..." : "Save Settings"}
+              {isPending ? "Bezig met opslaan..." : "Instellingen opslaan"}
             </AppButton>
           </div>
 
-          {/* Section: Notification Preferences */}
+          {/* Section: Meldingsvoorkeuren */}
           {(channelConfig.email || channelConfig.sms) && (
             <div
               style={{
@@ -463,10 +463,10 @@ export default function ProfileClient({
                   margin: 0,
                 }}
               >
-                Notification Preferences
+                Meldingsvoorkeuren
               </h3>
               <p style={{ color: APP_SHELL.textSecondary, fontSize: "13px", margin: "0 0 8px 0" }}>
-                Control which notifications you wish to receive. Transactional messages (like login
+                Bepaal welke meldingen je wilt ontvangen. Transactional messages (like login
                 magic links and RSVP confirmations) are always sent.
               </p>
 
@@ -481,12 +481,12 @@ export default function ProfileClient({
                       marginBottom: "10px",
                     }}
                   >
-                    Preferred Channel for Event Updates
+                    Voorkeurskanaal voor evenementupdates
                   </div>
                   <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                     {(
                       [
-                        { value: "EMAIL", label: "Email" },
+                        { value: "EMAIL", label: "E-mail" },
                         { value: "SMS", label: "SMS" },
                         { value: "BOTH", label: "Both" },
                       ] as const
@@ -528,7 +528,7 @@ export default function ProfileClient({
                       margin: "8px 0 0 0",
                     }}
                   >
-                    Hosts use this channel when sending event update notifications to guests.
+                    Organisatoren gebruiken dit kanaal om gasten berichten over wijzigingen te sturen.
                   </p>
                 </div>
               )}
@@ -542,12 +542,12 @@ export default function ProfileClient({
                     <div
                       style={{ fontWeight: 600, fontSize: "14px", color: APP_SHELL.textPrimary }}
                     >
-                      Email Blasts & Reminders
+                      E-mailberichten en herinneringen
                     </div>
                     <div
                       style={{ fontSize: "12px", color: APP_SHELL.textSecondary, marginTop: "2px" }}
                     >
-                      Receive scheduled reminders and host blasts via email
+                      Ontvang geplande herinneringen en berichten van organisatoren per e-mail
                     </div>
                   </div>
                   <button
@@ -636,7 +636,7 @@ export default function ProfileClient({
           )}
         </form>
 
-        {/* Danger Zone */}
+        {/* Gevarenzone */}
         <div
           style={{
             backgroundColor: APP_SHELL.cardBg,
@@ -647,7 +647,7 @@ export default function ProfileClient({
           }}
         >
           <h2 style={{ fontSize: "16px", fontWeight: 700, color: "#ef4444", marginBottom: "16px" }}>
-            Danger Zone
+            Gevarenzone
           </h2>
 
           {scheduledDeletionDate ? (
@@ -664,7 +664,7 @@ export default function ProfileClient({
             >
               <div>
                 <p style={{ color: "#ef4444", fontWeight: 700, margin: 0 }}>
-                  Your account is scheduled for deletion
+                  Je account staat gepland om te worden verwijderd
                 </p>
                 <p
                   style={{
@@ -690,7 +690,7 @@ export default function ProfileClient({
                         setScheduledDeletionDate(null);
                         setFeedback({
                           type: "success",
-                          message: "Account deletion request successfully canceled!",
+                          message: "Het verzoek om je account te verwijderen is geannuleerd!",
                         });
                         router.refresh();
                       }
@@ -698,7 +698,7 @@ export default function ProfileClient({
                       setFeedback({
                         type: "error",
                         message:
-                          err instanceof Error ? err.message : "Failed to cancel deletion request.",
+                          err instanceof Error ? err.message : "Het annuleren van het verwijderverzoek is mislukt.",
                       });
                     }
                   });
@@ -717,13 +717,13 @@ export default function ProfileClient({
                   transition: "opacity 0.2s",
                 }}
               >
-                Cancel Deletion Request
+                Verwijderverzoek annuleren
               </button>
             </div>
           ) : (
             <>
               <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "16px" }}>
-                Permanently delete your account and all associated data. This cannot be undone.
+                Verwijder je account en alle bijbehorende gegevens definitief. Dit kan niet ongedaan worden gemaakt.
               </p>
               <button
                 onClick={() => setShowDeleteModal(true)}
@@ -738,7 +738,7 @@ export default function ProfileClient({
                   cursor: "pointer",
                 }}
               >
-                Delete My Account
+                Mijn account verwijderen
               </button>
             </>
           )}
@@ -772,13 +772,13 @@ export default function ProfileClient({
             marginBottom: "12px",
           }}
         >
-          Delete your account?
+          Je account verwijderen?
         </h2>
 
         {blockedEvents && blockedEvents.length > 0 ? (
           <>
             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", marginBottom: "16px" }}>
-              You have upcoming published events. Delete them first before deleting your account.
+              Je hebt gepubliceerde toekomstige evenementen. Verwijder die eerst voordat je je account verwijdert.
             </p>
             <div
               style={{
@@ -833,25 +833,25 @@ export default function ProfileClient({
                       opacity: isDeletingEvent === ev.id ? 0.5 : 1,
                     }}
                   >
-                    {isDeletingEvent === ev.id ? "Deleting…" : "Delete event"}
+                    {isDeletingEvent === ev.id ? "Bezig met verwijderen…" : "Evenement verwijderen"}
                   </button>
                 </div>
               ))}
             </div>
             {blockedEvents.length === 0 && (
               <p style={{ color: "#22c55e", fontSize: "14px", marginBottom: "16px" }}>
-                All events deleted. You can now confirm account deletion below.
+                Alle evenementen zijn verwijderd. Je kunt hieronder nu de verwijdering van je account bevestigen.
               </p>
             )}
           </>
         ) : (
           <>
             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", marginBottom: "8px" }}>
-              Your profile info will be anonymized within 30 days. Past event history is preserved
+              Je profielgegevens worden binnen 30 dagen geanonimiseerd. Je eerdere evenementgeschiedenis blijft behouden
               for guests. You will be signed out immediately.
             </p>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", marginBottom: "16px" }}>
-              An admin can reverse this within 30 days if you change your mind.
+              Een beheerder kan dit binnen 30 dagen terugdraaien als je je bedenkt.
             </p>
             <p
               style={{
@@ -861,7 +861,7 @@ export default function ProfileClient({
                 fontWeight: 600,
               }}
             >
-              Type DELETE to confirm:
+              Typ DELETE om te bevestigen:
             </p>
             <AppInput
               type="text"
@@ -909,7 +909,7 @@ export default function ProfileClient({
                 } catch {
                   setFeedback({
                     type: "error",
-                    message: "Failed to delete account. Please try again.",
+                    message: "Account verwijderen mislukt. Probeer het opnieuw.",
                   });
                   setIsDeletingAccount(false);
                 }
@@ -929,7 +929,7 @@ export default function ProfileClient({
                   deleteConfirmText === "DELETE" && !isDeletingAccount ? "pointer" : "not-allowed",
               }}
             >
-              {isDeletingAccount ? "Processing…" : "Confirm Delete"}
+              {isDeletingAccount ? "Bezig met verwerken…" : "Verwijderen bevestigen"}
             </button>
           )}
         </div>

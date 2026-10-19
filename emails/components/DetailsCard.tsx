@@ -78,7 +78,7 @@ export function DetailsCard({
         {isVirtual ? (
           <DetailRow label="💻">
             <p className="dm-text-primary" style={textStyle}>
-              {event.locationName || "Virtual event"}
+              {event.locationName || "Online evenement"}
             </p>
             {event.virtualUrl ? (
               <p style={subStyle}>
@@ -88,7 +88,7 @@ export function DetailsCard({
                   rel="noopener noreferrer"
                   style={linkStyle}
                 >
-                  Join link
+                  Deelnemen via link
                 </a>
               </p>
             ) : null}
@@ -111,7 +111,7 @@ export function DetailsCard({
                   rel="noopener noreferrer"
                   style={linkStyle}
                 >
-                  Open in Google Maps
+                  Openen in Google Maps
                 </a>
               </p>
             ) : null}
@@ -121,7 +121,7 @@ export function DetailsCard({
         {showCalendarLinks ? (
           <DetailRow label="🗓️">
             <p style={subStyle}>
-              Add to calendar:{" "}
+              Toevoegen aan agenda:{" "}
               <a
                 href={buildGoogleCalendarUrl(event)}
                 target="_blank"

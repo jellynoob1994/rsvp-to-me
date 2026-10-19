@@ -59,7 +59,7 @@ export default function RegisterForm({ openRegistration }: { openRegistration: b
           >
             RSVP
           </h1>
-          <p style={{ color: APP_SHELL.textSecondary, fontSize: "15px" }}>Create an account</p>
+          <p style={{ color: APP_SHELL.textSecondary, fontSize: "15px" }}>Account aanmaken</p>
         </div>
 
         <AppCard style={{ borderRadius: APP_SHELL.authCardRadius, padding: "32px" }}>
@@ -110,7 +110,7 @@ export default function RegisterForm({ openRegistration }: { openRegistration: b
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Jane Smith"
+                  placeholder="Jan de Vries"
                   style={{ padding: "12px 14px", fontSize: "15px" }}
                 />
               </FormField>
@@ -120,7 +120,7 @@ export default function RegisterForm({ openRegistration }: { openRegistration: b
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder="jij@voorbeeld.nl"
                   style={{ padding: "12px 14px", fontSize: "15px" }}
                 />
               </FormField>
@@ -131,7 +131,7 @@ export default function RegisterForm({ openRegistration }: { openRegistration: b
                     required
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    placeholder="Enter your invite code"
+                    placeholder="Voer je uitnodigingscode in"
                     style={{ padding: "12px 14px", fontSize: "15px" }}
                   />
                 </FormField>

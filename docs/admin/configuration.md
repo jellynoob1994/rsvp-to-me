@@ -1,21 +1,21 @@
 ---
-title: Configuration
-description: Environment variable reference for every subsystem.
-category: Configuration
+title: Configuratie
+description: Naslag voor omgevingsvariabelen van alle onderdelen.
+category: Configuratie
 audience: admin
 order: 20
 ---
 
-# Configuration Reference
+# Configuratieoverzicht
 
-All configurable settings for **RSVP to Me** live in a single `.env` file in the same directory as your `docker-compose.yml`. This guide explains every variable, what it controls, and how to configure it.
+Alle instelbare opties voor **RSVP to Me** staan in één bestand `.env`, in dezelfde map als `docker-compose.yml`. Deze handleiding beschrijft elke variabele, waar die voor dient en hoe je deze instelt.
 
 ---
 
-## Table of Contents
+## Inhoudsopgave
 
-1. [How Configuration Works](#how-configuration-works)
-2. [Core Application Settings](#core-application-settings)
+1. [How Configuration Works](#hoe-configuratie-werkt)
+2. [Core Application Settings](#belangrijkste-app-instellingen)
    - [DATABASE_URL](#database_url)
    - [SESSION_SECRET](#session_secret)
    - [ENCRYPTION_KEY](#encryption_key)
@@ -26,33 +26,33 @@ All configurable settings for **RSVP to Me** live in a single `.env` file in the
    - [HOST_INVITE_CODE](#host_invite_code)
    - [SEED_TEST_DATA](#seed_test_data)
    - [LOG_LEVEL](#log_level)
-3. [Email Configuration](#email-configuration)
+3. [Email Configuration](#e-mailconfiguratie)
    - [EMAIL_FROM](#email_from)
-   - [SMTP Settings](#smtp-settings)
-   - [Cloudflare Worker Email](#cloudflare-worker-email)
-   - [Cloudflare REST API Email](#cloudflare-rest-api-email)
+   - [SMTP Settings](#smtp-instellingen)
+   - [Cloudflare Worker Email](#e-mail-via-cloudflare-worker)
+   - [Cloudflare REST API Email](#e-mail-via-cloudflare-rest-api)
    - [INBOUND_FORWARD_TO](#inbound_forward_to)
-4. [SMS Configuration (Twilio)](#sms-configuration-twilio)
-5. [PostgreSQL Configuration](#postgresql-configuration)
-6. [Redis Configuration](#redis-configuration)
-7. [Database Backup Configuration](#database-backup-configuration)
-8. [Quick Reference Table](#quick-reference-table)
+4. [SMS Configuration (Twilio)](#sms-configuratie-twilio)
+5. [PostgreSQL Configuration](#postgresql-configuratie)
+6. [Redis Configuration](#redis-configuratie)
+7. [Database Backup Configuration](#configuratie-van-databaseback-ups)
+8. [Quick Reference Table](#sneloverzicht-van-variabelen)
 
 ---
 
-## How Configuration Works
+## Hoe configuratie werkt
 
-When Docker Compose starts your containers, it loads the `.env` file and passes the variables to the `app` service.
+Wanneer Docker Compose de containers start, leest het de variabelen uit `.env` en geeft deze door aan de service `app`.
 
-Most changes to `.env` require a restart to take effect:
+Voor de meeste wijzigingen in `.env` moet je de applicatie opnieuw starten:
 
 ```bash
 docker compose restart
 ```
 
-> **Security:** Your `.env` file contains sensitive secrets. Never check it into a git repository.
+> **Beveiliging:** je bestand `.env` bevat gevoelige geheimen. Voeg dit bestand nooit toe aan een Git-repository.
 
-### Environment loading for commands
+### Omgevingsvariabelen laden voor opdrachten
 
 Prisma commands, database seeding, startup migrations, and tests use dotenv
 18.0.4 to load `.env` from the project directory. With the default loader
@@ -75,11 +75,11 @@ Explicit configuration options take precedence over environment options, and
 classic parser remains the default; this project does not enable the optional
 fast parser.
 
-### Settings Priority
+### Voorrang van instellingen
 
-Some configuration fields (email provider settings, registration mode) can also be changed at runtime via the Admin Panel. When a value is set in **both** the `.env` file and the database via the Admin Panel, **the Admin Panel database value takes precedence**.
+Sommige instellingen (zoals de e-mailprovider en de registratiemodus) kun je ook tijdens het draaien wijzigen via het beheerpaneel. Staat een waarde zowel in `.env` als in de database via het beheerpaneel, dan **heeft de waarde uit het beheerpaneel voorrang**.
 
-### Content Security Policy and request rendering
+### Content Security Policy en rendering van verzoeken
 
 Each document request receives a fresh, unpredictable script nonce. The
 application puts that same nonce in the request policy used by Next.js and in
@@ -101,14 +101,14 @@ asset caching.
 
 ---
 
-## Core Application Settings
+## Belangrijkste app-instellingen
 
 ### DATABASE_URL
 
-- **Required**: Yes
+- **Verplicht**: Yes
 - **Type**: String (PostgreSQL connection URL)
 
-**What it does:** Connection string for the PostgreSQL 18 database. All user profiles, events, RSVPs, comments, polls, and potluck lists are stored here.
+**Wat doet dit?** Connection string for the PostgreSQL 18 database. All user profiles, events, RSVPs, comments, polls, and potluck lists are stored here.
 
 **Format:**
 
@@ -118,19 +118,19 @@ DATABASE_URL="postgresql://username:password@hostname:5432/database_name"
 
 **Docker Context:** When using `docker-compose.yml`, the app connects to the bundled `postgres` container. The `pg_data/` directory on your host persists the database across restarts.
 
-> **Caution:** PostgreSQL 18 is required. The application will not start without a valid Postgres connection URL.
+> **Let op:** PostgreSQL 18 is required. The application will not start without a valid Postgres connection URL.
 
 ---
 
 ### SESSION_SECRET
 
-- **Required**: Yes (the app will crash on startup if missing or too short)
-- **Default**: _(none)_
+- **Verplicht**: Yes (the app will crash on startup if missing or too short)
+- **Standaard**: _(none)_
 - **Type**: Random string (at least 32 characters)
 
-**What it does:** The master key used to sign and encrypt cookies generated by `iron-session`. Without it, cookies cannot be verified, preventing session hijacking.
+**Wat doet dit?** The master key used to sign and encrypt cookies generated by `iron-session`. Without it, cookies cannot be verified, preventing session hijacking.
 
-**How to generate:**
+**Genereren:**
 
 - **Linux/Mac (Terminal):**
   ```bash
@@ -143,17 +143,17 @@ DATABASE_URL="postgresql://username:password@hostname:5432/database_name"
   ```
 - **Web alternative:** Generate via [generate-secret.vercel.app/32](https://generate-secret.vercel.app/32) or [random.org/passwords](https://www.random.org/passwords/?num=1&len=44&format=html).
 
-> **Warning:** Changing this value will invalidate all active sessions immediately, logging out all currently signed-in users.
+> **Waarschuwing:** Changing this value will invalidate all active sessions immediately, logging out all currently signed-in users.
 
 ---
 
 ### TRUSTED_IP_HEADER
 
-- **Required**: No
-- **Default**: _(none)_
+- **Verplicht**: No
+- **Standaard**: _(none)_
 - **Type**: String (Header Name)
 
-**What it does:** Names the request header the application should trust when extracting client IP addresses for rate limiting. When running behind a reverse proxy (Cloudflare, Nginx, AWS ALB, etc.), set this to the header your proxy adds so rate-limit tracking resolves the real client IP instead of the proxy IP.
+**Wat doet dit?** Names the request header the application should trust when extracting client IP addresses for rate limiting. When running behind a reverse proxy (Cloudflare, Nginx, AWS ALB, etc.), set this to the header your proxy adds so rate-limit tracking resolves the real client IP instead of the proxy IP.
 
 **Common values:**
 
@@ -161,7 +161,7 @@ DATABASE_URL="postgresql://username:password@hostname:5432/database_name"
 - `X-Real-IP` (Nginx, Vercel)
 - `X-Forwarded-For` (Nginx `proxy_add_x_forwarded_for`, AWS ALB — the app uses the **last** hop, i.e. the address your trusted proxy appended)
 
-> **Security (default is deny):** Forwarding headers are attacker-controlled unless a trusted proxy overwrites them. If this variable is **unset**, the app does **not** trust `X-Forwarded-For` / `X-Real-IP` / `CF-Connecting-IP` at all — otherwise a client could rotate `X-Forwarded-For` on every request to evade IP-based limits. With no trusted header configured, all requests resolve to loopback, so IP-keyed limits would otherwise collapse into a single shared bucket. The identifier-keyed limits (per email/phone and per event slug) that protect the sensitive flows still apply. **If you run behind a proxy, set this variable** to restore per-client IP granularity. For `X-Forwarded-For` the app reads the last entry in the chain (the hop your proxy appended), so a client-prepended fake IP is ignored — this only holds when the header is genuinely set by a trusted proxy in front of the app.
+> **Beveiliging (standaard wordt niets vertrouwd):** Forwarding headers are attacker-controlled unless a trusted proxy overwrites them. If this variable is **unset**, the app does **not** trust `X-Forwarded-For` / `X-Real-IP` / `CF-Connecting-IP` at all — otherwise a client could rotate `X-Forwarded-For` on every request to evade IP-based limits. With no trusted header configured, all requests resolve to loopback, so IP-keyed limits would otherwise collapse into a single shared bucket. The identifier-keyed limits (per email/phone and per event slug) that protect the sensitive flows still apply. **If you run behind a proxy, set this variable** to restore per-client IP granularity. For `X-Forwarded-For` the app reads the last entry in the chain (the hop your proxy appended), so a client-prepended fake IP is ignored — this only holds when the header is genuinely set by a trusted proxy in front of the app.
 
 > **Sign-in availability (SEC-45):** Because an unset header collapses every request to one shared bucket, the **per-IP magic-link sign-in limiter is skipped entirely when `TRUSTED_IP_HEADER` is not set** — otherwise 20 sign-in attempts from _anywhere_ would lock out _every_ user for 10 minutes. In that mode the per-identifier limiter (5 sign-in requests per email/phone per 10 minutes) is the active protection. Set `TRUSTED_IP_HEADER` behind a proxy to re-enable the per-client IP tier (20 per 10 minutes). Host registration keeps its global limiter (3/hour) even when unset, so its invite-code path stays brute-force-resistant.
 
@@ -173,8 +173,8 @@ DATABASE_URL="postgresql://username:password@hostname:5432/database_name"
 
 ### Cloudflare Turnstile
 
-- **Required**: No, but strongly recommended for internet-facing installations
-- **Default**: Disabled when both values are empty
+- **Verplicht**: No, but strongly recommended for internet-facing installations
+- **Standaard**: Disabled when both values are empty
 - **Type**: Cloudflare Turnstile site key and secret key
 
 ```env
@@ -203,11 +203,11 @@ requirement. Never expose `TURNSTILE_SECRET_KEY` to the browser.
 
 ### HEALTH_CHECK_TOKEN
 
-- **Required**: No
-- **Default**: _(none)_
+- **Verplicht**: No
+- **Standaard**: _(none)_
 - **Type**: Random string
 
-**What it does:** Unlocks the detailed response body of the `GET /api/health` endpoint. The endpoint is public (Docker healthchecks and uptime monitors probe it anonymously), so by default it returns only a minimal liveness signal — `{"status":"ok"}` with HTTP `200` when healthy, `{"status":"unavailable"}` with HTTP `503` when not — and no internal detail.
+**Wat doet dit?** Unlocks the detailed response body of the `GET /api/health` endpoint. The endpoint is public (Docker healthchecks and uptime monitors probe it anonymously), so by default it returns only a minimal liveness signal — `{"status":"ok"}` with HTTP `200` when healthy, `{"status":"unavailable"}` with HTTP `503` when not — and no internal detail.
 
 When `HEALTH_CHECK_TOKEN` is set, requests that present the same value in the `x-health-token` header receive the detailed body instead, including the database migration state (`migrations: "ok" | "pending" | "unreachable"`) and a timestamp:
 
@@ -217,31 +217,31 @@ curl -H "x-health-token: <your token>" http://localhost:3000/api/health
 
 When the variable is unset, every caller gets the minimal body. Requests with a missing or wrong token also get the minimal body — the status code (200/503) is the same either way, so anonymous monitoring keeps working.
 
-**How to generate:** Use the same method as `SESSION_SECRET` (e.g. `openssl rand -base64 32`).
+**Genereren:** Use the same method as `SESSION_SECRET` (e.g. `openssl rand -base64 32`).
 
 ---
 
 ### ENCRYPTION_KEY
 
-- **Required**: No (falls back to `SESSION_SECRET` if not set)
-- **Default**: _(none)_
+- **Verplicht**: No (falls back to `SESSION_SECRET` if not set)
+- **Standaard**: _(none)_
 - **Type**: Random string (at least 32 characters)
 
-**What it does:** Used to encrypt sensitive configuration credentials (like SMTP passwords and API tokens) at rest before saving them to the database.
+**Wat doet dit?** Used to encrypt sensitive configuration credentials (like SMTP passwords and API tokens) at rest before saving them to the database.
 
-**How to generate:** Use the same method as `SESSION_SECRET` to generate a separate unique key.
+**Genereren:** Use the same method as `SESSION_SECRET` to generate a separate unique key.
 
-> **Warning:** If you set this value, do not change or delete it. Changing the key after saving credentials in the Admin Panel will make them unreadable, requiring you to re-enter them in the UI.
+> **Waarschuwing:** If you set this value, do not change or delete it. Changing the key after saving credentials in the Admin Panel will make them unreadable, requiring you to re-enter them in the UI.
 
 ---
 
 ### NEXT_PUBLIC_APP_URL
 
-- **Required**: Yes
-- **Default**: _(none)_
+- **Verplicht**: Yes
+- **Standaard**: _(none)_
 - **Type**: URL string (no trailing slash)
 
-**What it does:** The public address where users visit the app. It is used to build invite links, confirmation links, magic sign-in links sent via email/SMS, canonical event-page metadata, and absolute social-preview image URLs. It is also the canonical origin for the redirects issued by the magic-link verification endpoint — when set, the app ignores the request `Host` header for those redirects (a link-poisoning safeguard behind reverse proxies); when unset, the `Host` header is used as a fallback, so production deploys should always set it.
+**Wat doet dit?** The public address where users visit the app. It is used to build invite links, confirmation links, magic sign-in links sent via email/SMS, canonical event-page metadata, and absolute social-preview image URLs. It is also the canonical origin for the redirects issued by the magic-link verification endpoint — when set, the app ignores the request `Host` header for those redirects (a link-poisoning safeguard behind reverse proxies); when unset, the `Host` header is used as a fallback, so production deploys should always set it.
 
 **Examples:**
 
@@ -249,17 +249,17 @@ When the variable is unset, every caller gets the minimal body. Requests with a 
 - LAN-only access: `http://192.168.1.50:3000`
 - Public HTTPS domain: `https://rsvp.yourdomain.com`
 
-> **Warning:** The `NEXT_PUBLIC_` prefix means this variable is embedded into the frontend JS code and visible in the browser source. Do not put passwords or secrets in this variable.
+> **Waarschuwing:** The `NEXT_PUBLIC_` prefix means this variable is embedded into the frontend JS code and visible in the browser source. Do not put passwords or secrets in this variable.
 
 ---
 
 ### INITIAL_ADMIN_EMAIL
 
-- **Required**: Recommended for initial setup
-- **Default**: _(none)_
+- **Verplicht**: Recommended for initial setup
+- **Standaard**: _(none)_
 - **Type**: Email address string
 
-**What it does:** Designated email address to bootstrap the admin account. The matching user is
+**Wat doet dit?** Designated email address to bootstrap the admin account. The matching user is
 granted the `ADMIN` role _if and only if_ they successfully verify a `LOGIN` magic link and there are
 currently no active administrators in the system. Email matching is normalized for case and
 surrounding whitespace. Registration, ordinary session access, dashboard/profile reads, profile
@@ -273,11 +273,11 @@ change links, and co-host invitation acceptance do not run bootstrap promotion.
 
 ### OPEN_REGISTRATION
 
-- **Required**: No
-- **Default**: `"false"`
+- **Verplicht**: No
+- **Standaard**: `"false"`
 - **Type**: Boolean string (`"true"` or `"false"`)
 
-**What it does:** Controls whether anyone can visit the register page and create a host account.
+**Wat doet dit?** Controls whether anyone can visit the register page and create a host account.
 
 - `"false"`: Users must input the `HOST_INVITE_CODE` to register.
 - `"true"`: Open registration is active; no invite code is requested.
@@ -286,13 +286,13 @@ change links, and co-host invitation acceptance do not run bootstrap promotion.
 
 ### HOST_INVITE_CODE
 
-- **Required**: Yes (if `OPEN_REGISTRATION` is `"false"`)
-- **Default**: `"letmein"`
+- **Verplicht**: Yes (if `OPEN_REGISTRATION` is `"false"`)
+- **Standaard**: `"letmein"`
 - **Type**: String (at least 10 characters in production)
 
-**What it does:** The invite code new hosts must type during registration to create a Host account.
+**Wat doet dit?** The invite code new hosts must type during registration to create a Host account.
 
-**How to generate:** Choose a memorable phrase or generate a hex string:
+**Genereren:** Choose a memorable phrase or generate a hex string:
 
 - **Terminal:**
   ```bash
@@ -300,35 +300,35 @@ change links, and co-host invitation acceptance do not run bootstrap promotion.
   ```
 - **Web alternative:** Use [random.org](https://www.random.org/strings/?num=1&len=12&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new).
 
-> **Warning:** The built-in fallback code `letmein` (used only when the variable is unset) and the `.env.example` placeholder `CHANGE_THIS_TO_A_STRONG_RANDOM_CODE` are both rejected in production, as is any code shorter than 10 characters — the app throws a startup validation error until you set a strong custom value.
+> **Waarschuwing:** The built-in fallback code `letmein` (used only when the variable is unset) and the `.env.example` placeholder `CHANGE_THIS_TO_A_STRONG_RANDOM_CODE` are both rejected in production, as is any code shorter than 10 characters — the app throws a startup validation error until you set a strong custom value.
 
 ---
 
 ### SEED_TEST_DATA
 
-- **Required**: No
-- **Default**: `"false"`
+- **Verplicht**: No
+- **Standaard**: `"false"`
 - **Type**: Boolean string (`"true"` or `"false"`)
 
-**What it does:** If set to `"true"` and the database is completely empty on startup, the application runs a seed script creating 20 test guests and 10 comprehensive sample events. The fixtures cover draft, published, cancelled, past, and upcoming events; all location and visibility modes; password protection; RSVP deadlines, approval, invited/unresponded guests, capacity, plus-ones, and all questionnaire field types; email/SMS invitation history; co-hosts and pending co-host invitations; guest-list privacy; polls, comments, potlucks, updates, reminders, activity, regular check-ins, and walk-ins; and representative theme presets, heading fonts, animated effects, and effect controls.
+**Wat doet dit?** If set to `"true"` and the database is completely empty on startup, the application runs a seed script creating 20 test guests and 10 comprehensive sample events. The fixtures cover draft, published, cancelled, past, and upcoming events; all location and visibility modes; password protection; RSVP deadlines, approval, invited/unresponded guests, capacity, plus-ones, and all questionnaire field types; email/SMS invitation history; co-hosts and pending co-host invitations; guest-list privacy; polls, comments, potlucks, updates, reminders, activity, regular check-ins, and walk-ins; and representative theme presets, heading fonts, animated effects, and effect controls.
 
-> **Warning:** Turn this off (`"false"`) before inviting real guests to avoid cluttering your dashboard with fake test data.
+> **Waarschuwing:** Turn this off (`"false"`) before inviting real guests to avoid cluttering your dashboard with fake test data.
 
 ---
 
 ### LOG_LEVEL
 
-- **Required**: No
-- **Default**: `"info"`
+- **Verplicht**: No
+- **Standaard**: `"info"`
 - **Type**: Enum string (`"debug"`, `"info"`, `"warn"`, `"error"`)
 
-**What it does:** Controls the verbosity of application logs written to stdout. Use `"debug"` to troubleshoot setup or database issues, and `"info"` for standard production runs.
+**Wat doet dit?** Controls the verbosity of application logs written to stdout. Use `"debug"` to troubleshoot setup or database issues, and `"info"` for standard production runs.
 
 At `"debug"`, the app also surfaces errors from non-critical background work (activity logging, best-effort notification sends, cleanup jobs) that are intentionally swallowed at higher levels so they never break the main request.
 
 ---
 
-## Email Configuration
+## E-mailconfiguratie
 
 RSVP to Me uses email for magic link logins, notifications, and guest invites. If no email is configured, magic links will be printed to container logs (useful for local development).
 
@@ -336,118 +336,118 @@ You configure your email provider either in the **Admin Panel** (recommended) or
 
 ### EMAIL_FROM
 
-- **Required**: No
-- **Default**: `"RSVP to Me <noreply@example.com>"` (set your own address — the default is a placeholder)
+- **Verplicht**: No
+- **Standaard**: `"RSVP to Me <noreply@example.com>"` (set your own address — the default is a placeholder)
 - **Type**: Address string
 
-**What it does:** The address shown in the "From" header of sent emails.
+**Wat doet dit?** The address shown in the "From" header of sent emails.
 _Format:_ `"Display Name <email@domain.com>"` (e.g. `"Sarah's Birthday <rsvp@sarah.com>"`).
 
-> **Warning:** If sending via SMTP, the email address here must match or be authorized by your SMTP provider, otherwise emails will fail SPF verification and go to spam.
+> **Waarschuwing:** If sending via SMTP, the email address here must match or be authorized by your SMTP provider, otherwise emails will fail SPF verification and go to spam.
 
 ---
 
-### SMTP Settings
+### SMTP-instellingen
 
 #### SMTP_HOST
 
-- **Required**: Yes (if using SMTP)
+- **Verplicht**: Yes (if using SMTP)
 - **Type**: Hostname string (e.g. `smtp.gmail.com`, `smtp.mailgun.org`, `email-smtp.us-east-1.amazonaws.com`)
 
 #### SMTP_PORT
 
-- **Required**: No
-- **Default**: `"587"`
+- **Verplicht**: No
+- **Standaard**: `"587"`
 - **Type**: Port number string (typically `"587"` for STARTTLS, or `"465"` for implicit TLS)
 
 #### SMTP_SECURE
 
-- **Required**: No
-- **Default**: `"false"`
+- **Verplicht**: No
+- **Standaard**: `"false"`
 - **Type**: Boolean string (`"true"` or `"false"`)
 - **Use case:** Set `"true"` when using port `465` (implicit TLS), or `"false"` when using port `587` (STARTTLS).
 
 #### SMTP_USER
 
-- **Required**: Yes (if using SMTP)
+- **Verplicht**: Yes (if using SMTP)
 - **Type**: String (usually your email address)
 
 #### SMTP_PASS
 
-- **Required**: Yes (if using SMTP)
+- **Verplicht**: Yes (if using SMTP)
 - **Type**: String (regular password or provider App Password)
 - **Gmail App Passwords:** Create a 16-character App Password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) if 2-Step Verification is active.
 
 ---
 
-### Cloudflare Worker Email
+### E-mail via Cloudflare Worker
 
 #### CLOUDFLARE_WORKER_EMAIL_URL
 
-- **Required**: Yes (if using Cloudflare Workers)
+- **Verplicht**: Yes (if using Cloudflare Workers)
 - **Type**: HTTPS URL string (e.g. `https://rsvp-worker.yourdomain.workers.dev`)
 
-**What it does:** The endpoint of your deployed Cloudflare Worker relay. Must use `https://`.
+**Wat doet dit?** The endpoint of your deployed Cloudflare Worker relay. Must use `https://`.
 
 #### CLOUDFLARE_WORKER_API_SECRET
 
-- **Required**: Yes (if using Cloudflare Workers)
+- **Verplicht**: Yes (if using Cloudflare Workers)
 - **Type**: String (shared API secret)
-- **How to generate:** Run `openssl rand -hex 32` and configure the exact same string in your Worker's dashboard.
+- **Genereren:** Run `openssl rand -hex 32` and configure the exact same string in your Worker's dashboard.
 
 ---
 
-### Cloudflare REST API Email
+### E-mail via Cloudflare REST API
 
 #### CLOUDFLARE_ACCOUNT_ID
 
-- **Required**: Yes (if using Cloudflare REST API)
+- **Verplicht**: Yes (if using Cloudflare REST API)
 - **Type**: String (found in your Cloudflare Dashboard sidebar)
 
 #### CLOUDFLARE_API_TOKEN
 
-- **Required**: Yes (if using Cloudflare REST API)
+- **Verplicht**: Yes (if using Cloudflare REST API)
 - **Type**: String (API token generated at [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens))
 
 ---
 
 ### INBOUND_FORWARD_TO
 
-- **Required**: No (Cloudflare Worker only)
+- **Verplicht**: No (Cloudflare Worker only)
 - **Type**: Email address string
 
-**What it does:** When using the Cloudflare Worker, this is a fallback catch-all email address. By default, guest replies go dynamically to the event host's email (using the Reply-To header). This address is only used if a guest manually types or replies directly to the system From address. Because Cloudflare restricts email forwarding to verified destinations, this fallback address must be verified in your Cloudflare dashboard.
+**Wat doet dit?** When using the Cloudflare Worker, this is a fallback catch-all email address. By default, guest replies go dynamically to the event host's email (using the Reply-To header). This address is only used if a guest manually types or replies directly to the system From address. Because Cloudflare restricts email forwarding to verified destinations, this fallback address must be verified in your Cloudflare dashboard.
 
 ---
 
-## SMS Configuration (Twilio)
+## Sms-configuratie (Twilio)
 
 SMS is optional. When enabled, it allows magic link logins via SMS, text invitations, confirmation texts, and host blasts.
 
 ### TWILIO_ACCOUNT_SID
 
-- **Required**: Yes (if using SMS)
+- **Verplicht**: Yes (if using SMS)
 - **Type**: String (starts with `AC`)
 
 #### TWILIO_AUTH_TOKEN
 
-- **Required**: Yes (if using SMS)
+- **Verplicht**: Yes (if using SMS)
 - **Type**: String (Twilio authentication key)
 
 #### TWILIO_PHONE_NUMBER
 
-- **Required**: Yes (if using SMS)
+- **Verplicht**: Yes (if using SMS)
 - **Type**: E.164 formatted phone number (e.g. `+15558675309`, `+447911123456`)
 
 ---
 
-## PostgreSQL Configuration
+## PostgreSQL-configuratie
 
 PostgreSQL 18 is the only supported database. Managed PostgreSQL hosting (e.g., Supabase, Neon, AWS RDS) or the bundled `docker-compose.yml` Postgres container are both supported.
 
 ### DATABASE_URL (PostgreSQL)
 
-- **Required**: Yes
+- **Verplicht**: Yes
 - **Type**: String (Connection URL)
 
 Your `DATABASE_URL` connection string must follow this format:
@@ -466,13 +466,13 @@ On container startup the application runs `prisma migrate deploy` to apply any p
 
 ---
 
-## Redis Configuration
+## Redis-configuratie
 
 Redis is required for session caching, distributed locking, and rate-limiting.
 
 ### REDIS_URL
 
-- **Required**: Yes (the app will not start without a valid Redis URL)
+- **Verplicht**: Yes (the app will not start without a valid Redis URL)
 - **Type**: String (Redis connection URL)
 
 **Format:**
@@ -489,17 +489,17 @@ When configured, the application enables:
 
 ---
 
-## Database Backup Configuration
+## Configuratie van databaseback-ups
 
 Automated and manual database backups use `pg_dump` to create `.sql` dump files saved in `/app/data/backups/`.
 
 ### BACKUP_SCHEDULE
 
-- **Required**: No
-- **Default**: `disabled`
+- **Verplicht**: No
+- **Standaard**: `disabled`
 - **Type**: String (Cron expression or `"disabled"`)
 
-**What it does:** Defines the cron schedule for automated database backups run by the in-process cron scheduler.
+**Wat doet dit?** Defines the cron schedule for automated database backups run by the in-process cron scheduler.
 
 - `"disabled"`: Automated backups are turned off.
 - `"* * * * *"`: Standard 5-field cron pattern. E.g., `0 0 * * *` triggers a daily backup at midnight.
@@ -508,17 +508,17 @@ _Note: This setting can also be configured and updated dynamically at runtime vi
 
 ### BACKUP_KEEP_COUNT
 
-- **Required**: No
-- **Default**: `7`
+- **Verplicht**: No
+- **Standaard**: `7`
 - **Type**: Number string
 
-**What it does:** Sets the rotation retention limit. The application will keep only this number of backups, automatically deleting the oldest file when a new backup completes.
+**Wat doet dit?** Sets the rotation retention limit. The application will keep only this number of backups, automatically deleting the oldest file when a new backup completes.
 
 _Note: This setting can also be configured and updated dynamically at runtime via the **Backups** tab in the Admin Panel._
 
 ---
 
-## Quick Reference Table
+## Sneloverzicht van variabelen
 
 | Variable                       | Required        | Default             | Description                                                                                                     |
 | ------------------------------ | --------------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |

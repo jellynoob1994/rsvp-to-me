@@ -186,7 +186,7 @@ export function DateEdit({
           <div
             style={{ cursor: isHost ? "pointer" : "default" }}
             onClick={isHost ? openPopover : undefined}
-            title={isHost ? "Click to edit date/time" : undefined}
+            title={isHost ? "Klik om datum en tijd te bewerken" : undefined}
           >
             <div
               style={{
@@ -254,7 +254,7 @@ export function DateEdit({
                   marginBottom: "6px",
                 }}
               >
-                Start Date & Time
+                Begindatum en -tijd
               </label>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <input
@@ -305,9 +305,9 @@ export function DateEdit({
                   marginBottom: "6px",
                 }}
               >
-                End Date & Time{" "}
+                Einddatum en -tijd{" "}
                 <span style={{ fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>
-                  (optional)
+                  (optioneel)
                 </span>
               </label>
               <div style={{ display: "flex", gap: "6px" }}>
@@ -393,7 +393,7 @@ export function DateEdit({
                   opacity: !startDate || !startTime || isPending ? 0.5 : 1,
                 }}
               >
-                {isPending ? "Saving…" : "Save"}
+                {isPending ? "Bezig met opslaan…" : "Opslaan"}
               </button>
               <button
                 onClick={() => setOpen(false)}
@@ -408,7 +408,7 @@ export function DateEdit({
                   cursor: "pointer",
                 }}
               >
-                Cancel
+                Annuleren
               </button>
             </div>
           </div>
@@ -435,7 +435,7 @@ export function DateEdit({
             boxSizing: "border-box",
             transition: "all 0.2s ease",
           }}
-          title="Add to Calendar"
+          title="Aan agenda toevoegen"
         >
           <CalendarPlus size={22} />
         </button>

@@ -17,10 +17,10 @@ export function CoHostInviteEmail({ theme, event, hostName, inviteUrl }: CoHostI
   const { date } = formatEventDateTime(event.startAt, event.endAt, event.timezone);
   const subtitle = event.locationName ? `${date} · ${event.locationName}` : date;
   return (
-    <EmailLayout theme={theme} preview={`${hostName} invited you to co-host ${event.title}`}>
+    <EmailLayout theme={theme} preview={`${hostName} nodigt je uit als medeorganisator van ${event.title}`}>
       <Hero
         theme={theme}
-        kicker="Co-host Invitation"
+        kicker="Uitnodiging voor medeorganisator"
         title={event.title}
         subtitle={subtitle}
         showCoverImage={false}
@@ -47,7 +47,7 @@ export function CoHostInviteEmail({ theme, event, hostName, inviteUrl }: CoHostI
                   color: theme.textPrimary,
                 }}
               >
-                {`${hostName} has invited you to co-host their event, ${event.title}. As a co-host, you will be able to edit the event page, manage the guest list, and send updates.`}
+                {`${hostName} heeft je uitgenodigd om medeorganisator te worden van het evenement ${event.title}. Als medeorganisator kun je de evenementpagina bewerken, de gastenlijst beheren en updates versturen.`}
               </p>
 
               <DetailsCard
@@ -70,7 +70,7 @@ export function CoHostInviteEmail({ theme, event, hostName, inviteUrl }: CoHostI
                   <tr>
                     <td>
                       <EmailButton theme={theme} href={inviteUrl} variant="primary">
-                        Co-Host This Event
+                        Word medeorganisator
                       </EmailButton>
                     </td>
                   </tr>
@@ -86,7 +86,7 @@ export function CoHostInviteEmail({ theme, event, hostName, inviteUrl }: CoHostI
                   textAlign: "center" as const,
                 }}
               >
-                If you weren&apos;t expecting this, you can safely ignore or delete this email.
+                Had je deze uitnodiging niet verwacht? Dan kun je deze e-mail veilig negeren of verwijderen.
               </p>
             </td>
           </tr>

@@ -5,7 +5,7 @@ import { isOpenRegistrationActive } from "@/lib/auth";
 import { DashboardClient } from "@/components/dashboard/DashboardClient";
 import { getSessionUser } from "@/lib/session-user";
 
-export const metadata: Metadata = { title: "Dashboard" };
+export const metadata: Metadata = { title: "Evenementenoverzicht" };
 
 export default async function DashboardPage() {
   const sessionUser = await getSessionUser();

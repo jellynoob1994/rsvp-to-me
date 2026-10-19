@@ -1,48 +1,48 @@
 ---
-title: Inviting Guests
-description: Share a link or send email and text invitations.
-category: Guests & RSVPs
+title: Gasten uitnodigen
+description: Deel een link of verstuur uitnodigingen per e-mail en sms.
+category: Gasten en aanmeldingen
 audience: host
 order: 50
 ---
 
-# Inviting Guests
+# Gasten uitnodigen
 
-There are two ways to get guests to your event: share the link, or send invitations from the guest management area.
-
----
-
-## Share the Link
-
-Every event has its own web address. Copy it and share it however you like — group chat, social media, email signature. Anyone who can [see the event](visibility-and-privacy.md) can RSVP from the link.
+Je kunt gasten op twee manieren naar je evenement krijgen: deel de link of verstuur uitnodigingen vanuit het gastenbeheer.
 
 ---
 
-## Send Invitations
+## De link delen
 
-From the guest management area you can send invitations directly:
-
-- **Email invites** — enter guest email addresses to send invitation links (available when email is enabled on your site).
-- **SMS invites** — enter guest phone numbers to send text invitations (available when texting is enabled).
-
-Invited guests appear on your guest list with an **Invited** status until they respond.
-
-> **Anti-abuse:** You can invite up to **200 recipients per request** (paste more than that and it'll ask you to split into batches), and there's an hourly cap on how many invite batches you can send per event. When your administrator enables bot protection, each host, co-host, or guest invitation submission also receives an interaction-only security check. These controls prevent spam and runaway texting costs if an account is misused.
-
-### Invitation History
-
-The invitations table tracks when each invite was sent and whether the guest has responded yet, so you can follow up with anyone who hasn't.
-
-Each batch of invites you send also shows up in the event's **activity feed**, attributed to whoever sent it. On a shared event this gives you and your co-hosts a clear record of who invited how many people and when.
+Elk evenement heeft een eigen webadres. Kopieer de link en deel hem waar je maar wilt — in een groepschat, op sociale media of in je e-mailhandtekening. Iedereen die het [evenement kan zien](visibility-and-privacy.md), kan zich via de link aanmelden.
 
 ---
 
-## Let Guests Invite Friends
+## Uitnodigingen versturen
 
-On a **Private** event, you can turn on an option that lets your invited guests send their own invitations — handy for word-of-mouth gatherings. See [Visibility & Privacy](visibility-and-privacy.md). This option is only available on private events.
+Vanuit het gastenbeheer kun je uitnodigingen rechtstreeks versturen:
+
+- **E-mailuitnodigingen** — vul de e-mailadressen van gasten in om uitnodigingslinks te versturen. Dit is beschikbaar wanneer e-mail op je site is ingeschakeld.
+- **Sms-uitnodigingen** — vul de telefoonnummers van gasten in om uitnodigingen per sms te versturen. Dit is beschikbaar wanneer sms is ingeschakeld.
+
+Uitgenodigde gasten verschijnen in je gastenlijst met de status **Uitgenodigd**, totdat ze reageren.
+
+> **Misbruik voorkomen:** je kunt maximaal **200 ontvangers per verzoek** uitnodigen. Plak je er meer, dan wordt gevraagd de lijst in meerdere batches te verdelen. Per evenement geldt ook een uurlimiet voor het aantal uitnodigingsbatches. Als de beheerder botbescherming inschakelt, voert elke uitnodiging van een organisator, mede-organisator of gast ook een korte beveiligingscontrole uit. Deze maatregelen voorkomen spam en onverwacht hoge sms-kosten bij misbruik van een account.
+
+### Uitnodigingsgeschiedenis
+
+De uitnodigingentabel registreert wanneer elke uitnodiging is verstuurd en of de gast al heeft gereageerd. Zo kun je eenvoudig opvolgen wie nog niet heeft gereageerd.
+
+Elke batch uitnodigingen verschijnt ook in het **activiteitenoverzicht** van het evenement, met de naam van de verzender. Bij een gedeeld evenement hebben jij en je mede-organisatoren zo een duidelijk overzicht van wie hoeveel mensen heeft uitgenodigd en wanneer.
 
 ---
 
-## Reminders for Non-Responders
+## Gasten vrienden laten uitnodigen
 
-You don't have to chase people manually — RSVP to Me can automatically nudge guests who haven't responded. See [Messaging Guests & Reminders](messaging-and-reminders.md).
+Bij een **Privé**-evenement kun je een optie inschakelen waarmee uitgenodigde gasten zelf uitnodigingen kunnen versturen. Dat is handig voor bijeenkomsten waarbij gasten ook vrienden meenemen. Zie [Zichtbaarheid en privacy](visibility-and-privacy.md). Deze optie is alleen beschikbaar voor privé-evenementen.
+
+---
+
+## Herinneringen voor gasten die niet reageren
+
+Je hoeft mensen niet handmatig achterna te zitten. RSVP to Me kan automatisch een herinnering sturen naar gasten die nog niet hebben gereageerd. Zie [Berichten en herinneringen](messaging-and-reminders.md).

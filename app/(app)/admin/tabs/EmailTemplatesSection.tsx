@@ -21,10 +21,10 @@ type TemplateEntry = {
 };
 
 const TOGGLE_LABELS: Record<TemplateToggleKey, string> = {
-  showCoverImage: "Cover image",
-  showHostFlourish: "Hosted-by flourish",
-  showMapLink: "Google Maps link",
-  showCalendarLinks: "Add-to-calendar links",
+  showCoverImage: "Omslagafbeelding",
+  showHostFlourish: "Decoratieve tekst bij organisator",
+  showMapLink: "Google Maps-link",
+  showCalendarLinks: "Links om aan agenda toe te voegen",
 };
 
 const BASES = ["DARK", "SOFT", "BOLD"] as const;
@@ -68,7 +68,7 @@ export function EmailTemplatesSection() {
     // setState only in the async callback (not synchronously in the effect body).
     getEmailTemplatesAdmin()
       .then(({ templates: loaded }) => setTemplates(loaded as TemplateEntry[]))
-      .catch(() => setStatus("Failed to load templates"));
+      .catch(() => setStatus("Laden van sjablonen is mislukt"));
   }, []);
 
   // Seed the editor from the selected template's saved copy when the selection
@@ -120,13 +120,13 @@ export function EmailTemplatesSection() {
     try {
       const res = await saveEmailTemplateAction(selected.meta.id, currentOverrides());
       if (!res.success) {
-        setStatus(res.error ?? "Save failed");
+        setStatus(res.error ?? "Opslaan mislukt");
       } else {
         await loadTemplates();
-        setStatus("Saved");
+        setStatus("Opgeslagen");
       }
     } catch {
-      setStatus("Save failed");
+      setStatus("Opslaan mislukt");
     } finally {
       setBusy(false);
     }
@@ -145,9 +145,9 @@ export function EmailTemplatesSection() {
       const cleared: Partial<Record<TemplateToggleKey, boolean>> = {};
       for (const key of selected.meta.toggles) cleared[key] = true;
       setToggles(cleared);
-      setStatus("Reset to default");
+      setStatus("Standaard hersteld");
     } catch {
-      setStatus("Reset failed");
+      setStatus("Herstellen mislukt");
     } finally {
       setBusy(false);
     }
@@ -156,7 +156,7 @@ export function EmailTemplatesSection() {
   const handleResetAll = async () => {
     if (
       !window.confirm(
-        "Reset ALL email templates to their defaults? This clears every saved subject, body, and toggle override for all templates. This can't be undone."
+        "Alle e-mailsjablonen terugzetten naar de standaardwaarden? Dit verwijdert alle opgeslagen aanpassingen aan onderwerpen, teksten en inhoudsopties. Dit kan niet ongedaan worden gemaakt."
       )
     ) {
       return;
@@ -176,11 +176,11 @@ export function EmailTemplatesSection() {
       }
       setStatus(
         res.cleared > 0
-          ? `Reset all templates (${res.cleared} override${res.cleared === 1 ? "" : "s"} cleared)`
-          : "All templates were already at their defaults"
+          ? `Alle sjablonen hersteld (${res.cleared} aanpassing${res.cleared === 1 ? "" : "en"} verwijderd)`
+          : "Alle sjablonen gebruikten al de standaardwaarden"
       );
     } catch {
-      setStatus("Reset all failed");
+      setStatus("Alles herstellen is mislukt");
     } finally {
       setBusy(false);
     }
@@ -192,9 +192,9 @@ export function EmailTemplatesSection() {
     setStatus(null);
     try {
       const res = await sendEmailTemplateTestAction(selected.meta.id, sampleBase);
-      setStatus(res.success ? `Test sent to ${res.sentTo}` : (res.error ?? "Send failed"));
+      setStatus(res.success ? `Testmail verstuurd naar ${res.sentTo}` : (res.error ?? "Verzenden mislukt"));
     } catch {
-      setStatus("Send failed");
+      setStatus("Verzenden mislukt");
     } finally {
       setBusy(false);
     }
@@ -211,7 +211,7 @@ export function EmailTemplatesSection() {
 
   if (!selected) {
     return (
-      <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>Loading templates…</div>
+      <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>Sjablonen laden…</div>
     );
   }
 
@@ -220,7 +220,7 @@ export function EmailTemplatesSection() {
       {/* Template picker + test send */}
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
         <div style={{ flex: "1 1 260px" }}>
-          <label style={labelStyle}>Template</label>
+          <label style={labelStyle}>Sjabloon</label>
           <select
             value={selectedId}
             onChange={(e) => setSelectedId(e.target.value as TemplateId)}
@@ -256,13 +256,13 @@ export function EmailTemplatesSection() {
             opacity: busy ? 0.6 : 1,
           }}
         >
-          <Send size={14} /> Send test to me
+          <Send size={14} /> Stuur mij een testmail
         </button>
         <button
           type="button"
           onClick={handleResetAll}
           disabled={busy}
-          title="Clear every saved override and restore all shipped defaults"
+          title="Verwijder alle opgeslagen aanpassingen en herstel de standaardwaarden"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -278,7 +278,7 @@ export function EmailTemplatesSection() {
             opacity: busy ? 0.6 : 1,
           }}
         >
-          <RotateCcw size={14} /> Reset all to default
+          <RotateCcw size={14} /> Alles naar standaardwaarden herstellen
         </button>
       </div>
 
@@ -290,7 +290,7 @@ export function EmailTemplatesSection() {
         {/* Editor column */}
         <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: "16px" }}>
           <div>
-            <label style={labelStyle}>Subject</label>
+            <label style={labelStyle}>Onderwerp</label>
             <input
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
@@ -300,7 +300,7 @@ export function EmailTemplatesSection() {
 
           {selected.meta.bodyEditable && (
             <div>
-              <label style={labelStyle}>Body copy</label>
+              <label style={labelStyle}>Berichttekst</label>
               <textarea
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
@@ -312,7 +312,7 @@ export function EmailTemplatesSection() {
 
           {selected.meta.placeholders.length > 0 && (
             <div>
-              <label style={labelStyle}>Placeholders (click to insert)</label>
+              <label style={labelStyle}>Invulvelden (klik om in te voegen)</label>
               <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
                 {selected.meta.placeholders.map((name) => (
                   <button
@@ -340,7 +340,7 @@ export function EmailTemplatesSection() {
 
           {selected.meta.toggles.length > 0 && (
             <div>
-              <label style={labelStyle}>Content blocks</label>
+              <label style={labelStyle}>Inhoudsblokken</label>
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 {selected.meta.toggles.map((key) => (
                   <label
@@ -384,7 +384,7 @@ export function EmailTemplatesSection() {
                 opacity: busy ? 0.6 : 1,
               }}
             >
-              Save Template
+              Sjabloon opslaan
             </button>
             <button
               type="button"
@@ -405,7 +405,7 @@ export function EmailTemplatesSection() {
                 opacity: busy ? 0.6 : 1,
               }}
             >
-              <RotateCcw size={14} /> Reset to default
+              <RotateCcw size={14} /> Standaard herstellen
             </button>
           </div>
 
@@ -426,7 +426,7 @@ export function EmailTemplatesSection() {
               flexWrap: "wrap",
             }}
           >
-            <label style={{ ...labelStyle, marginBottom: 0 }}>Live preview</label>
+            <label style={{ ...labelStyle, marginBottom: 0 }}>Live voorbeeld</label>
             {selected.meta.eventScoped && (
               <div style={{ display: "flex", gap: "4px" }}>
                 {BASES.map((base) => (
@@ -445,7 +445,7 @@ export function EmailTemplatesSection() {
                       cursor: "pointer",
                     }}
                   >
-                    {base === "DARK" ? "Dark" : base === "SOFT" ? "Soft" : "Bold"}
+                    {base === "DARK" ? "Donker" : base === "SOFT" ? "Zacht" : "Vet"}
                   </button>
                 ))}
               </div>
@@ -463,10 +463,10 @@ export function EmailTemplatesSection() {
                   whiteSpace: "nowrap",
                 }}
               >
-                Subject: <span style={{ color: APP_SHELL.textPrimary }}>{preview.subject}</span>
+                Onderwerp: <span style={{ color: APP_SHELL.textPrimary }}>{preview.subject}</span>
               </div>
               <iframe
-                title="Email preview"
+                title="E-mailvoorbeeld"
                 sandbox=""
                 srcDoc={preview.html}
                 style={{
@@ -480,7 +480,7 @@ export function EmailTemplatesSection() {
             </>
           ) : (
             <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>
-              Rendering preview…
+              Voorbeeld laden…
             </div>
           )}
         </div>

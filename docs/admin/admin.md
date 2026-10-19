@@ -1,57 +1,57 @@
 ---
-title: Admin Panel
-description: Admin walkthrough: users, system config, backups, themes.
-category: Usage
+title: Beheerpaneel
+description: Uitleg over gebruikers, systeeminstellingen, back-ups en thema’s.
+category: Gebruik
 audience: admin
 order: 50
 ---
 
-# Admin Panel Guide
+# Handleiding voor het beheerpaneel
 
-The Admin Panel gives you a complete view of your RSVP to Me installation: every user account, every event page, system configuration, invite codes, themes, and backups. This guide explains what each section does and how to use it.
-
----
-
-## Table of Contents
-
-1. [Accessing the Admin Panel](#accessing-the-admin-panel)
-2. [Getting Admin Access](#getting-admin-access)
-3. [Overview](#overview)
-4. [User Management](#user-management)
-5. [Event Moderation](#event-moderation)
-6. [Host Settings (Invite Codes & Registration)](#host-settings-invite-codes--registration)
-7. [Email Settings](#email-settings)
-8. [SMS Settings](#sms-settings)
-9. [Database Backups](#database-backups)
-10. [Theme Presets](#theme-presets)
-11. [Admin Security Notes](#admin-security-notes)
+Het beheerpaneel geeft je een volledig overzicht van je RSVP to Me-installatie: alle gebruikersaccounts, evenementpagina’s, systeeminstellingen, uitnodigingscodes, thema’s en back-ups. Deze handleiding legt uit wat elk onderdeel doet en hoe je het gebruikt.
 
 ---
 
-## Accessing the Admin Panel
+## Inhoudsopgave
 
-You can access the Admin Panel in two ways:
-
-1. **Profile Dropdown**: If you are logged in with the `ADMIN` role, click your profile picture/initials in the top-right navigation header and select **🛡️ Admin Panel**.
-2. **Direct URL**: Navigate directly to `/admin` in your browser:
-   - Local address: `http://localhost:3000/admin`
-   - Domain address: `https://rsvp.yourdomain.com/admin`
-
-The Admin Panel is strictly gated to users with the `ADMIN` role. If you attempt to access `/admin` with a lower-privilege account, the app redirects you to the main dashboard.
-
-The panel is organized into a sidebar of tabs: **Overview**, **Users**, **Events**, **Host Settings**, **Email**, **SMS**, **Backups**, **Themes**, and **Documentation**. On phones and small tablets the sidebar is replaced by a hamburger button (☰) in the top-left of the page — tap it to open a slide-in drawer with the same tabs. The active tab is reflected in the URL (e.g. `/admin?tab=backups`), so you can bookmark or refresh without losing your place.
-
-> **Tip:** All of these admin guides — this one plus installation, configuration, email, SMS, and upgrading — are also readable inside the app in the **Documentation** tab at the bottom of the Admin Panel menu.
+1. [Het beheerpaneel openen](#het-beheerpaneel-openen)
+2. [Beheerderstoegang verkrijgen](#beheerderstoegang-verkrijgen)
+3. [Overzicht](#overzicht)
+4. [Gebruikersbeheer](#gebruikersbeheer)
+5. [Evenementenmoderatie](#evenementenmoderatie)
+6. [Instellingen voor organisatoren: uitnodigingscodes en registratie](#instellingen-voor-organisatoren-uitnodigingscodes-en-registratie)
+7. [E-mailinstellingen](#e-mailinstellingen)
+8. [Sms-instellingen](#sms-instellingen)
+9. [Databaseback-ups](#databaseback-ups)
+10. [Thema-voorinstellingen](#thema-voorinstellingen)
+11. [Beveiligingsopmerkingen voor beheerders](#beveiligingsopmerkingen-voor-beheerders)
 
 ---
 
-## Getting Admin Access
+## Het beheerpaneel openen
 
-There are two ways to promote an account to Admin.
+Je kunt het beheerpaneel op twee manieren openen:
 
-### Method 1: INITIAL_ADMIN_EMAIL (First-Time Setup)
+1. **Profielmenu:** als je bent ingelogd met de rol `ADMIN`, klik je rechtsboven op je profielfoto of initialen en kies je **🛡️ Beheerpaneel**.
+2. **Rechtstreeks via de URL:** open `/admin` in je browser:
+   - Lokaal adres: `http://localhost:3000/admin`
+   - Domeinadres: `https://rsvp.jouwdomein.nl/admin`
 
-Set the `INITIAL_ADMIN_EMAIL` environment variable in your `.env` file to your email address and restart the application.
+Alleen gebruikers met de rol `ADMIN` hebben toegang tot het beheerpaneel. Als je `/admin` probeert te openen met een account met minder rechten, stuurt de app je door naar het hoofddashboard.
+
+Het paneel heeft een zijbalk met de tabbladen **Overzicht**, **Gebruikers**, **Evenementen**, **Organisatie-instellingen**, **E-mail**, **Sms**, **Back-ups**, **Thema’s** en **Documentatie**. Op telefoons en kleine tablets wordt de zijbalk vervangen door een menuknop (☰) linksboven. Tik daarop om een uitschuifmenu met dezelfde tabbladen te openen. Het actieve tabblad staat in de URL (bijvoorbeeld `/admin?tab=backups`), zodat je de pagina als bladwijzer kunt opslaan of vernieuwen zonder je plek kwijt te raken.
+
+> **Tip:** Alle beheerdershandleidingen — deze handleiding en die voor installatie, configuratie, e-mail, sms en upgraden — zijn ook in de app beschikbaar via het tabblad **Documentatie** onderaan het menu van het beheerpaneel.
+
+---
+
+## Beheerderstoegang verkrijgen
+
+Je kunt een account op twee manieren de rol Beheerder geven.
+
+### Methode 1: INITIAL_ADMIN_EMAIL (eerste installatie)
+
+Stel de omgevingsvariabele `INITIAL_ADMIN_EMAIL` in je bestand `.env` in op je e-mailadres en start de applicatie opnieuw.
 
 ```env
 INITIAL_ADMIN_EMAIL="youraddress@domain.com"
@@ -61,190 +61,185 @@ INITIAL_ADMIN_EMAIL="youraddress@domain.com"
 docker compose restart app
 ```
 
-The first time you complete sign-in by opening a valid `LOGIN` magic link for this email, your
-account is automatically promoted to `ADMIN` (provided there are currently no other administrators
-in the system). This is a bootstrap mechanism for first-time installation. Registration, an
-existing session, dashboard/profile access, profile-change links, and co-host invitation acceptance
-cannot trigger this promotion; request and verify a fresh sign-in magic link when bootstrapping or
-recovering the initial administrator.
+De eerste keer dat je voor dit e-mailadres inlogt door een geldige eenmalige `LOGIN`-link te openen, krijgt je account automatisch de rol `ADMIN` — maar alleen als er nog geen andere beheerders in het systeem zijn. Dit mechanisme is bedoeld voor de eerste installatie. Registratie, een bestaande sessie, toegang tot het dashboard of profiel, links om profielgegevens te wijzigen en het accepteren van een uitnodiging als mede-organisator kunnen deze promotie niet activeren. Vraag bij de eerste installatie of herstel van de eerste beheerder om een nieuwe inloglink en verifieer die.
 
-### Method 2: Promotion via the Admin Panel
+### Methode 2: promotie via het beheerpaneel
 
-If you already have one active Admin account, you can promote other users:
+Als er al een actieve beheerder is, kun je andere gebruikers promoveren:
 
-1. Navigate to `/admin` > **Users**.
-2. Search for the user by name or email address.
-3. Click the user's row to open their details.
-4. Select `ADMIN` from the **Role** dropdown.
-5. Save the change.
+1. Ga naar `/admin` > **Gebruikers**.
+2. Zoek de gebruiker op naam of e-mailadres.
+3. Klik op de rij van de gebruiker om de gegevens te openen.
+4. Kies `ADMIN` in de keuzelijst **Rol**.
+5. Sla de wijziging op.
 
 ---
 
-## Overview
+## Overzicht
 
-The **Overview** tab shows a snapshot of your installation:
+Het tabblad **Overzicht** toont een momentopname van je installatie:
 
-| Stat             | What it counts                                                |
+| Cijfer | Wat wordt geteld |
 | ---------------- | ------------------------------------------------------------- |
-| **Total Users**  | All registered guest, host, and admin accounts.               |
-| **Total Events** | Every event page created (published and cancelled).           |
-| **Total RSVPs**  | The sum of all RSVPs submitted by guests across all events.   |
-| **Check-ins**    | Active whole-party check-ins recorded from event guest lists. |
-| **Invite Codes** | The number of active host-registration invite codes.          |
+| **Totaal aantal gebruikers** | Alle geregistreerde gasten, organisatoren en beheerders. |
+| **Totaal aantal evenementen** | Alle aangemaakte evenementpagina’s, zowel gepubliceerde als geannuleerde. |
+| **Totaal aantal aanmeldingen** | Het totaal van alle aanmeldingen van gasten voor alle evenementen. |
+| **Check-ins** | Actieve check-ins van complete gezelschappen die via de gastenlijsten zijn vastgelegd. |
+| **Uitnodigingscodes** | Het aantal actieve uitnodigingscodes voor registratie van organisatoren. |
 
 ---
 
-## User Management
+## Gebruikersbeheer
 
-Go to `/admin` > **Users** to view and manage accounts.
+Ga naar `/admin` > **Gebruikers** om accounts te bekijken en te beheren.
 
-### Searching Users
+### Gebruikers zoeken
 
-Filter the list by entering a search query at the top. The table searches across display names, email addresses, and phone numbers.
+Filter de lijst door bovenaan een zoekopdracht in te voeren. De tabel doorzoekt weergavenamen, e-mailadressen en telefoonnummers.
 
-### Creating a User
+### Een gebruiker aanmaken
 
-Click **+ Create User** to open the creation modal and fill in:
+Klik op **+ Gebruiker aanmaken** om het formulier te openen en vul de volgende gegevens in:
 
-- **Name**, **Email**, and (optionally) **Phone** — email and phone must be unique.
-- **Role** — `GUEST`, `HOST`, or `ADMIN`.
+- **Naam**, **e-mailadres** en eventueel **telefoonnummer** — e-mailadressen en telefoonnummers moeten uniek zijn.
+- **Rol** — `GUEST`, `HOST` of `ADMIN`.
 
-When you create the user, a 48-hour magic sign-in link is emailed to them so they can log in immediately. If email delivery fails, the account is still created — the email step is non-blocking.
+Wanneer je een gebruiker aanmaakt, wordt een eenmalige inloglink verstuurd die 48 uur geldig is, zodat de gebruiker meteen kan inloggen. Als de e-mailbezorging mislukt, wordt het account toch aangemaakt; het versturen van de e-mail blokkeert de accountaanmaak niet.
 
-### User Roles
+### Gebruikersrollen
 
-| Role    | Description               | Capabilities                                                                                                                    |
+| Rol | Beschrijving | Mogelijkheden |
 | ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `GUEST` | Basic guest account.      | Can RSVP, reply to update blasts, post comments, claim potluck items, and vote in polls. Cannot host events.                    |
-| `HOST`  | Standard event organizer. | All guest actions, plus: create event pages, manage guest lists, send blast updates, invite guests, and manage co-hosts.        |
-| `ADMIN` | System administrator.     | All host actions, plus: access the Admin Panel, search and moderate all events, delete accounts, and configure system settings. |
+| `GUEST` | Standaard gastaccount. | Kan zich aanmelden, reageren op groepsupdates, reacties plaatsen, items op de meeneemlijst toezeggen en stemmen in peilingen. Kan geen evenementen organiseren. |
+| `HOST` | Standaard organisator van evenementen. | Alle gastmogelijkheden, plus evenementpagina’s aanmaken, gastenlijsten beheren, groepsupdates versturen, gasten uitnodigen en mede-organisatoren beheren. |
+| `ADMIN` | Systeembeheerder. | Alle mogelijkheden van organisatoren, plus toegang tot het beheerpaneel, alle evenementen zoeken en modereren, accounts verwijderen en systeeminstellingen beheren. |
 
 > **Co-hosts:** a host can appoint other registered users as co-hosts of an individual event. Co-hosts are not a separate role — they get per-event management rights equivalent to the host's (edit event details, theme, cover image, settings and reminders; manage RSVPs, guest list, potluck, polls, questionnaire fields; send email/SMS blasts and updates; invite guests) with two exceptions that stay with the original host: **deleting the event** and **adding/removing co-hosts**. Server actions enforce this uniformly via a shared authorization check (SEC-30).
 
 ### Deleting and Restoring Users
 
-You can delete and manage users from the **Users** tab.
+Je kunt gebruikers verwijderen en beheren via het tabblad **Gebruikers**.
 
-- **Standard Deletion (Grace Period)**: By default, deleting a user schedules their account to be permanently deleted and anonymized in 30 days. During this 30-day grace period, the user's account is suspended, but an admin can click **Restore** to cancel the deletion request and re-enable the account.
-- **Immediate Deletion Override**: Admins can bypass the 30-day grace period and immediately anonymize/delete a pending user by clicking **Delete Now** in the user's action column (requires confirmation).
-- **Self-Service Revocation**: If a host schedules their own account for deletion from their Profile settings page, they can cancel the deletion request from the same page at any time during the 30-day window.
-- **Anonymization Details**: When deletion becomes final (or is done immediately), the user's PII is permanently anonymized: their name is changed to "Deleted User", email and phone are set to `null`, and any custom avatar is removed. The role is reset to `GUEST`. Their guest RSVPs on other events, co-host slots, magic tokens, and active sessions are fully deleted.
-- **Event Reassignment**: Events created by the deleted user are not deleted. Instead, they are reassigned to the `"system"` tombstone user account so that guests can still access them and view details.
+- **Standaard verwijderen (bedenktijd):** standaard wordt een account na 30 dagen definitief verwijderd en geanonimiseerd. Tijdens deze periode wordt het account opgeschort, maar kan een beheerder op **Herstellen** klikken om de aanvraag te annuleren en het account opnieuw te activeren.
+- **Direct verwijderen:** beheerders kunnen de bedenktijd van 30 dagen overslaan en een gebruiker die klaarstaat voor verwijdering meteen anonimiseren/verwijderen via **Nu verwijderen** in de actiekolom. Bevestiging is vereist.
+- **Zelf annuleren:** als een organisator het verwijderen van het eigen account aanvraagt via de profielinstellingen, kan diegene de aanvraag daar op elk moment binnen de periode van 30 dagen annuleren.
+- **Anonimiseren:** zodra de verwijdering definitief wordt of direct wordt uitgevoerd, worden persoonsgegevens permanent geanonimiseerd. De naam wordt gewijzigd in `"Deleted User"`, e-mail en telefoon worden op `null` gezet en een aangepaste avatar wordt verwijderd. De rol wordt teruggezet naar `GUEST`. Aanmeldingen als gast bij andere evenementen, mede-organisatorplaatsen, magische tokens en actieve sessies worden volledig verwijderd.
+- **Evenementen opnieuw toewijzen:** evenementen van de verwijderde gebruiker worden niet verwijderd. Ze worden toegewezen aan het systeemaccount `"system"`, zodat gasten de evenementen nog steeds kunnen openen en de gegevens bekijken.
 
-### Filtering Users
+### Gebruikers filteren
 
-The **Users** list can be filtered using the dropdown selectors:
+De lijst **Gebruikers** kan met keuzelijsten worden gefilterd:
 
-- **Role Filter**: Filter users by account type (`All Roles`, `ADMIN`, `HOST`, `GUEST`).
-- **Status Filter**: Filter users by account state (`All Statuses`, `Active` (default), `Pending Deletion`, `Deleted / Anonymized`).
-
----
-
-## Event Moderation
-
-Go to `/admin` > **Events** to inspect event pages across your installation.
-
-### Search and Moderation
-
-Search for events by title, slug, or the host's email, and filter by status.
-
-### What Admins Can Do
-
-- View any event's details and guest list, and delete events that violate your rules.
-- Admins do not edit event details from inside the Admin Panel. Instead, when an Admin opens a public event page, their permissions supersede the host checks — so they can use the inline editor, manage comments, edit potlucks, and moderate RSVPs exactly like the host.
-- Public event pages and their related settings and RSVP screens use a responsive, single-column layout capped at 600px; compact authentication, confirmation, and modal surfaces remain narrower by design.
-- After access is granted, the public event page, RSVP form, guest list, and event settings share the host-selected background effect. Password/private gates, dashboards, exports, social images, and emails remain static and do not expose or animate event effects.
-- Admins can use the host guest-list check-in, undo, walk-in, invitation resend, search, attendance summary, and CSV export controls. Check-in is available for every RSVP status, including no-reply, Can't make it, and awaiting-approval guests. These actions are attributed in the host-only activity feed.
-- The guest list's **All** filter includes both RSVP responses and invited guests who have not responded.
+- **Rolfilter:** filter op accounttype (`All Roles`, `ADMIN`, `HOST`, `GUEST`).
+- **Statusfilter:** filter op accountstatus (`All Statuses`, `Active` (standaard), `Pending Deletion`, `Deleted / Anonymized`).
 
 ---
 
-## Host Settings (Invite Codes & Registration)
+## Evenementenmoderatie
 
-Go to `/admin` > **Host Settings** to control how new hosts join the platform.
+Ga naar `/admin` > **Evenementen** om evenementpagina’s in je installatie te bekijken.
 
-### Open Registration
+### Zoeken en modereren
 
-- **Open Registration toggle:** turn on to let anyone register as a host without a code. Turn off to require a valid invite code at registration.
+Zoek evenementen op titel, slug of e-mailadres van de organisator en filter op status.
 
-### Creating an Invite Code
+### Wat beheerders kunnen doen
 
-When open registration is off, hosts need an invite code. Click **Create New Code** and configure:
+- Bekijk de gegevens en gastenlijst van elk evenement en verwijder evenementen die de regels overtreden.
+- Beheerders bewerken evenementgegevens niet rechtstreeks vanuit het beheerpaneel. Wanneer een beheerder een openbare evenementpagina opent, gaan diens rechten boven de controles voor de organisator. Daardoor kan diegene, net als de organisator, de inline-editor gebruiken, reacties beheren, de meeneemlijst bewerken en aanmeldingen modereren.
+- Openbare evenementpagina’s en de bijbehorende instellingen- en aanmeldschermen gebruiken een responsieve lay-out met één kolom van maximaal 600 px. Compacte schermen voor authenticatie, bevestigingen en dialoogvensters zijn bewust smaller.
+- Nadat toegang is verleend, gebruiken de openbare evenementpagina, het aanmeldformulier, de gastenlijst en de evenementinstellingen het achtergrondeffect dat de organisator heeft gekozen. Wachtwoord- en privacyschermen, dashboards, exports, sociale afbeeldingen en e-mails blijven statisch en tonen geen bewegende evenementeffecten.
+- Beheerders kunnen inchecken, check-ins ongedaan maken, gasten ter plaatse toevoegen, uitnodigingen opnieuw versturen, zoeken, het aanwezigheidsoverzicht bekijken en de gastenlijst naar CSV exporteren. Inchecken is mogelijk bij elke aanmeldstatus, ook voor gasten die niet hebben gereageerd, Afwezig hebben gekozen of nog op goedkeuring wachten. Deze handelingen worden geregistreerd in het activiteitenoverzicht dat alleen organisatoren kunnen zien.
+- Het filter **Iedereen** in de gastenlijst bevat zowel aanmeldingen als uitgenodigde gasten die nog niet hebben gereageerd.
 
-- **Code:** type a custom string, or leave blank to generate a random one.
-- **Note:** a description (e.g. "For Book Club").
-- **Max Uses:** limit how many times the code can be redeemed.
-- **Expires At:** an optional date after which the code stops working.
+---
 
-### Managing Codes
+## Instellingen voor organisatoren: uitnodigingscodes en registratie
 
-Toggle the status next to any code in the table to deactivate or reactivate it instantly.
+Ga naar `/admin` > **Organisatie-instellingen** om te bepalen hoe nieuwe organisatoren toegang krijgen tot het platform.
 
-### Env-Var Code vs. Admin Panel Codes
+### Open registratie
 
-| Feature          | `HOST_INVITE_CODE` (env var) | Admin Panel codes        |
+- **Schakelaar voor open registratie:** schakel deze in om iedereen zonder code als organisator te laten registreren. Schakel deze uit om bij registratie een geldige uitnodigingscode te vereisen.
+
+### Een uitnodigingscode aanmaken
+
+Wanneer open registratie is uitgeschakeld, hebben organisatoren een uitnodigingscode nodig. Klik op **Nieuwe code aanmaken** en stel het volgende in:
+
+- **Code:** vul zelf een tekenreeks in of laat het veld leeg om een willekeurige code te genereren.
+- **Opmerking:** een beschrijving, bijvoorbeeld “Voor de boekenclub”.
+- **Maximaal aantal gebruiken:** beperk hoe vaak de code kan worden gebruikt.
+- **Verloopt op:** een optionele datum waarna de code niet meer werkt.
+
+### Codes beheren
+
+Wijzig de status naast een code in de tabel om deze meteen uit of weer in te schakelen.
+
+### Code uit een omgevingsvariabele versus codes uit het beheerpaneel
+
+| Eigenschap | `HOST_INVITE_CODE` (omgevingsvariabele) | Codes uit het beheerpaneel |
 | ---------------- | ---------------------------- | ------------------------ |
-| **Location**     | Defined in `.env` file       | Stored in the database   |
-| **Expiration**   | None (always active)         | Optional expiration date |
-| **Usage Limits** | Unlimited                    | Optional max usage count |
-| **Quantity**     | Exactly one code             | Multiple unique codes    |
+| **Locatie** | Ingesteld in het bestand `.env` | Opgeslagen in de database |
+| **Vervaldatum** | Geen; altijd actief | Optionele vervaldatum |
+| **Gebruikslimiet** | Onbeperkt | Optioneel maximaal aantal gebruiken |
+| **Aantal** | Precies één code | Meerdere unieke codes |
 
 ---
 
-## Email Settings
+## E-mailinstellingen
 
-Go to `/admin` > **Email** to configure outbound email. Settings saved here are stored in the database and override the matching `.env` values immediately, without a container restart.
+Ga naar `/admin` > **E-mail** om uitgaande e-mail te configureren. Instellingen die je hier opslaat, worden in de database bewaard en overschrijven direct de bijbehorende waarden uit `.env`, zonder dat de container opnieuw hoeft te starten.
 
-- **Guest Email Notifications toggle:** when off, no emails are sent to guests (RSVP confirmations, blast updates, reminders, invites). Host sign-in links and admin emails are always sent regardless of this setting.
-- **Email Provider:** choose **SMTP**, **Cloudflare Worker**, or **Cloudflare REST API**.
-- **Provider fields:** enter the credentials for the selected provider (SMTP host/port/secure/username/password, or the relevant Cloudflare fields) plus the **From Address**.
-- **Send Test Email:** enter an address and send a test to verify your settings.
+- **E-mailmeldingen voor gasten:** als dit is uitgeschakeld, worden er geen e-mails aan gasten verstuurd (aanmeldbevestigingen, groepsupdates, herinneringen en uitnodigingen). Inloglinks voor organisatoren en e-mails aan beheerders worden altijd verstuurd, ongeacht deze instelling.
+- **E-mailprovider:** kies **SMTP**, **Cloudflare Worker** of **Cloudflare REST API**.
+- **Velden van de provider:** vul de gegevens van de gekozen provider in (SMTP-host, poort, beveiliging, gebruikersnaam en wachtwoord, of de relevante Cloudflare-velden) en geef het **afzenderadres** op.
+- **Testmail versturen:** vul een e-mailadres in en verstuur een test om de instellingen te controleren.
 
-See the [Email Setup Guide](email.md) for provider-by-provider walkthroughs.
-
----
-
-## SMS Settings
-
-Go to `/admin` > **SMS** to configure Twilio.
-
-- **SMS Notifications toggle:** when on, guests receive SMS confirmations, blast updates, reminders, and invites. It defaults to on automatically when Twilio credentials are present, and requires those credentials to work.
-- Enter your Twilio **Account SID**, **Auth Token**, and **phone number**.
-- **Send Test SMS:** send a test message to a phone number to verify your settings.
-
-See the [SMS Setup Guide](sms.md) for the full Twilio walkthrough.
+Zie de [handleiding voor e-mailinstellingen](email.md) voor stapsgewijze uitleg per provider.
 
 ---
 
-## Database Backups
+## Sms-instellingen
 
-Go to `/admin` > **Backups** to manage PostgreSQL database snapshots. Backups are created with `pg_dump` and saved to the persistent `/app/data/backups` volume.
+Ga naar `/admin` > **Sms** om Twilio in te stellen.
 
-### Backup Schedule
+- **Sms-meldingen:** als dit is ingeschakeld, ontvangen gasten sms-bevestigingen, groepsupdates, herinneringen en uitnodigingen. De instelling wordt automatisch ingeschakeld wanneer Twilio-gegevens aanwezig zijn en werkt alleen met geldige gegevens.
+- Vul je Twilio-**Account SID**, **Auth Token** en **telefoonnummer** in.
+- **Test-sms versturen:** verstuur een testbericht naar een telefoonnummer om de instellingen te controleren.
 
-Pick a schedule from the preset dropdown: **Disabled**, **Every hour**, **Every 6 hours**, **Daily at midnight**, **Every 3 days**, **Weekly**, or **Custom**. Choosing **Custom** reveals a field for a standard 5-field cron expression (e.g. `0 0 * * *` for daily at midnight).
-
-- **Backups to Retain:** set how many snapshots to keep. When a new backup runs, the oldest files beyond this limit are deleted automatically to control disk usage.
-
-### Manual Actions
-
-- **Create Backup Now:** trigger an immediate `pg_dump` snapshot.
-- **Download:** stream any archive to your browser via a secure, admin-authenticated route.
-- **Delete:** permanently remove a backup file from disk.
+Zie de [handleiding voor sms-instellingen](sms.md) voor de volledige Twilio-uitleg.
 
 ---
 
-## Theme Presets
+## Databaseback-ups
 
-Go to `/admin` > **Themes** to manage the preset themes hosts can choose from in their event settings.
+Ga naar `/admin` > **Back-ups** om momentopnamen van de PostgreSQL-database te beheren. Back-ups worden gemaakt met `pg_dump` en opgeslagen in het permanente volume `/app/data/backups`.
 
-- **Create / Edit / Delete presets:** configure a preset's base style, accent colors, gradients, decorations, title, and description.
-- **Heading font:** each preset can optionally carry a **heading font** chosen from the curated registry (`lib/fonts.ts`) — 12 Google Fonts self-hosted at build time (no runtime requests to Google, works offline/air-gapped). Hosts applying the preset get the font automatically and can override it per event. Leave it on **Theme default** to use the base style's built-in typography.
-- **Active vs. inactive:** inactive presets are hidden from hosts but kept for later use.
+### Back-upschema
 
-These presets populate the theme picker that hosts see when customizing an event page.
+Kies een schema in de keuzelijst: **Uitgeschakeld**, **Elk uur**, **Elke 6 uur**, **Dagelijks om middernacht**, **Elke 3 dagen**, **Wekelijks** of **Aangepast**. Bij **Aangepast** verschijnt een veld voor een standaard cron-expressie met vijf velden (bijvoorbeeld `0 0 * * *` voor dagelijks om middernacht).
 
-### Theme Typography & Effects (schema notes)
+- **Aantal te bewaren back-ups:** stel in hoeveel snapshots je wilt bewaren. Wanneer er een nieuwe back-up wordt gemaakt, worden oudere bestanden boven deze limiet automatisch verwijderd om schijfruimte te besparen.
+
+### Handmatige acties
+
+- **Nu back-up maken:** maak onmiddellijk een snapshot met `pg_dump`.
+- **Downloaden:** stuur een archief via een beveiligde route waarvoor je als beheerder moet zijn ingelogd naar je browser.
+- **Verwijderen:** verwijder een back-upbestand definitief van de schijf.
+
+---
+
+## Thema-voorinstellingen
+
+Ga naar `/admin` > **Thema’s** om de thema’s te beheren die organisatoren in de evenementinstellingen kunnen kiezen.
+
+- **Thema’s aanmaken, bewerken en verwijderen:** stel de basisstijl, accentkleuren, kleurverlopen, versieringen, titel en beschrijving in.
+- **Lettertype voor koppen:** elk thema kan optioneel een **lettertype voor koppen** gebruiken uit het register (`lib/fonts.ts`): 12 Google Fonts die tijdens het bouwen lokaal worden opgeslagen. Er zijn geen verzoeken aan Google tijdens runtime, zodat de fonts ook offline werken. Organisatoren die het thema kiezen, krijgen het lettertype automatisch; zij kunnen dit per evenement aanpassen. Kies **Standaardthema** om de ingebouwde typografie van de basisstijl te gebruiken.
+- **Actief of inactief:** inactieve thema’s zijn verborgen voor organisatoren, maar blijven bewaard voor later gebruik.
+
+Deze thema’s verschijnen in de themakiezer die organisatoren gebruiken om hun evenementpagina aan te passen.
+
+### Typografie en effecten van thema’s (schemanotities)
 
 - The host-facing **Settings → Theme** section is split into three tabs — **Theme** (presets + custom colors), **Effects** (picker with Density/Speed/Size controls), and **Font** — all saving to the same `EventTheme` row. The selected font is applied only to the main event title; section headings and body text retain the standard UI font.
 
@@ -255,11 +250,11 @@ These presets populate the theme picker that hosts see when customizing an event
 
 ---
 
-## Admin Security Notes
+## Beveiligingsopmerkingen voor beheerders
 
-- Stored credentials (SMTP password, Twilio Auth Token, Cloudflare API token/secret) are AES-256-GCM encrypted in the database using the `ENCRYPTION_KEY` (falling back to `SESSION_SECRET` if it is not set), to limit exposure if the database is ever leaked.
-- Sensitive values are masked (as `••••••••`) before being sent to the browser.
-- There is no separate administrator password. Admin accounts sign in through the same passwordless magic-link flow as everyone else.
-- Actions taken within the Admin Panel are not currently recorded in the public activity feed.
-- **Event visibility and password gates are enforced consistently across every event sub-route.** A single access check (`resolveEventAccess` in `lib/eventAccess.ts`) backs the event page, the guest list (`/e/[slug]/guests`), the RSVP form (`/e/[slug]/rsvp`), and the calendar export (`/e/[slug]/calendar.ics`). A `PRIVATE` or password-protected event cannot be reached through any of these by guessing the URL — access requires a host/co-host session, an admin moderating with `?admin=1`, the signed unlock cookie set after entering the password, or a valid guest RSVP token.
-- **Guest contact details never leave the server for non-hosts.** On the guest list, per-guest edit tokens, email addresses, phone numbers, and private questionnaire answers are stripped from the page data unless the viewer is a host, co-host, or admin — they are not merely hidden in the UI.
+- Opgeslagen inloggegevens (SMTP-wachtwoord, Twilio Auth Token, Cloudflare API-token/geheim) worden in de database versleuteld met AES-256-GCM, met `ENCRYPTION_KEY` (of `SESSION_SECRET` als die niet is ingesteld) als sleutel. Dit beperkt de blootstelling als de database ooit uitlekt.
+- Gevoelige waarden worden gemaskeerd (als `••••••••`) voordat ze naar de browser worden verstuurd.
+- Er bestaat geen apart beheerderswachtwoord. Beheerders loggen net als alle andere gebruikers in via een eenmalige inloglink.
+- Acties in het beheerpaneel worden momenteel niet vastgelegd in het openbare activiteitenoverzicht.
+- **Zichtbaarheid en wachtwoordbeveiliging gelden voor alle subroutes van een evenement.** Eén toegangscontrole (`resolveEventAccess` in `lib/eventAccess.ts`) wordt gebruikt voor de evenementpagina, de gastenlijst (`/e/[slug]/guests`), het aanmeldformulier (`/e/[slug]/rsvp`) en de agenda-export (`/e/[slug]/calendar.ics`). Een privé-evenement of evenement met wachtwoord kan niet worden geopend door de URL te raden. Toegang vereist een sessie van een organisator of mede-organisator, een beheerder die modereert met `?admin=1`, de ondertekende ontgrendelcookie die na invoer van het wachtwoord wordt geplaatst, of een geldig RSVP-token van een gast.
+- **Contactgegevens van gasten verlaten de server nooit voor niet-organisatoren.** Op de gastenlijst worden persoonlijke wijzigingstokens, e-mailadressen, telefoonnummers en privéantwoorden op vragenlijsten uit de paginagegevens verwijderd, tenzij de bezoeker organisator, mede-organisator of beheerder is. Ze worden dus niet alleen in de interface verborgen.

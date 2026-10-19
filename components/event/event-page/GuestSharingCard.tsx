@@ -35,7 +35,7 @@ export function GuestSharingCard({
         >
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <Megaphone size={16} style={{ color: t.accent }} />
-            <span style={{ fontWeight: 700, fontSize: "14px" }}>Share this event</span>
+            <span style={{ fontWeight: 700, fontSize: "14px" }}>Deel dit evenement</span>
           </div>
           <div style={{ display: "flex", gap: "8px" }}>
             <button
@@ -65,7 +65,7 @@ export function GuestSharingCard({
               }}
             >
               {eventLinkCopied ? <Check size={14} /> : <span>📋</span>}
-              {eventLinkCopied ? "Copied!" : "Copy Link"}
+              {eventLinkCopied ? "Gekopieerd!" : "Link kopiëren"}
             </button>
             <button
               onClick={() => setShowShareQr(true)}
@@ -86,7 +86,7 @@ export function GuestSharingCard({
                 gap: "6px",
               }}
             >
-              <span>📱</span> Show QR Code
+              <span>📱</span> QR-code tonen
             </button>
           </div>
         </EventCard>

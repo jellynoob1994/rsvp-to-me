@@ -6,8 +6,8 @@ import type { MagicLinkEmailProps } from "../types";
 
 export function MagicLinkEmail({ theme, body, magicLink }: MagicLinkEmailProps) {
   return (
-    <EmailLayout theme={theme} preview="Your sign-in link for RSVP to Me">
-      <Hero theme={theme} kicker="RSVP to Me" title="Sign in" showCoverImage={false} />
+    <EmailLayout theme={theme} preview="Je inloglink voor RSVP to Me">
+      <Hero theme={theme} kicker="RSVP to Me" title="Inloggen" showCoverImage={false} />
       <table
         align="center"
         width="100%"
@@ -48,7 +48,7 @@ export function MagicLinkEmail({ theme, body, magicLink }: MagicLinkEmailProps) 
                   <tr>
                     <td>
                       <EmailButton theme={theme} href={magicLink} variant="primary">
-                        Sign in
+                        Inloggen
                       </EmailButton>
                     </td>
                   </tr>
@@ -58,7 +58,7 @@ export function MagicLinkEmail({ theme, body, magicLink }: MagicLinkEmailProps) 
                 className="dm-text-muted"
                 style={{ margin: "24px 0 0", fontSize: "12px", color: theme.textMuted }}
               >
-                {"If you didn't request this, you can safely ignore this email."}
+                {"Heb je deze inloglink niet aangevraagd? Dan kun je deze veilig negeren."}
               </p>
             </td>
           </tr>

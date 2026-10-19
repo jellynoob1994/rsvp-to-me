@@ -15,12 +15,12 @@ export function ApprovalEmail({
     <EmailLayout
       theme={theme}
       preview={
-        approved ? `Your RSVP for ${eventTitle} is approved` : `About your RSVP for ${eventTitle}`
+        approved ? `Je aanmelding voor ${eventTitle} is goedgekeurd` : `Over je aanmelding voor ${eventTitle}`
       }
     >
       <Hero
         theme={theme}
-        kicker={approved ? "You're on the list" : "RSVP update"}
+        kicker={approved ? "Je staat op de gastenlijst" : "Update over je aanmelding"}
         title={eventTitle}
         showCoverImage={toggles.showCoverImage}
       />
@@ -48,7 +48,7 @@ export function ApprovalEmail({
                   color: theme.textPrimary,
                 }}
               >
-                {approved ? "Your RSVP is approved! 🎉" : "Your RSVP was declined"}
+                {approved ? "Je aanmelding is goedgekeurd! 🎉" : "Je aanmelding is afgewezen"}
               </h2>
               <p
                 className="dm-text-secondary"
@@ -60,8 +60,8 @@ export function ApprovalEmail({
                 }}
               >
                 {approved
-                  ? `You are officially on the guest list for ${eventTitle}.`
-                  : `We're sorry, but the host has declined your RSVP for ${eventTitle}.`}
+                  ? `Je staat officieel op de gastenlijst voor ${eventTitle}.`
+                  : `Helaas heeft de organisator je aanmelding voor ${eventTitle} afgewezen.`}
               </p>
 
               {hostMessage ? (
@@ -94,7 +94,7 @@ export function ApprovalEmail({
                             color: theme.textSecondary,
                           }}
                         >
-                          Message from the host: “{hostMessage}”
+                          Bericht van de organisator: “{hostMessage}”
                         </p>
                       </td>
                     </tr>
@@ -116,7 +116,7 @@ export function ApprovalEmail({
                     <tr>
                       <td>
                         <EmailButton theme={theme} href={eventUrl} variant="primary">
-                          View event
+                          Bekijk evenement
                         </EmailButton>
                       </td>
                     </tr>

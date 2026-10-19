@@ -1,110 +1,110 @@
 ---
-title: SMS Setup
-description: Twilio integration, account setup, limits, and costs.
-category: Configuration
+title: Sms instellen
+description: Twilio koppelen, account instellen, limieten en kosten.
+category: Configuratie
 audience: admin
 order: 40
 ---
 
-# SMS Setup Guide (Twilio)
+# Handleiding voor sms (Twilio)
 
-SMS messaging in RSVP to Me is powered by Twilio and is entirely optional. This guide walks you through creating a Twilio account, acquiring a phone number, and connecting it to your installation.
+Sms-berichten in RSVP to Me worden verzorgd door Twilio en zijn volledig optioneel. Deze handleiding laat zien hoe je een Twilio-account aanmaakt, een telefoonnummer verkrijgt en dit aan je installatie koppelt.
 
 ---
 
-## Table of Contents
+## Inhoudsopgave
 
-1. [What SMS Enables](#what-sms-enables)
-2. [What You Need](#what-you-need)
-3. [Step 1 — Create a Twilio Account](#step-1--create-a-twilio-account)
-4. [Step 2 — Get a Phone Number](#step-2--get-a-phone-number)
-5. [Step 3 — Find Your Credentials](#step-3--find-your-credentials)
-6. [Step 4 — Configure RSVP to Me](#step-4--configure-rsvp-to-me)
-7. [Testing SMS](#testing-sms)
-8. [Trial Account Limitations](#trial-account-limitations)
+1. [Wat sms mogelijk maakt](#wat-sms-mogelijk-maakt)
+2. [Wat je nodig hebt](#wat-je-nodig-hebt)
+3. [Stap 1 — Een Twilio-account aanmaken](#stap-1--een-twilio-account-aanmaken)
+4. [Stap 2 — Een telefoonnummer verkrijgen](#stap-2--een-telefoonnummer-verkrijgen)
+5. [Stap 3 — Je inloggegevens vinden](#stap-3--je-inloggegevens-vinden)
+6. [Stap 4 — RSVP to Me configureren](#stap-4--rsvp-to-me-configureren)
+7. [Sms testen](#sms-testen)
+8. [Beperkingen van een proefaccount](#beperkingen-van-een-proefaccount)
 9. [Costs](#costs)
-10. [Disabling SMS](#disabling-sms)
-11. [Troubleshooting](#troubleshooting)
+10. [Sms uitschakelen](#sms-uitschakelen)
+11. [Problemen oplossen](#problemen-oplossen)
 
 ---
 
-## What SMS Enables
+## Wat sms mogelijk maakt
 
-Without SMS configured, the app works entirely through email. With Twilio connected, you gain:
+Zonder sms werkt de app volledig via e-mail. Met Twilio erbij krijg je de volgende mogelijkheden:
 
-| Feature                         | Description                                                                                                      |
+| Functie | Beschrijving |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Magic Link Sign-In via Text** | Users can sign in by entering their phone number instead of email.                                               |
-| **SMS Invitations**             | Send event invitations directly to guest phone numbers.                                                          |
-| **RSVP Confirmations**          | Guests receive an automated text confirming their Going/Maybe status.                                            |
-| **Host RSVP Alerts**            | Hosts receive a text when a guest RSVPs, including the guest's name, status, note, and a link to the guest list. |
-| **Approval Notifications**      | Guests receive updates when their RSVPs are approved/declined.                                                   |
-| **Event Update Blasts**         | Send immediate text notifications to all Going/Maybe guests.                                                     |
-| **Automated Reminders**         | Schedule text reminders 7 days, 1 day, or N hours before the event.                                              |
+| **Inloggen met een link via sms** | Gebruikers kunnen inloggen door hun telefoonnummer in te voeren in plaats van hun e-mailadres. |
+| **Sms-uitnodigingen** | Verstuur evenementuitnodigingen rechtstreeks naar telefoonnummers van gasten. |
+| **Aanmeldbevestigingen** | Gasten ontvangen automatisch een sms ter bevestiging van hun status Aanwezig of Misschien. |
+| **Meldingen voor de organisator** | Organisatoren ontvangen een sms wanneer een gast reageert, met naam en status van de gast, diens notitie en een link naar de gastenlijst. |
+| **Meldingen over goedkeuring** | Gasten ontvangen een bericht wanneer hun aanmelding is goedgekeurd of afgewezen. |
+| **Groepsupdates over het evenement** | Verstuur direct sms-meldingen naar alle gasten met de status Aanwezig of Misschien. |
+| **Automatische herinneringen** | Plan sms-herinneringen 7 dagen, 1 dag of een zelfgekozen aantal uren vóór het evenement. |
 
-Each user can control their own notification preferences (Email vs SMS) in their Profile. Hosts can toggle their own **New RSVP** alerts (email and, when SMS is enabled, text) per event under **Event Settings → RSVP Options → Notification Settings** — the text alert defaults off. Host RSVP alerts go to the host and every co-host.
-
----
-
-## What You Need
-
-- A Twilio account (a free trial is available).
-- A credit card (to verify identity, even on free trial accounts).
-- A Twilio phone number with SMS capabilities (~$1.15/month in the US).
+Iedere gebruiker beheert de eigen meldingsvoorkeuren (e-mail of sms) via het profiel. Organisatoren kunnen per evenement hun meldingen over **Nieuwe aanmelding** in- of uitschakelen via **Evenementinstellingen → Aanmeldopties → Meldingsinstellingen**. E-mailmeldingen staan standaard aan; sms-meldingen staan standaard uit. De organisator en alle mede-organisatoren ontvangen deze meldingen.
 
 ---
 
-## Step 1 — Create a Twilio Account
+## Wat je nodig hebt
 
-1. Go to [Twilio Signup](https://www.twilio.com/try-twilio).
-2. Fill in your name, email, and choose a password.
-3. Verify your email address by clicking the verification link sent to your inbox.
-4. Verify your personal phone number by entering the verification code sent via SMS.
-5. Answer the developer onboarding questions (any answers work; they just customize your dashboard view).
-
-Your new trial account starts with approximately $15.00 in free credit.
+- Een Twilio-account (een gratis proefperiode is beschikbaar).
+- Een creditcard om je identiteit te verifiëren, ook bij een gratis proefaccount.
+- Een Twilio-telefoonnummer dat sms ondersteunt (in de VS ongeveer $ 1,15 per maand).
 
 ---
 
-## Step 2 — Get a Phone Number
+## Stap 1 — Een Twilio-account aanmaken
 
-Trial accounts include one free phone number. To purchase one:
+1. Ga naar [Twilio registreren](https://www.twilio.com/try-twilio).
+2. Vul je naam en e-mailadres in en kies een wachtwoord.
+3. Verifieer je e-mailadres via de link die je per e-mail ontvangt.
+4. Verifieer je telefoonnummer met de code die je per sms ontvangt.
+5. Beantwoord de introductievragen voor ontwikkelaars. De antwoorden passen alleen de weergave van je dashboard aan.
 
-1. Go to your [Twilio Console](https://console.twilio.com).
-2. Look for the **Get a Twilio phone number** button on the home page, or navigate to **Phone Numbers** > **Manage** > **Buy a number** in the left sidebar.
-3. Choose your country.
-4. Under **Capabilities**, check the **SMS** box.
-5. Click **Search** and select a number from the list.
-6. Click **Buy** (it will use your free trial credit).
-7. Note down the phone number in E.164 format.
+Je nieuwe proefaccount begint met ongeveer $ 15,00 aan gratis tegoed.
 
-### E.164 Phone Format
+---
 
-E.164 means: `+` country code + full phone number, with no spaces, dashes, or parentheses.
+## Stap 2 — Een telefoonnummer verkrijgen
 
-| Country        | Display Format   | E.164 Format    |
+Een proefaccount bevat één gratis telefoonnummer. Zo koop je een nummer:
+
+1. Open de [Twilio Console](https://console.twilio.com).
+2. Zoek op de startpagina naar **Get a Twilio phone number**, of open via het menu links **Phone Numbers → Manage → Buy a number**.
+3. Kies je land.
+4. Vink bij **Capabilities** het vakje **SMS** aan.
+5. Klik op **Search** en kies een nummer uit de lijst.
+6. Klik op **Buy**. De kosten worden van je proeftegoed afgeschreven.
+7. Noteer het telefoonnummer in E.164-notatie.
+
+### E.164-telefoonnotatie
+
+E.164 betekent: `+` gevolgd door de landcode en het volledige telefoonnummer, zonder spaties, streepjes of haakjes.
+
+| Land | Weergaveformaat | E.164-formaat |
 | -------------- | ---------------- | --------------- |
-| USA / Canada   | `(555) 867-5309` | `+15558675309`  |
-| United Kingdom | `07911 123456`   | `+447911123456` |
-| Australia      | `0412 345 678`   | `+61412345678`  |
+| Verenigde Staten / Canada | `(555) 867-5309` | `+15558675309` |
+| Verenigd Koninkrijk | `07911 123456` | `+447911123456` |
+| Australië | `0412 345 678` | `+61412345678` |
 
 ---
 
-## Step 3 — Find Your Credentials
+## Stap 3 — Je inloggegevens vinden
 
-Your account keys are displayed on your Twilio Console home page under the **Account Info** section.
+Je accountgegevens staan op de startpagina van de Twilio Console bij **Account Info**.
 
-1. **Account SID**: A unique identifier starting with `AC` (e.g. `ACyour_account_sid_here`).
-2. **Auth Token**: Click the eye icon (👁) to reveal your authentication token.
-3. **Phone Number**: Your E.164 formatted Twilio phone number.
+1. **Account SID:** een unieke identificatie die begint met `AC` (bijvoorbeeld `ACyour_account_sid_here`).
+2. **Auth Token:** klik op het oogpictogram (👁) om je authenticatietoken te tonen.
+3. **Phone Number:** het Twilio-telefoonnummer in E.164-notatie.
 
-> **Warning:** Your Auth Token grants complete access to your Twilio account billing. Keep it private and never share it.
+> **Waarschuwing:** met je Auth Token kan iemand toegang krijgen tot je Twilio-account en de bijbehorende kosten. Houd deze geheim en deel hem nooit.
 
 ---
 
-## Step 4 — Configure RSVP to Me
+## Stap 4 — RSVP to Me configureren
 
-Add the three Twilio configuration variables to your `.env` file:
+Voeg de drie Twilio-variabelen toe aan je bestand `.env`:
 
 ```env
 TWILIO_ACCOUNT_SID="ACyour_account_sid_here"
@@ -112,86 +112,86 @@ TWILIO_AUTH_TOKEN="your_auth_token_here"
 TWILIO_PHONE_NUMBER="+15558675309"
 ```
 
-Restart your container to load the environment changes:
+Start de app-container opnieuw om de wijzigingen te laden:
 
 ```bash
 docker compose restart app
 ```
 
-> You can also enter these credentials in the Admin Panel under **Admin → SMS** instead of (or in addition to) the `.env` file. Admin Panel values take precedence and apply without a restart.
+> Je kunt deze gegevens ook invoeren in het beheerpaneel onder **Beheerder → Sms**, in plaats van of naast het bestand `.env`. Waarden uit het beheerpaneel hebben voorrang en worden direct toegepast zonder herstart.
 
 ---
 
-## Enabling Reply-to-RSVP (Inbound SMS)
+## Reageren op een uitnodiging via sms inschakelen
 
-Guests who receive an invitation by text can reply **YES**, **NO**, or **MAYBE** to set their RSVP — no link required. For this to work, point your Twilio number's incoming-message webhook at your installation:
+Gasten die een uitnodiging per sms ontvangen, kunnen antwoorden met **YES**, **NO** of **MAYBE** om hun aanmelding in te stellen — een link is niet nodig. Stel hiervoor de webhook voor inkomende berichten van je Twilio-nummer in:
 
-1. In the Twilio Console, go to **Phone Numbers → Manage → Active Numbers** and open your number.
-2. Under **Messaging**, set **A message comes in** to **Webhook**, with the URL:
+1. Open in de Twilio Console **Phone Numbers → Manage → Active Numbers** en kies je nummer.
+2. Stel onder **Messaging** de optie **A message comes in** in op **Webhook**, met deze URL:
    ```
    https://yourdomain.com/api/webhooks/twilio
    ```
-   Use the `HTTP POST` method.
-3. Save. Incoming replies are validated against your Twilio Auth Token, matched to the guest's pending invitation by phone number, and applied to their RSVP.
+   Kies de HTTP-methode `POST`.
+3. Sla de wijziging op. Inkomende antwoorden worden gecontroleerd met je Twilio Auth Token, gekoppeld aan de openstaande uitnodiging van de gast op basis van het telefoonnummer en vervolgens op diens aanmelding toegepast.
 
 > This step is only needed if you want guests to RSVP by replying to texts. Outbound SMS (confirmations, reminders, blasts) works without it.
 
-> **Note:** The inbound webhook validates the signature against the **same** Twilio Auth Token used for outbound SMS — whether you set it in the Admin Panel (stored encrypted at rest) or in `.env`, with the Admin Panel value taking precedence. If you configured Twilio only in the Admin Panel, reply-to-RSVP works with no `TWILIO_AUTH_TOKEN` env var. If every inbound reply returns a signature error, confirm the token in **Admin → SMS** matches the one in your Twilio Console.
+> **Let op:** de webhook controleert de handtekening met dezelfde Twilio Auth Token die voor uitgaande sms wordt gebruikt. Dit geldt zowel voor de versleuteld opgeslagen waarde in het beheerpaneel als voor de waarde in `.env`; de waarde uit het beheerpaneel heeft voorrang. Heb je Twilio alleen via het beheerpaneel ingesteld, dan werkt reageren via sms ook zonder de omgevingsvariabele `TWILIO_AUTH_TOKEN`. Geeft ieder inkomend antwoord een handtekeningfout, controleer dan of de token onder **Beheerder → Sms** overeenkomt met de token in je Twilio Console.
 
 ---
 
-## Testing SMS
+## Sms testen
 
-You can test your connection directly from the Admin Panel:
+Je kunt de verbinding rechtstreeks vanuit het beheerpaneel testen:
 
-1. Log in to the application as an `ADMIN` user.
-2. Navigate to `/admin` and select the **SMS** tab.
-3. Click **Send Test SMS**.
-4. Type your verified phone number (in E.164 format) and click Send.
-5. Verify that the text message arrives.
+1. Log in op de applicatie met een gebruiker met de rol `ADMIN`.
+2. Open `/admin` en kies het tabblad **Sms**.
+3. Klik op **Test-sms versturen**.
+4. Voer je geverifieerde telefoonnummer in E.164-notatie in en verstuur de test.
+5. Controleer of het bericht aankomt.
 
-_Note: If using a trial account, you can only send test messages to verified caller IDs (see below)._
+_Let op: met een proefaccount kun je alleen testberichten sturen naar geverifieerde telefoonnummers (zie hieronder)._
 
 ---
 
-## Trial Account Limitations
+## Beperkingen van een proefaccount
 
-Twilio trial accounts have two main restrictions:
+Twilio-proefaccounts hebben twee belangrijke beperkingen.
 
-### 1. Send Only to Verified Numbers
+### 1. Alleen versturen naar geverifieerde nummers
 
-You can only send SMS messages to phone numbers that you have explicitly verified in your Twilio Console.
+Je kunt alleen sms-berichten versturen naar telefoonnummers die je expliciet in de Twilio Console hebt geverifieerd.
 
-- To verify a number, go to **Phone Numbers** > **Verified Caller IDs** > [Add a Verified Caller ID](https://console.twilio.com/us1/account/verified-caller-ids/add).
-- Enter the phone number and input the code Twilio sends to verify it.
+- Ga voor het verifiëren van een nummer naar **Phone Numbers → Verified Caller IDs → [Add a Verified Caller ID](https://console.twilio.com/us1/account/verified-caller-ids/add)**.
+- Voer het telefoonnummer in en vul de verificatiecode in die Twilio verstuurt.
 
-### 2. Trial Account Watermark
+### 2. Vermelding van het proefaccount
 
-All SMS messages sent from a trial account will begin with:
+Alle sms-berichten die vanaf een proefaccount worden verstuurd, beginnen met:
 `Sent from your Twilio trial account - `
 
-### Upgrading your Account
+### Je account upgraden
 
-To remove both restrictions, click **Upgrade Project** at the top of the Twilio Console and add a credit card. Your remaining trial credit will carry over.
-
----
-
-## Costs
-
-Twilio bills on a per-message usage model.
-
-- **US Phone Number Rent:** ~$1.15 per month.
-- **Outbound SMS (US):** ~$0.0079 per message.
-- **Outbound SMS (International):** Varies by country.
-
-For an event with 30 guests receiving 2 text alerts, the estimated SMS cost is under $0.50.
-For the latest pricing, see the [Twilio SMS Pricing Page](https://www.twilio.com/en-us/sms/pricing/us).
+Klik bovenaan de Twilio Console op **Upgrade Project** en voeg een creditcard toe om beide beperkingen op te heffen. Je resterende proeftegoed blijft behouden.
 
 ---
 
-## Disabling SMS
+## Kosten
 
-To return to email-only mode, clear the three Twilio variables in your `.env` file:
+Twilio rekent per verstuurd bericht.
+
+- **Huur van een Amerikaans telefoonnummer:** ongeveer $ 1,15 per maand.
+- **Uitgaande sms in de VS:** ongeveer $ 0,0079 per bericht.
+- **Internationale sms:** de prijs verschilt per land.
+
+Voor een evenement met 30 gasten die elk twee sms-meldingen ontvangen, zijn de geschatte kosten minder dan $ 0,50.
+Bekijk voor de actuele tarieven de [Twilio-prijspagina voor sms](https://www.twilio.com/en-us/sms/pricing/us).
+
+---
+
+## Sms uitschakelen
+
+Wil je terug naar alleen e-mail? Maak de drie Twilio-variabelen in je bestand `.env` leeg:
 
 ```env
 TWILIO_ACCOUNT_SID=""
@@ -199,7 +199,7 @@ TWILIO_AUTH_TOKEN=""
 TWILIO_PHONE_NUMBER=""
 ```
 
-Restart your container:
+Start de app-container opnieuw:
 
 ```bash
 docker compose restart app
@@ -207,21 +207,21 @@ docker compose restart app
 
 ---
 
-## Troubleshooting
+## Problemen oplossen
 
-### "Authentication Error" / Code 20003
+### ‘Authentication Error’ / code 20003
 
-Your `TWILIO_ACCOUNT_SID` or `TWILIO_AUTH_TOKEN` is incorrect. Recopy both values carefully from your Twilio Console.
+Je `TWILIO_ACCOUNT_SID` of `TWILIO_AUTH_TOKEN` is onjuist. Kopieer beide waarden opnieuw vanuit de Twilio Console.
 
-### "Invalid From Phone Number" / Code 21606
+### ‘Invalid From Phone Number’ / code 21606
 
-The phone number set in `TWILIO_PHONE_NUMBER` is not formatted correctly, or is not owned by your Twilio account. Make sure it uses E.164 format and appears in your Active Numbers list.
+Het nummer in `TWILIO_PHONE_NUMBER` heeft een onjuist formaat of is niet van jouw Twilio-account. Gebruik E.164-notatie en controleer of het nummer in de lijst **Active Numbers** staat.
 
-### "Unverified Number" / Code 21608
+### ‘Unverified Number’ / code 21608
 
-You are trying to send a text to a guest's number on a trial account. You must verify their number in the Verified Caller IDs console first, or upgrade to a paid account.
+Je probeert met een proefaccount een sms naar een niet-geverifieerd nummer te sturen. Verifieer het nummer eerst via **Verified Caller IDs** of stap over op een betaald account.
 
-### Messages are not arriving
+### Berichten komen niet aan
 
-- Check the Twilio Console **Monitor** > **Logs** > **Messaging** to check for delivery errors.
-- Confirm that the recipient's phone number contains a country code in their Profile settings.
+- Open in de Twilio Console **Monitor → Logs → Messaging** en controleer op bezorgfouten.
+- Controleer of het telefoonnummer van de ontvanger in het profiel inclusief landcode is opgeslagen.

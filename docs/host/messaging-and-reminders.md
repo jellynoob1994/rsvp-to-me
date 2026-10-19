@@ -1,93 +1,87 @@
 ---
-title: Messaging Guests & Reminders
-description: Update blasts, automated reminders, and how notifications work.
-category: Communication & Engagement
+title: Berichten en herinneringen
+description: Groepsberichten met updates, automatische herinneringen en de werking van meldingen.
+category: Communicatie en betrokkenheid
 audience: host
 order: 80
 ---
 
-# Messaging Guests & Reminders
+# Berichten en herinneringen
 
-Keep guests informed without leaving the app — send your own updates and let RSVP to Me handle the reminders.
-
----
-
-## Invitation Links
-
-The **View event details** link in a personalized invitation keeps the guest’s RSVP context, so they can open the event and respond using their invitation. Newly sent and resent invitations include this context; previously delivered emails are unchanged.
+Houd gasten op de hoogte zonder de app te verlaten. Verstuur zelf updates en laat RSVP to Me de herinneringen verzorgen.
 
 ---
 
-## Update Blasts
+## Uitnodigingslinks
 
-Send a message to your guests at any time from the event's host controls:
-
-- **Recipients:** filter by **Going**, **Maybe**, or both.
-- **Delivery channels:** send by **Email**, **SMS**, or both (only the channels enabled on your site appear).
-- **Log:** every blast is recorded in the event's [activity log](#activity-log).
-
-When the site administrator enables bot protection, sending a blast, publishing an event update, or
-sending a test email requires an interaction-only security check. This also applies to hosts and
-co-hosts so a compromised or abusive organizer account cannot be used to spam guests.
+De link **Evenementgegevens bekijken** in een persoonlijke uitnodiging behoudt de aanmeldcontext van de gast. Daardoor kan de gast het evenement openen en reageren met de uitnodiging. Nieuwe uitnodigingen en opnieuw verstuurde uitnodigingen bevatten deze context; eerder bezorgde e-mails worden niet gewijzigd.
 
 ---
 
-## New-RSVP Alerts
+## Groepsberichten met updates
 
-Get notified the moment someone responds. When a guest RSVPs to your event, you — and any co-hosts — receive a **"New RSVP" alert** with the guest's name, their status (Going / Maybe / Can't Go), any plus-ones and note, and your event's running Going / Maybe / Can't-Go totals.
+Je kunt op elk moment via de organisatorbediening van het evenement een bericht naar gasten sturen:
 
-Control these under **Settings → RSVP Options → Notification Settings**:
+- **Ontvangers:** filter op **Aanwezig**, **Misschien** of beide.
+- **Verzendkanalen:** verstuur via **E-mail**, **Sms** of beide. Alleen kanalen die op je site zijn ingeschakeld, worden getoond.
+- **Logboek:** elk groepsbericht wordt vastgelegd in het [activiteitenlogboek](#activiteitenlogboek) van het evenement.
 
-- **Email me when a guest RSVPs** — on by default.
-- **Text me when a guest RSVPs** — off by default, and shown only when texting is enabled on your site.
-
-These alerts are for hosts and co-hosts only; they're separate from the confirmation your guest receives, and they keep working even if your site's guest email notifications are turned off.
-
----
-
-## Automated Reminders
-
-RSVP to Me automatically reminds guests as the event approaches. Each reminder can be toggled on or off in the event's Settings:
-
-- **Email reminders:** one week before, one day before, and a custom number of hours before.
-- **SMS reminders:** one week before, one day before, and your chosen hours before (requires texting to be enabled).
-- **Unresponded nudge:** a few days before the event, a gentle reminder to invited guests who still haven't responded.
-
-A guest's own notification preferences always take precedence — if a guest has turned off SMS, they won't get texts even when an SMS reminder is enabled.
+Wanneer de beheerder botbescherming inschakelt, is een beveiligingscontrole vereist bij het versturen van een groepsbericht, het publiceren van een evenementupdate of het versturen van een testmail. Dit geldt ook voor organisatoren en mede-organisatoren, zodat een gehackt of misbruikt organisatoraccount niet kan worden gebruikt om gasten te spammen.
 
 ---
 
-## Preview Your Event's Emails
+## Meldingen bij nieuwe aanmeldingen
 
-Every email your guests receive — the invite, RSVP confirmation, approval, and update/reminder blasts — is styled to match your event's **theme**. Change your theme's colors, base vibe, or cover image, and your emails automatically follow; there's nothing extra to set up.
+Ontvang een melding zodra iemand reageert. Wanneer een gast zich aanmeldt voor je evenement, ontvangen jij en eventuele mede-organisatoren een melding **‘Nieuwe aanmelding’** met de naam van de gast, diens status (Aanwezig / Misschien / Afwezig), eventuele extra gasten en notitie, plus de actuele totalen voor Aanwezig, Misschien en Afwezig.
 
-To see exactly what guests get, open **Settings → 💌 Emails**:
+Stel deze meldingen in via **Instellingen → Aanmeldopties → Meldingsinstellingen**:
 
-- Pick an email from the dropdown to see a live preview rendered with **your event's real details and current theme**.
-- Click **Send me a test** to receive that email at your own address, so you can check how it looks in your actual inbox before guests do.
+- **Stuur mij een e-mail wanneer een gast zich aanmeldt** — standaard ingeschakeld.
+- **Stuur mij een sms wanneer een gast zich aanmeldt** — standaard uitgeschakeld en alleen zichtbaar als sms op je site is ingeschakeld.
 
-The wording of these emails is managed site-wide by your administrator, so the Emails panel is preview-only. If you'd like different copy, ask your admin. (The Emails panel appears only when email is enabled on your site.)
-
----
-
-## When Messaging Is Turned Off
-
-If your site administrator has disabled both email and SMS, the messaging panel is hidden and the app runs in **pure RSVP-collection mode**: guests fill out forms and you see the guest list, but no messages are sent.
+Deze meldingen zijn alleen bedoeld voor organisatoren en mede-organisatoren. Ze staan los van de bevestiging die je gast ontvangt en blijven werken als e-mailmeldingen voor gasten op je site zijn uitgeschakeld.
 
 ---
 
-## Activity Log
+## Automatische herinneringen
 
-The **activity feed** is a timeline on your event page. It records:
+RSVP to Me herinnert gasten automatisch wanneer het evenement dichterbij komt. Je kunt elke herinnering afzonderlijk in- of uitschakelen in de evenementinstellingen:
 
-- New RSVPs and status changes
-- New comments and replies
-- Poll activity (votes, new options, locking)
-- Potluck claims and releases
-- Invitations and update blasts you've sent
+- **E-mailherinneringen:** één week van tevoren, één dag van tevoren en een zelfgekozen aantal uren van tevoren.
+- **Sms-herinneringen:** één week van tevoren, één dag van tevoren en het gekozen aantal uren van tevoren. Sms moet hiervoor zijn ingeschakeld.
+- **Herinnering voor mensen die nog niet hebben gereageerd:** enkele dagen voor het evenement krijgen uitgenodigde gasten die nog niet hebben gereageerd een vriendelijke herinnering.
 
-Guest-facing RSVP identity entries follow **Settings → RSVP Options → guest-list visibility**:
-everyone can see them for a public guest list, only authenticated event guests or valid personal
-invite-link holders can see them for **Going guests only**, and only hosts/co-hosts/admins can see
-them for **Host only**. The server removes restricted entries—including guest names and RSVP note
-text—before sending the page. Check-in, check-in undo, and walk-in activity is always organizer-only.
+De eigen meldingsvoorkeuren van een gast hebben altijd voorrang. Heeft een gast sms uitgeschakeld, dan ontvangt diegene geen sms, ook als een sms-herinnering is ingeschakeld.
+
+---
+
+## Voorbeeld van de e-mails voor je evenement
+
+Alle e-mails die gasten ontvangen — uitnodigingen, aanmeldbevestigingen, goedkeuringen en groepsberichten voor updates of herinneringen — worden opgemaakt in het **thema** van je evenement. Verander de kleuren, de basisstijl of de omslagafbeelding van je thema en de e-mails passen zich automatisch aan. Je hoeft niets extra’s in te stellen.
+
+Wil je zien wat gasten precies ontvangen? Open **Instellingen → 💌 E-mails**:
+
+- Kies een e-mail in de keuzelijst om een livevoorbeeld te zien met **de echte gegevens en het huidige thema van je evenement**.
+- Klik op **Stuur mij een testmail** om de e-mail naar je eigen adres te sturen. Zo kun je in je eigen inbox controleren hoe die eruitziet voordat gasten hem ontvangen.
+
+De beheerder beheert de tekst van deze e-mails voor de hele site. In het onderdeel E-mails kun je ze alleen bekijken. Vraag je beheerder om de tekst te wijzigen als je andere formuleringen wilt. (Het onderdeel E-mails wordt alleen getoond wanneer e-mail op je site is ingeschakeld.)
+
+---
+
+## Wanneer berichten zijn uitgeschakeld
+
+Als de beheerder zowel e-mail als sms heeft uitgeschakeld, wordt het berichtenpaneel verborgen en werkt de app in **alleen-aanmeldmodus**: gasten vullen formulieren in en jij bekijkt de gastenlijst, maar er worden geen berichten verstuurd.
+
+---
+
+## Activiteitenlogboek
+
+Het **activiteitenoverzicht** is een tijdlijn op je evenementpagina. Het registreert:
+
+- Nieuwe aanmeldingen en statuswijzigingen
+- Nieuwe reacties en antwoorden
+- Activiteit rond peilingen (stemmen, nieuwe opties en vergrendelen)
+- Toezeggingen en vrijgegeven items op de meeneemlijst
+- Uitnodigingen en verstuurde groepsberichten
+
+Activiteiten die de identiteit van gasten bij een aanmelding tonen, volgen **Instellingen → Aanmeldopties → zichtbaarheid van de gastenlijst**. Bij een openbare gastenlijst kan iedereen ze zien; bij **Alleen aanwezige gasten** kunnen alleen ingelogde gasten van het evenement en mensen met een geldige persoonlijke uitnodigingslink ze zien; bij **Alleen organisatoren** zijn ze uitsluitend zichtbaar voor organisatoren, mede-organisatoren en beheerders. De server verwijdert afgeschermde activiteiten — inclusief gastnamen en notities bij aanmeldingen — voordat de pagina wordt verstuurd. Activiteit rond inchecken, het ongedaan maken van een check-in en gasten ter plaatse toevoegen, blijft altijd alleen zichtbaar voor organisatoren.

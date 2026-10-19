@@ -1,41 +1,41 @@
 ---
-title: Email Setup
-description: SMTP and Cloudflare email provider configuration.
-category: Configuration
+title: E-mail instellen
+description: Configuratie van e-mailproviders via SMTP en Cloudflare.
+category: Configuratie
 audience: admin
 order: 30
 ---
 
-# Email Setup Guide
+# Handleiding voor e-mailinstellingen
 
-RSVP to Me sends email notifications for passwordless logins (magic links), guest invitations, RSVP confirmations, event updates, and automated reminders. This guide explains how to configure each supported email provider.
-
----
-
-## Table of Contents
-
-1. [How Email Works in the App](#how-email-works-in-the-app)
-2. [What Happens Without Email Configured](#what-happens-without-email-configured)
-3. [Choosing a Provider](#choosing-a-provider)
-4. [Option A: SMTP](#option-a-smtp)
-   - [Gmail Setup](#gmail-setup)
-   - [Outlook / Hotmail Setup](#outlook--hotmail-setup)
-   - [Fastmail Setup](#fastmail-setup)
-   - [Mailgun Setup](#mailgun-setup)
-   - [Amazon SES Setup](#amazon-ses-setup)
-5. [Option B: Cloudflare Workers (Full Setup)](#option-b-cloudflare-workers-full-setup)
-6. [Option C: Cloudflare REST API (Outbound Only)](#option-c-cloudflare-rest-api-outbound-only)
-7. [Testing Your Email Configuration](#testing-your-email-configuration)
-8. [Themed Email Templates](#themed-email-templates)
-9. [Editing Template Copy & Content Blocks](#editing-template-copy--content-blocks)
-10. [Troubleshooting](#troubleshooting)
-11. [SPF, DKIM, and DMARC Explained](#spf-dkim-and-dmarc-explained)
+RSVP to Me verstuurt e-mailmeldingen voor inloggen zonder wachtwoord (eenmalige inloglinks), uitnodigingen, aanmeldbevestigingen, evenementupdates en automatische herinneringen. Deze handleiding legt uit hoe je iedere ondersteunde e-mailprovider configureert.
 
 ---
 
-## How Email Works in the App
+## Inhoudsopgave
 
-Email dispatches are triggered by the following application events:
+1. [How Email Works in the App](#hoe-e-mail-in-de-app-werkt)
+2. [What Happens Without Email Configured](#wat-gebeurt-er-als-e-mail-niet-is-ingesteld)
+3. [Choosing a Provider](#een-provider-kiezen)
+4. [Option A: SMTP](#optie-a-smtp)
+   - [Gmail Setup](#gmail-instellen)
+   - [Outlook / Hotmail Setup](#outlook--hotmail-instellen)
+   - [Fastmail Setup](#fastmail-instellen)
+   - [Mailgun Setup](#mailgun-instellen)
+   - [Amazon SES Setup](#amazon-ses-instellen)
+5. [Option B: Cloudflare Workers (Full Setup)](#optie-b-cloudflare-workers-volledige-configuratie)
+6. [Option C: Cloudflare REST API (Outbound Only)](#optie-c-cloudflare-rest-api-alleen-uitgaand)
+7. [Testing Your Email Configuration](#je-e-mailconfiguratie-testen)
+8. [Themed Email Templates](#e-mails-met-thema)
+9. [Editing Template Copy & Content Blocks](#sjabloontekst-en-inhoudsblokken-bewerken)
+10. [Troubleshooting](#problemen-oplossen)
+11. [SPF, DKIM, and DMARC Explained](#uitleg-over-spf-dkim-en-dmarc)
+
+---
+
+## Hoe e-mail in de app werkt
+
+E-mails worden verstuurd wanneer de volgende gebeurtenissen plaatsvinden:
 
 | Trigger                                            | Recipients                                                     |
 | -------------------------------------------------- | -------------------------------------------------------------- |
@@ -49,47 +49,47 @@ Email dispatches are triggered by the following application events:
 | Nudge for unresponded guests                       | Invited guests who have not responded yet                      |
 | Profile email change verification                  | The user's new email address                                   |
 
-_Note on Reminders:_ The in-process cron scheduler checks every 15 minutes to trigger due reminders. Each reminder type is sent exactly once per user per event.
+_Opmerking over herinneringen:_ de ingebouwde cron-planner controleert elke 15 minuten welke herinneringen verstuurd moeten worden. Elk type herinnering wordt per gebruiker en evenement precies één keer verstuurd.
 
 _Note on Host RSVP Alerts:_ When a guest RSVPs, the host and every co-host receive a **"New RSVP" alert** email summarizing the response (guest name, status, plus-ones, note) plus the current Going/Maybe/Can't-Go tallies. This is controlled per event by the **Email me when a guest RSVPs** toggle under **Event Settings → RSVP Options → Notification Settings** — new events default it **on** (a matching **Text me when a guest RSVPs** toggle defaults **off** and appears only when SMS is enabled, backed by the `Event.hostAlertEmail` / `Event.hostAlertSms` columns). Host alerts are **not** affected by the site-wide guest-email channel toggle — an operator who turns off guest email notifications will still receive their own new-RSVP alerts (the SMS alert does respect the site-wide SMS toggle).
 
 Personalized guest invitations keep the recipient’s RSVP context in the **View event details** link, just like the response buttons. This applies to newly sent and resent invitations; previously delivered emails are unchanged.
 
-_Note on Themed Templates:_ Every event email (invite, RSVP confirmation, approval, update/reminder) is styled from that event's theme — see [Themed Email Templates](#themed-email-templates) below.
+_Note on Themed Templates:_ Every event email (invite, RSVP confirmation, approval, update/reminder) is styled from that event's theme — see [Themed Email Templates](#e-mails-met-thema) below.
 
 ---
 
-## What Happens Without Email Configured
+## Wat gebeurt er als e-mail niet is ingesteld
 
-If no email settings are configured in `.env` or the Admin Panel, the application falls back to **console logging** instead of sending.
+Als er geen e-mailinstellingen in `.env` of het beheerpaneel zijn ingevuld, schrijft de applicatie meldingen naar de **console** in plaats van e-mails te versturen.
 
-**In development** (`NODE_ENV` not `production`), the full message — recipient, subject, and body, including magic links — is written to standard output so you can grab a sign-in link locally. Sign-in requests also print a dedicated `[auth:magic-link-fallback]` line in development.
+**In de ontwikkelomgeving** (wanneer `NODE_ENV` niet `production` is) wordt het volledige bericht — ontvanger, onderwerp en inhoud, inclusief inloglinks — naar de standaarduitvoer geschreven. Inlogverzoeken schrijven ook een aparte regel met `[auth:magic-link-fallback]`.
 
-For a container-based test setup, read the **app container logs**. For example, if your test app uses the source-build Compose file:
+Bij een testomgeving in containers bekijk je de logboeken van de **app-container**. Als je testapp bijvoorbeeld het Compose-bestand gebruikt dat vanuit de broncode bouwt:
 
 ```bash
 docker compose -f docker-compose.yml logs --since 10m app
 ```
 
-Use the same Compose file selection as the running test stack, then look for `Magic link for` and the test account's email address. The [sample-data guide](sample-data.md) describes `host@test.com` and the populated demo events.
+Gebruik dezelfde Compose-bestanden als de draaiende testomgeving en zoek naar `Magic link for` en het e-mailadres van het testaccount. De [handleiding voor voorbeeldgegevens](sample-data.md) beschrijft `host@test.com` en de demo-evenementen.
 
-If you use the optional [native WSL development workflow](local-development.md), the app runs outside Docker: read the terminal running `npm run dev` instead. PostgreSQL and Redis logs do not contain application sign-in links.
+Gebruik je de optionele [lokale ontwikkelwerkwijze via WSL](local-development.md), dan draait de app buiten Docker. Lees dan de terminal waarin `npm run dev` wordt uitgevoerd. De logboeken van PostgreSQL en Redis bevatten geen inloglinks.
 
-**In production**, the fallback deliberately does **not** write recipients, message bodies, or magic-link/RSVP tokens to the logs — those are live credentials and must not sit in log storage. Instead it logs only a generic warning that no transport is configured:
+**In productie** schrijft de terugvaloptie bewust **geen ontvangers, berichtinhoud of inlog-/aanmeldtokens** naar de logboeken. Deze toegangsmiddelen horen niet thuis in logopslag. Er wordt alleen een algemene waarschuwing vastgelegd dat er geen transport is ingesteld:
 
 ```
 [email:dev] No email transport configured — message not sent. Configure SMTP or a Cloudflare provider.
 ```
 
-_Note:_ The console fallback is for local development only. A production deployment **must** configure a real email provider (SMTP or Cloudflare) — otherwise magic-link sign-in and all notifications silently fail to send.
+_Opmerking:_ de console-terugval is alleen bedoeld voor lokale ontwikkeling. Een productieomgeving **moet** een echte e-mailprovider (SMTP of Cloudflare) configureren. Anders worden inloglinks en meldingen niet verstuurd.
 
 The published image and the repository's Dockerfile both run in production mode. `SEED_TEST_DATA=true` loads sample content; it does not enable development logging or make production magic links appear in container logs.
 
 ---
 
-## Choosing a Provider
+## Een provider kiezen
 
-We support three email delivery channels. Select the option that best fits your hosting setup:
+We ondersteunen drie manieren om e-mail te versturen. Kies de optie die het best bij je hosting past:
 
 | Provider                | Best for                                                                                        | Inbound replies       | Setup Complexity |
 | ----------------------- | ----------------------------------------------------------------------------------------------- | --------------------- | ---------------- |
@@ -99,7 +99,7 @@ We support three email delivery channels. Select the option that best fits your 
 
 ---
 
-## Option A: SMTP
+## Optie A: SMTP
 
 SMTP is the simplest option. Add these variables to your `.env`:
 
@@ -114,9 +114,9 @@ EMAIL_FROM="RSVP to Me <username@domain.com>"
 
 ---
 
-### Gmail Setup
+### Gmail instellen
 
-Gmail requires using an **App Password** instead of your main Google password.
+Voor Gmail moet je een **app-wachtwoord** gebruiken in plaats van je gewone Google-wachtwoord.
 
 1. **Enable 2-Step Verification:**
    - Go to [Google Account Security](https://myaccount.google.com/security).
@@ -138,7 +138,7 @@ Gmail requires using an **App Password** instead of your main Google password.
 
 ---
 
-### Outlook / Hotmail Setup
+### Outlook / Hotmail instellen
 
 1. **Create an App Password (if 2FA is active):**
    - Go to [Microsoft Account Security](https://account.microsoft.com/security) and click **Advanced security options**.
@@ -155,7 +155,7 @@ Gmail requires using an **App Password** instead of your main Google password.
 
 ---
 
-### Fastmail Setup
+### Fastmail instellen
 
 1. **Create an App Password:**
    - Go to Fastmail **Settings** > **Developer keys** > [New App Password](https://www.fastmail.com/settings/security/devicekeys/new).
@@ -173,7 +173,7 @@ Gmail requires using an **App Password** instead of your main Google password.
 
 ---
 
-### Mailgun Setup
+### Mailgun instellen
 
 1. **Add and Verify your Domain:**
    - Sign up at [Mailgun](https://www.mailgun.com).
@@ -194,7 +194,7 @@ Gmail requires using an **App Password** instead of your main Google password.
 
 ---
 
-### Amazon SES Setup
+### Amazon SES instellen
 
 1. **Verify your Identity:**
    - Open the AWS Console and go to **Amazon SES**.
@@ -215,18 +215,18 @@ Gmail requires using an **App Password** instead of your main Google password.
 
 ---
 
-## Option B: Cloudflare Workers (Full Setup)
+## Optie B: Cloudflare Workers (volledige configuratie)
 
 This option deploys a small serverless script to your Cloudflare account. It handles outbound email delivery and forwards inbound guest replies back to your personal email address.
 
-### Prerequisites
+### Vereisten
 
 - A domain managed by Cloudflare DNS.
 - Cloudflare Email Routing enabled on that domain (navigate to **Email** > **Email Routing** > **Get Started** to insert the default MX records automatically).
 
 ---
 
-### 1. Configure SPF and DKIM
+### 1. SPF en DKIM instellen
 
 To authorize Cloudflare to send emails on behalf of your domain:
 
@@ -236,7 +236,7 @@ To authorize Cloudflare to send emails on behalf of your domain:
 
 ---
 
-### 2. Deploy the Worker
+### 2. De Worker uitrollen
 
 We use Wrangler CLI to compile and push the worker:
 
@@ -257,7 +257,7 @@ We use Wrangler CLI to compile and push the worker:
 
 ---
 
-### 3. Bind Secrets & Variables in Cloudflare
+### 3. Geheimen en variabelen instellen in Cloudflare
 
 1. Generate a strong API secret token:
    ```bash
@@ -275,7 +275,7 @@ We use Wrangler CLI to compile and push the worker:
 
 ---
 
-### 4. Create the Inbound Email Route
+### 4. De route voor inkomende e-mail aanmaken
 
 1. Go back to your domain's **Email Routing** > **Routes** tab.
 2. Under **Destination addresses**, make sure your forwarding email address is verified.
@@ -287,7 +287,7 @@ We use Wrangler CLI to compile and push the worker:
 
 ---
 
-### 5. Configure your `.env`
+### 5. Je bestand `.env` configureren
 
 Enable the Worker integration in your app:
 
@@ -302,7 +302,7 @@ Leave all `SMTP_*` fields blank.
 
 ---
 
-## Option C: Cloudflare REST API (Outbound Only)
+## Optie C: Cloudflare REST API (alleen uitgaand)
 
 If you do not need inbound guest replies forwarded to you, you can call Cloudflare's Email Routing API directly without setting up Wrangler or deploying a Worker.
 
@@ -323,12 +323,12 @@ If you do not need inbound guest replies forwarded to you, you can call Cloudfla
 
 ---
 
-## Testing Your Email Configuration
+## Je e-mailconfiguratie testen
 
-The Admin Panel's **Email** tab is split into two collapsible sections:
+Het tabblad **E-mail** in het beheerpaneel is verdeeld in twee uitklapbare onderdelen:
 
 - **Email Setup** — the guest-notifications toggle, provider selector, provider fields, and a **Test Connection** button. The connection test now sends the fully styled test email (not a plain "it works" line) to your admin address, so you can confirm both delivery _and_ rendering.
-- **Email Templates** — see [Editing Template Copy & Content Blocks](#editing-template-copy--content-blocks).
+- **Email Templates** — see [Editing Template Copy & Content Blocks](#sjabloontekst-en-inhoudsblokken-bewerken).
 
 To verify delivery:
 
@@ -345,7 +345,7 @@ docker compose logs app | grep -i email
 
 ---
 
-## Themed Email Templates
+## E-mails met thema
 
 All event-related emails are rendered from the event's own theme, so an invite for a Halloween-themed party looks like that party and a Soft & Dreamy wedding shower looks like that shower. Emails are built with [React Email](https://react.email/) into table-based HTML that renders reliably across Gmail, Apple Mail, and Outlook.
 
@@ -362,7 +362,7 @@ All event-related emails are rendered from the event's own theme, so an invite f
 
 ---
 
-## Editing Template Copy & Content Blocks
+## Sjabloontekst en inhoudsblokken bewerken
 
 Under **Admin Panel → Email → Email Templates**, admins can customize each email without touching code. Pick a template from the dropdown to edit it; a **live preview** renders beside the editor (with a Dark/Soft/Bold sample switcher for event emails), and **Send test to me** delivers a sample to your admin address.
 
@@ -380,40 +380,40 @@ Template overrides are stored per-template in system configuration and apply sit
 
 ---
 
-## Troubleshooting
+## Problemen oplossen
 
-### "Connection refused" or "Network Error"
+### ‘Connection refused’ of ‘Network Error’
 
 - Ensure that `SMTP_HOST` is spelled correctly.
 - Check that `SMTP_PORT` matches your provider's requirements.
 - Some home internet service providers block port `25` or `587` outbound. Try configuring port `465` with `SMTP_SECURE="true"`.
 
-### "Authentication failed" / "535 Invalid credentials"
+### ‘Authentication failed’ / ‘535 Invalid credentials’
 
 - **Gmail:** Double-check that you created a 16-character App Password, and that you are not entering your regular Google login password.
 - **Outlook:** Ensure that App Passwords are created if 2FA is active on your Microsoft account.
 - Check that `SMTP_USER` is your full email address.
 
-### Emails are going straight to spam
+### E-mails komen direct in de spammap terecht
 
 This indicates that the receiving mail server is rejecting your emails due to authentication failure.
 
 - Ensure your `EMAIL_FROM` matches the domain you are authorized to send from.
 - Check that your DNS registrar contains active SPF, DKIM, and DMARC records (see below).
 
-### The Cloudflare Worker returns 401 Unauthorized
+### De Cloudflare Worker geeft 401 Unauthorized terug
 
-The `CLOUDFLARE_WORKER_API_SECRET` defined in your `.env` file does not match the secret bound to your Cloudflare Worker. Run `wrangler secret put API_SECRET` again to overwrite it with the matching value.
+De waarde van `CLOUDFLARE_WORKER_API_SECRET` in `.env` komt niet overeen met het geheim dat aan je Cloudflare Worker is gekoppeld. Voer `wrangler secret put API_SECRET` opnieuw uit om de juiste waarde in te stellen.
 
 ---
 
-## SPF, DKIM, and DMARC Explained
+## Uitleg over SPF, DKIM en DMARC
 
-These three DNS records verify to receiving email servers that email sent from your domain is authorized.
+Met deze drie DNS-records controleer je bij ontvangende mailservers of e-mail vanaf jouw domein is geautoriseerd.
 
 ### SPF (Sender Policy Framework)
 
-An SPF record lists the mail servers that are allowed to send emails on behalf of your domain. It is added as a **TXT** record at your domain registrar.
+Een SPF-record vermeldt welke mailservers namens jouw domein e-mail mogen versturen. Voeg dit bij je domeinprovider toe als een **TXT-record**.
 
 - _For Gmail SMTP:_
   ```
@@ -440,6 +440,6 @@ v=DMARC1; p=quarantine; pct=100; rua=mailto:dmarc-reports@yourdomain.com
 - `p=quarantine` tells servers to put failing emails into the spam folder.
 - `p=none` is a safe testing option that just monitors without filtering.
 
-### Where to Add Records
+### Waar je DNS-records toevoegt
 
-Log in to the dashboard of the company where you purchased your domain (e.g. Cloudflare, GoDaddy, Namecheap, Name.com) and navigate to **DNS Settings** > **DNS Records** to add these TXT and CNAME values.
+Log in op het dashboard van je domeinprovider (bijvoorbeeld Cloudflare, GoDaddy, Namecheap of Name.com) en open **DNS Settings → DNS Records** om de TXT- en CNAME-waarden toe te voegen.

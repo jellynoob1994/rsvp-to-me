@@ -14,10 +14,10 @@ export function BlastEmail({
   eventUrl,
 }: BlastEmailProps) {
   return (
-    <EmailLayout theme={theme} preview={`Update from ${hostName} about ${eventTitle}`}>
+    <EmailLayout theme={theme} preview={`Bericht van ${hostName} over ${eventTitle}`}>
       <Hero
         theme={theme}
-        kicker={`Update from ${hostName}`}
+        kicker={`Bericht van ${hostName}`}
         title={eventTitle}
         showCoverImage={toggles.showCoverImage}
       />
@@ -58,7 +58,7 @@ export function BlastEmail({
                   rel="noopener noreferrer"
                   style={{ color: theme.accent, fontSize: "14px" }}
                 >
-                  View event →
+                  Bekijk evenement →
                 </a>
               </p>
             </td>

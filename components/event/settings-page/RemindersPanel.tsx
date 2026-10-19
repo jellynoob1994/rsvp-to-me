@@ -68,7 +68,7 @@ export function RemindersPanel({
           />
           {channelConfig.email && (
             <div style={{ marginBottom: "20px" }}>
-              <Label t={t}>Email reminders</Label>
+              <Label t={t}>E-mailherinneringen</Label>
               <Toggle
                 label="1 week before"
                 value={emailWeekBefore}
@@ -116,7 +116,7 @@ export function RemindersPanel({
                     cursor: "pointer",
                   }}
                 >
-                  <option value={0}>Off</option>
+                  <option value={0}>Uit</option>
                   <option value={1}>1 hour</option>
                   <option value={2}>2 hours</option>
                   <option value={4}>4 hours</option>
@@ -126,7 +126,7 @@ export function RemindersPanel({
           )}
           {channelConfig.sms && (
             <div style={{ marginBottom: "20px" }}>
-              <Label t={t}>SMS reminders</Label>
+              <Label t={t}>Sms-herinneringen</Label>
               <Toggle
                 label="1 week before"
                 value={smsWeekBefore}
@@ -174,7 +174,7 @@ export function RemindersPanel({
                     cursor: "pointer",
                   }}
                 >
-                  <option value={0}>Off</option>
+                  <option value={0}>Uit</option>
                   <option value={1}>1 hour</option>
                   <option value={2}>2 hours</option>
                 </select>

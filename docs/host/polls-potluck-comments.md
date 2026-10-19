@@ -1,42 +1,42 @@
 ---
-title: Polls, Potluck & Comments
-description: Gather input, coordinate what guests bring, and host the conversation.
-category: Communication & Engagement
+title: Peilingen, meeneemlijst en reacties
+description: Verzamel meningen, stem af wat gasten meenemen en houd het gesprek gaande.
+category: Communicatie en betrokkenheid
 audience: host
 order: 90
 ---
 
-# Polls, Potluck & Comments
+# Peilingen, meeneemlijst en reacties
 
-Three ways to make your event interactive. Enable and configure each from the event's **Settings**.
-
----
-
-## Polls
-
-Gather input from guests — vote on a date, the menu, the playlist:
-
-- **Types:** single-choice or multi-choice.
-- **Write-ins:** optionally let guests add their own options.
-- **Anonymity:** show or hide voter names.
-- **Locking:** lock a poll to freeze voting once you've decided.
+Er zijn drie manieren om je evenement interactief te maken. Schakel ze in en stel ze in via de **Instellingen** van het evenement.
 
 ---
 
-## Potluck
+## Peilingen
 
-Coordinate who's bringing what:
+Verzamel meningen van gasten, bijvoorbeeld over een datum, het menu of de afspeellijst:
 
-- **Quantity:** set a required amount for an item (e.g., 3 bottles of wine).
-- **Multi-claim:** several guests can each claim part of an item until the total is met.
-- **Claims:** guests claim or release items right on the event page.
+- **Soorten:** één keuze of meerdere keuzes.
+- **Eigen suggesties:** geef gasten desgewenst de mogelijkheid hun eigen opties toe te voegen.
+- **Anoniem stemmen:** toon of verberg de namen van stemmers.
+- **Vergrendelen:** vergrendel een peiling om het stemmen te sluiten zodra je een beslissing hebt genomen.
 
 ---
 
-## Comments
+## Meeneemlijst
 
-A threaded comment board sits at the bottom of the event page:
+Stem met elkaar af wie wat meeneemt:
 
-- Guests and hosts can post and reply.
-- You can delete any comment or reply.
-- A setting lets you show or hide comment timestamps.
+- **Hoeveelheid:** stel in hoeveel er van een item nodig is, bijvoorbeeld drie flessen wijn.
+- **Meerdere toezeggingen:** meerdere gasten kunnen elk een deel toezeggen totdat de benodigde hoeveelheid is bereikt.
+- **Toezeggen:** gasten kunnen op de evenementpagina aangeven dat ze iets meenemen of hun toezegging intrekken.
+
+---
+
+## Reacties
+
+Onderaan de evenementpagina staat een reactiesectie met gesprekken in draadjes:
+
+- Gasten en organisatoren kunnen berichten plaatsen en erop reageren.
+- Je kunt iedere reactie of ieder antwoord verwijderen.
+- Met een instelling kun je tijdstippen bij reacties tonen of verbergen.

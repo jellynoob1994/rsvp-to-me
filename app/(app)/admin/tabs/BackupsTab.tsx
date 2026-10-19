@@ -5,13 +5,13 @@ import { appCardStyle } from "@/components/ui/AppPrimitives";
 import type { BackupFile } from "./types";
 
 const BACKUP_PRESETS = [
-  { label: "Disabled", value: "disabled" },
-  { label: "Every hour", value: "0 * * * *" },
-  { label: "Every 6 hours", value: "0 */6 * * *" },
-  { label: "Daily at midnight", value: "0 0 * * *" },
-  { label: "Every 3 days", value: "0 0 */3 * *" },
-  { label: "Weekly (Sundays at midnight)", value: "0 0 * * 0" },
-  { label: "Custom", value: "custom" },
+  { label: "Uitgeschakeld", value: "disabled" },
+  { label: "Elk uur", value: "0 * * * *" },
+  { label: "Elke 6 uur", value: "0 */6 * * *" },
+  { label: "Dagelijks om middernacht", value: "0 0 * * *" },
+  { label: "Elke 3 dagen", value: "0 0 */3 * *" },
+  { label: "Wekelijks (zondag om middernacht)", value: "0 0 * * 0" },
+  { label: "Aangepast", value: "custom" },
 ] as const;
 
 export function BackupsTab({
@@ -60,11 +60,10 @@ export function BackupsTab({
               margin: 0,
             }}
           >
-            Backup Configuration
+            Back-upconfiguratie
           </h3>
           <p style={{ color: APP_SHELL.textSecondary, fontSize: "13px", marginTop: "4px" }}>
-            Configure scheduled database backups. Backups are stored in the persistent application
-            volume.
+            Stel geplande databaseback-ups in. Back-ups worden opgeslagen in het permanente applicatievolume.
           </p>
         </div>
 
@@ -83,7 +82,7 @@ export function BackupsTab({
                   color: APP_SHELL.textSecondary,
                 }}
               >
-                BACKUP SCHEDULE
+                BACK-UPSCHEMA
               </label>
               {(() => {
                 const isCustom = !BACKUP_PRESETS.some(
@@ -118,7 +117,7 @@ export function BackupsTab({
                         type="text"
                         value={backupSchedule}
                         onChange={(e) => setBackupSchedule(e.target.value)}
-                        placeholder="e.g. 0 0 * * * (or 'disabled')"
+                        placeholder="bijv. 0 0 * * * (of 'disabled')"
                         required
                         style={{
                           backgroundColor: APP_SHELL.inputBg,
@@ -133,9 +132,9 @@ export function BackupsTab({
                     )}
                     <span style={{ fontSize: "11px", color: APP_SHELL.textMuted }}>
                       {isCustom
-                        ? "Standard 5-field cron syntax (Minute Hour Day-of-Month Month Day-of-Week)."
+                        ? "Standaardsyntaxis voor cron met 5 velden (minuut, uur, dag van de maand, maand en dag van de week)."
                         : backupSchedule === "disabled"
-                          ? "Automated backups are off."
+                          ? "Automatische back-ups zijn uitgeschakeld."
                           : `Cron: ${backupSchedule}`}
                     </span>
                   </>
@@ -151,7 +150,7 @@ export function BackupsTab({
                   color: APP_SHELL.textSecondary,
                 }}
               >
-                BACKUPS TO RETAIN (ROTATION LIMIT)
+                AANTAL TE BEWAREN BACK-UPS (ROTATIELIMIET)
               </label>
               <input
                 type="number"
@@ -171,8 +170,8 @@ export function BackupsTab({
                 }}
               />
               <span style={{ fontSize: "11px", color: APP_SHELL.textMuted }}>
-                Maximum number of backup files to keep. Older backups will be automatically deleted
-                on new backup runs.
+                Het maximale aantal back-upbestanden dat bewaard blijft. Oudere back-ups worden automatisch verwijderd
+                wanneer een nieuwe back-up wordt gemaakt.
               </span>
             </div>
           </div>
@@ -186,8 +185,8 @@ export function BackupsTab({
             }}
           >
             <div style={{ fontSize: "12px", color: APP_SHELL.textSecondary }}>
-              <strong>Last Backup Completed:</strong>{" "}
-              {lastBackupTime ? new Date(lastBackupTime).toLocaleString() : "Never"}
+              <strong>Laatste back-up voltooid:</strong>{" "}
+              {lastBackupTime ? new Date(lastBackupTime).toLocaleString("nl-NL") : "Nooit"}
             </div>
 
             <button
@@ -205,7 +204,7 @@ export function BackupsTab({
                 opacity: isSavingBackupConfig ? 0.6 : 1,
               }}
             >
-              {isSavingBackupConfig ? "Saving..." : "Save Backup Settings"}
+              {isSavingBackupConfig ? "Opslaan…" : "Back-upinstellingen opslaan"}
             </button>
           </div>
         </form>
@@ -230,7 +229,7 @@ export function BackupsTab({
               margin: 0,
             }}
           >
-            Manual Database Backup
+            Handmatige databaseback-up
           </h3>
           <p
             style={{
@@ -240,8 +239,7 @@ export function BackupsTab({
               margin: 0,
             }}
           >
-            Instantly trigger a database snapshot using <code>pg_dump</code>, saved to the backups
-            volume.
+            Maak direct een databasesnapshot met <code>pg_dump</code> en sla deze op in het back-upvolume.
           </p>
         </div>
 
@@ -262,7 +260,7 @@ export function BackupsTab({
             whiteSpace: "nowrap",
           }}
         >
-          {isBackupRunning ? "Backing up..." : "Create Backup Now"}
+          {isBackupRunning ? "Back-up maken…" : "Nu back-up maken"}
         </button>
       </div>
 
@@ -285,10 +283,10 @@ export function BackupsTab({
               margin: 0,
             }}
           >
-            Backup Archives
+            Back-uparchieven
           </h3>
           <p style={{ color: APP_SHELL.textSecondary, fontSize: "13px", marginTop: "4px" }}>
-            List of stored backups on this server.
+            Overzicht van de back-ups die op deze server zijn opgeslagen.
           </p>
         </div>
 
@@ -305,10 +303,10 @@ export function BackupsTab({
                   fontWeight: 700,
                 }}
               >
-                <th style={{ padding: "12px" }}>FILENAME</th>
-                <th style={{ padding: "12px" }}>CREATED AT</th>
-                <th style={{ padding: "12px" }}>FILE SIZE</th>
-                <th style={{ padding: "12px", textAlign: "right" }}>ACTIONS</th>
+                <th style={{ padding: "12px" }}>BESTANDSNAAM</th>
+                <th style={{ padding: "12px" }}>AANGEMAAKT OP</th>
+                <th style={{ padding: "12px" }}>BESTANDSGROOTTE</th>
+                <th style={{ padding: "12px", textAlign: "right" }}>ACTIES</th>
               </tr>
             </thead>
             <tbody>
@@ -322,7 +320,7 @@ export function BackupsTab({
                       color: APP_SHELL.textMuted,
                     }}
                   >
-                    No backup archives found. Create one manually or configure a schedule.
+                    Geen back-uparchieven gevonden. Maak handmatig een back-up of stel een schema in.
                   </td>
                 </tr>
               ) : (
@@ -344,7 +342,7 @@ export function BackupsTab({
                       {b.filename}
                     </td>
                     <td style={{ padding: "14px 12px", color: APP_SHELL.textSecondary }}>
-                      {new Date(b.createdAt).toLocaleString()}
+                      {new Date(b.createdAt).toLocaleString("nl-NL")}
                     </td>
                     <td style={{ padding: "14px 12px", color: APP_SHELL.textSecondary }}>
                       {b.sizeBytes >= 1024 * 1024
@@ -363,7 +361,7 @@ export function BackupsTab({
                             fontSize: "13px",
                           }}
                         >
-                          Download
+                          Downloaden
                         </a>
                         <button
                           onClick={() => handleDeleteBackup(b.filename)}
@@ -377,7 +375,7 @@ export function BackupsTab({
                             padding: 0,
                           }}
                         >
-                          Delete
+                          Verwijderen
                         </button>
                       </div>
                     </td>

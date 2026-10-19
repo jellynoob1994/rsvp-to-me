@@ -130,7 +130,7 @@ export function DangerZonePanel({
           }}
         >
           This action is permanent and cannot be undone. To confirm, please type{" "}
-          <strong style={{ color: t.textPrimary }}>DELETE</strong> in the box below:
+          <strong style={{ color: t.textPrimary }}>DELETE</strong> in het vak hieronder:
         </p>
         <input
           type="text"

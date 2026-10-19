@@ -219,7 +219,7 @@ export default function AdminClient({
         setLastBackupTime(new Date().toISOString());
       }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Failed to create backup.";
+      const msg = err instanceof Error ? err.message : "Back-up maken is mislukt.";
       setFeedback({ type: "error", message: msg });
     } finally {
       setIsBackupRunning(false);
@@ -232,14 +232,14 @@ export default function AdminClient({
     try {
       const res = await deleteBackupAction(filename);
       if (res.success) {
-        setFeedback({ type: "success", message: "Backup deleted successfully." });
+        setFeedback({ type: "success", message: "Back-up verwijderd." });
         const updated = await listBackupsAction();
         setBackups(updated);
       } else {
-        setFeedback({ type: "error", message: "Failed to delete backup." });
+        setFeedback({ type: "error", message: "Back-up verwijderen is mislukt." });
       }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Failed to delete backup.";
+      const msg = err instanceof Error ? err.message : "Back-up verwijderen is mislukt.";
       setFeedback({ type: "error", message: msg });
     }
   };
@@ -251,10 +251,10 @@ export default function AdminClient({
     try {
       const res = await updateBackupConfigAction(backupSchedule, backupKeepCount);
       if (res.success) {
-        setFeedback({ type: "success", message: "Backup configuration updated successfully." });
+        setFeedback({ type: "success", message: "Back-upinstellingen bijgewerkt." });
       }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Failed to update backup configuration.";
+      const msg = err instanceof Error ? err.message : "Bijwerken van back-upinstellingen is mislukt.";
       setFeedback({ type: "error", message: msg });
     } finally {
       setIsSavingBackupConfig(false);
@@ -301,7 +301,7 @@ export default function AdminClient({
         });
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to test connection.";
+      const message = err instanceof Error ? err.message : "Verbindingstest mislukt.";
       setFeedback({ type: "error", message });
     } finally {
       setIsTestingEmail(false);
@@ -344,10 +344,10 @@ export default function AdminClient({
         }));
         setFeedback({
           type: "success",
-          message: "Email delivery configuration saved successfully.",
+          message: "E-mailinstellingen opgeslagen.",
         });
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to save configuration.";
+        const message = err instanceof Error ? err.message : "Opslaan van instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -371,7 +371,7 @@ export default function AdminClient({
       if (res.success) {
         setFeedback({
           type: "success",
-          message: "Test SMS sent successfully! Check the destination device or console logs.",
+          message: "Test-sms verstuurd! Controleer het ontvangende toestel of de consolelogboeken.",
         });
       } else {
         setFeedback({
@@ -380,7 +380,7 @@ export default function AdminClient({
         });
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to test Twilio connection.";
+      const message = err instanceof Error ? err.message : "Twilio-verbindingstest mislukt.";
       setFeedback({ type: "error", message });
     } finally {
       setIsTestingSms(false);
@@ -402,9 +402,9 @@ export default function AdminClient({
           twilio_auth_token: twilioAuthToken.trim(),
           twilio_phone_number: twilioPhoneNumber.trim(),
         }));
-        setFeedback({ type: "success", message: "SMS configuration saved successfully." });
+        setFeedback({ type: "success", message: "Sms-instellingen opgeslagen." });
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to save SMS configuration.";
+        const message = err instanceof Error ? err.message : "Opslaan van sms-instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -439,10 +439,10 @@ export default function AdminClient({
         const res = await updateUserRole(userId, newRole);
         if (res.success) {
           setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u)));
-          setFeedback({ type: "success", message: "User role updated successfully!" });
+          setFeedback({ type: "success", message: "Gebruikersrol bijgewerkt!" });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to update role.";
+        const message = err instanceof Error ? err.message : "Bijwerken van de gebruikersrol is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -483,7 +483,7 @@ export default function AdminClient({
           });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to schedule deletion.";
+        const message = err instanceof Error ? err.message : "Inplannen van verwijdering is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -503,7 +503,7 @@ export default function AdminClient({
           setFeedback({ type: "success", message: `${name}'s account has been restored.` });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to cancel deletion.";
+        const message = err instanceof Error ? err.message : "Annuleren van verwijdering is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -543,7 +543,7 @@ export default function AdminClient({
           });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to delete immediately.";
+        const message = err instanceof Error ? err.message : "Direct verwijderen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -559,7 +559,7 @@ export default function AdminClient({
         role: createUserRole,
       });
       if (res.success) {
-        setFeedback({ type: "success", message: "User created and welcome email sent." });
+        setFeedback({ type: "success", message: "Gebruiker aangemaakt en welkomstmail verstuurd." });
         setCreateUserOpen(false);
         setCreateUserName("");
         setCreateUserEmail("");
@@ -575,7 +575,7 @@ export default function AdminClient({
 
   const handleEventDelete = (eventId: string, title: string) => {
     if (
-      !confirm(`Are you sure you want to moderate/delete the event "${title}"? This is permanent.`)
+      !confirm(`Weet je zeker dat je het evenement "${title}" wilt modereren en verwijderen? Dit kan niet ongedaan worden gemaakt.`)
     ) {
       return;
     }
@@ -585,10 +585,10 @@ export default function AdminClient({
         const res = await deleteEventAdmin(eventId);
         if (res.success) {
           setEvents((prev) => prev.filter((e) => e.id !== eventId));
-          setFeedback({ type: "success", message: "Event moderated and deleted." });
+          setFeedback({ type: "success", message: "Evenement gemodereerd en verwijderd." });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to delete event.";
+        const message = err instanceof Error ? err.message : "Verwijderen van het evenement is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -611,10 +611,10 @@ export default function AdminClient({
           setMaxUses("");
           setExpiresAt("");
           setNote("");
-          setFeedback({ type: "success", message: "Invite code created successfully." });
+          setFeedback({ type: "success", message: "Uitnodigingscode aangemaakt." });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to create code.";
+        const message = err instanceof Error ? err.message : "Aanmaken van de code is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -627,10 +627,10 @@ export default function AdminClient({
         const res = await revokeInviteCode(id);
         if (res.success) {
           setInviteCodes((prev) => prev.filter((c) => c.id !== id));
-          setFeedback({ type: "success", message: "Invite code revoked." });
+          setFeedback({ type: "success", message: "Uitnodigingscode ingetrokken." });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Failed to revoke code.";
+        const message = err instanceof Error ? err.message : "Intrekken van de uitnodigingscode is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -645,14 +645,14 @@ export default function AdminClient({
         await updateSystemConfig("open_registration", nextVal);
         setFeedback({
           type: "success",
-          message: `Open registration toggled to ${nextVal === "true" ? "Active" : "Inactive"}.`,
+          message: `Open registratie is ${nextVal === "true" ? "ingeschakeld" : "uitgeschakeld"}.`,
         });
       } catch (err) {
         setConfig((prev) => ({
           ...prev,
           open_registration: nextVal === "true" ? "false" : "true",
         })); // Revert
-        const message = err instanceof Error ? err.message : "Failed to update configuration.";
+        const message = err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -667,14 +667,14 @@ export default function AdminClient({
         await updateSystemConfig("email_enabled", nextVal);
         setFeedback({
           type: "success",
-          message: `Guest email notifications ${nextVal === "true" ? "enabled" : "disabled"}.`,
+          message: `E-mailmeldingen voor gasten zijn ${nextVal === "true" ? "ingeschakeld" : "uitgeschakeld"}.`,
         });
       } catch (err) {
         setConfig((prev) => ({
           ...prev,
           email_enabled: nextVal === "true" ? "false" : "true",
         }));
-        const message = err instanceof Error ? err.message : "Failed to update configuration.";
+        const message = err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -696,7 +696,7 @@ export default function AdminClient({
           ...prev,
           sms_enabled: nextVal === "true" ? "false" : "true",
         }));
-        const message = err instanceof Error ? err.message : "Failed to update configuration.";
+        const message = err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -721,7 +721,7 @@ export default function AdminClient({
         setThemePresets((prev) =>
           prev.map((p) => (p.id === themePresetForm.id ? { ...p, ...themePresetForm } : p))
         );
-        setFeedback({ type: "success", message: "Preset updated." });
+        setFeedback({ type: "success", message: "Thema bijgewerkt." });
       } else {
         const created = await createThemePreset({
           name: themePresetForm.name,
@@ -736,13 +736,13 @@ export default function AdminClient({
           fontId: themePresetForm.fontId ?? null,
         });
         setThemePresets((prev) => [...prev, created as AdminThemePreset]);
-        setFeedback({ type: "success", message: "Preset created." });
+        setFeedback({ type: "success", message: "Thema aangemaakt." });
       }
       return true;
     } catch (err) {
       setFeedback({
         type: "error",
-        message: err instanceof Error ? err.message : "Failed to save preset.",
+        message: err instanceof Error ? err.message : "Opslaan van het thema is mislukt.",
       });
       return false;
     }
@@ -777,23 +777,23 @@ export default function AdminClient({
       setThemePresets((prev) =>
         prev.map((p) => (p.id === themePresetForm.id ? { ...p, defaultSnapshot: snap } : p))
       );
-      setFeedback({ type: "success", message: "Preset saved and set as new default." });
+      setFeedback({ type: "success", message: "Thema opgeslagen en ingesteld als standaard." });
       setThemePresetForm(null);
     }
     setIsSavingPreset(false);
   };
 
   const handleDeleteThemePreset = async (id: string) => {
-    if (!confirm("Delete this theme preset? Events using it will keep their current colors."))
+    if (!confirm("Dit thema verwijderen? Evenementen die het gebruiken, behouden hun huidige kleuren."))
       return;
     try {
       await deleteThemePreset(id);
       setThemePresets((prev) => prev.filter((p) => p.id !== id));
-      setFeedback({ type: "success", message: "Preset deleted." });
+      setFeedback({ type: "success", message: "Thema verwijderd." });
     } catch (err) {
       setFeedback({
         type: "error",
-        message: err instanceof Error ? err.message : "Failed to delete preset.",
+        message: err instanceof Error ? err.message : "Verwijderen van het thema is mislukt.",
       });
     }
   };
@@ -807,50 +807,50 @@ export default function AdminClient({
     } catch (err) {
       setFeedback({
         type: "error",
-        message: err instanceof Error ? err.message : "Failed to update preset.",
+        message: err instanceof Error ? err.message : "Bijwerken van het thema is mislukt.",
       });
     }
   };
 
   const TAB_META: Record<TabId, { title: string; description: string }> = {
     overview: {
-      title: "📊 Overview",
-      description: "A snapshot of users, events, and RSVPs across your platform.",
+      title: "📊 Overzicht",
+      description: "Overzicht van gebruikers, evenementen en aanmeldingen op je platform.",
     },
     users: {
-      title: "👥 User Management",
+      title: "👥 Gebruikersbeheer",
       description:
-        "View, search, and manage all registered users. Adjust roles and remove accounts.",
+        "Bekijk, zoek en beheer alle geregistreerde gebruikers. Pas rollen aan en verwijder accounts.",
     },
     events: {
-      title: "🎈 Event Moderation",
-      description: "Review and moderate active events. Delete events that violate platform rules.",
+      title: "🎈 Evenementenbeheer",
+      description: "Controleer en modereer actieve evenementen. Verwijder evenementen die de platformregels overtreden.",
     },
     invites: {
-      title: "🔑 Host Settings",
+      title: "🔑 Organisatie-instellingen",
       description:
-        "Control how new hosts access the platform — via invite codes or open registration.",
+        "Bepaal hoe nieuwe organisatoren toegang krijgen: via uitnodigingscodes of open registratie.",
     },
     email: {
-      title: "📧 Email Settings",
-      description: "Choose your email provider and configure delivery settings.",
+      title: "📧 E-mailinstellingen",
+      description: "Kies je e-mailprovider en stel de bezorging in.",
     },
     sms: {
-      title: "💬 SMS Settings",
-      description: "Configure Twilio for SMS notifications and alerts.",
+      title: "💬 Sms-instellingen",
+      description: "Configureer Twilio voor sms-meldingen en waarschuwingen.",
     },
     themes: {
-      title: "🎨 Theme Presets",
+      title: "🎨 Thema-voorinstellingen",
       description:
-        "Manage the preset themes hosts can pick from in the event settings. Inactive presets are hidden from hosts.",
+        "Beheer de thema’s die organisatoren kunnen kiezen bij de evenementinstellingen. Inactieve thema’s zijn niet zichtbaar voor organisatoren.",
     },
     backups: {
-      title: "💾 Database Backups",
-      description: "Schedule automated backups and manage your database snapshot history.",
+      title: "💾 Databaseback-ups",
+      description: "Plan automatische back-ups en beheer de geschiedenis van databasesnapshots.",
     },
     docs: {
-      title: "📚 Documentation",
-      description: "Setup, configuration, and operations guides for self-hosting RSVP to Me.",
+      title: "📚 Documentatie",
+      description: "Handleidingen voor installatie, configuratie en beheer van je eigen RSVP to Me-server.",
     },
   };
 
@@ -885,7 +885,7 @@ export default function AdminClient({
           {/* Hamburger trigger for the mobile drawer — sidebar is hidden below lg */}
           <button
             type="button"
-            aria-label="Open admin navigation"
+            aria-label="Beheernavigatie openen"
             className="lg:hidden"
             onClick={() => setIsDrawerOpen(true)}
             style={{

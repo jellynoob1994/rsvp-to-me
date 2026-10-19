@@ -177,7 +177,7 @@ export default function SignInForm({
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder="you@example.com or +1 555 000 0000"
+                  placeholder="jij@voorbeeld.nl of 06 12345678"
                   style={{ padding: "12px 14px", fontSize: "15px" }}
                 />
               </FormField>

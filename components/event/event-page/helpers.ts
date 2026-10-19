@@ -19,7 +19,7 @@ import {
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 export function formatDate(d: Date, tz: string) {
-  return new Date(d).toLocaleDateString("en-US", {
+  return new Date(d).toLocaleDateString("nl-NL", {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -28,7 +28,7 @@ export function formatDate(d: Date, tz: string) {
   });
 }
 export function formatTime(d: Date, tz: string) {
-  return new Date(d).toLocaleTimeString("en-US", {
+  return new Date(d).toLocaleTimeString("nl-NL", {
     hour: "numeric",
     minute: "2-digit",
     timeZone: tz,
@@ -36,10 +36,10 @@ export function formatTime(d: Date, tz: string) {
 }
 export function timeAgo(d: Date) {
   const s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
-  if (s < 60) return "just now";
-  if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-  if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
-  return `${Math.floor(s / 86400)}d ago`;
+  if (s < 60) return "zojuist";
+  if (s < 3600) return `${Math.floor(s / 60)} min geleden`;
+  if (s < 86400) return `${Math.floor(s / 3600)} uur geleden`;
+  return `${Math.floor(s / 86400)} dagen geleden`;
 }
 
 // Convert a UTC Date to a "YYYY-MM-DDTHH:MM" string in the given timezone
@@ -84,19 +84,19 @@ export function tzLocalToUtcClient(localStr: string, tz: string): Date {
 }
 
 export const ICON_SET: { key: string; icon: React.ElementType; label: string }[] = [
-  { key: "shirt", icon: Shirt, label: "Dress code" },
-  { key: "utensils", icon: UtensilsCrossed, label: "Food & drinks" },
-  { key: "parking", icon: ParkingCircle, label: "Parking" },
+  { key: "shirt", icon: Shirt, label: "Kledingvoorschrift" },
+  { key: "utensils", icon: UtensilsCrossed, label: "Eten en drinken" },
+  { key: "parking", icon: ParkingCircle, label: "Parkeren" },
   { key: "link", icon: Link2, label: "Link" },
   { key: "info", icon: Info, label: "Info" },
-  { key: "music", icon: Music, label: "Music" },
-  { key: "gift", icon: Gift, label: "Gift registry" },
-  { key: "bed", icon: Bed, label: "Accommodation" },
-  { key: "mappin", icon: MapPin, label: "Getting here" },
-  { key: "calendar", icon: Calendar, label: "Schedule" },
-  { key: "sparkles", icon: Sparkles, label: "Vibes" },
-  { key: "filetext", icon: FileText, label: "Notes" },
-  { key: "camera", icon: Camera, label: "Photos" },
+  { key: "music", icon: Music, label: "Muziek" },
+  { key: "gift", icon: Gift, label: "Cadeaulijst" },
+  { key: "bed", icon: Bed, label: "Overnachting" },
+  { key: "mappin", icon: MapPin, label: "Routebeschrijving" },
+  { key: "calendar", icon: Calendar, label: "Programma" },
+  { key: "sparkles", icon: Sparkles, label: "Sfeer" },
+  { key: "filetext", icon: FileText, label: "Notities" },
+  { key: "camera", icon: Camera, label: "Foto's" },
   { key: "phone", icon: Phone, label: "Contact" },
   { key: "zelle", icon: DollarSign, label: "Zelle" },
   { key: "venmo", icon: DollarSign, label: "Venmo" },
@@ -104,12 +104,12 @@ export const ICON_SET: { key: string; icon: React.ElementType; label: string }[]
 
 export const PRESET_CHIPS = [
   { key: "link", label: "Link", icon: Link2 },
-  { key: "gift", label: "Registry", icon: Gift },
-  { key: "shirt", label: "Dress Code", icon: Shirt },
-  { key: "utensils", label: "Food Situation", icon: UtensilsCrossed },
-  { key: "parking", label: "Parking", icon: ParkingCircle },
-  { key: "bed", label: "Accommodations", icon: Bed },
-  { key: "info", label: "Additional Info", icon: Info },
+  { key: "gift", label: "Cadeaulijst", icon: Gift },
+  { key: "shirt", label: "Kledingvoorschrift", icon: Shirt },
+  { key: "utensils", label: "Eten en drinken", icon: UtensilsCrossed },
+  { key: "parking", label: "Parkeren", icon: ParkingCircle },
+  { key: "bed", label: "Overnachting", icon: Bed },
+  { key: "info", label: "Aanvullende informatie", icon: Info },
   { key: "zelle", label: "Zelle", icon: DollarSign },
   { key: "venmo", label: "Venmo", icon: DollarSign },
 ];
@@ -143,23 +143,23 @@ export function buildMapUrl(address: string) {
 export function getPlaceholder(key: string) {
   switch (key) {
     case "link":
-      return "Link details (e.g. Group chat, playlist)...";
+      return "Linkgegevens (bijv. groepschat of afspeellijst)…";
     case "gift":
-      return "Registry details (e.g. Target, Amazon)...";
+      return "Cadeaulijstgegevens (bijv. winkel of webshop)…";
     case "shirt":
-      return "Dress Code (e.g. Cocktail, Casual, Festive)...";
+      return "Kledingvoorschrift (bijv. cocktail, casual of feestelijk)…";
     case "utensils":
-      return "Food Situation (e.g. BYOB, dinner provided, potluck)...";
+      return "Eten en drinken (bijv. zelf drank meenemen, diner inbegrepen of gezamenlijke maaltijd)…";
     case "parking":
-      return "Parking information (e.g. Street parking, driveway)...";
+      return "Parkeerinformatie (bijv. parkeren op straat of op de oprit)…";
     case "bed":
-      return "Accommodations (e.g. Hotel block, house details)...";
+      return "Overnachting (bijv. hotelafspraken of verblijfadres)…";
     case "info":
-      return "Additional Info...";
+      return "Aanvullende informatie…";
     case "zelle":
-      return "Zelle details (e.g. Phone, email, or name)...";
+      return "Zelle-gegevens (bijv. telefoonnummer, e-mailadres of naam)…";
     case "venmo":
-      return "Venmo username (e.g. @username)...";
+      return "Venmo-gebruikersnaam (bijv. @gebruikersnaam)…";
     default:
       return "Details…";
   }

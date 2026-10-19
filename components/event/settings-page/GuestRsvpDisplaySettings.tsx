@@ -34,7 +34,7 @@ export function GuestRsvpDisplaySettings({
       </h3>
       <p style={{ color: t.textSecondary, fontSize: "13px", lineHeight: 1.6 }}>
         Choose how guests see response lists and counts on the event page and the full guest list.{" "}
-        <strong>Hosts and co-hosts always see all names and exact counts.</strong>
+        <strong>Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen.</strong>
       </p>
       <p style={{ color: t.textMuted, fontSize: "12px", lineHeight: 1.6 }}>
         Show immediately displays the names when the page opens. Show after a click lets guests open
@@ -82,9 +82,9 @@ export function GuestRsvpDisplaySettings({
                 }
                 style={{ ...S.inp, marginTop: "6px" }}
               >
-                <option value="EXPANDED">Show immediately</option>
-                <option value="COLLAPSED">Show after a click</option>
-                <option value="HIDDEN">Do not display</option>
+                <option value="EXPANDED">Direct tonen</option>
+                <option value="COLLAPSED">Tonen na een klik</option>
+                <option value="HIDDEN">Niet weergeven</option>
               </select>
             </label>
             {value[listField] !== "HIDDEN" && (
@@ -98,8 +98,8 @@ export function GuestRsvpDisplaySettings({
                   }
                   style={{ ...S.inp, marginTop: "6px" }}
                 >
-                  <option value="EXACT">Exact count</option>
-                  <option value="HIDDEN">No count</option>
+                  <option value="EXACT">Exact aantal</option>
+                  <option value="HIDDEN">Geen aantal</option>
                   {status === "NO" && <option value="CAPPED">Limit to 3+</option>}
                 </select>
               </label>

@@ -1,69 +1,65 @@
 ---
-title: Host FAQ & Troubleshooting
-description: Common host questions, plus managing your profile and account.
-category: Help
+title: Veelgestelde vragen en probleemoplossing
+description: Veelvoorkomende vragen van organisatoren en het beheren van je profiel en account.
+category: Hulp
 audience: host
 order: 110
 ---
 
-# Host FAQ & Troubleshooting
+# Veelgestelde vragen en probleemoplossing
 
-Quick answers to the things hosts run into most.
-
----
-
-## What changes for hosts in v1.4.1?
-
-This maintenance update preserves event links, RSVP edit links, and existing text
-limits. Your administrator may briefly restart the site during the upgrade.
-Afterward, check an existing event and its guest list. If sign-in, an RSVP, an
-upload, or an email/text fails, share the time and affected event with your
-administrator. You do not need to recreate events or resend invitations.
-
-## A guest lost their RSVP edit link
-
-Each guest's edit link is unique and arrives in their confirmation email. If they can't find it, ask them to RSVP again with the same email — RSVP to Me recognizes the existing response and updates it rather than creating a duplicate, and a fresh confirmation (with the link) is sent.
-
-## A guest can't see the event
-
-- **Private event:** only invited guests and hosts can view it. Make sure they were invited.
-- **Password-protected:** they need the password you set (shared separately from the link).
-- Confirm you've shared the correct event link.
-
-## A guest didn't get an email or text
-
-- The channel may be disabled on your site (your admin controls whether email/SMS are enabled).
-- The guest may have turned that channel off in their own notification preferences.
-- For SMS specifically, trial messaging accounts can only reach pre-verified numbers — check with your administrator.
-
-## "The event is full"
-
-You've hit the **capacity** limit for Going guests. Raise the capacity in the event's Settings to let more people in. See [Managing RSVPs](managing-rsvps.md).
-
-## How do I cancel an event?
-
-Open the event's **Settings** and mark it cancelled. This closes RSVPs and shows guests the event is no longer happening.
-
-## How do I delete an event?
-
-Open the event's **Settings**, scroll to the **Danger Zone** at the bottom of the main settings page, and click **Delete Event**. You will be prompted to type `DELETE` to confirm. Once deleted, the event and all guest data are permanently and irreversibly removed.
-
-## Will guests be notified if I change the event?
-
-Editing details doesn't automatically message guests. To tell them about a change, send an update blast — see [Messaging Guests & Reminders](messaging-and-reminders.md).
+Hier vind je snelle antwoorden op vragen waar organisatoren vaak tegenaan lopen.
 
 ---
 
-## Your Profile & Account
+## Wat verandert er voor organisatoren in versie v1.4.1?
 
-Manage your profile at `/profile`:
+Deze onderhoudsupdate behoudt evenementlinks, links om aanmeldingen te wijzigen en de bestaande tekstlimieten. Tijdens de upgrade kan de beheerder de site kort opnieuw starten. Controleer daarna een bestaand evenement en de bijbehorende gastenlijst. Als inloggen, aanmelden, uploaden of e-mail/sms niet werkt, geef dan aan de beheerder door wanneer het gebeurde en om welk evenement het gaat. Je hoeft evenementen niet opnieuw aan te maken en uitnodigingen niet opnieuw te versturen.
 
-- **Details:** edit your display name and upload a profile picture.
-- **Contact info:** changing your email sends a verification link to the new address; changing your phone sends a verification code to the new number.
-- **Notification preferences:** turn email or SMS notifications on or off, and (when both are available) choose whether you'd like to be reached by **Email**, **SMS**, or **Both**.
+## Een gast is de link kwijt om de aanmelding te wijzigen
 
-### Deleting your account
+Elke gast heeft een unieke wijzigingslink die in de bevestigingsmail staat. Kan de gast de link niet vinden, vraag dan om zich opnieuw aan te melden met hetzelfde e-mailadres. RSVP to Me herkent de bestaande reactie en werkt deze bij in plaats van een duplicaat te maken. Daarna wordt een nieuwe bevestiging met de link verstuurd.
 
-You can request account deletion from your profile settings. You'll be asked to deal with any upcoming published events first. Past events are preserved (your guests' RSVP and comment history stays intact), and your personal details are removed.
+## Een gast kan het evenement niet zien
 
-Once requested, your account is scheduled for deletion in 30 days and you will be signed out. If you log back in within this 30-day window, you can cancel the deletion request directly from your profile settings page.
+- **Privé-evenement:** alleen uitgenodigde gasten en organisatoren kunnen het bekijken. Controleer of de gast is uitgenodigd.
+- **Beveiligd met een wachtwoord:** de gast moet het wachtwoord invoeren dat je hebt ingesteld. Deel dit apart van de link.
+- Controleer of je de juiste evenementlink hebt gedeeld.
+
+## Een gast heeft geen e-mail of sms ontvangen
+
+- Het betreffende kanaal kan op je site zijn uitgeschakeld. De beheerder bepaalt of e-mail en sms beschikbaar zijn.
+- De gast kan dit kanaal in de eigen meldingsvoorkeuren hebben uitgeschakeld.
+- Bij sms kunnen proefaccounts voor berichten soms alleen vooraf geverifieerde nummers bereiken. Vraag de beheerder om dit te controleren.
+
+## ‘Het evenement is vol’
+
+Je hebt de **capaciteitslimiet** voor gasten die aanwezig zijn bereikt. Verhoog de capaciteit in de evenementinstellingen om meer mensen toe te laten. Zie [Aanmeldingen beheren](managing-rsvps.md).
+
+## Hoe annuleer ik een evenement?
+
+Open de **Instellingen** van het evenement en markeer het als geannuleerd. Aanmelden wordt dan gesloten en gasten zien dat het evenement niet meer doorgaat.
+
+## Hoe verwijder ik een evenement?
+
+Open de **Instellingen** van het evenement, scroll naar de **Gevarenzone** onderaan de hoofdinstellingen en klik op **Evenement verwijderen**. Je moet ter bevestiging de tekst `DELETE` invoeren. Na verwijdering worden het evenement en alle gastgegevens definitief verwijderd. Dit kan niet ongedaan worden gemaakt.
+
+## Krijgen gasten een melding als ik het evenement wijzig?
+
+Het aanpassen van gegevens verstuurt niet automatisch een bericht aan gasten. Wil je hen op de hoogte brengen, verstuur dan een groepsbericht met de wijziging. Zie [Berichten en herinneringen](messaging-and-reminders.md).
+
+---
+
+## Je profiel en account
+
+Beheer je profiel via `/profile`:
+
+- **Gegevens:** wijzig je weergavenaam en upload een profielfoto.
+- **Contactgegevens:** als je je e-mailadres wijzigt, ontvang je een verificatielink op het nieuwe adres. Bij een gewijzigd telefoonnummer ontvang je een verificatiecode op het nieuwe nummer.
+- **Meldingsvoorkeuren:** schakel e-mail- of sms-meldingen in of uit. Wanneer beide beschikbaar zijn, kun je kiezen of je bereikbaar wilt zijn via **E-mail**, **Sms** of **Beide**.
+
+### Je account verwijderen
+
+Je kunt het verwijderen van je account aanvragen via je profielinstellingen. Eerst moet je eventuele aankomende, gepubliceerde evenementen afhandelen. Eerdere evenementen blijven bewaard, inclusief de aanmeldingen en reacties van gasten; je persoonlijke gegevens worden verwijderd.
+
+Na je aanvraag wordt je account gepland voor verwijdering over 30 dagen en word je uitgelogd. Log je binnen die periode van 30 dagen opnieuw in, dan kun je de verwijderingsaanvraag rechtstreeks vanuit je profielinstellingen annuleren.

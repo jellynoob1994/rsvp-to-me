@@ -49,7 +49,7 @@ export function GuestListSection({
             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
               <Users size={16} style={{ color: t.accent }} />
               <span style={{ fontWeight: 700 }}>
-                Guests{showTotal ? ` (${event.rsvps.length})` : ""}
+                Gasten{showTotal ? ` (${event.rsvps.length})` : ""}
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -62,13 +62,13 @@ export function GuestListSection({
                   opacity: 0.85,
                 }}
               >
-                View all →
+                Alles bekijken →
               </a>
               {isHost && (
                 <a
                   href={`/e/${event.slug}/settings?section=rsvp`}
-                  aria-label="RSVP settings"
-                  title="RSVP settings"
+                  aria-label="Aanmeldinstellingen"
+                  title="Aanmeldinstellingen"
                   style={{ color: t.textMuted, display: "flex", alignItems: "center" }}
                 >
                   <Settings size={13} />
@@ -77,7 +77,7 @@ export function GuestListSection({
             </div>
           </div>
           {going.length > 0 && (
-            <GuestRsvpGroup label="Going" count={totalGoing} display={display.GOING} t={t}>
+            <GuestRsvpGroup label="Aanwezig" count={totalGoing} display={display.GOING} t={t}>
               <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "8px" }}>
                 {going.map((r) => (
                   <div
@@ -117,7 +117,7 @@ export function GuestListSection({
             </GuestRsvpGroup>
           )}
           {maybe.length > 0 && (
-            <GuestRsvpGroup label="Maybe" count={maybe.length} display={display.MAYBE} t={t}>
+            <GuestRsvpGroup label="Misschien" count={maybe.length} display={display.MAYBE} t={t}>
               <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "8px" }}>
                 {maybe.map((r) => (
                   <div
@@ -150,7 +150,7 @@ export function GuestListSection({
             </GuestRsvpGroup>
           )}
           {no.length > 0 && (
-            <GuestRsvpGroup label="Can't make it" count={no.length} display={display.NO} t={t}>
+            <GuestRsvpGroup label="Afwezig" count={no.length} display={display.NO} t={t}>
               <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "8px" }}>
                 {no.map((r) => (
                   <div

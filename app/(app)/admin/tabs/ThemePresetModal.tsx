@@ -104,7 +104,7 @@ export function ThemePresetModal({
                     minWidth: 0,
                   }}
                 >
-                  {themePresetForm.id ? "Edit Preset" : "New Preset"}
+                  {themePresetForm.id ? "Thema bewerken" : "Nieuw thema"}
                 </h3>
                 {formDiffersFromDefault && defSnap && (
                   <button
@@ -122,7 +122,7 @@ export function ThemePresetModal({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    ↺ Reset to Default
+                    ↺ Standaard herstellen
                   </button>
                 )}
                 {origDiffersFromDefault && formDiffersFromOriginal && origSnap && (
@@ -141,7 +141,7 @@ export function ThemePresetModal({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    ↺ Reset to Original
+                    ↺ Origineel herstellen
                   </button>
                 )}
                 <button
@@ -204,14 +204,14 @@ export function ThemePresetModal({
                     color: APP_SHELL.textSecondary,
                   }}
                 >
-                  NAME
+                  NAAM
                 </label>
                 <input
                   type="text"
                   value={themePresetForm.name}
                   onChange={(e) => setThemePresetForm((f) => f && { ...f, name: e.target.value })}
                   required
-                  placeholder="e.g. Midnight Purple"
+                  placeholder="bijv. Middernachtpaars"
                   style={{
                     backgroundColor: APP_SHELL.inputBg,
                     border: `1px solid ${APP_SHELL.inputBorder}`,
@@ -234,7 +234,7 @@ export function ThemePresetModal({
                   color: APP_SHELL.textSecondary,
                 }}
               >
-                BASE STYLE
+                BASISSTIJL
               </label>
               <div style={{ display: "flex", gap: "8px" }}>
                 {BASE_THEMES.map((bt) => (
@@ -278,7 +278,7 @@ export function ThemePresetModal({
                   color: APP_SHELL.textSecondary,
                 }}
               >
-                BACKGROUND GRADIENT
+                ACHTERGRONDVERLOOP
               </label>
               <div style={{ display: "flex", gap: "10px" }}>
                 <label
@@ -381,7 +381,7 @@ export function ThemePresetModal({
                   color: APP_SHELL.textSecondary,
                 }}
               >
-                ACCENT COLOR
+                ACCENTKLEUR
               </label>
               <div
                 style={{
@@ -408,7 +408,7 @@ export function ThemePresetModal({
                   />
                 ))}
                 <label
-                  title="Custom"
+                  title="Aangepast"
                   style={{
                     width: "28px",
                     height: "28px",
@@ -471,7 +471,7 @@ export function ThemePresetModal({
                   }
                   style={{ width: "16px", height: "16px", cursor: "pointer" }}
                 />
-                Seasonal preset
+                Seizoensgebonden thema
               </label>
               {themePresetForm.seasonal && (
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -482,7 +482,7 @@ export function ThemePresetModal({
                       color: APP_SHELL.textSecondary,
                     }}
                   >
-                    MONTH (1–12)
+                    MAAND (1–12)
                   </label>
                   <input
                     type="number"
@@ -498,7 +498,7 @@ export function ThemePresetModal({
                           }
                       )
                     }
-                    placeholder="e.g. 10"
+                    placeholder="bijv. 10"
                     style={{
                       width: "72px",
                       backgroundColor: APP_SHELL.inputBg,
@@ -523,7 +523,7 @@ export function ThemePresetModal({
                   color: APP_SHELL.textSecondary,
                 }}
               >
-                HEADING FONT
+                LETTERTYPE VOOR KOPPEN
               </label>
               <select
                 value={themePresetForm.fontId ?? ""}
@@ -540,7 +540,7 @@ export function ThemePresetModal({
                   outline: "none",
                 }}
               >
-                <option value="">Theme default</option>
+                <option value="">Standaardthema</option>
                 {FONT_OPTIONS.map((f) => (
                   <option key={f.id} value={f.id}>
                     {f.label} ({FONT_CATEGORY_LABELS[f.category]})
@@ -563,7 +563,7 @@ export function ThemePresetModal({
                     textAlign: "center",
                   }}
                 >
-                  You&rsquo;re Invited!
+                  Je bent uitgenodigd!
                 </div>
               )}
             </div>
@@ -581,7 +581,7 @@ export function ThemePresetModal({
                       color: APP_SHELL.textSecondary,
                     }}
                   >
-                    CARD OPACITY
+                    DEKKING VAN DE KAART
                   </label>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                     <input
@@ -610,7 +610,7 @@ export function ThemePresetModal({
                     </span>
                   </div>
                   <div style={{ fontSize: "11px", color: APP_SHELL.textSecondary }}>
-                    Controls card transparency. Default for {themePresetForm.base}:{" "}
+                    Bepaalt de transparantie van de kaart. Standaard voor {themePresetForm.base}:{" "}
                     {Math.round(defaultOp * 100)}%
                   </div>
                 </div>
@@ -656,7 +656,7 @@ export function ThemePresetModal({
                         fontFamily: pv.headingFont,
                       }}
                     >
-                      {themePresetForm.emoji} {themePresetForm.name || "Untitled"}
+                      {themePresetForm.emoji} {themePresetForm.name || "Naamloos thema"}
                     </span>
                   </div>
                   {/* Card zone */}
@@ -683,10 +683,10 @@ export function ThemePresetModal({
                             fontFamily: pv.headingFont,
                           }}
                         >
-                          Event details
+                          Evenementgegevens
                         </div>
                         <div style={{ fontSize: "11px", color: pv.textMuted }}>
-                          Saturday · 7:00 PM
+                          Zaterdag · 19:00
                         </div>
                       </div>
                       <button
@@ -725,7 +725,7 @@ export function ThemePresetModal({
                   cursor: "pointer",
                 }}
               >
-                Cancel
+                Annuleren
               </button>
               {themePresetForm.id &&
                 themePresetOriginal &&
@@ -757,7 +757,7 @@ export function ThemePresetModal({
                         cursor: "pointer",
                       }}
                     >
-                      ↺ Reset
+                      ↺ Herstellen
                     </button>
                   ) : null;
                 })()}
@@ -777,7 +777,7 @@ export function ThemePresetModal({
                   opacity: isSavingPreset ? 0.7 : 1,
                 }}
               >
-                {isSavingPreset ? "Saving…" : themePresetForm.id ? "Save Changes" : "Create Preset"}
+                {isSavingPreset ? "Opslaan…" : themePresetForm.id ? "Wijzigingen opslaan" : "Thema aanmaken"}
               </button>
               {themePresetForm.id && (
                 <button
@@ -797,7 +797,7 @@ export function ThemePresetModal({
                     opacity: isSavingPreset ? 0.7 : 1,
                   }}
                 >
-                  Save as Default
+                  Als standaard instellen
                 </button>
               )}
             </div>

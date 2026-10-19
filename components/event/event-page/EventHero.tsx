@@ -111,7 +111,7 @@ export function EventHero({
             outerRef={titleRef}
             value={event.title}
             onSave={(v) => save("title", v)}
-            placeholder="Event title"
+            placeholder="Titel van het evenement"
             style={{
               fontSize: "36px",
               fontWeight: 900,
@@ -158,7 +158,7 @@ export function EventHero({
           fontSize: "18px",
         })}
         <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "4px" }}>
-          <span>Hosted by {event.hostDisplayName ?? event.host.name ?? event.host.email}</span>
+          <span>Georganiseerd door {event.hostDisplayName ?? event.host.name ?? event.host.email}</span>
           {event.coHosts && event.coHosts.length === 1 && (
             <span>
               {" + "}
@@ -189,7 +189,7 @@ export function EventHero({
                   e.currentTarget.style.opacity = "1";
                 }}
               >
-                {event.coHosts.length} others
+                {event.coHosts.length} anderen
               </span>
               {showHostsPopup && (
                 <div
@@ -229,7 +229,7 @@ export function EventHero({
                       marginBottom: "2px",
                     }}
                   >
-                    Co-Hosts
+                    Mede-organisatoren
                   </div>
                   {event.coHosts.map((ch) => {
                     const name = ch.displayName || ch.user.name || ch.user.email;
@@ -286,7 +286,7 @@ export function EventHero({
                 display: "inline-flex",
                 alignItems: "center",
               }}
-              title="Host settings"
+              title="Instellingen van de organisator"
             >
               <Settings size={13} />
             </a>
@@ -324,7 +324,7 @@ export function EventHero({
           {event.theme?.coverImageUrl && (
             <NextImage
               src={event.theme.coverImageUrl}
-              alt={`${event.title} cover`}
+              alt={`${event.title} omslag`}
               fill
               priority
               sizes="(max-width: 600px) calc(100vw - 32px), 568px"
@@ -363,10 +363,10 @@ export function EventHero({
                 }}
               >
                 {uploadStatus === "compressing"
-                  ? "Compressing…"
+                  ? "Afbeelding comprimeren…"
                   : uploadStatus === "uploading"
-                    ? "Uploading…"
-                    : "📷 Cover"}
+                    ? "Uploaden…"
+                    : "📷 Omslag"}
               </button>
               {event.theme?.coverImageUrl && (
                 <button
@@ -388,7 +388,7 @@ export function EventHero({
                     opacity: isPending ? 0.7 : 1,
                   }}
                 >
-                  🗑 Remove
+                  🗑 Verwijderen
                 </button>
               )}
             </div>
@@ -446,7 +446,7 @@ export function EventHero({
               id="event-description-heading"
               style={{ margin: 0, fontSize: "16px", fontWeight: 700 }}
             >
-              Description
+              Beschrijving
             </h2>
           </div>
           {isHost && (
@@ -461,7 +461,7 @@ export function EventHero({
           outerRef={detailsRef}
           value={event.description ?? ""}
           onSave={(v) => save("description", v)}
-          placeholder="Add a description…"
+          placeholder="Voeg een beschrijving toe…"
           multiline
           style={{
             color: t.textSecondary,

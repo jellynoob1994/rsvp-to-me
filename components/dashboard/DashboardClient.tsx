@@ -97,11 +97,11 @@ export function DashboardClient({
       const actDate = new Date(act.createdAt);
       actDate.setHours(0, 0, 0, 0);
 
-      let key = "Older";
+      let key = "Eerder";
       if (actDate.getTime() === today.getTime()) {
-        key = "Today";
+        key = "Vandaag";
       } else if (actDate.getTime() === yesterday.getTime()) {
-        key = "Yesterday";
+        key = "Gisteren";
       } else {
         key = actDate.toLocaleDateString(undefined, {
           month: "short",
@@ -205,14 +205,13 @@ export function DashboardClient({
   // Helper to format date Partiful-style: "Sat 11/15 at 4pm"
   const formatPartifulDate = (dateVal: Date | string) => {
     const d = new Date(dateVal);
-    const weekday = d.toLocaleDateString("en-US", { weekday: "short" });
-    const dateStr = d.toLocaleDateString("en-US", { month: "numeric", day: "numeric" });
+    const weekday = d.toLocaleDateString("nl-NL", { weekday: "short" });
+    const dateStr = d.toLocaleDateString("nl-NL", { day: "numeric", month: "short" });
     const hour = d.getHours();
     const minute = d.getMinutes();
-    const ampm = hour >= 12 ? "pm" : "am";
-    const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
-    const formattedMin = minute === 0 ? "" : `:${minute.toString().padStart(2, "0")}`;
-    return `${weekday} ${dateStr} at ${formattedHour}${formattedMin}${ampm}`;
+    const formattedHour = hour.toString().padStart(2, "0");
+    const formattedMin = minute.toString().padStart(2, "0");
+    return `${weekday} ${dateStr} om ${formattedHour}:${formattedMin}`;
   };
 
   // Relative time helper for activity log
@@ -225,11 +224,11 @@ export function DashboardClient({
     const diffHr = Math.floor(diffMin / 60);
     const diffDays = Math.floor(diffHr / 24);
 
-    if (diffSec < 60) return "just now";
-    if (diffMin < 60) return `${diffMin}m ago`;
-    if (diffHr < 24) return `${diffHr}h ago`;
-    if (diffDays === 1) return "yesterday";
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    if (diffSec < 60) return "zojuist";
+    if (diffMin < 60) return `${diffMin} min geleden`;
+    if (diffHr < 24) return `${diffHr} uur geleden`;
+    if (diffDays === 1) return "gisteren";
+    return date.toLocaleDateString("nl-NL", { month: "short", day: "numeric" });
   };
 
   // Activity type icon lookup
@@ -286,23 +285,23 @@ export function DashboardClient({
             letterSpacing: "-0.03em",
           }}
         >
-          Welcome back {userName}!
+          Welkom terug, {userName}!
         </h1>
         <p style={{ color: APP_SHELL.textSecondary, fontSize: "15px", margin: 0 }}>
           {counts.upcoming === 0 ? (
             <>
-              {"You don't have any upcoming events right now. "}
+              {"Je hebt momenteel geen aankomende evenementen. "}
               {showNewEventCard && (
                 <Link
                   href={userRole === "GUEST" ? "/auth/register" : "/dashboard/events/new"}
                   style={{ color: APP_SHELL.accent, fontWeight: 800, textDecoration: "none" }}
                 >
-                  Host one!
+                  Maak er zelf één aan!
                 </Link>
               )}
             </>
           ) : (
-            `You have ${counts.upcoming} upcoming event${counts.upcoming > 1 ? "s" : ""} scheduled.`
+            `Je hebt ${counts.upcoming} evenement${counts.upcoming > 1 ? "en" : ""} op de planning.`
           )}
         </p>
       </div>
@@ -339,14 +338,14 @@ export function DashboardClient({
           }}
         >
           <Search size={14} strokeWidth={2.5} />
-          Search
+          Zoeken
         </button>
 
         {/* Filter Tab Pills */}
         <PillTab
           filter="upcoming"
           active={activeFilter}
-          label="Upcoming"
+          label="Aankomend"
           count={counts.upcoming}
           onClick={setActiveFilter}
         />
@@ -354,7 +353,7 @@ export function DashboardClient({
           <PillTab
             filter="hosting"
             active={activeFilter}
-            label="Hosting"
+            label="Als organisator"
             count={counts.hosting}
             onClick={setActiveFilter}
           />
@@ -362,21 +361,21 @@ export function DashboardClient({
         <PillTab
           filter="invites"
           active={activeFilter}
-          label="Open invite"
+          label="Open uitnodigingen"
           count={counts.invites}
           onClick={setActiveFilter}
         />
         <PillTab
           filter="attended"
           active={activeFilter}
-          label="Attended"
+          label="Bijgewoond"
           count={counts.attended}
           onClick={setActiveFilter}
         />
         <PillTab
           filter="past"
           active={activeFilter}
-          label="All past events"
+          label="Afgelopen evenementen"
           count={counts.past}
           onClick={setActiveFilter}
         />
@@ -387,7 +386,7 @@ export function DashboardClient({
         <div style={{ marginBottom: "28px", animation: "slideDown 0.2s ease-out" }}>
           <input
             type="text"
-            placeholder="Search events by title..."
+            placeholder="Zoek evenementen op titel..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
@@ -421,12 +420,12 @@ export function DashboardClient({
             >
               <div style={{ fontSize: "36px", marginBottom: "12px" }}>🎉</div>
               <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", marginBottom: "6px" }}>
-                No events found
+                Geen evenementen gevonden
               </h3>
               <p style={{ color: APP_SHELL.textSecondary, fontSize: "14px", margin: 0 }}>
                 {searchQuery
-                  ? "Try a different search query."
-                  : "When you host or get invited, they will show up here!"}
+                  ? "Probeer een andere zoekopdracht."
+                  : "Evenementen die je organiseert of waarvoor je wordt uitgenodigd, verschijnen hier!"}
               </p>
             </div>
           ) : (
@@ -471,7 +470,7 @@ export function DashboardClient({
                     }}
                   >
                     <Plus size={24} strokeWidth={2.5} />
-                    <span style={{ fontSize: "14px", fontWeight: 800 }}>New event</span>
+                    <span style={{ fontSize: "14px", fontWeight: 800 }}>Nieuw evenement</span>
                   </div>
                 </Link>
               )}
@@ -511,7 +510,7 @@ export function DashboardClient({
             >
               <Clock size={16} color={APP_SHELL.accent} />
               <h3 style={{ fontSize: "14px", fontWeight: 800, color: APP_SHELL.textPrimary }}>
-                Recent Activity
+                Recente activiteit
               </h3>
             </div>
             {recentActivities.length === 0 ? (
@@ -527,8 +526,8 @@ export function DashboardClient({
                   size={24}
                   style={{ display: "block", margin: "0 auto 8px", opacity: 0.5 }}
                 />
-                No activity logged yet. When guests RSVP or comments are posted, they will appear
-                here!
+                Er is nog geen activiteit. Wanneer gasten zich aanmelden of reacties plaatsen, verschijnen die
+                hier!
               </div>
             ) : (
               (() => {
@@ -609,19 +608,19 @@ export function DashboardClient({
                         }}
                       >
                         <option value="all" style={{ background: "#12121c" }}>
-                          All Activity Types
+                          Alle soorten activiteit
                         </option>
                         <option value="rsvp" style={{ background: "#12121c" }}>
-                          RSVPs Only
+                          Alleen RSVP-activiteiten
                         </option>
                         <option value="potluck" style={{ background: "#12121c" }}>
-                          Potluck Sign-ups
+                          Aanmeldingen voor de meeneemlijst
                         </option>
                         <option value="comment" style={{ background: "#12121c" }}>
-                          Comments Only
+                          Alleen reacties
                         </option>
                         <option value="event" style={{ background: "#12121c" }}>
-                          Event Updates
+                          Wijzigingen aan evenementen
                         </option>
                       </select>
 
@@ -645,7 +644,7 @@ export function DashboardClient({
                         }}
                       >
                         <option value="all" style={{ background: "#12121c" }}>
-                          All Events
+                          Alle evenementen
                         </option>
                         {activityEventsList.map((e) => (
                           <option key={e.id} value={e.id} style={{ background: "#12121c" }}>
@@ -664,7 +663,7 @@ export function DashboardClient({
                           fontSize: "12px",
                         }}
                       >
-                        No matching activities found.
+                        Geen overeenkomende activiteiten gevonden.
                       </div>
                     ) : (
                       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -689,7 +688,7 @@ export function DashboardClient({
                             </div>
                             {items.map((act) => {
                               const { Icon, color } = getActivityMeta(act.type);
-                              const actorDisplayName = act.actorName || "Someone";
+                              const actorDisplayName = act.actorName || "Iemand";
                               const actorInitials = actorDisplayName.slice(0, 2).toUpperCase();
                               return (
                                 <div
@@ -826,10 +825,10 @@ export function DashboardClient({
                             transition: "all 0.2s",
                           }}
                         >
-                          Prev
+                          Vorige
                         </button>
                         <span style={{ color: APP_SHELL.textSecondary, fontSize: "11px" }}>
-                          Page {currentPage} of {totalPages}
+                          Pagina {currentPage} van {totalPages}
                         </span>
                         <button
                           onClick={() => setActivityPage((prev) => Math.min(prev + 1, totalPages))}
@@ -852,7 +851,7 @@ export function DashboardClient({
                             transition: "all 0.2s",
                           }}
                         >
-                          Next
+                          Volgende
                         </button>
                       </div>
                     )}
@@ -938,22 +937,22 @@ function EventCard({
   let overlayColor = "rgba(0,0,0,0.75)";
 
   if (!isInvite) {
-    overlayText = item.isCohost ? "👑 CO-HOST" : "👑 HOSTING";
+    overlayText = item.isCohost ? "👑 MEDEORGANISATOR" : "👑 ORGANISATOR";
   } else {
     if (item.userRsvpStatus === "GOING") {
-      overlayText = "✅ GOING";
+      overlayText = "✅ AANWEZIG";
       overlayColor = "rgba(16,185,129,0.9)"; // green
     } else if (item.userRsvpStatus === "MAYBE") {
-      overlayText = "❓ MAYBE";
+      overlayText = "❓ MISSCHIEN";
       overlayColor = "rgba(245,158,11,0.9)"; // amber
     } else if (item.userRsvpStatus === "NO") {
-      overlayText = "❌ DECLINED";
+      overlayText = "❌ AFGEZEGD";
       overlayColor = "rgba(239,68,68,0.9)"; // red
     }
   }
 
   const hostName =
-    item.hostDisplayName || item.host?.name || item.host?.email?.split("@")[0] || "Host";
+    item.hostDisplayName || item.host?.name || item.host?.email?.split("@")[0] || "Organisator";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -1090,13 +1089,13 @@ function EventCard({
             >
               {!isInvite ? (
                 <>
-                  <DropdownLink href={`/e/${item.slug}`}>View Page</DropdownLink>
-                  <DropdownLink href={`/e/${item.slug}/guests`}>Guests List</DropdownLink>
-                  <DropdownLink href={`/e/${item.slug}/settings`}>Settings</DropdownLink>
+                  <DropdownLink href={`/e/${item.slug}`}>Bekijk evenement</DropdownLink>
+                  <DropdownLink href={`/e/${item.slug}/guests`}>Gastenlijst</DropdownLink>
+                  <DropdownLink href={`/e/${item.slug}/settings`}>Instellingen</DropdownLink>
                 </>
               ) : (
                 <>
-                  <DropdownLink href={`/e/${item.slug}`}>View Invite</DropdownLink>
+                  <DropdownLink href={`/e/${item.slug}`}>Bekijk uitnodiging</DropdownLink>
                   {item.userRsvpEditToken && (
                     <DropdownLink href={`/e/${item.slug}/rsvp?token=${item.userRsvpEditToken}`}>
                       Edit RSVP
@@ -1156,7 +1155,7 @@ function EventCard({
 
         {/* Hosted By & Avatars */}
         <div style={{ display: "flex", alignItems: "center", marginTop: "4px", gap: "6px" }}>
-          <span style={{ color: APP_SHELL.textSecondary, fontSize: "11px" }}>Hosted by</span>
+          <span style={{ color: APP_SHELL.textSecondary, fontSize: "11px" }}>Georganiseerd door</span>
           <div style={{ display: "flex", alignItems: "center" }}>
             {/* Host avatar */}
             <AvatarBubble name={hostName} avatarUrl={item.host?.avatarUrl} accentColor={accent} />
@@ -1198,7 +1197,7 @@ function EventCard({
               const deadline = new Date(item.rsvpDeadline);
               const now = new Date();
               const hasPassed = deadline < now;
-              const formatted = deadline.toLocaleDateString("en-US", {
+              const formatted = deadline.toLocaleDateString("nl-NL", {
                 month: "short",
                 day: "numeric",
               });
@@ -1214,7 +1213,7 @@ function EventCard({
                 >
                   <span>·</span>
                   <Clock size={10} />
-                  <span>RSVPs {hasPassed ? "closed" : `by ${formatted}`}</span>
+                  <span>Aanmelden {hasPassed ? "gesloten" : `tot ${formatted}`}</span>
                 </div>
               );
             })()}

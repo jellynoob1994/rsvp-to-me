@@ -1,98 +1,87 @@
 ---
-title: Managing RSVPs
-description: Statuses, approval, capacity, plus-ones, questionnaires, and edit links.
-category: Guests & RSVPs
+title: Aanmeldingen beheren
+description: Statussen, goedkeuring, capaciteit, extra gasten, vragenlijsten en wijzigingslinks.
+category: Gasten en aanmeldingen
 audience: host
 order: 60
 ---
 
-# Managing RSVPs
+# Aanmeldingen beheren
 
-Everything about how guests respond — and how you control it — lives in your event's **Settings** and on the [guest list](guest-list.md).
+Alles over hoe gasten reageren — en hoe jij dat beheert — vind je in de **Instellingen** van je evenement en op de [gastenlijst](guest-list.md).
 
-On the guest-facing event page, the RSVP card stays at the bottom of the screen while responses are open, then docks into its normal place as the guest reaches it. After responding, the card becomes a small Going, Maybe, Can't make it, or Awaiting approval summary with an edit link when changes are allowed. It stops floating once the response window closes or the event starts.
-
----
-
-## RSVP Statuses
-
-Guests respond **Going**, **Maybe**, or **No**. You can turn off the **Maybe** option per event if you only want a yes/no.
-
-The guest's Going confirmation uses a green circled checkmark beside its status label.
+Op de evenementpagina voor gasten blijft de aanmeldkaart onderaan het scherm zichtbaar zolang aanmelden openstaat. Zodra een gast ernaartoe scrolt, komt de kaart op de normale plek te staan. Na een reactie verandert de kaart in een beknopt overzicht met Aanwezig, Misschien, Afwezig of Wacht op goedkeuring, met een link om de reactie te wijzigen als dat is toegestaan. De kaart blijft niet langer zweven wanneer het aanmeldvenster sluit of het evenement begint.
 
 ---
 
-## Approval
+## Aanmeldstatussen
 
-Turn on **Approval Required** when you want to vet responses. New RSVPs then wait in a **pending** state until you **Approve** or **Decline** them from the guest list, and the guest is notified of your decision. (A pending guest's response is still recorded — they're just not approved yet.)
+Gasten kiezen **Aanwezig**, **Misschien** of **Afwezig**. Je kunt de optie **Misschien** per evenement uitschakelen als je alleen ja of nee wilt toestaan.
 
----
-
-## Capacity Limits
-
-Set a maximum number of **Going** guests. Once that limit is reached:
-
-- Additional guests can no longer mark themselves **Going** — they'll see the event is at capacity.
-- Guests can still respond **Maybe** or **No**.
-- To make room, raise the capacity in Settings.
+Bij de bevestiging van Aanwezig krijgt de gast naast de status een groen vinkje in een cirkel te zien.
 
 ---
 
-## Plus-Ones
+## Goedkeuring
 
-- Allow or disallow plus-ones.
-- Set a maximum plus-one count per guest.
-- Optionally require names for plus-ones.
-
-Plus-ones are counted on the main guest's RSVP and share that guest's status. They aren't separate accounts and don't have their own contact details.
+Schakel **Goedkeuring vereist** in als je reacties eerst wilt beoordelen. Nieuwe aanmeldingen krijgen dan de status **In afwachting** totdat je ze via de gastenlijst **Goedkeurt** of **Afwijst**. De gast ontvangt een melding over je beslissing. (De reactie van een gast die op goedkeuring wacht, wordt wel opgeslagen; alleen de goedkeuring ontbreekt nog.)
 
 ---
 
-## RSVP Deadlines & Editing Gates
+## Capaciteitslimieten
 
-You can set an optional **RSVP deadline** on your event under Settings → RSVP.
+Stel het maximale aantal gasten in dat **Aanwezig** kan zijn. Zodra de limiet is bereikt:
 
-- **Before the deadline:** Guests can RSVP and edit their RSVP at any time.
-- **After the deadline:**
-  - New guests are prevented from RSVPing, and they will see a "RSVPs Closed" notice.
-  - Existing guests cannot edit their RSVP from their unique edit link unless the **Allow guests to edit RSVPs after deadline** option is enabled in settings. If disabled, their edit links will be hidden/gated.
-  - Hosts and co-hosts are exempt from these deadline restrictions and can manage RSVPs at any time.
-
-The event's scheduled start is a final guest cutoff. Once `startAt` is reached, guests cannot submit
-a new RSVP or change an existing one, even when post-deadline editing is enabled. A guest opening
-their private edit link sees a read-only summary and instructions to contact the host. Hosts,
-co-hosts, and admins can continue editing responses at any time. If the event is rescheduled into the
-future, guest RSVP access automatically reopens under the normal deadline rules.
+- Nieuwe gasten kunnen niet meer aangeven dat ze **Aanwezig** zijn en zien dat het evenement vol is.
+- Gasten kunnen nog wel **Misschien** of **Afwezig** kiezen.
+- Verhoog de capaciteit in de instellingen om meer gasten toe te laten.
 
 ---
 
-## Custom Questionnaires
+## Extra gasten
 
-Add your own questions to the RSVP form (dietary needs, song requests, t-shirt size — whatever you need):
+- Sta extra gasten toe of schakel ze uit.
+- Stel het maximale aantal extra gasten per aanmelding in.
+- Vereis desgewenst namen voor extra gasten.
 
-- **Field types:** single-line text, multi-line text, dropdown, and checkbox.
-- **Required or optional:** mark each question as needed.
-- **Reordering:** drag questions to set their order on the form.
-
-Answers appear with each guest and are included in the [CSV export](guest-list.md).
+Extra gasten tellen mee bij de aanmelding van de hoofdgast en hebben dezelfde status. Het zijn geen aparte accounts en ze hebben geen eigen contactgegevens.
 
 ---
 
-## Guest Edit Links
+## Aanmelddeadline en wijzigen van aanmeldingen
 
-Guests don't need an account to change their RSVP. Every confirmation email includes a private link
-unique to that guest; clicking it lets them update their status or answers until the event starts. If
-a guest loses their link, see the [FAQ](faq.md).
+Je kunt via **Instellingen → Aanmeldingen** een optionele **aanmelddeadline** instellen.
+
+- **Voor de deadline:** gasten kunnen zich aanmelden en hun reactie op elk moment wijzigen.
+- **Na de deadline:**
+  - Nieuwe gasten kunnen zich niet meer aanmelden en zien een melding dat aanmelden gesloten is.
+  - Bestaande gasten kunnen hun reactie niet via hun persoonlijke wijzigingslink aanpassen, tenzij de optie **Gasten toestaan hun aanmelding na de deadline te wijzigen** in de instellingen is ingeschakeld. Als deze optie uitstaat, worden de wijzigingslinks afgeschermd.
+  - Organisatoren en mede-organisatoren vallen niet onder deze deadlinebeperkingen en kunnen aanmeldingen op elk moment beheren.
+
+De geplande starttijd van het evenement is de uiterste grens voor gasten. Zodra `startAt` is bereikt, kunnen gasten geen nieuwe aanmelding versturen of een bestaande aanmelding wijzigen, zelfs niet als wijzigen na de deadline is toegestaan. Een gast die de persoonlijke wijzigingslink opent, ziet een alleen-lezen overzicht en de instructie om contact op te nemen met de organisator. Organisatoren, mede-organisatoren en beheerders kunnen reacties blijven wijzigen. Als het evenement naar een tijdstip in de toekomst wordt verplaatst, gaat de aanmeldtoegang automatisch weer open volgens de normale deadlineregels.
 
 ---
 
-## Anti-Abuse
+## Aangepaste vragenlijsten
 
-When the site administrator enables bot protection, every new or edited RSVP must pass an
-interaction-only security check before it is saved. The same protection applies when a host or
-co-host edits an RSVP or records a walk-in, because organizer accounts can also be abused. Most
-legitimate users see no prompt. Separate protected tasks can remain in progress at the same time;
-for example, an image upload does not block an RSVP or comment from passing its own check.
+Voeg eigen vragen toe aan het aanmeldformulier, bijvoorbeeld over dieetwensen, muzieknummers of T-shirtmaten:
 
-RSVP submissions are also rate-limited per client IP (both overall and per event). Together these
-controls throttle automated fake RSVPs before any confirmation email or text is sent.
+- **Veldtypen:** tekst op één regel, tekst op meerdere regels, keuzelijst en selectievakje.
+- **Verplicht of optioneel:** stel per vraag in of een antwoord vereist is.
+- **Volgorde aanpassen:** versleep vragen om de volgorde op het formulier te bepalen.
+
+Antwoorden verschijnen bij elke gast en worden opgenomen in de [CSV-export](guest-list.md).
+
+---
+
+## Links om aanmeldingen te wijzigen
+
+Gasten hebben geen account nodig om hun aanmelding te wijzigen. Elke bevestigingsmail bevat een persoonlijke, unieke link. Via die link kunnen gasten hun status of antwoorden wijzigen totdat het evenement begint. Is een gast de link kwijt, kijk dan bij de [veelgestelde vragen](faq.md).
+
+---
+
+## Misbruik voorkomen
+
+Wanneer de beheerder van de site botbescherming inschakelt, moet elke nieuwe of gewijzigde aanmelding eerst een beveiligingscontrole doorlopen voordat deze wordt opgeslagen. Dit geldt ook wanneer een organisator of mede-organisator een aanmelding wijzigt of een gast ter plaatse registreert, omdat ook organisatoraccounts misbruikt kunnen worden. De meeste normale gebruikers krijgen geen extra vraag te zien. Meerdere beveiligde acties kunnen tegelijk lopen; het uploaden van een afbeelding blokkeert bijvoorbeeld niet de beveiligingscontrole voor een aanmelding of reactie.
+
+Aanmeldingen zijn ook beperkt tot een maximaal aantal verzoeken per client-IP-adres, zowel algemeen als per evenement. Samen helpen deze maatregelen geautomatiseerde nepaanmeldingen af te remmen voordat een bevestiging per e-mail of sms wordt verstuurd.

@@ -16,15 +16,15 @@ export function AdminSidebar({
     <div className="hidden lg:flex lg:flex-col lg:w-[240px] shrink-0 lg:border-b-0 mb-4 lg:mb-0">
       {(
         [
-          { id: "overview", label: "📊 Overview" },
-          { id: "users", label: "👥 User Management" },
-          { id: "events", label: "🎈 Event Moderation" },
-          { id: "invites", label: "🔑 Host Settings" },
-          { id: "email", label: "📧 Email Settings" },
-          { id: "sms", label: "💬 SMS Settings" },
-          { id: "themes", label: "🎨 Theme Presets" },
-          { id: "backups", label: "💾 Database Backups" },
-          { id: "docs", label: "📚 Documentation" },
+          { id: "overview", label: "📊 Overzicht" },
+          { id: "users", label: "👥 Gebruikersbeheer" },
+          { id: "events", label: "🎈 Evenementenbeheer" },
+          { id: "invites", label: "🔑 Organisatie-instellingen" },
+          { id: "email", label: "📧 E-mailinstellingen" },
+          { id: "sms", label: "💬 Sms-instellingen" },
+          { id: "themes", label: "🎨 Thema-voorinstellingen" },
+          { id: "backups", label: "💾 Databaseback-ups" },
+          { id: "docs", label: "📚 Documentatie" },
         ] as const
       ).map((tab) => (
         <button

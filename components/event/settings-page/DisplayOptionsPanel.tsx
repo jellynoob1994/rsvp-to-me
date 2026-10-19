@@ -60,7 +60,7 @@ export function DisplayOptionsPanel({
   return (
     <Section title="Display Options" t={t}>
       <div style={{ marginBottom: "16px" }}>
-        <Label t={t}>Event visibility</Label>
+        <Label t={t}>Zichtbaarheid van het evenement</Label>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {(
             [

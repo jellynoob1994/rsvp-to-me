@@ -20,10 +20,10 @@ export function InviteEmail({
   const { date } = formatEventDateTime(event.startAt, event.endAt, event.timezone);
   const subtitle = event.locationName ? `${date} · ${event.locationName}` : date;
   return (
-    <EmailLayout theme={theme} preview={`${hostName} invited you to ${event.title}`}>
+    <EmailLayout theme={theme} preview={`${hostName} nodigt je uit voor ${event.title}`}>
       <Hero
         theme={theme}
-        kicker="You're invited"
+        kicker="Je bent uitgenodigd"
         title={event.title}
         subtitle={subtitle}
         showCoverImage={toggles.showCoverImage}
@@ -82,7 +82,7 @@ export function InviteEmail({
                         href={`${rsvpBaseUrl}&status=GOING`}
                         variant="primary"
                       >
-                        {"I'm going 🎉"}
+                        {"Ik ben erbij 🎉"}
                       </EmailButton>
                       <p style={{ margin: "14px 0 0" }}>
                         {maybeEnabled ? (
@@ -96,7 +96,7 @@ export function InviteEmail({
                                 textDecoration: "underline",
                               }}
                             >
-                              Maybe
+                              Misschien
                             </a>
                             <span className="dm-text-muted" style={{ color: theme.textMuted }}>
                               {"   ·   "}
@@ -112,7 +112,7 @@ export function InviteEmail({
                             textDecoration: "underline",
                           }}
                         >
-                          {"Can't go"}
+                          {"Ik kan er niet bij zijn"}
                         </a>
                       </p>
                     </td>
@@ -127,7 +127,7 @@ export function InviteEmail({
                   rel="noopener noreferrer"
                   style={{ color: theme.accent, fontSize: "14px" }}
                 >
-                  View event details →
+                  Bekijk de evenementdetails →
                 </a>
               </p>
             </td>

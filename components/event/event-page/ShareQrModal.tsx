@@ -48,7 +48,7 @@ export function ShareQrModal({
           margin: "0 0 16px",
         }}
       >
-        Event QR Code
+        QR-code van het evenement
       </h3>
       <div
         style={{
@@ -62,7 +62,7 @@ export function ShareQrModal({
         {qrDataUrl ? (
           <NextImage
             src={qrDataUrl}
-            alt="Event QR Code"
+            alt="QR-code van het evenement"
             width={200}
             height={200}
             unoptimized
@@ -81,7 +81,7 @@ export function ShareQrModal({
               fontWeight: 600,
             }}
           >
-            Generating QR…
+            QR-code genereren…
           </div>
         )}
       </div>
@@ -99,7 +99,7 @@ export function ShareQrModal({
           fontWeight: 700,
         }}
       >
-        Close
+        Sluiten
       </button>
     </Dialog>
   );

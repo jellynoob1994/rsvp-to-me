@@ -102,7 +102,7 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
     };
   }, []);
 
-  const displayName = user?.name || user?.email?.split("@")[0] || "User";
+  const displayName = user?.name || user?.email?.split("@")[0] || "Gebruiker";
   const initials = displayName.slice(0, 2).toUpperCase();
   const closeMenu = () => setIsOpen(false);
   const toggleEffects = () => {
@@ -115,7 +115,7 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
       <button
         type="button"
         onClick={() => setIsOpen((open) => !open)}
-        aria-label={user ? "Open profile menu" : "Open menu"}
+        aria-label={user ? "Profielmenu openen" : "Menu openen"}
         aria-haspopup="menu"
         aria-expanded={isOpen}
         style={{
@@ -201,7 +201,7 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
       {isOpen && (
         <div
           role="menu"
-          aria-label={user ? "Profile menu" : "Viewer menu"}
+          aria-label={user ? "Profielmenu" : "Bezoekersmenu"}
           style={{
             position: "absolute",
             right: 0,
@@ -249,7 +249,7 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
                     textOverflow: "ellipsis",
                   }}
                 >
-                  {user.email || "No email"}
+                  {user.email || "Geen e-mailadres"}
                 </div>
                 {user.role !== "GUEST" && (
                   <span
@@ -269,36 +269,36 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
                       textTransform: "uppercase",
                     }}
                   >
-                    {user.role}
+                    {user.role === "ADMIN" ? "BEHEERDER" : user.role === "HOST" ? "ORGANISATOR" : "GAST"}
                   </span>
                 )}
               </div>
 
               {user.role === "ADMIN" && (
                 <MenuLink href="/admin" onSelect={closeMenu}>
-                  🛡️ Admin Panel
+                  🛡️ Beheerpaneel
                 </MenuLink>
               )}
               <MenuLink href="/dashboard" onSelect={closeMenu}>
-                🗓️ Event Dashboard
+                🗓️ Evenementenoverzicht
               </MenuLink>
               <MenuLink href="/profile" onSelect={closeMenu}>
-                ⚙️ Profile Settings
+                ⚙️ Profielinstellingen
               </MenuLink>
               {user.role !== "GUEST" && (
                 <MenuLink href="/help" onSelect={closeMenu}>
-                  📖 Help &amp; Guides
+                  📖 Hulp &amp; handleidingen
                 </MenuLink>
               )}
             </>
           ) : (
             <MenuLink href="/auth/sign-in" onSelect={closeMenu}>
-              🔑 Login
+              🔑 Inloggen
             </MenuLink>
           )}
 
           <MenuButton onSelect={toggleEffects}>
-            ✨ {effectsHidden ? "Show effects" : "Hide effects"}
+            ✨ {effectsHidden ? "Effecten tonen" : "Effecten verbergen"}
           </MenuButton>
 
           {user && (
@@ -308,7 +308,7 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
                 style={{ height: "1px", backgroundColor: APP_SHELL.navBorder, margin: "6px 0" }}
               />
               <MenuLink href="/auth/sign-out" onSelect={closeMenu}>
-                🚪 Sign Out
+                🚪 Uitloggen
               </MenuLink>
             </>
           )}
