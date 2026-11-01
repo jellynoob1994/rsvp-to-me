@@ -106,7 +106,8 @@ export function ThemesTab({
               padding: "40px 0",
             }}
           >
-            Er zijn nog geen thema&apos;s. Klik op &quot;+ Nieuw thema&quot; om er een toe te voegen.
+            Er zijn nog geen thema&apos;s. Klik op &quot;+ Nieuw thema&quot; om er een toe te
+            voegen.
           </p>
         ) : (
           <div
