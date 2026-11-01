@@ -89,7 +89,12 @@ describe("SEC-21(b): updateRSVP re-checks deadline and capacity", () => {
       rsvpRow({ status: "MAYBE", event: { slug: "party", capacity: null, rsvpDeadline: PAST } })
     );
 
-    const result = await updateRSVP("tok-1", { status: "GOING", plusOneCount: 0 });
+    const result = await updateRSVP("tok-1", {
+      status: "GOING",
+      plusOneCount: 0,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+    });
 
     expect(result.success).toBe(false);
     expect(result.error).toMatch(/deadline/i);
@@ -111,7 +116,12 @@ describe("SEC-21(b): updateRSVP re-checks deadline and capacity", () => {
     mockRsvpFindUnique.mockResolvedValue(rsvpRow({ status: "MAYBE" }));
     mockRsvpCount.mockResolvedValue(2); // capacity === 2, full
 
-    const result = await updateRSVP("tok-1", { status: "GOING", plusOneCount: 0 });
+    const result = await updateRSVP("tok-1", {
+      status: "GOING",
+      plusOneCount: 0,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+    });
 
     expect(result.success).toBe(false);
     expect(result.error).toMatch(/at capacity/i);
@@ -126,6 +136,8 @@ describe("SEC-21(b): updateRSVP re-checks deadline and capacity", () => {
     const result = await updateRSVP("tok-1", {
       status: "GOING",
       plusOneCount: 0,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       note: "running late",
     });
 
