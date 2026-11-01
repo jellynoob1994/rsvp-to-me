@@ -755,7 +755,7 @@ export function RsvpFlow({
             </div>
           )}
 
-          {/* Namen van introducés Inputs */}
+          {/* Naamvelden voor introducés */}
           {event.plusOneAllowed &&
             event.plusOneMax > 0 &&
             status === "GOING" &&
