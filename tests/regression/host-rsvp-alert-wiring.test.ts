@@ -101,6 +101,9 @@ function eventRow(overrides = {}) {
 const RSVP_INPUT = {
   eventId: EVENT_ID,
   guestName: "Alice",
+  guestEmail: "alice@example.com",
+  guestPhone: "+31612345678",
+  guestAddress: "Dorpsstraat 12, 1234 AB",
   status: "GOING" as const,
   plusOneCount: 1,
   note: "So excited!",

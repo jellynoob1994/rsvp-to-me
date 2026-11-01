@@ -369,6 +369,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -380,6 +382,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -396,6 +400,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -412,6 +418,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -424,6 +432,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -439,6 +449,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -456,6 +468,8 @@ describe("addRSVP", () => {
         eventId: EVENT_ID,
         guestName: "Alice",
         guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
         status: "GOING",
         plusOneCount: 0,
       })
@@ -473,6 +487,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -486,6 +502,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -509,6 +527,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -565,7 +585,7 @@ describe("updateRSVP", () => {
   });
 
   it("revalidates the event page", async () => {
-    await updateRSVP(EDIT_TOKEN, { status: "GOING", plusOneCount: 0 });
+    await updateRSVP(EDIT_TOKEN, { status: "GOING", guestPhone: "+31612345678", guestAddress: "Dorpsstraat 12, 1234 AB", plusOneCount: 0 });
     expect(revalidatePath).toHaveBeenCalledWith(`/e/${EVENT_SLUG}`);
   });
 });
@@ -602,7 +622,7 @@ describe("updateRsvpAsHost", () => {
   it("requires authentication before looking up an RSVP", async () => {
     mockGetSession.mockResolvedValue(null);
 
-    await expect(updateRsvpAsHost("rsvp-1", { status: "GOING", plusOneCount: 0 })).rejects.toThrow(
+    await expect(updateRsvpAsHost("rsvp-1", { status: "GOING", guestPhone: "+31612345678", guestAddress: "Dorpsstraat 12, 1234 AB", plusOneCount: 0 })).rejects.toThrow(
       "Unauthorized"
     );
     expect(mockRsvpFindUnique).not.toHaveBeenCalled();
@@ -1111,6 +1131,8 @@ describe("addRSVP — note field", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       note: "Bringing wine!",
@@ -1127,6 +1149,8 @@ describe("addRSVP — note field", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       note: "",
@@ -1143,6 +1167,8 @@ describe("addRSVP — note field", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -1165,7 +1191,7 @@ describe("updateRSVP — note field", () => {
   });
 
   it("includes note in the update when provided", async () => {
-    await updateRSVP(EDIT_TOKEN, { status: "GOING", plusOneCount: 0, note: "Can't wait!" });
+    await updateRSVP(EDIT_TOKEN, { status: "GOING", guestPhone: "+31612345678", guestAddress: "Dorpsstraat 12, 1234 AB", plusOneCount: 0, note: "Can't wait!" });
     expect(mockRsvpUpdate).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({ note: "Can't wait!" }),
@@ -1174,7 +1200,7 @@ describe("updateRSVP — note field", () => {
   });
 
   it("passes undefined for note when omitted, leaving the existing value intact", async () => {
-    await updateRSVP(EDIT_TOKEN, { status: "GOING", plusOneCount: 0 });
+    await updateRSVP(EDIT_TOKEN, { status: "GOING", guestPhone: "+31612345678", guestAddress: "Dorpsstraat 12, 1234 AB", plusOneCount: 0 });
     const data = mockRsvpUpdate.mock.calls[0][0].data;
     expect(data.note).toBeUndefined();
   });
@@ -1889,6 +1915,8 @@ describe("addRSVP questionnaire answers", () => {
       eventId: EVENT_ID,
       guestName: "Charlie",
       guestEmail: "guest-charlie@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       answers: { "field-1": "answer-1" },

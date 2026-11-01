@@ -77,6 +77,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
 
@@ -86,6 +88,8 @@ describe("addRSVP — real DB integration", () => {
     const rsvp = await db.rSVP.findUnique({ where: { id: result.id } });
     expect(rsvp).not.toBeNull();
     expect(rsvp!.guestName).toBe("Alice");
+    expect(rsvp!.guestPhone).toBe("+31612345678");
+    expect(rsvp!.guestAddress).toBe("Dorpsstraat 12, 1234 AB");
     expect(rsvp!.status).toBe("GOING");
     expect(rsvp!.approved).toBe(true);
   });
@@ -99,12 +103,16 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Guest 1",
       guestEmail: "guest-guest-1@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     await addRSVP({
       eventId: event.id,
       guestName: "Guest 2",
       guestEmail: "guest-guest-2@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
 
@@ -113,6 +121,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Guest 3",
       guestEmail: "guest-guest-3@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     expect(result).toMatchObject({ success: false, error: "Event is at capacity" });
@@ -135,6 +145,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Bob",
       guestEmail: "guest-bob@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     expect(result).toMatchObject({ success: true });
@@ -169,6 +181,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Alice",
       guestEmail: "alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     expect(result).toMatchObject({ success: true });
@@ -194,6 +208,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Alice",
       guestEmail: "alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     if (!result.success) throw new Error("Expected success");
@@ -208,6 +224,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: "does-not-exist",
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     expect(result).toMatchObject({ success: false, error: "Event not found" });
@@ -226,6 +244,8 @@ describe("addRSVP — real DB integration", () => {
       eventId: event.id,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     if (!result.success) throw new Error("Expected success");

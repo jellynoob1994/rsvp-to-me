@@ -19,6 +19,8 @@ test.describe("Guest RSVP flow", () => {
     // Fill in the required name and email address.
     await page.getByPlaceholder("Je naam (verplicht)").fill("E2E Guest");
     await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-guest@example.com");
+    await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+    await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
 
     // Submit
     await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
@@ -32,6 +34,8 @@ test.describe("Guest RSVP flow", () => {
     await page.goto(`/e/${EVENT_SLUG}/rsvp?status=GOING`);
     await page.getByPlaceholder("Je naam (verplicht)").fill("Edit Test Guest");
     await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-edit@example.com");
+    await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+    await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
     await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
     await expect(page.getByText("Je bent erbij!")).toBeVisible({ timeout: 10_000 });
 
@@ -63,6 +67,12 @@ test.describe("Guest RSVP flow", () => {
     await expect(submit).toBeDisabled();
 
     await email.fill("e2e-required@example.com");
+    await expect(submit).toBeDisabled();
+
+    await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+    await expect(submit).toBeDisabled();
+
+    await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
     await expect(submit).toBeEnabled();
   });
 
@@ -138,6 +148,10 @@ test.describe("#712 personalized invitation details journey", () => {
             "aria-pressed",
             "true"
           );
+          if (status === "GOING") {
+            await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+            await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
+          }
           await page.getByRole("button", { name: "RSVP wijzigen", exact: true }).click();
           await expect(page.getByText("RSVP bijgewerkt!", { exact: true })).toBeVisible();
 
