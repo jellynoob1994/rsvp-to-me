@@ -34,6 +34,7 @@ vi.mock("@/lib/db", () => ({
       groupBy: mockRsvpGroupBy,
     },
     user: { upsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }) },
+    invitation: { updateMany: vi.fn().mockResolvedValue({ count: 0 }) },
     rSVPAnswer: { createMany: vi.fn() },
     plusOneGuest: { createMany: vi.fn() },
   },
