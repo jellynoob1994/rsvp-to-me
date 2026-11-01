@@ -32,6 +32,15 @@ test.describe("Host event management", () => {
     await expect(page.getByRole("button", { name: /Display Options/ })).toBeVisible();
   });
 
+  test("host sees Dutch co-host management labels", async ({ page }) => {
+    await page.goto(`/e/${PUBLIC_EVENT_SLUG}/settings?section=hosts`);
+    await expect(page.getByText("Organisatoren", { exact: true })).toHaveCount(2);
+    await expect(page.getByText("AANGEPASTE WEERGAVENAAM")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Medeorganisator toevoegen" })
+    ).toBeVisible();
+  });
+
   test("host can create an event and see the published page", async ({ page }) => {
     await page.goto("/dashboard/events/new");
     await page.getByPlaceholder("Wine Night at Jane's").fill(CREATED_EVENT_TITLE);
