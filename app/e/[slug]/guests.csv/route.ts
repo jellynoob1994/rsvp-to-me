@@ -118,8 +118,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
       "Cache-Control": "private, no-store, no-cache, max-age=0, must-revalidate",
       "CDN-Cache-Control": "no-store",
       "Cloudflare-CDN-Cache-Control": "no-store",
-      "Pragma": "no-cache",
-      "Expires": "0",
+      Pragma: "no-cache",
+      Expires: "0",
     },
   });
 }
