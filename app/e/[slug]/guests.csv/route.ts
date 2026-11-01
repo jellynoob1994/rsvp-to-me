@@ -75,7 +75,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
     "Name",
     "Email",
     "Phone",
-    "Postal address",
+    "Postadres",
     "Status",
     "Plus Ones",
     "Approved",

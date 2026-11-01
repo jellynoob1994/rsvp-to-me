@@ -555,6 +555,25 @@ describe("updateRSVP", () => {
     });
   });
 
+  it("updates the phone number and postal address for a GOING RSVP", async () => {
+    const result = await updateRSVP(EDIT_TOKEN, {
+      status: "GOING",
+      plusOneCount: 0,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+    });
+
+    expect(result).toEqual({ success: true });
+    expect(mockRsvpUpdate).toHaveBeenCalledWith({
+      where: { editToken: EDIT_TOKEN },
+      data: expect.objectContaining({
+        status: "GOING",
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
+      }),
+    });
+  });
+
   it("returns error when RSVP is not found", async () => {
     mockRsvpFindUnique.mockResolvedValue(null);
     const result = await updateRSVP("bad-token", { status: "NO", plusOneCount: 0 });

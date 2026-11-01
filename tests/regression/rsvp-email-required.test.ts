@@ -5,7 +5,7 @@
 // cannot bypass the requirement.
 
 import { describe, it, expect } from "vitest";
-import { AddRsvpSchema } from "@/lib/schemas";
+import { AddRsvpSchema, UpdateRsvpSchema } from "@/lib/schemas";
 
 const base = {
   eventId: "evt-1",
@@ -56,6 +56,32 @@ describe("public RSVP email requirement", () => {
     });
     expect(validGoing.guestPhone).toBe("+31612345678");
     expect(validGoing.guestAddress).toBe("Dorpsstraat 12, 1234 AB");
+  });
+
+  it("requires phone and postal address for GOING RSVP edits too", () => {
+    expect(() => UpdateRsvpSchema.parse({ status: "GOING", plusOneCount: 0 })).toThrow();
+    expect(() =>
+      UpdateRsvpSchema.parse({
+        status: "GOING",
+        plusOneCount: 0,
+        guestPhone: "+31612345678",
+      })
+    ).toThrow();
+    expect(() =>
+      UpdateRsvpSchema.parse({
+        status: "GOING",
+        plusOneCount: 0,
+        guestAddress: "Dorpsstraat 12, 1234 AB",
+      })
+    ).toThrow();
+    expect(
+      UpdateRsvpSchema.parse({
+        status: "GOING",
+        plusOneCount: 0,
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
+      }).guestAddress
+    ).toBe("Dorpsstraat 12, 1234 AB");
   });
 
   it("keeps phone number and postal address optional for MAYBE and NO", () => {
