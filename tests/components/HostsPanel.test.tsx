@@ -58,7 +58,7 @@ describe("HostsPanel — Dutch localization", () => {
     expect(screen.getByText("Organisator")).toBeInTheDocument();
     expect(screen.getByText("AANGEPASTE WEERGAVENAAM")).toBeInTheDocument();
     expect(screen.getByText("Eline Wimmers")).toBeInTheDocument();
-    expect(screen.getByText("· Medeorganisator")).toBeInTheDocument();
+    expect(screen.getByText("eline@example.com · Medeorganisator")).toBeInTheDocument();
     expect(
       screen.getByText("AANGEPASTE WEERGAVENAAM MEDEORGANISATOR")
     ).toBeInTheDocument();
