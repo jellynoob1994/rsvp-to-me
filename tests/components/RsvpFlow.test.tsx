@@ -37,6 +37,38 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
+describe("RsvpFlow — Dutch plus-one labels", () => {
+  it("renders the plus-one count and name fields in Dutch", () => {
+    const { container } = render(
+      <RsvpFlow
+        event={{
+          ...baseEvent,
+          plusOneAllowed: true,
+          plusOneMax: 2,
+          plusOneNamesRequired: true,
+        }}
+        theme={testTheme}
+        initialStatus="GOING"
+        sessionUser={null}
+      />
+    );
+
+    const countSelect = container.querySelector("select");
+    expect(countSelect).not.toBeNull();
+    fireEvent.change(countSelect!, { target: { value: "2" } });
+
+    expect(
+      screen.getByRole("option", { name: "2 (2 personen — ik + 1 introducé)" })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Namen van introducés")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Naam van introducé 1 (verplicht)")).toBeInTheDocument();
+    expect(
+      screen.getByText("Let op: de namen van introducés zijn openbaar zichtbaar.")
+    ).toBeInTheDocument();
+    expect(screen.getByText("Bericht (optioneel — openbaar zichtbaar)")).toBeInTheDocument();
+  });
+});
+
 describe("RsvpFlow — new RSVP", () => {
   it("renders Going, Maybe, and Can't go buttons", () => {
     render(
@@ -150,7 +182,7 @@ describe("RsvpFlow — new RSVP", () => {
     fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
-      expect(screen.getByText("You're in!")).toBeInTheDocument();
+      expect(screen.getByText("Je bent erbij!")).toBeInTheDocument();
     });
     expect(container.querySelector('[data-effect-id="confetti"]')).toBeTruthy();
   });
@@ -198,12 +230,12 @@ describe("RsvpFlow — new RSVP", () => {
 // [89d70d] themes E2E audit): after a successful *create*, the Server Action's
 // automatic page refresh re-requests the RSC payload with the new ?token= URL,
 // so the server passes `existingRsvp` down and the still-mounted RsvpFlow
-// flipped `isEdit` to true — transiently swapping the "You're in!" success
+// flipped `isEdit` to true — transiently swapping the "Je bent erbij!" success
 // heading to "RSVP bijgewerkt!". The `justCreated` flag pins the create heading
 // for the RSVP created in this mount. The rerender below simulates the RSC
 // refresh delivering the new props.
 describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () => {
-  it("keeps 'You're in!' when existingRsvp arrives after a create", async () => {
+  it("keeps 'Je bent erbij!' when existingRsvp arrives after a create", async () => {
     mockAddRSVP.mockResolvedValue({ success: true, id: "rsvp-1", editToken: "tok-abc" });
 
     const { rerender } = render(
@@ -217,7 +249,7 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
     });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
     await waitFor(() => {
-      expect(screen.getByText("You're in!")).toBeInTheDocument();
+      expect(screen.getByText("Je bent erbij!")).toBeInTheDocument();
     });
 
     rerender(
@@ -239,7 +271,7 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
       />
     );
 
-    expect(screen.getByText("You're in!")).toBeInTheDocument();
+    expect(screen.getByText("Je bent erbij!")).toBeInTheDocument();
     expect(screen.queryByText("RSVP bijgewerkt!")).not.toBeInTheDocument();
   });
 });
