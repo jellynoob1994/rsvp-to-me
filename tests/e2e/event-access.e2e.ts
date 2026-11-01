@@ -17,23 +17,23 @@ test.describe("Event access controls", () => {
     page,
   }) => {
     await page.goto(`/e/${PASSWORD_EVENT_SLUG}`);
-    await page.getByPlaceholder("Event password").fill("incorrect-password");
-    await page.getByRole("button", { name: "Enter Event" }).click();
-    await expect(page.getByText("Incorrect password")).toBeVisible();
+    await page.getByPlaceholder("Wachtwoord van het evenement").fill("incorrect-password");
+    await page.getByRole("button", { name: "Evenement openen" }).click();
+    await expect(page.getByText("Onjuist wachtwoord")).toBeVisible();
 
-    await page.getByPlaceholder("Event password").fill(PASSWORD_EVENT_PASSWORD);
-    await page.getByRole("button", { name: "Enter Event" }).click();
+    await page.getByPlaceholder("Wachtwoord van het evenement").fill(PASSWORD_EVENT_PASSWORD);
+    await page.getByRole("button", { name: "Evenement openen" }).click();
     await expect(page.getByRole("heading", { name: "E2E Password Event" })).toBeVisible();
   });
 
   test("protected RSVP and guest-list routes redirect to the event gate", async ({ page }) => {
     await page.goto(`/e/${PASSWORD_EVENT_SLUG}/rsvp?status=GOING`);
     await expect(page).toHaveURL(new RegExp(`/e/${PASSWORD_EVENT_SLUG}$`));
-    await expect(page.getByPlaceholder("Event password")).toBeVisible();
+    await expect(page.getByPlaceholder("Wachtwoord van het evenement")).toBeVisible();
 
     await page.goto(`/e/${PASSWORD_EVENT_SLUG}/guests`);
     await expect(page).toHaveURL(new RegExp(`/e/${PASSWORD_EVENT_SLUG}$`));
-    await expect(page.getByPlaceholder("Event password")).toBeVisible();
+    await expect(page.getByPlaceholder("Wachtwoord van het evenement")).toBeVisible();
   });
 
   test("calendar and CSV endpoints enforce their access boundaries", async ({ request }) => {
