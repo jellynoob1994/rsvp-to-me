@@ -106,8 +106,8 @@ describe("guest-facing RSVP display", () => {
   it("starts declines collapsed and opens names without revealing a hidden count", () => {
     const { container } = renderCard();
     expect(screen.getByText("Going · 2")).toBeVisible();
-    expect(screen.getByText("Guests")).toBeVisible();
-    expect(screen.queryByText("Guests (15)")).not.toBeInTheDocument();
+    expect(screen.getByText("Gasten")).toBeVisible();
+    expect(screen.queryByText("Gasten (15)")).not.toBeInTheDocument();
     expect(screen.getByText("Declined Guest 0")).not.toBeVisible();
     fireEvent.click(container.querySelector("summary")!);
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
