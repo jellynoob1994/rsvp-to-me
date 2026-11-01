@@ -105,7 +105,7 @@ function renderFullList(fields = preferences, isHost = false) {
 describe("guest-facing RSVP display", () => {
   it("starts declines collapsed and opens names without revealing a hidden count", () => {
     const { container } = renderCard();
-    expect(screen.getByText("Going · 2")).toBeVisible();
+    expect(screen.getByText("Aanwezig · 2")).toBeVisible();
     expect(screen.getByText("Gasten")).toBeVisible();
     expect(screen.queryByText("Gasten (15)")).not.toBeInTheDocument();
     expect(screen.getByText("Declined Guest 0")).not.toBeVisible();
@@ -141,7 +141,7 @@ describe("guest-facing RSVP display", () => {
       true
     );
     expect(screen.getByText("Gasten (15)")).toBeVisible();
-    expect(screen.getByText("Going · 2")).toBeVisible();
+    expect(screen.getByText("Aanwezig · 2")).toBeVisible();
     expect(screen.getByText("Maybe · 1")).toBeVisible();
     expect(screen.getByText("Can't make it · 13")).toBeVisible();
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
