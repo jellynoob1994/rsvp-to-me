@@ -46,7 +46,8 @@ vi.mock("@/lib/db", () => ({
     },
     rSVPAnswer: { createMany: mockAnswerCreateMany, upsert: mockAnswerUpsert },
     plusOneGuest: { deleteMany: vi.fn(), createMany: vi.fn() },
-    user: { upsert: vi.fn() },
+    user: { upsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }) },
+    invitation: { updateMany: vi.fn().mockResolvedValue({ count: 0 }) },
   },
 }));
 vi.mock("@/lib/capacityLock", () => ({ withEventCapacityLock: mockWithLock }));
