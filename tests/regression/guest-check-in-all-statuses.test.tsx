@@ -83,9 +83,9 @@ describe("guest check-in for every RSVP status", () => {
       .closest<HTMLElement>("div[style*='margin-bottom']");
     expect(declinedCard).not.toBeNull();
     expect(invitedCard).not.toBeNull();
-    expect(within(declinedCard!).getByRole("button", { name: "Check in" })).not.toBeNull();
-    expect(within(invitedCard!).getByRole("button", { name: "Check in" })).not.toBeNull();
-    expect(within(invitedCard!).getByRole("button", { name: "Resend invite" })).not.toBeNull();
+    expect(within(declinedCard!).getByRole("button", { name: "Inchecken" })).not.toBeNull();
+    expect(within(invitedCard!).getByRole("button", { name: "Inchecken" })).not.toBeNull();
+    expect(within(invitedCard!).getByRole("button", { name: "Uitnodiging opnieuw versturen" })).not.toBeNull();
   });
 
   it("resends an unanswered invitation through the existing invite action", async () => {
@@ -105,7 +105,7 @@ describe("guest check-in for every RSVP status", () => {
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Resend invite" }));
+    fireEvent.click(screen.getByRole("button", { name: "Uitnodiging opnieuw versturen" }));
     await waitFor(() =>
       expect(mocks.inviteGuest).toHaveBeenCalledWith("event-1", "invited@example.com", null)
     );
