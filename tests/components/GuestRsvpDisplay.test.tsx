@@ -203,7 +203,9 @@ describe("grouped guest display settings", () => {
   it("explains the guest-only scope and groups separate name/count controls by response", () => {
     render(<Settings />);
     expect(
-      screen.getByText("Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen.")
+      screen.getByText(
+        "Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen."
+      )
     ).toBeVisible();
     for (const label of ["Going", "Maybe", "Can't make it"]) {
       const group = within(screen.getByRole("group", { name: label }));

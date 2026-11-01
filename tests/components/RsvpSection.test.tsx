@@ -144,9 +144,9 @@ describe("RsvpSection", () => {
 
       expect(screen.getByText(label)).toBeTruthy();
       expect(container.querySelector(`[data-rsvp-status-icon="${status}"]`)).toBeTruthy();
-      expect(screen.getByRole("link", { name: "Mijn aanmelding aanpassen" }).getAttribute("href")).toBe(
-        "/e/summer-party/rsvp?token=edit-token"
-      );
+      expect(
+        screen.getByRole("link", { name: "Mijn aanmelding aanpassen" }).getAttribute("href")
+      ).toBe("/e/summer-party/rsvp?token=edit-token");
     }
   );
 
