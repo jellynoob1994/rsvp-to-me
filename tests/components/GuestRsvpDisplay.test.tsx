@@ -142,8 +142,8 @@ describe("guest-facing RSVP display", () => {
     );
     expect(screen.getByText("Gasten (15)")).toBeVisible();
     expect(screen.getByText("Aanwezig · 2")).toBeVisible();
-    expect(screen.getByText("Maybe · 1")).toBeVisible();
-    expect(screen.getByText("Can't make it · 13")).toBeVisible();
+    expect(screen.getByText("Misschien · 1")).toBeVisible();
+    expect(screen.getByText("Afwezig · 13")).toBeVisible();
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
     expect(container.querySelector("details")).toBeNull();
   });
@@ -160,7 +160,7 @@ describe("guest-facing RSVP display", () => {
     renderFullList({ ...preferences, guestDeclinedCount: "CAPPED" });
     expect(screen.queryByText("Declined Guest 0")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Iedereen" })).toBeVisible();
-    const declined = screen.getByRole("button", { name: "Can't make it 3+" });
+    const declined = screen.getByRole("button", { name: "Afwezig 3+" });
     fireEvent.click(declined);
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
     expect(declined).toHaveTextContent("3+");
@@ -170,7 +170,7 @@ describe("guest-facing RSVP display", () => {
 
   it("removes omitted response types from the guest filters and cards", () => {
     renderFullList({ ...preferences, guestMaybeList: "HIDDEN", guestDeclinedList: "HIDDEN" });
-    expect(screen.queryByRole("button", { name: /Maybe|Can't make it/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Misschien|Afwezig/ })).not.toBeInTheDocument();
     expect(screen.queryByText("Maybe Guest")).not.toBeInTheDocument();
     expect(screen.queryByText("Declined Guest 0")).not.toBeInTheDocument();
   });
@@ -178,7 +178,7 @@ describe("guest-facing RSVP display", () => {
   it("preserves exact host management counts and names despite guest preferences", () => {
     renderFullList({ ...preferences, guestMaybeList: "HIDDEN", guestDeclinedList: "HIDDEN" }, true);
     expect(screen.getByRole("button", { name: "Iedereen 15" })).toBeVisible();
-    expect(screen.getByRole("button", { name: "Can't make it 13" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "Afwezig 13" })).toBeVisible();
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
     expect(screen.getByText("Maybe Guest")).toBeVisible();
   });
@@ -207,24 +207,24 @@ describe("grouped guest display settings", () => {
         "Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen."
       )
     ).toBeVisible();
-    for (const label of ["Going", "Maybe", "Can't make it"]) {
+    for (const label of ["Aanwezig", "Misschien", "Afwezig"]) {
       const group = within(screen.getByRole("group", { name: label }));
       expect(group.getAllByRole("combobox")).toHaveLength(2);
       expect(group.getByText("Guest preview · example responses")).toBeVisible();
     }
     expect(
-      within(screen.getByRole("group", { name: "Going" })).queryByRole("option", {
+      within(screen.getByRole("group", { name: "Aanwezig" })).queryByRole("option", {
         name: "Limit to 3+",
       })
     ).not.toBeInTheDocument();
-    fireEvent.change(screen.getByLabelText("Can't make it: count shown to guests"), {
+    fireEvent.change(screen.getByLabelText("Afwezig: count shown to guests"), {
       target: { value: "CAPPED" },
     });
-    expect(screen.getByText("Can't make it · 3+")).toBeVisible();
-    fireEvent.change(screen.getByLabelText("Can't make it: guest names"), {
+    expect(screen.getByText("Afwezig · 3+")).toBeVisible();
+    fireEvent.change(screen.getByLabelText("Afwezig: guest names"), {
       target: { value: "HIDDEN" },
     });
-    expect(screen.queryByLabelText("Can't make it: count shown to guests")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Afwezig: count shown to guests")).not.toBeInTheDocument();
     expect(screen.getByText("This response type is not displayed to guests.")).toBeVisible();
   });
 
