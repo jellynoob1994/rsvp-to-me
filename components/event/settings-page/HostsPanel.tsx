@@ -46,7 +46,7 @@ export function HostsPanel({
   sessionUser: SessionUser | null;
 }) {
   return (
-    <Section title="Hosts" t={t}>
+    <Section title="Organisatoren" t={t}>
       <div style={{ marginBottom: "20px" }}>
         {/* Main Host Section */}
         <div
@@ -63,16 +63,16 @@ export function HostsPanel({
               {(event.hostDisplayName ||
                 event.host.name ||
                 event.host.email ||
-                "H")[0].toUpperCase()}
+                "O")[0].toUpperCase()}
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: "14px", fontWeight: 600, color: t.textPrimary }}>
                 {isOwner
-                  ? `You ${event.hostDisplayName ? `(${event.hostDisplayName})` : ""}`
+                  ? `Jij ${event.hostDisplayName ? `(${event.hostDisplayName})` : ""}`
                   : event.host.name || event.host.email}
               </div>
               <div style={{ fontSize: "12px", color: t.textMuted }}>
-                {isOwner ? "Host" : `${event.host.email} · Host`}
+                {isOwner ? "Organisator" : `${event.host.email} · Organisator`}
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@ export function HostsPanel({
                   marginBottom: "4px",
                 }}
               >
-                DISPLAY NAME OVERRIDE
+                AANGEPASTE WEERGAVENAAM
               </label>
               <input
                 style={{ ...S.inp, fontSize: "12px", padding: "6px 10px" }}
@@ -121,11 +121,11 @@ export function HostsPanel({
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: "14px", fontWeight: 600, color: t.textPrimary }}>
                   {ch.user.id === sessionUser?.id
-                    ? `You ${ch.displayName ? `(${ch.displayName})` : ""}`
+                    ? `Jij ${ch.displayName ? `(${ch.displayName})` : ""}`
                     : ch.user.name || ch.user.email}
                 </div>
                 <div style={{ fontSize: "12px", color: t.textMuted }}>
-                  {ch.user.email} · Co-host
+                  {ch.user.email} · Medeorganisator
                 </div>
               </div>
               {(isOwner || ch.user.id === sessionUser?.id) && (
@@ -138,7 +138,7 @@ export function HostsPanel({
                     color: t.textMuted,
                     padding: "4px",
                   }}
-                  title={ch.user.id === sessionUser?.id ? "Remove yourself" : "Remove co-host"}
+                  title={ch.user.id === sessionUser?.id ? "Jezelf als medeorganisator verwijderen" : "Medeorganisator verwijderen"}
                 >
                   <X size={16} />
                 </button>
@@ -156,15 +156,15 @@ export function HostsPanel({
                   }}
                 >
                   {ch.user.id === sessionUser?.id
-                    ? "YOUR DISPLAY NAME OVERRIDE"
-                    : "CO-HOST DISPLAY NAME OVERRIDE"}
+                    ? "JOUW AANGEPASTE WEERGAVENAAM"
+                    : "AANGEPASTE WEERGAVENAAM MEDEORGANISATOR"}
                 </label>
                 <input
                   style={{ ...S.inp, fontSize: "12px", padding: "6px 10px" }}
                   placeholder={
                     ch.user.id === sessionUser?.id
-                      ? "Override your display name..."
-                      : "Override display name for this co-host..."
+                      ? "Pas je weergavenaam aan..."
+                      : "Pas de weergavenaam van deze medeorganisator aan..."
                   }
                   defaultValue={ch.displayName || ""}
                   onBlur={(e) => {
@@ -192,7 +192,7 @@ export function HostsPanel({
                 marginBottom: "8px",
               }}
             >
-              PENDING CO-HOST INVITATIONS
+              OPENSTAANDE UITNODIGINGEN VOOR MEDEORGANISATOREN
             </h4>
             {pendingInvitations.map((invite) => (
               <div
@@ -223,7 +223,7 @@ export function HostsPanel({
                       {invite.email}
                     </div>
                     <div style={{ fontSize: "12px", color: t.textMuted }}>
-                      Invited · Pending acceptance
+                      Uitgenodigd · Wacht op acceptatie
                     </div>
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export function HostsPanel({
                     color: t.textMuted,
                     padding: "4px",
                   }}
-                  title="Cancel invitation"
+                  title="Uitnodiging annuleren"
                 >
                   <X size={16} />
                 </button>
@@ -253,7 +253,7 @@ export function HostsPanel({
             onKeyDown={(e) => {
               if (e.key === "Enter") handleAddCohost();
             }}
-            placeholder="cohost@email.com"
+            placeholder="medeorganisator@voorbeeld.nl"
             style={{ ...S.inp, flex: 1 }}
           />
           <button
@@ -261,7 +261,7 @@ export function HostsPanel({
             disabled={isPending || !cohostEmail.trim()}
             style={S.smallBtn}
           >
-            Add Co-Host
+            Medeorganisator toevoegen
           </button>
         </div>
       )}
