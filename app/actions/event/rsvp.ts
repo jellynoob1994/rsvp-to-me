@@ -68,7 +68,7 @@ export async function verifyEventPassword(
 // instead of a thrown ZodError the form can't catch.
 function rsvpValidationError(issues: { path: PropertyKey[] }[]): string {
   const fields = new Set(issues.flatMap((i) => i.path.map(String)));
-  if (fields.has("guestEmail")) return "Please enter a valid email address.";
+  if (fields.has("guestEmail")) return "Vul een geldig e-mailadres in.";
   if (fields.has("guestPhone")) return "Please enter a valid phone number.";
   if (fields.has("answers")) return "One of your answers is too long (2000 characters max).";
   return "Invalid RSVP data.";

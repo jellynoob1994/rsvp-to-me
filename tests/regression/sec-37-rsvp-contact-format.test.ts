@@ -40,8 +40,11 @@ describe("SEC-37: AddRsvpSchema contact format validation", () => {
     expect(parsed.guestPhone).toBe("+1 (555) 123-4567");
   });
 
-  it("still accepts empty / omitted contact fields (anonymous RSVP)", () => {
-    expect(() => AddRsvpSchema.parse({ ...base, guestEmail: "", guestPhone: "" })).not.toThrow();
-    expect(() => AddRsvpSchema.parse(base)).not.toThrow();
+  it("keeps phone optional while requiring the email field", () => {
+    expect(() => AddRsvpSchema.parse({ ...base, guestEmail: "", guestPhone: "" })).toThrow();
+    expect(() => AddRsvpSchema.parse(base)).toThrow();
+
+    const parsed = AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com" });
+    expect(parsed.guestPhone).toBeUndefined();
   });
 });

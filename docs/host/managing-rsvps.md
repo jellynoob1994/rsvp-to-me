@@ -20,6 +20,8 @@ Gasten kiezen **Aanwezig**, **Misschien** of **Afwezig**. Je kunt de optie **Mis
 
 Bij de bevestiging van Aanwezig krijgt de gast naast de status een groen vinkje in een cirkel te zien.
 
+Bij iedere nieuwe aanmelding moet de gast een geldig e-mailadres invullen. Dit geldt voor Aanwezig, Misschien en Afwezig, ook wanneer e-mailmeldingen voor gasten zijn uitgeschakeld. Het telefoonnummer blijft optioneel. Bestaande gasten kunnen hun reactie via hun persoonlijke wijzigingslink aanpassen zonder het e-mailadres opnieuw in te vullen.
+
 ---
 
 ## Goedkeuring

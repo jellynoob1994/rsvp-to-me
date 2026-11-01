@@ -42,9 +42,9 @@ describe("RsvpFlow — new RSVP", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    expect(screen.getByText("Going")).toBeInTheDocument();
-    expect(screen.getByText("Maybe")).toBeInTheDocument();
-    expect(screen.getByText("Can't go")).toBeInTheDocument();
+    expect(screen.getByText("Aanwezig")).toBeInTheDocument();
+    expect(screen.getByText("Misschien")).toBeInTheDocument();
+    expect(screen.getByText("Afwezig")).toBeInTheDocument();
   });
 
   it("uses the shared 600px event width for the RSVP flow", () => {
@@ -79,32 +79,54 @@ describe("RsvpFlow — new RSVP", () => {
         sessionUser={null}
       />
     );
-    expect(screen.queryByText("Maybe")).not.toBeInTheDocument();
+    expect(screen.queryByText("Misschien")).not.toBeInTheDocument();
   });
 
   it("renders name input with required placeholder", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    expect(screen.getByPlaceholderText("Your name (required)")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Je naam (verplicht)")).toBeInTheDocument();
   });
 
   it("submit button is disabled when name is empty", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    const btn = screen.getByText("Confirm RSVP");
+    const btn = screen.getByText("RSVP bevestigen");
     expect(btn).toBeDisabled();
   });
 
-  it("submit button is enabled after typing a name", () => {
+  it("requires a valid email before enabling RSVP submission", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    fireEvent.change(screen.getByPlaceholderText("Your name (required)"), {
+    fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Alice" },
     });
-    expect(screen.getByText("Confirm RSVP")).not.toBeDisabled();
+    const submit = screen.getByText("RSVP bevestigen");
+    expect(submit).toBeDisabled();
+
+    const email = screen.getByPlaceholderText("E-mailadres (verplicht)");
+    expect(email).toBeRequired();
+    fireEvent.change(email, { target: { value: "not-an-email" } });
+    expect(submit).toBeDisabled();
+
+    fireEvent.change(email, { target: { value: "alice@example.com" } });
+    expect(submit).not.toBeDisabled();
+  });
+
+  it("requires an email even when guest email notifications are disabled", () => {
+    render(
+      <RsvpFlow
+        event={baseEvent}
+        theme={testTheme}
+        initialStatus="GOING"
+        sessionUser={null}
+        channelConfig={{ email: false, sms: false }}
+      />
+    );
+    expect(screen.getByPlaceholderText("E-mailadres (verplicht)")).toBeRequired();
   });
 
   it("shows confirmation screen after successful RSVP submission", async () => {
@@ -119,10 +141,13 @@ describe("RsvpFlow — new RSVP", () => {
         sessionUser={null}
       />
     );
-    fireEvent.change(screen.getByPlaceholderText("Your name (required)"), {
+    fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Alice" },
     });
-    fireEvent.click(screen.getByText("Confirm RSVP"));
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "alice@example.com" },
+    });
+    fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
       expect(screen.getByText("You're in!")).toBeInTheDocument();
@@ -136,10 +161,13 @@ describe("RsvpFlow — new RSVP", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    fireEvent.change(screen.getByPlaceholderText("Your name (required)"), {
+    fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Bob" },
     });
-    fireEvent.click(screen.getByText("Confirm RSVP"));
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "bob@example.com" },
+    });
+    fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
       expect(screen.getByText("Event is at capacity")).toBeInTheDocument();
@@ -152,13 +180,16 @@ describe("RsvpFlow — new RSVP", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="MAYBE" sessionUser={null} />
     );
-    fireEvent.change(screen.getByPlaceholderText("Your name (required)"), {
+    fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Carol" },
     });
-    fireEvent.click(screen.getByText("Confirm RSVP"));
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "carol@example.com" },
+    });
+    fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
-      expect(screen.getByText("Noted!")).toBeInTheDocument();
+      expect(screen.getByText("Genoteerd!")).toBeInTheDocument();
     });
   });
 });
@@ -168,7 +199,7 @@ describe("RsvpFlow — new RSVP", () => {
 // automatic page refresh re-requests the RSC payload with the new ?token= URL,
 // so the server passes `existingRsvp` down and the still-mounted RsvpFlow
 // flipped `isEdit` to true — transiently swapping the "You're in!" success
-// heading to "RSVP updated!". The `justCreated` flag pins the create heading
+// heading to "RSVP bijgewerkt!". The `justCreated` flag pins the create heading
 // for the RSVP created in this mount. The rerender below simulates the RSC
 // refresh delivering the new props.
 describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () => {
@@ -178,10 +209,13 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
     const { rerender } = render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    fireEvent.change(screen.getByPlaceholderText("Your name (required)"), {
+    fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Alice" },
     });
-    fireEvent.click(screen.getByText("Confirm RSVP"));
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "alice@example.com" },
+    });
+    fireEvent.click(screen.getByText("RSVP bevestigen"));
     await waitFor(() => {
       expect(screen.getByText("You're in!")).toBeInTheDocument();
     });
@@ -206,7 +240,7 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
     );
 
     expect(screen.getByText("You're in!")).toBeInTheDocument();
-    expect(screen.queryByText("RSVP updated!")).not.toBeInTheDocument();
+    expect(screen.queryByText("RSVP bijgewerkt!")).not.toBeInTheDocument();
   });
 });
 
@@ -233,7 +267,7 @@ describe("RsvpFlow — edit mode", () => {
     );
     expect(screen.getByText("Alice")).toBeInTheDocument();
     // Name input should not be present in edit mode
-    expect(screen.queryByPlaceholderText("Your name (required)")).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("Je naam (verplicht)")).not.toBeInTheDocument();
   });
 
   it("shows 'Update RSVP' button in edit mode", () => {
@@ -245,7 +279,7 @@ describe("RsvpFlow — edit mode", () => {
         sessionUser={null}
       />
     );
-    expect(screen.getByRole("button", { name: "Update RSVP" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "RSVP wijzigen" })).toBeInTheDocument();
   });
 
   it("shows 'RSVP updated!' on successful update", async () => {
@@ -259,10 +293,10 @@ describe("RsvpFlow — edit mode", () => {
         sessionUser={null}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "Update RSVP" }));
+    fireEvent.click(screen.getByRole("button", { name: "RSVP wijzigen" }));
 
     await waitFor(() => {
-      expect(screen.getByText("RSVP updated!")).toBeInTheDocument();
+      expect(screen.getByText("RSVP bijgewerkt!")).toBeInTheDocument();
     });
   });
 
@@ -278,9 +312,9 @@ describe("RsvpFlow — edit mode", () => {
       />
     );
 
-    expect(screen.getByText("RSVP editing is closed")).toBeInTheDocument();
-    expect(screen.getByText("Going · Party of 1")).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Update RSVP" })).not.toBeInTheDocument();
+    expect(screen.getByText("Je RSVP wijzigen is niet meer mogelijk")).toBeInTheDocument();
+    expect(screen.getByText("Aanwezig · Aantal personen: 1")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "RSVP wijzigen" })).not.toBeInTheDocument();
     expect(container.querySelector('[data-effect-id="confetti"]')).toBeTruthy();
   });
 
@@ -296,7 +330,7 @@ describe("RsvpFlow — edit mode", () => {
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Update RSVP" }));
+    fireEvent.click(screen.getByRole("button", { name: "RSVP wijzigen" }));
     await waitFor(() =>
       expect(mockUpdateRsvpAsHost).toHaveBeenCalledWith("rsvp-1", expect.any(Object), null)
     );

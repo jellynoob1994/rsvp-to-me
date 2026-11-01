@@ -76,6 +76,8 @@ type ExistingRsvp = {
   answers: { rsvpFieldId: string; value: string }[];
 };
 
+const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
 export function RsvpFlow({
   event,
   theme,
@@ -157,6 +159,7 @@ export function RsvpFlow({
 
   const canProceedStep1 =
     name.trim().length > 0 &&
+    (isEdit || isValidEmail(email)) &&
     (status !== "GOING" ||
       !event.plusOneNamesRequired ||
       plusOneNames.every((n) => n.trim().length > 0));
@@ -196,7 +199,7 @@ export function RsvpFlow({
               {
                 eventId: event.id,
                 guestName: name.trim(),
-                guestEmail: email.trim() || undefined,
+                guestEmail: email.trim(),
                 guestPhone: phone.trim() || undefined,
                 status,
                 plusOneCount,
@@ -698,15 +701,15 @@ export function RsvpFlow({
               )}
               {!isEdit && (
                 <>
-                  {channelConfig.email && (
-                    <input
-                      style={S.inp}
-                      type="email"
-                      placeholder="E-mailadres (optioneel, voor updates)"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  )}
+                  <input
+                    style={S.inp}
+                    type="email"
+                    autoComplete="email"
+                    required
+                    placeholder="E-mailadres (verplicht)"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                   {channelConfig.sms && (
                     <input
                       style={S.inp}
