@@ -64,11 +64,11 @@ vi.mock("@/lib/activity", () => ({
 }));
 vi.mock("@/lib/crypto", () => ({ getUnlockSignature: vi.fn() }));
 vi.mock("@/lib/email", () => ({
-  sendRsvpConfirmationEmail: vi.fn(),
+  sendRsvpConfirmationEmail: vi.fn().mockResolvedValue(undefined),
   sendApprovalEmail: vi.fn(),
 }));
 vi.mock("@/lib/sms", () => ({
-  sendRsvpConfirmationSms: vi.fn(),
+  sendRsvpConfirmationSms: vi.fn().mockResolvedValue(undefined),
   sendApprovalSms: vi.fn(),
 }));
 
