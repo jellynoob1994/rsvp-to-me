@@ -745,7 +745,7 @@ export function RsvpFlow({
                 onChange={(e) => setAddress(e.target.value)}
               />
               <p style={{ color: t.textMuted, fontSize: "11px", margin: "-4px 0 0" }}>
-                Telefoonnummer en postadres zijn alleen verplicht wanneer je Aanwezig kiest.
+                Dit adres gebruiken we om je fysieke kaart te versturen. Telefoonnummer en postadres zijn alleen verplicht wanneer je Aanwezig kiest.
               </p>
             </div>
           </div>
