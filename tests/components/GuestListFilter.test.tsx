@@ -28,6 +28,7 @@ const going = {
   guestName: "Ada Guest",
   guestEmail: "ada@example.com",
   guestPhone: "+15550001111",
+  guestAddress: "Dorpsstraat 12, 1234 AB",
   status: "GOING" as const,
   plusOneCount: 1,
   note: null,
@@ -85,6 +86,7 @@ describe("GuestListFilter attendance controls", () => {
       target: { value: "+15550001111" },
     });
     expect(screen.getByText("Ada Guest")).toBeInTheDocument();
+    expect(screen.getByText("Postadres: Dorpsstraat 12, 1234 AB")).toBeInTheDocument();
     expect(screen.queryByText("Maybe Guest")).not.toBeInTheDocument();
   });
 

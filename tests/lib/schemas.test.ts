@@ -162,10 +162,13 @@ describe("CreateEventSchema", () => {
 });
 
 describe("AddRsvpSchema", () => {
-  it("accepts required fields only", () => {
+  it("accepts a GOING RSVP with valid contact details", () => {
     const res = AddRsvpSchema.safeParse({
       eventId: "evt-123",
       guestName: "Bob",
+      guestEmail: "bob@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
     });
     expect(res.success).toBe(true);
@@ -178,6 +181,9 @@ describe("AddRsvpSchema", () => {
     const res = AddRsvpSchema.safeParse({
       eventId: "evt-123",
       guestName: "Bob",
+      guestEmail: "bob@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 11,
     });
@@ -224,7 +230,15 @@ describe("Zod schemas — property tests", () => {
         fc.string({ minLength: 1, maxLength: 100 }).filter((s) => s.trim().length > 0),
         fc.string({ minLength: 1 }).filter((s) => s.trim().length > 0),
         (status, guestName, eventId) => {
-          const res = AddRsvpSchema.safeParse({ eventId, guestName, status });
+          const res = AddRsvpSchema.safeParse({
+            eventId,
+            guestName,
+            guestEmail: "guest@example.com",
+            ...(status === "GOING"
+              ? { guestPhone: "+31612345678", guestAddress: "Dorpsstraat 12, 1234 AB" }
+              : {}),
+            status,
+          });
           expect(res.success).toBe(true);
         }
       )

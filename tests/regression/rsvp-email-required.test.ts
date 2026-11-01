@@ -27,17 +27,46 @@ describe("public RSVP email requirement", () => {
         ...base,
         status,
         guestEmail: " Alice@Example.com ",
+        ...(status === "GOING"
+          ? { guestPhone: "+31612345678", guestAddress: "Dorpsstraat 12, 1234 AB" }
+          : {}),
       });
       expect(parsed.guestEmail).toBe("alice@example.com");
     }
   );
 
-  it("does not require a phone number", () => {
-    const parsed = AddRsvpSchema.parse({
+  it("requires a phone number and postal address only for GOING", () => {
+    const going = {
       ...base,
-      status: "GOING",
+      status: "GOING" as const,
       guestEmail: "alice@example.com",
+    };
+    expect(() => AddRsvpSchema.parse(going)).toThrow();
+    expect(() =>
+      AddRsvpSchema.parse({ ...going, guestPhone: "+31612345678" })
+    ).toThrow();
+    expect(() =>
+      AddRsvpSchema.parse({ ...going, guestAddress: "Dorpsstraat 12, 1234 AB" })
+    ).toThrow();
+
+    const validGoing = AddRsvpSchema.parse({
+      ...going,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
     });
-    expect(parsed.guestPhone).toBeUndefined();
+    expect(validGoing.guestPhone).toBe("+31612345678");
+    expect(validGoing.guestAddress).toBe("Dorpsstraat 12, 1234 AB");
+  });
+
+  it("keeps phone number and postal address optional for MAYBE and NO", () => {
+    for (const status of ["MAYBE", "NO"] as const) {
+      const parsed = AddRsvpSchema.parse({
+        ...base,
+        status,
+        guestEmail: "alice@example.com",
+      });
+      expect(parsed.guestPhone).toBeUndefined();
+      expect(parsed.guestAddress).toBeUndefined();
+    }
   });
 });
