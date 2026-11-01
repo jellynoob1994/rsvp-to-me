@@ -16,6 +16,7 @@ const {
   mockCommentCreate,
   mockCommentFindFirst,
   mockUserFindUnique,
+  mockUserUpsert,
   mockInfoSectionCreate,
   mockInfoSectionFindUnique,
   mockInfoSectionDelete,
@@ -37,6 +38,7 @@ const {
   mockInvitationCreate,
   mockRsvpFindFirst,
   mockInvitationFindFirst,
+  mockInvitationUpdateMany,
   mockSendApprovalEmail,
   mockSendApprovalSms,
   mockInfoSectionUpdate,
@@ -63,6 +65,7 @@ const {
   mockCommentCreate: vi.fn(),
   mockCommentFindFirst: vi.fn(),
   mockUserFindUnique: vi.fn(),
+  mockUserUpsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }),
   mockInfoSectionCreate: vi.fn(),
   mockInfoSectionFindUnique: vi.fn(),
   mockInfoSectionDelete: vi.fn(),
@@ -84,6 +87,7 @@ const {
   mockInvitationCreate: vi.fn(),
   mockRsvpFindFirst: vi.fn(),
   mockInvitationFindFirst: vi.fn(),
+  mockInvitationUpdateMany: vi.fn().mockResolvedValue({ count: 0 }),
   mockSendApprovalEmail: vi.fn().mockResolvedValue(undefined),
   mockSendApprovalSms: vi.fn().mockResolvedValue(undefined),
   mockInfoSectionUpdate: vi.fn(),
@@ -103,7 +107,7 @@ const {
 vi.mock("@/lib/db", () => ({
   db: {
     event: { findUnique: mockEventFindUnique, update: mockEventUpdate },
-    user: { findFirst: mockUserFindFirst, create: mockUserCreate, findUnique: mockUserFindUnique },
+    user: { findFirst: mockUserFindFirst, create: mockUserCreate, findUnique: mockUserFindUnique, upsert: mockUserUpsert },
     rSVP: {
       create: mockRsvpCreate,
       count: mockRsvpCount,
@@ -146,6 +150,7 @@ vi.mock("@/lib/db", () => ({
       createMany: mockInvitationCreateMany,
       create: mockInvitationCreate,
       findFirst: mockInvitationFindFirst,
+      updateMany: mockInvitationUpdateMany,
     },
     activityEvent: { create: vi.fn().mockResolvedValue({}) },
     rSVPAnswer: { createMany: mockRsvpAnswerCreateMany, upsert: mockRsvpAnswerUpsert },
@@ -253,6 +258,9 @@ const BASE_EVENT = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockUserUpsert.mockResolvedValue({ id: "guest-user-1" });
+  mockInvitationUpdateMany.mockResolvedValue({ count: 0 });
+  mockRsvpFindFirst.mockResolvedValue(null);
 });
 
 // ── assertHostOrCohost (exercised via saveEventField; SEC-30) ─────────────────
