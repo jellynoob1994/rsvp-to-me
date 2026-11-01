@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { assertHostOrCohost } from "@/lib/auth-guards";
 
+// A guest export contains private RSVP data and must never be served from a
+// browser, Next.js, reverse-proxy, or CDN cache.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
@@ -110,6 +115,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition": `attachment; filename="${slug}-guests.csv"`,
+      "Cache-Control": "private, no-store, no-cache, max-age=0, must-revalidate",
+      "CDN-Cache-Control": "no-store",
+      "Cloudflare-CDN-Cache-Control": "no-store",
+      "Pragma": "no-cache",
+      "Expires": "0",
     },
   });
 }
