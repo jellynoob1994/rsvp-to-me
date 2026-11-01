@@ -140,7 +140,7 @@ describe("guest-facing RSVP display", () => {
       },
       true
     );
-    expect(screen.getByText("Guests (15)")).toBeVisible();
+    expect(screen.getByText("Gasten (15)")).toBeVisible();
     expect(screen.getByText("Going · 2")).toBeVisible();
     expect(screen.getByText("Maybe · 1")).toBeVisible();
     expect(screen.getByText("Can't make it · 13")).toBeVisible();
@@ -159,12 +159,12 @@ describe("guest-facing RSVP display", () => {
   it("keeps collapsed names out of All until the guest selects that response", () => {
     renderFullList({ ...preferences, guestDeclinedCount: "CAPPED" });
     expect(screen.queryByText("Declined Guest 0")).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "All" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "Iedereen" })).toBeVisible();
     const declined = screen.getByRole("button", { name: "Can't make it 3+" });
     fireEvent.click(declined);
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
     expect(declined).toHaveTextContent("3+");
-    fireEvent.click(screen.getByRole("button", { name: "All" }));
+    fireEvent.click(screen.getByRole("button", { name: "Iedereen" }));
     expect(screen.queryByText("Declined Guest 0")).not.toBeInTheDocument();
   });
 
@@ -177,7 +177,7 @@ describe("guest-facing RSVP display", () => {
 
   it("preserves exact host management counts and names despite guest preferences", () => {
     renderFullList({ ...preferences, guestMaybeList: "HIDDEN", guestDeclinedList: "HIDDEN" }, true);
-    expect(screen.getByRole("button", { name: "All 15" })).toBeVisible();
+    expect(screen.getByRole("button", { name: "Iedereen 15" })).toBeVisible();
     expect(screen.getByRole("button", { name: "Can't make it 13" })).toBeVisible();
     expect(screen.getByText("Declined Guest 0")).toBeVisible();
     expect(screen.getByText("Maybe Guest")).toBeVisible();
@@ -203,7 +203,7 @@ describe("grouped guest display settings", () => {
   it("explains the guest-only scope and groups separate name/count controls by response", () => {
     render(<Settings />);
     expect(
-      screen.getByText("Hosts and co-hosts always see all names and exact counts.")
+      screen.getByText("Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen.")
     ).toBeVisible();
     for (const label of ["Going", "Maybe", "Can't make it"]) {
       const group = within(screen.getByRole("group", { name: label }));
