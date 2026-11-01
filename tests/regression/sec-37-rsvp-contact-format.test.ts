@@ -17,7 +17,6 @@ const base = {
   guestName: "Alice",
   status: "GOING" as const,
   plusOneCount: 0,
-  guestAddress: "Dorpsstraat 12, 1234 AB",
 };
 
 describe("SEC-37: AddRsvpSchema contact format validation", () => {
