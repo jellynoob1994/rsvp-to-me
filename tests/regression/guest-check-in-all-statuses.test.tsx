@@ -85,7 +85,9 @@ describe("guest check-in for every RSVP status", () => {
     expect(invitedCard).not.toBeNull();
     expect(within(declinedCard!).getByRole("button", { name: "Inchecken" })).not.toBeNull();
     expect(within(invitedCard!).getByRole("button", { name: "Inchecken" })).not.toBeNull();
-    expect(within(invitedCard!).getByRole("button", { name: "Uitnodiging opnieuw versturen" })).not.toBeNull();
+    expect(
+      within(invitedCard!).getByRole("button", { name: "Uitnodiging opnieuw versturen" })
+    ).not.toBeNull();
   });
 
   it("resends an unanswered invitation through the existing invite action", async () => {

@@ -107,7 +107,12 @@ const {
 vi.mock("@/lib/db", () => ({
   db: {
     event: { findUnique: mockEventFindUnique, update: mockEventUpdate },
-    user: { findFirst: mockUserFindFirst, create: mockUserCreate, findUnique: mockUserFindUnique, upsert: mockUserUpsert },
+    user: {
+      findFirst: mockUserFindFirst,
+      create: mockUserCreate,
+      findUnique: mockUserFindUnique,
+      upsert: mockUserUpsert,
+    },
     rSVP: {
       create: mockRsvpCreate,
       count: mockRsvpCount,
