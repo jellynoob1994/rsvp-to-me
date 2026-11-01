@@ -16,8 +16,18 @@ export type GuestStatusDisplay = { list: GuestListDisplay; count: GuestCountDisp
 export type GuestRsvpDisplay = Record<GuestRsvpStatus, GuestStatusDisplay>;
 
 export const GUEST_RSVP_GROUPS = [
-  { status: "GOING", label: "Aanwezig", listField: "guestGoingList", countField: "guestGoingCount" },
-  { status: "MAYBE", label: "Misschien", listField: "guestMaybeList", countField: "guestMaybeCount" },
+  {
+    status: "GOING",
+    label: "Aanwezig",
+    listField: "guestGoingList",
+    countField: "guestGoingCount",
+  },
+  {
+    status: "MAYBE",
+    label: "Misschien",
+    listField: "guestMaybeList",
+    countField: "guestMaybeCount",
+  },
   {
     status: "NO",
     label: "Afwezig",
