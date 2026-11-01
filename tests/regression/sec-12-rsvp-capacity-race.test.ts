@@ -24,6 +24,8 @@ const { mockEventFindUnique, mockRsvpCount, mockRsvpCreate, mockRsvpFindFirst, m
 vi.mock("@/lib/db", () => ({
   db: {
     event: { findUnique: mockEventFindUnique },
+    user: { upsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }) },
+    invitation: { updateMany: vi.fn().mockResolvedValue({ count: 0 }) },
     rSVP: { count: mockRsvpCount, create: mockRsvpCreate, findFirst: mockRsvpFindFirst },
   },
 }));
