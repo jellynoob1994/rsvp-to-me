@@ -26,8 +26,12 @@ describe("SEC-37: AddRsvpSchema contact format validation", () => {
   });
 
   it("rejects a non-phone guestPhone", () => {
-    expect(() => AddRsvpSchema.parse({ ...base, guestPhone: "call me maybe" })).toThrow();
-    expect(() => AddRsvpSchema.parse({ ...base, guestPhone: "123" })).toThrow();
+    expect(() =>
+      AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com", guestPhone: "call me maybe" })
+    ).toThrow();
+    expect(() =>
+      AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com", guestPhone: "123" })
+    ).toThrow();
   });
 
   it("accepts valid contact info, lowercasing email", () => {
@@ -35,16 +39,19 @@ describe("SEC-37: AddRsvpSchema contact format validation", () => {
       ...base,
       guestEmail: "Alice@Example.com",
       guestPhone: "+1 (555) 123-4567",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
     });
     expect(parsed.guestEmail).toBe("alice@example.com");
     expect(parsed.guestPhone).toBe("+1 (555) 123-4567");
   });
 
-  it("keeps phone optional while requiring the email field", () => {
-    expect(() => AddRsvpSchema.parse({ ...base, guestEmail: "", guestPhone: "" })).toThrow();
-    expect(() => AddRsvpSchema.parse(base)).toThrow();
-
-    const parsed = AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com" });
+  it("keeps phone and address optional for MAYBE responses", () => {
+    const parsed = AddRsvpSchema.parse({
+      ...base,
+      status: "MAYBE",
+      guestEmail: "alice@example.com",
+    });
     expect(parsed.guestPhone).toBeUndefined();
+    expect(parsed.guestAddress).toBeUndefined();
   });
 });

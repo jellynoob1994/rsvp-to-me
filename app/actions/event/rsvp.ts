@@ -69,9 +69,13 @@ export async function verifyEventPassword(
 function rsvpValidationError(issues: { path: PropertyKey[] }[]): string {
   const fields = new Set(issues.flatMap((i) => i.path.map(String)));
   if (fields.has("guestEmail")) return "Vul een geldig e-mailadres in.";
-  if (fields.has("guestPhone")) return "Please enter a valid phone number.";
-  if (fields.has("answers")) return "One of your answers is too long (2000 characters max).";
-  return "Invalid RSVP data.";
+  if (fields.has("guestPhone") && fields.has("guestAddress")) {
+    return "Vul je telefoonnummer en postadres in.";
+  }
+  if (fields.has("guestAddress")) return "Vul je postadres in.";
+  if (fields.has("guestPhone")) return "Vul een geldig telefoonnummer in.";
+  if (fields.has("answers")) return "Een van je antwoorden is te lang (maximaal 2000 tekens).";
+  return "Ongeldige aanmeldgegevens.";
 }
 
 async function linkUnlinkedInvitation(
@@ -202,6 +206,8 @@ export async function addRSVP(rawInput: unknown, captchaToken?: string | null) {
         where: { id: existingInvited.id },
         data: {
           guestName: data.guestName,
+          guestPhone: data.guestPhone || null,
+          guestAddress: data.guestAddress || null,
           status: data.status,
           plusOneCount: data.plusOneCount,
           note: data.note || null,
@@ -215,7 +221,8 @@ export async function addRSVP(rawInput: unknown, captchaToken?: string | null) {
           eventId: data.eventId,
           guestName: data.guestName,
           guestEmail: data.guestEmail,
-          guestPhone: data.guestPhone,
+          guestPhone: data.guestPhone || null,
+          guestAddress: data.guestAddress || null,
           status: data.status,
           plusOneCount: data.plusOneCount,
           note: data.note || null,
@@ -398,6 +405,8 @@ export async function updateRSVP(
         plusOneCount: data.plusOneCount,
         responded: true,
         ...(data.note !== undefined && { note: data.note || null }),
+        ...(data.guestPhone !== undefined && { guestPhone: data.guestPhone || null }),
+        ...(data.guestAddress !== undefined && { guestAddress: data.guestAddress || null }),
       },
     });
     return { atCapacity: false as const };
@@ -485,6 +494,8 @@ export async function updateRsvpAsHost(
       plusOneCount: data.status === "GOING" ? data.plusOneCount : 0,
       responded: true,
       ...(data.note !== undefined && { note: data.note || null }),
+      ...(data.guestPhone !== undefined && { guestPhone: data.guestPhone || null }),
+      ...(data.guestAddress !== undefined && { guestAddress: data.guestAddress || null }),
     },
   });
 

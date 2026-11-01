@@ -51,12 +51,12 @@ Bekijk ook [gastenbeheer](docs/host/guest-list.md#voorbeeld-van-gastenbeheer) en
 
 ## Voor de installatie
 
-| Vereiste | Wat je kunt verwachten |
-|---|---|
-| Docker en Docker Compose | Het release-Compose-bestand start de app met PostgreSQL en Redis. Node.js hoeft niet op de host te worden geïnstalleerd. |
-| Een bereikbaar app-adres | Gebruik localhost voor een lokale test of een stabiel adres dat gasten kunnen bereiken voor een gedeelde installatie. |
-| E-mailbezorging | Configureer SMTP of een ondersteunde Cloudflare-provider voordat je in productie inlogt. Productie-images tonen geen inloglinks in logbestanden. |
-| Sms (optioneel) | Koppel Twilio als je wilt inloggen, uitnodigingen of updates via sms wilt versturen. |
+| Vereiste                 | Wat je kunt verwachten                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Docker en Docker Compose | Het release-Compose-bestand start de app met PostgreSQL en Redis. Node.js hoeft niet op de host te worden geïnstalleerd.                         |
+| Een bereikbaar app-adres | Gebruik localhost voor een lokale test of een stabiel adres dat gasten kunnen bereiken voor een gedeelde installatie.                            |
+| E-mailbezorging          | Configureer SMTP of een ondersteunde Cloudflare-provider voordat je in productie inlogt. Productie-images tonen geen inloglinks in logbestanden. |
+| Sms (optioneel)          | Koppel Twilio als je wilt inloggen, uitnodigingen of updates via sms wilt versturen.                                                             |
 
 Zie [Voorbeeldgegevens en schermafbeeldingen](docs/admin/sample-data.md) voor een lokale testinstallatie met gegevens. Daar worden de aangemaakte testaccounts en de ontwikkelwerkwijze voor inloggen uitgelegd.
 
@@ -138,14 +138,14 @@ Met deze stappen krijg je **RSVP to Me** aan de praat. Bekijk [docs/admin/instal
 
 Raadpleeg de onderstaande handleidingen voor gedetailleerde uitleg over functies, configuratie en beheer:
 
-| Handleiding | Beschrijving |
-|---|---|
-| [Installatiehandleiding](docs/admin/installation.md) | Volledige installatie, Docker, gegevensback-ups en HTTPS-reverse-proxy’s. |
-| [Configuratieoverzicht](docs/admin/configuration.md) | Overzicht en uitleg van alle omgevingsvariabelen. |
-| [E-mail instellen](docs/admin/email.md) | SMTP instellen (Gmail, Outlook, SES enz.) of Cloudflare Email Routing. |
-| [Sms instellen](docs/admin/sms.md) | Twilio koppelen voor inloggen per sms, uitnodigingen en groepsberichten. |
-| [Handleiding voor beheerders](docs/admin/admin.md) | Gebruikersaccounts, evenementenmoderatie, uitnodigingscodes en systeeminstellingen beheren. |
-| [Handleidingen voor organisatoren](docs/host/) | Stapsgewijze uitleg over evenementen aanmaken, aanmeldingen beheren, uitnodigingen en meer. |
-| [Veilig upgraden](docs/admin/upgrading.md) | RSVP to Me bijwerken zonder databasegegevens te verliezen. |
-| [Voorbeeldgegevens en schermafbeeldingen](docs/admin/sample-data.md) | Testaccounts, lokaal inloggen en de checklist voor schermafbeeldingen. |
-| [Architectuuroverzicht](ARCHITECTURE.md) | Ontwikkelaarsoverzicht van runtimegrenzen, subsystemen, ingangspunten en plekken waar wijzigingen vaak nodig zijn. |
+| Handleiding                                                          | Beschrijving                                                                                                       |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [Installatiehandleiding](docs/admin/installation.md)                 | Volledige installatie, Docker, gegevensback-ups en HTTPS-reverse-proxy’s.                                          |
+| [Configuratieoverzicht](docs/admin/configuration.md)                 | Overzicht en uitleg van alle omgevingsvariabelen.                                                                  |
+| [E-mail instellen](docs/admin/email.md)                              | SMTP instellen (Gmail, Outlook, SES enz.) of Cloudflare Email Routing.                                             |
+| [Sms instellen](docs/admin/sms.md)                                   | Twilio koppelen voor inloggen per sms, uitnodigingen en groepsberichten.                                           |
+| [Handleiding voor beheerders](docs/admin/admin.md)                   | Gebruikersaccounts, evenementenmoderatie, uitnodigingscodes en systeeminstellingen beheren.                        |
+| [Handleidingen voor organisatoren](docs/host/)                       | Stapsgewijze uitleg over evenementen aanmaken, aanmeldingen beheren, uitnodigingen en meer.                        |
+| [Veilig upgraden](docs/admin/upgrading.md)                           | RSVP to Me bijwerken zonder databasegegevens te verliezen.                                                         |
+| [Voorbeeldgegevens en schermafbeeldingen](docs/admin/sample-data.md) | Testaccounts, lokaal inloggen en de checklist voor schermafbeeldingen.                                             |
+| [Architectuuroverzicht](ARCHITECTURE.md)                             | Ontwikkelaarsoverzicht van runtimegrenzen, subsystemen, ingangspunten en plekken waar wijzigingen vaak nodig zijn. |

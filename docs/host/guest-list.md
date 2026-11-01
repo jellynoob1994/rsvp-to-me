@@ -69,14 +69,14 @@ Open **Instellingen → Weergaveopties → Aanmeldingen tonen aan gasten**, dire
 
 **Deze instellingen gelden alleen voor gasten. Organisatoren en mede-organisatoren blijven op de evenementpagina en in het gastenbeheer de volledige lijsten en exacte aantallen zien.**
 
-| Instelling | Keuze | Wat gasten zien |
-|---|---|---|
-| Gastnamen | Direct tonen | Namen verschijnen zodra de pagina wordt geopend. |
-| Gastnamen | Tonen na een klik | Een ingeklapte kop kan worden geopend om de namen te tonen. In de volledige gastenlijst toont het selecteren van het bijbehorende antwoordfilter de namen; bij Iedereen beginnen alleen de reeds uitgeklapte lijsten open. |
-| Gastnamen | Niet tonen | Dit type reactie, de namen en het aantal worden weggelaten uit de gastenweergave. |
-| Aantal voor gasten | Exact aantal | Het werkelijke aantal staat naast het type reactie. |
-| Aantal voor gasten | Geen aantal | Het label van de reactie wordt zonder aantal getoond, ook nadat de namen zijn geopend. |
-| Aantal voor gasten | Maximaal 3+ tonen | Beschikbaar voor Afwezig: toon 1 of 2 en daarna 3+ bij drie of meer reacties, ook nadat de lijst is geopend. |
+| Instelling         | Keuze             | Wat gasten zien                                                                                                                                                                                                            |
+| ------------------ | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gastnamen          | Direct tonen      | Namen verschijnen zodra de pagina wordt geopend.                                                                                                                                                                           |
+| Gastnamen          | Tonen na een klik | Een ingeklapte kop kan worden geopend om de namen te tonen. In de volledige gastenlijst toont het selecteren van het bijbehorende antwoordfilter de namen; bij Iedereen beginnen alleen de reeds uitgeklapte lijsten open. |
+| Gastnamen          | Niet tonen        | Dit type reactie, de namen en het aantal worden weggelaten uit de gastenweergave.                                                                                                                                          |
+| Aantal voor gasten | Exact aantal      | Het werkelijke aantal staat naast het type reactie.                                                                                                                                                                        |
+| Aantal voor gasten | Geen aantal       | Het label van de reactie wordt zonder aantal getoond, ook nadat de namen zijn geopend.                                                                                                                                     |
+| Aantal voor gasten | Maximaal 3+ tonen | Beschikbaar voor Afwezig: toon 1 of 2 en daarna 3+ bij drie of meer reacties, ook nadat de lijst is geopend.                                                                                                               |
 
 De instelling voor aantallen verdwijnt wanneer je **Niet tonen** kiest. Totalen en filterbadges volgen dezelfde keuzes. Het gecombineerde totaal wordt weggelaten wanneer het anders een verborgen of begrensd aantal zou onthullen. Namen kunnen nog steeds worden geteld wanneer een lijst wordt geopend: dit zijn weergavekeuzes, geen extra toegangsregels.
 

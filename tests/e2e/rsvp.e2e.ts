@@ -19,12 +19,14 @@ test.describe("Guest RSVP flow", () => {
     // Fill in the required name and email address.
     await page.getByPlaceholder("Je naam (verplicht)").fill("E2E Guest");
     await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-guest@example.com");
+    await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+    await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
 
     // Submit
     await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
 
     // Should show confirmation
-    await expect(page.getByText("You're in!")).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText("Je bent erbij!")).toBeVisible({ timeout: 10_000 });
   });
 
   test("guest can edit RSVP via editToken in URL", async ({ page }) => {
@@ -32,8 +34,10 @@ test.describe("Guest RSVP flow", () => {
     await page.goto(`/e/${EVENT_SLUG}/rsvp?status=GOING`);
     await page.getByPlaceholder("Je naam (verplicht)").fill("Edit Test Guest");
     await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-edit@example.com");
+    await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+    await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
     await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
-    await expect(page.getByText("You're in!")).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText("Je bent erbij!")).toBeVisible({ timeout: 10_000 });
 
     // The URL should now contain an editToken
     const url = new URL(page.url());
@@ -63,6 +67,12 @@ test.describe("Guest RSVP flow", () => {
     await expect(submit).toBeDisabled();
 
     await email.fill("e2e-required@example.com");
+    await expect(submit).toBeDisabled();
+
+    await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
+    await expect(submit).toBeDisabled();
+
+    await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
     await expect(submit).toBeEnabled();
   });
 
@@ -131,13 +141,21 @@ test.describe("#712 personalized invitation details journey", () => {
           const rsvpUrl = new URL(page.url());
           expect(rsvpUrl.searchParams.get("token")).toBe(editToken);
           expect(rsvpUrl.searchParams.get("status")).toBe(status);
-          await expect(page.getByText("RSVP as", { exact: true })).toBeVisible();
+          await expect(page.getByText("Aanmelden als", { exact: true })).toBeVisible();
           await expect(page.getByText(guestName, { exact: true })).toBeVisible();
           await expect(page.getByPlaceholder("Je naam (verplicht)")).toHaveCount(0);
           await expect(page.getByRole("button", { name: label, exact: true })).toHaveAttribute(
             "aria-pressed",
             "true"
           );
+          if (status === "GOING") {
+            await page
+              .getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)")
+              .fill("+31612345678");
+            await page
+              .getByPlaceholder("Straat huisnummer, postcode")
+              .fill("Dorpsstraat 12, 1234 AB");
+          }
           await page.getByRole("button", { name: "RSVP wijzigen", exact: true }).click();
           await expect(page.getByText("RSVP bijgewerkt!", { exact: true })).toBeVisible();
 

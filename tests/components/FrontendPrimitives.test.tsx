@@ -38,8 +38,8 @@ describe("shared frontend primitives", () => {
       </div>
     );
 
-    expect(screen.getByRole("link", { name: /Going/ })).toHaveAttribute("href", "/rsvp");
-    const maybe = screen.getByRole("button", { name: /Maybe/ });
+    expect(screen.getByRole("link", { name: /Aanwezig/ })).toHaveAttribute("href", "/rsvp");
+    const maybe = screen.getByRole("button", { name: /Misschien/ });
     expect(maybe).toHaveAttribute("aria-pressed", "true");
     fireEvent.click(maybe);
     expect(onClick).toHaveBeenCalledOnce();
@@ -51,7 +51,7 @@ describe("shared frontend primitives", () => {
     render(<LocationFields value={value} onChange={onChange} theme={testTheme} submitNames />);
 
     expect(screen.getByDisplayValue("PHYSICAL")).toHaveAttribute("name", "locationType");
-    fireEvent.click(screen.getByRole("button", { name: /Virtual/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Online/ }));
     expect(onChange).toHaveBeenCalledWith({ ...value, type: "VIRTUAL" });
   });
 

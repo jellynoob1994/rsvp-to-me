@@ -24,6 +24,8 @@ const { mockEventFindUnique, mockRsvpCount, mockRsvpCreate, mockRsvpFindFirst, m
 vi.mock("@/lib/db", () => ({
   db: {
     event: { findUnique: mockEventFindUnique },
+    user: { upsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }) },
+    invitation: { updateMany: vi.fn().mockResolvedValue({ count: 0 }) },
     rSVP: { count: mockRsvpCount, create: mockRsvpCreate, findFirst: mockRsvpFindFirst },
   },
 }));
@@ -51,13 +53,13 @@ vi.mock("@/lib/rateLimit", () => ({
 }));
 vi.mock("@/lib/clientIp", () => ({ getClientIp: vi.fn().mockResolvedValue("127.0.0.1") }));
 vi.mock("@/lib/email", () => ({
-  sendRsvpConfirmationEmail: vi.fn(),
+  sendRsvpConfirmationEmail: vi.fn().mockResolvedValue(undefined),
   sendBlastEmail: vi.fn(),
   sendEventInviteEmail: vi.fn(),
   sendApprovalEmail: vi.fn(),
 }));
 vi.mock("@/lib/sms", () => ({
-  sendRsvpConfirmationSms: vi.fn(),
+  sendRsvpConfirmationSms: vi.fn().mockResolvedValue(undefined),
   sendSmsBlast: vi.fn(),
   sendApprovalSms: vi.fn(),
   sendEventInviteSms: vi.fn(),
@@ -96,7 +98,14 @@ describe("SEC-12: atomic RSVP capacity enforcement", () => {
   it("re-counts and writes inside the per-event lock", async () => {
     mockRsvpCount.mockResolvedValue(0);
 
-    const result = await addRSVP({ eventId: "evt-1", guestName: "Ada", status: "GOING" });
+    const result = await addRSVP({
+      eventId: "evt-1",
+      guestName: "Ada",
+      guestEmail: "ada@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+      status: "GOING",
+    });
 
     expect(result.success).toBe(true);
     // The write must be wrapped by the lock helper, keyed to the event.
@@ -109,7 +118,14 @@ describe("SEC-12: atomic RSVP capacity enforcement", () => {
   it("rejects when capacity is already reached, without writing", async () => {
     mockRsvpCount.mockResolvedValue(2); // capacity === 2
 
-    const result = await addRSVP({ eventId: "evt-1", guestName: "Ada", status: "GOING" });
+    const result = await addRSVP({
+      eventId: "evt-1",
+      guestName: "Ada",
+      guestEmail: "ada@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+      status: "GOING",
+    });
 
     expect(result.success).toBe(false);
     expect(result.error).toMatch(/at capacity/i);

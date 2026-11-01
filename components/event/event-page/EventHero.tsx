@@ -158,7 +158,9 @@ export function EventHero({
           fontSize: "18px",
         })}
         <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "4px" }}>
-          <span>Georganiseerd door {event.hostDisplayName ?? event.host.name ?? event.host.email}</span>
+          <span>
+            Georganiseerd door {event.hostDisplayName ?? event.host.name ?? event.host.email}
+          </span>
           {event.coHosts && event.coHosts.length === 1 && (
             <span>
               {" + "}

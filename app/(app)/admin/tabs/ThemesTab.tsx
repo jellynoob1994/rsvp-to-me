@@ -53,8 +53,8 @@ export function ThemesTab({
                 marginBottom: 0,
               }}
             >
-              Beheer de thema's die organisatoren kunnen kiezen bij de evenementinstellingen. Inactieve thema's
-              zijn niet zichtbaar voor organisatoren.
+              Beheer de thema&apos;s die organisatoren kunnen kiezen bij de evenementinstellingen.
+              Inactieve thema&apos;s zijn niet zichtbaar voor organisatoren.
             </p>
           </div>
           <button
@@ -106,7 +106,8 @@ export function ThemesTab({
               padding: "40px 0",
             }}
           >
-            Er zijn nog geen thema's. Klik op &quot;+ Nieuw thema&quot; om er een toe te voegen.
+            Er zijn nog geen thema&apos;s. Klik op &quot;+ Nieuw thema&quot; om er een toe te
+            voegen.
           </p>
         ) : (
           <div

@@ -59,29 +59,49 @@ export const CreateEventSchema = z.object({
   visibility: z.enum(["PUBLIC", "UNLISTED", "PRIVATE"]).default("UNLISTED"),
 });
 
-export const AddRsvpSchema = z.object({
-  eventId: z.string().trim().min(1),
-  guestName: z.string().trim().min(1).check(maxCodeUnits(100)),
-  // SEC-37: format-validated — guestEmail becomes a User upsert key and a mail
-  // recipient in addRSVP; guestPhone is normalized into a User lookup key.
-  guestEmail: z.string().trim().toLowerCase().email().check(maxCodeUnits(100)),
-  guestPhone: z
-    .string()
-    .trim()
-    .regex(GuestPhoneRegex)
-    .check(maxCodeUnits(30))
-    .optional()
-    .or(z.literal("")),
-  status: z.enum(["GOING", "MAYBE", "NO"]),
-  plusOneCount: z.number().int().min(0).max(10).default(0),
-  plusOneGuestNames: z.array(z.string().trim().check(maxCodeUnits(100))).optional(),
-  note: z.string().trim().check(maxCodeUnits(1000)).optional(),
-  // SEC-38: cap answer length (parity with note/comment caps); keys are further
-  // validated against the event's own rsvpFields in addRSVP/updateRSVP.
-  answers: z
-    .record(z.string().check(maxCodeUnits(100)), z.string().check(maxCodeUnits(2000)))
-    .optional(),
-});
+export const AddRsvpSchema = z
+  .object({
+    eventId: z.string().trim().min(1),
+    guestName: z.string().trim().min(1).check(maxCodeUnits(100)),
+    // SEC-37: format-validated — guestEmail becomes a User upsert key and a mail
+    // recipient in addRSVP; guestPhone is normalized into a User lookup key.
+    guestEmail: z.string().trim().toLowerCase().email().check(maxCodeUnits(100)),
+    guestPhone: z
+      .string()
+      .trim()
+      .regex(GuestPhoneRegex)
+      .check(maxCodeUnits(30))
+      .optional()
+      .or(z.literal("")),
+    guestAddress: z.string().trim().check(maxCodeUnits(250)).optional().or(z.literal("")),
+    status: z.enum(["GOING", "MAYBE", "NO"]),
+    plusOneCount: z.number().int().min(0).max(10).default(0),
+    plusOneGuestNames: z.array(z.string().trim().check(maxCodeUnits(100))).optional(),
+    note: z.string().trim().check(maxCodeUnits(1000)).optional(),
+    // SEC-38: cap answer length (parity with note/comment caps); keys are further
+    // validated against the event's own rsvpFields in addRSVP/updateRSVP.
+    answers: z
+      .record(z.string().check(maxCodeUnits(100)), z.string().check(maxCodeUnits(2000)))
+      .optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.status === "GOING") {
+      if (!data.guestPhone?.trim()) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["guestPhone"],
+          message: "Telefoonnummer is verplicht bij aanwezigheid.",
+        });
+      }
+      if (!data.guestAddress?.trim()) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["guestAddress"],
+          message: "Postadres is verplicht bij aanwezigheid.",
+        });
+      }
+    }
+  });
 
 // SEC-20: explicit allow-list for `saveEventSettings`. Server actions do not
 // enforce their TS parameter types at runtime, so without this schema a crafted
@@ -115,16 +135,43 @@ export const SaveEventSettingsSchema = z.object({
   hostAlertSms: z.boolean().optional(),
 });
 
-export const UpdateRsvpSchema = z.object({
-  status: z.enum(["GOING", "MAYBE", "NO"]),
-  plusOneCount: z.number().int().min(0).max(10).default(0),
-  plusOneGuestNames: z.array(z.string().trim().check(maxCodeUnits(100))).optional(),
-  note: z.string().trim().check(maxCodeUnits(1000)).optional(),
-  // SEC-38: same caps as AddRsvpSchema.
-  answers: z
-    .record(z.string().check(maxCodeUnits(100)), z.string().check(maxCodeUnits(2000)))
-    .optional(),
-});
+export const UpdateRsvpSchema = z
+  .object({
+    status: z.enum(["GOING", "MAYBE", "NO"]),
+    plusOneCount: z.number().int().min(0).max(10).default(0),
+    plusOneGuestNames: z.array(z.string().trim().check(maxCodeUnits(100))).optional(),
+    note: z.string().trim().check(maxCodeUnits(1000)).optional(),
+    guestPhone: z
+      .string()
+      .trim()
+      .regex(GuestPhoneRegex)
+      .check(maxCodeUnits(30))
+      .optional()
+      .or(z.literal("")),
+    guestAddress: z.string().trim().check(maxCodeUnits(250)).optional().or(z.literal("")),
+    // SEC-38: same caps as AddRsvpSchema.
+    answers: z
+      .record(z.string().check(maxCodeUnits(100)), z.string().check(maxCodeUnits(2000)))
+      .optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.status === "GOING") {
+      if (!data.guestPhone?.trim()) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["guestPhone"],
+          message: "Telefoonnummer is verplicht bij aanwezigheid.",
+        });
+      }
+      if (!data.guestAddress?.trim()) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["guestAddress"],
+          message: "Postadres is verplicht bij aanwezigheid.",
+        });
+      }
+    }
+  });
 
 export const AddWalkInSchema = z.object({
   eventId: z.string().trim().min(1),

@@ -91,7 +91,11 @@ export function EventsTab({
                           textTransform: "uppercase",
                         }}
                       >
-                        {e.visibility === "PUBLIC" ? "Openbaar" : e.visibility === "UNLISTED" ? "Niet vermeld" : "Privé"}
+                        {e.visibility === "PUBLIC"
+                          ? "Openbaar"
+                          : e.visibility === "UNLISTED"
+                            ? "Niet vermeld"
+                            : "Privé"}
                       </span>
                     </td>
                     <td style={{ padding: "16px", textAlign: "right" }}>

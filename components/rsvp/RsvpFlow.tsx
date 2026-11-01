@@ -69,6 +69,8 @@ type ExistingRsvp = {
   id: string;
   editToken: string;
   guestName: string;
+  guestPhone?: string | null;
+  guestAddress?: string | null;
   status: "GOING" | "MAYBE" | "NO";
   plusOneCount: number;
   note: string | null;
@@ -77,6 +79,7 @@ type ExistingRsvp = {
 };
 
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+const isValidPhone = (value: string) => /^\+?[0-9\s\-().]{7,}$/.test(value.trim());
 
 export function RsvpFlow({
   event,
@@ -110,7 +113,8 @@ export function RsvpFlow({
   );
   const [name, setName] = useState(existingRsvp?.guestName ?? "");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(existingRsvp?.guestPhone ?? "");
+  const [address, setAddress] = useState(existingRsvp?.guestAddress ?? "");
   const [note, setNote] = useState(existingRsvp?.note ?? "");
   const [plusOneNames, setPlusOneNames] = useState<string[]>(
     existingRsvp?.plusOneGuests
@@ -127,7 +131,7 @@ export function RsvpFlow({
   // After a create, the Server Action's automatic page refresh re-requests the
   // RSC payload with the new ?token= URL, so `existingRsvp` arrives on the next
   // render and flips `isEdit` while the success screen is showing. This flag
-  // pins the "You're in!" heading for the RSVP created in this mount.
+  // pins the "Je bent erbij!" heading for the RSVP created in this mount.
   const [justCreated, setJustCreated] = useState(false);
   const [savedEditToken, setSavedEditToken] = useState(existingRsvp?.editToken ?? "");
   const [linkCopied, setLinkCopied] = useState(false);
@@ -160,9 +164,12 @@ export function RsvpFlow({
   const canProceedStep1 =
     name.trim().length > 0 &&
     (isEdit || isValidEmail(email)) &&
+    (!phone.trim() || isValidPhone(phone)) &&
     (status !== "GOING" ||
-      !event.plusOneNamesRequired ||
-      plusOneNames.every((n) => n.trim().length > 0));
+      (isValidPhone(phone) &&
+        address.trim().length > 0 &&
+        address.trim().length <= 250 &&
+        (!event.plusOneNamesRequired || plusOneNames.every((n) => n.trim().length > 0))));
 
   const handleContinue = () => {
     if (step < maxStep) {
@@ -181,6 +188,8 @@ export function RsvpFlow({
             status,
             plusOneCount,
             plusOneGuestNames,
+            guestPhone: phone.trim(),
+            guestAddress: address.trim(),
             note: note.trim() || undefined,
             answers,
           };
@@ -190,7 +199,7 @@ export function RsvpFlow({
               : updateRSVP(existingRsvp.editToken, input, token)
           );
           if (!result.success) {
-            setError(result.error ?? "Something went wrong");
+            setError(result.error ?? "Er is iets misgegaan.");
             return;
           }
         } else {
@@ -200,7 +209,8 @@ export function RsvpFlow({
                 eventId: event.id,
                 guestName: name.trim(),
                 guestEmail: email.trim(),
-                guestPhone: phone.trim() || undefined,
+                guestPhone: phone.trim(),
+                guestAddress: address.trim(),
                 status,
                 plusOneCount,
                 plusOneGuestNames,
@@ -211,7 +221,7 @@ export function RsvpFlow({
             )
           );
           if (!result.success) {
-            setError(result.error ?? "Something went wrong");
+            setError(result.error ?? "Er is iets misgegaan.");
             return;
           }
           setJustCreated(true);
@@ -227,12 +237,12 @@ export function RsvpFlow({
         }
         setDone(true);
       } catch (reason) {
-        setError(reason instanceof Error ? reason.message : "Something went wrong");
+        setError(reason instanceof Error ? reason.message : "Er is iets misgegaan.");
       }
     });
   };
 
-  const dateStr = new Date(event.startAt).toLocaleDateString("en-US", {
+  const dateStr = new Date(event.startAt).toLocaleDateString("nl-NL", {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -289,7 +299,8 @@ export function RsvpFlow({
           >
             <div style={{ fontWeight: 700 }}>{existingRsvp.guestName}</div>
             <div style={{ color: t.textSecondary, marginTop: "4px", fontSize: "14px" }}>
-              {RSVP_STATUS_LABELS[existingRsvp.status]} · Aantal personen: {1 + existingRsvp.plusOneCount}
+              {RSVP_STATUS_LABELS[existingRsvp.status]} · Aantal personen:{" "}
+              {1 + existingRsvp.plusOneCount}
             </div>
             {existingRsvp.note && (
               <p style={{ color: t.textMuted, fontSize: "13px", margin: "10px 0 0" }}>
@@ -348,7 +359,7 @@ export function RsvpFlow({
             {isEdit && !justCreated
               ? "RSVP bijgewerkt!"
               : status === "GOING"
-                ? "You're in!"
+                ? "Je bent erbij!"
                 : status === "MAYBE"
                   ? "Genoteerd!"
                   : "Begrepen."}
@@ -390,8 +401,7 @@ export function RsvpFlow({
                   lineHeight: 1.5,
                 }}
               >
-                Since you didn&apos;t add an email or phone, bewaar deze link om je RSVP later te wijzigen
-                later:
+                Bewaar deze link om je aanmelding later te wijzigen:
               </p>
               <div style={{ display: "flex", gap: "8px" }}>
                 <input
@@ -642,7 +652,7 @@ export function RsvpFlow({
               padding: "12px 0",
             }}
           >
-            ← Back
+            ← Terug
           </a>
           <div style={{ marginBottom: "20px" }}>
             <div
@@ -685,9 +695,9 @@ export function RsvpFlow({
             </div>
           </div>
 
-          {/* RSVP as */}
+          {/* Aanmelden als */}
           <div style={S.group}>
-            <div style={S.label}>RSVP as</div>
+            <div style={S.label}>Aanmelden als</div>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {isEdit ? (
                 <div style={{ ...S.inp, color: t.textSecondary }}>{name}</div>
@@ -700,27 +710,49 @@ export function RsvpFlow({
                 />
               )}
               {!isEdit && (
-                <>
-                  <input
-                    style={S.inp}
-                    type="email"
-                    autoComplete="email"
-                    required
-                    placeholder="E-mailadres (verplicht)"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  {channelConfig.sms && (
-                    <input
-                      style={S.inp}
-                      type="tel"
-                      placeholder="Telefoonnummer (optioneel, voor sms-updates)"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  )}
-                </>
+                <input
+                  style={S.inp}
+                  type="email"
+                  autoComplete="email"
+                  required
+                  placeholder="E-mailadres (verplicht)"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               )}
+              <input
+                style={S.inp}
+                type="tel"
+                autoComplete="tel"
+                required={status === "GOING"}
+                placeholder={
+                  status === "GOING"
+                    ? "Telefoonnummer (verplicht bij aanwezigheid)"
+                    : channelConfig.sms
+                      ? "Telefoonnummer (optioneel, voor sms-updates)"
+                      : "Telefoonnummer (optioneel)"
+                }
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <input
+                style={S.inp}
+                type="text"
+                autoComplete="street-address"
+                required={status === "GOING"}
+                aria-label={
+                  status === "GOING"
+                    ? "Postadres (verplicht bij aanwezigheid)"
+                    : "Postadres (optioneel)"
+                }
+                placeholder="Straat huisnummer, postcode"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <p style={{ color: t.textMuted, fontSize: "11px", margin: "-4px 0 0" }}>
+                Dit adres gebruiken we om je fysieke kaart te versturen. Telefoonnummer en postadres
+                zijn alleen verplicht wanneer je Aanwezig kiest.
+              </p>
             </div>
           </div>
 
@@ -748,29 +780,29 @@ export function RsvpFlow({
                   <option key={i + 1} value={i + 1}>
                     {i + 1}{" "}
                     {i + 1 === 1
-                      ? "(Just me)"
-                      : `(${i + 1} total — me + ${i} guest${i > 1 ? "s" : ""})`}
+                      ? "(Alleen ik)"
+                      : `(${i + 1} personen — ik + ${i} ${i === 1 ? "introducé" : "introducés"})`}
                   </option>
                 ))}
               </select>
             </div>
           )}
 
-          {/* Plus One Names Inputs */}
+          {/* Naamvelden voor introducés */}
           {event.plusOneAllowed &&
             event.plusOneMax > 0 &&
             status === "GOING" &&
             plusOneNames.length > 0 && (
               <div style={S.group}>
                 <div style={S.label}>
-                  Plus One Names{" "}
+                  Namen van introducés{" "}
                   {event.plusOneNamesRequired ? (
                     <span style={{ color: "#ef4444", fontSize: "11px", textTransform: "none" }}>
-                      (Required)
+                      (Verplicht)
                     </span>
                   ) : (
                     <span style={{ color: t.textMuted, fontSize: "11px", textTransform: "none" }}>
-                      (Optional)
+                      (Optioneel)
                     </span>
                   )}
                 </div>
@@ -779,7 +811,7 @@ export function RsvpFlow({
                     <input
                       key={i}
                       style={S.inp}
-                      placeholder={`Guest ${i + 1} Name${event.plusOneNamesRequired ? " (required)" : ""}`}
+                      placeholder={`Naam van introducé ${i + 1}${event.plusOneNamesRequired ? " (verplicht)" : ""}`}
                       value={n}
                       onChange={(e) => {
                         const next = [...plusOneNames];
@@ -790,18 +822,18 @@ export function RsvpFlow({
                   ))}
                 </div>
                 <p style={{ fontSize: "12px", color: t.textMuted, margin: "8px 0 0" }}>
-                  Note: Plus one names will be public.
+                  Let op: de namen van introducés zijn openbaar zichtbaar.
                 </p>
               </div>
             )}
 
           {/* Note */}
           <div style={S.group}>
-            <div style={S.label}>Message (optional — will be public)</div>
+            <div style={S.label}>Bericht (optioneel — openbaar zichtbaar)</div>
             <textarea
               style={{ ...S.inp, resize: "none" } as React.CSSProperties}
               rows={3}
-              placeholder="Leave a note…"
+              placeholder="Laat een bericht achter…"
               value={note}
               onChange={(e) => setNote(e.target.value)}
             />

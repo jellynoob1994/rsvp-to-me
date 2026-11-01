@@ -37,6 +37,38 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
+describe("RsvpFlow — Dutch plus-one labels", () => {
+  it("renders the plus-one count and name fields in Dutch", () => {
+    const { container } = render(
+      <RsvpFlow
+        event={{
+          ...baseEvent,
+          plusOneAllowed: true,
+          plusOneMax: 2,
+          plusOneNamesRequired: true,
+        }}
+        theme={testTheme}
+        initialStatus="GOING"
+        sessionUser={null}
+      />
+    );
+
+    const countSelect = container.querySelector("select");
+    expect(countSelect).not.toBeNull();
+    fireEvent.change(countSelect!, { target: { value: "2" } });
+
+    expect(
+      screen.getByRole("option", { name: "2 (2 personen — ik + 1 introducé)" })
+    ).toBeInTheDocument();
+    expect(screen.getByText("Namen van introducés")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Naam van introducé 1 (verplicht)")).toBeInTheDocument();
+    expect(
+      screen.getByText("Let op: de namen van introducés zijn openbaar zichtbaar.")
+    ).toBeInTheDocument();
+    expect(screen.getByText("Bericht (optioneel — openbaar zichtbaar)")).toBeInTheDocument();
+  });
+});
+
 describe("RsvpFlow — new RSVP", () => {
   it("renders Going, Maybe, and Can't go buttons", () => {
     render(
@@ -113,7 +145,32 @@ describe("RsvpFlow — new RSVP", () => {
     expect(submit).toBeDisabled();
 
     fireEvent.change(email, { target: { value: "alice@example.com" } });
+    expect(submit).toBeDisabled();
+
+    const phone = screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)");
+    const address = screen.getByPlaceholderText("Straat huisnummer, postcode");
+    expect(phone).toBeRequired();
+    expect(address).toBeRequired();
+    fireEvent.change(phone, { target: { value: "+31612345678" } });
+    expect(submit).toBeDisabled();
+    fireEvent.change(address, { target: { value: "Dorpsstraat 12, 1234 AB" } });
     expect(submit).not.toBeDisabled();
+  });
+
+  it("requires phone and postal address only for Aanwezig", () => {
+    render(
+      <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
+    );
+    expect(
+      screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)")
+    ).toBeRequired();
+    expect(screen.getByPlaceholderText("Straat huisnummer, postcode")).toBeRequired();
+
+    fireEvent.click(screen.getByText("Misschien"));
+    expect(
+      screen.getByPlaceholderText("Telefoonnummer (optioneel, voor sms-updates)")
+    ).not.toBeRequired();
+    expect(screen.getByPlaceholderText("Straat huisnummer, postcode")).not.toBeRequired();
   });
 
   it("requires an email even when guest email notifications are disabled", () => {
@@ -147,10 +204,16 @@ describe("RsvpFlow — new RSVP", () => {
     fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
       target: { value: "alice@example.com" },
     });
+    fireEvent.change(screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)"), {
+      target: { value: "+31612345678" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Straat huisnummer, postcode"), {
+      target: { value: "Dorpsstraat 12, 1234 AB" },
+    });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
-      expect(screen.getByText("You're in!")).toBeInTheDocument();
+      expect(screen.getByText("Je bent erbij!")).toBeInTheDocument();
     });
     expect(container.querySelector('[data-effect-id="confetti"]')).toBeTruthy();
   });
@@ -166,6 +229,12 @@ describe("RsvpFlow — new RSVP", () => {
     });
     fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
       target: { value: "bob@example.com" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)"), {
+      target: { value: "+31612345678" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Straat huisnummer, postcode"), {
+      target: { value: "Dorpsstraat 12, 1234 AB" },
     });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
 
@@ -198,12 +267,12 @@ describe("RsvpFlow — new RSVP", () => {
 // [89d70d] themes E2E audit): after a successful *create*, the Server Action's
 // automatic page refresh re-requests the RSC payload with the new ?token= URL,
 // so the server passes `existingRsvp` down and the still-mounted RsvpFlow
-// flipped `isEdit` to true — transiently swapping the "You're in!" success
+// flipped `isEdit` to true — transiently swapping the "Je bent erbij!" success
 // heading to "RSVP bijgewerkt!". The `justCreated` flag pins the create heading
 // for the RSVP created in this mount. The rerender below simulates the RSC
 // refresh delivering the new props.
 describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () => {
-  it("keeps 'You're in!' when existingRsvp arrives after a create", async () => {
+  it("keeps 'Je bent erbij!' when existingRsvp arrives after a create", async () => {
     mockAddRSVP.mockResolvedValue({ success: true, id: "rsvp-1", editToken: "tok-abc" });
 
     const { rerender } = render(
@@ -215,9 +284,15 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
     fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
       target: { value: "alice@example.com" },
     });
+    fireEvent.change(screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)"), {
+      target: { value: "+31612345678" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Straat huisnummer, postcode"), {
+      target: { value: "Dorpsstraat 12, 1234 AB" },
+    });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
     await waitFor(() => {
-      expect(screen.getByText("You're in!")).toBeInTheDocument();
+      expect(screen.getByText("Je bent erbij!")).toBeInTheDocument();
     });
 
     rerender(
@@ -230,6 +305,8 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
           id: "rsvp-1",
           editToken: "tok-abc",
           guestName: "Alice",
+          guestPhone: "+31612345678",
+          guestAddress: "Dorpsstraat 12, 1234 AB",
           status: "GOING" as const,
           plusOneCount: 0,
           note: null,
@@ -239,7 +316,7 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
       />
     );
 
-    expect(screen.getByText("You're in!")).toBeInTheDocument();
+    expect(screen.getByText("Je bent erbij!")).toBeInTheDocument();
     expect(screen.queryByText("RSVP bijgewerkt!")).not.toBeInTheDocument();
   });
 });
@@ -249,6 +326,8 @@ describe("RsvpFlow — edit mode", () => {
     id: "rsvp-1",
     editToken: "tok-abc",
     guestName: "Alice",
+    guestPhone: "+31612345678",
+    guestAddress: "Dorpsstraat 12, 1234 AB",
     status: "GOING" as const,
     plusOneCount: 0,
     note: null,

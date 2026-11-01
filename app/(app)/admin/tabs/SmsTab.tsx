@@ -67,8 +67,8 @@ export function SmsTab({
                 maxWidth: "420px",
               }}
             >
-              Als dit is ingeschakeld, ontvangen gasten sms-bevestigingen, groepsberichten, herinneringen en uitnodigingen. Hiervoor zijn
-              de Twilio-gegevens hieronder nodig.
+              Als dit is ingeschakeld, ontvangen gasten sms-bevestigingen, groepsberichten,
+              herinneringen en uitnodigingen. Hiervoor zijn de Twilio-gegevens hieronder nodig.
             </div>
           </div>
           <button
@@ -289,8 +289,9 @@ export function SmsTab({
                 lineHeight: "1.4",
               }}
             >
-              Controleer de Twilio-verbinding door een test-sms te versturen. Let op: in de ontwikkelmodus worden de sms-gegevens
-              in het consolelogboek weergegeven als Twilio niet is ingesteld.
+              Controleer de Twilio-verbinding door een test-sms te versturen. Let op: in de
+              ontwikkelmodus worden de sms-gegevens in het consolelogboek weergegeven als Twilio
+              niet is ingesteld.
             </p>
 
             <div style={{ display: "flex", gap: "8px", alignItems: "flex-end" }}>

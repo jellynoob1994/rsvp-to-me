@@ -34,6 +34,7 @@ vi.mock("@/lib/db", () => ({
       groupBy: mockRsvpGroupBy,
     },
     user: { upsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }) },
+    invitation: { updateMany: vi.fn().mockResolvedValue({ count: 0 }) },
     rSVPAnswer: { createMany: vi.fn() },
     plusOneGuest: { createMany: vi.fn() },
   },
@@ -101,6 +102,9 @@ function eventRow(overrides = {}) {
 const RSVP_INPUT = {
   eventId: EVENT_ID,
   guestName: "Alice",
+  guestEmail: "alice@example.com",
+  guestPhone: "+31612345678",
+  guestAddress: "Dorpsstraat 12, 1234 AB",
   status: "GOING" as const,
   plusOneCount: 1,
   note: "So excited!",

@@ -95,9 +95,17 @@ export default async function NewEventPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             {(
               [
-                ["UNLISTED", "Niet vermeld", "Alleen mensen met de link kunnen dit evenement bekijken"],
+                [
+                  "UNLISTED",
+                  "Niet vermeld",
+                  "Alleen mensen met de link kunnen dit evenement bekijken",
+                ],
                 ["PUBLIC", "Openbaar", "Iedereen kan dit evenement vinden en bekijken"],
-                ["PRIVATE", "Privé", "Alleen op uitnodiging — de organisator moet elke aanmelding goedkeuren"],
+                [
+                  "PRIVATE",
+                  "Privé",
+                  "Alleen op uitnodiging — de organisator moet elke aanmelding goedkeuren",
+                ],
               ] as const
             ).map(([val, label, desc]) => (
               <label

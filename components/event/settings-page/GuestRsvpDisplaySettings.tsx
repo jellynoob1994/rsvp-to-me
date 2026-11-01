@@ -34,7 +34,9 @@ export function GuestRsvpDisplaySettings({
       </h3>
       <p style={{ color: t.textSecondary, fontSize: "13px", lineHeight: 1.6 }}>
         Choose how guests see response lists and counts on the event page and the full guest list.{" "}
-        <strong>Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen.</strong>
+        <strong>
+          Organisatoren en medeorganisatoren zien altijd alle namen en exacte aantallen.
+        </strong>
       </p>
       <p style={{ color: t.textMuted, fontSize: "12px", lineHeight: 1.6 }}>
         Show immediately displays the names when the page opens. Show after a click lets guests open

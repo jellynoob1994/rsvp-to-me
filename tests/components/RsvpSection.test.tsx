@@ -91,11 +91,11 @@ describe("RsvpSection", () => {
     mockLayout();
     const { container } = renderSection();
 
-    expect(screen.getByRole("heading", { name: "Are you going?" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Kom je ook?" })).toBeTruthy();
     expect(container.querySelector(".lucide-calendar-check")).toBeTruthy();
-    expect(screen.getByText("Going")).toBeTruthy();
-    expect(screen.getByText("Maybe")).toBeTruthy();
-    expect(screen.getByText("Can't go")).toBeTruthy();
+    expect(screen.getByText("Aanwezig")).toBeTruthy();
+    expect(screen.getByText("Misschien")).toBeTruthy();
+    expect(screen.getByText("Afwezig")).toBeTruthy();
 
     await waitFor(() =>
       expect(
@@ -108,8 +108,8 @@ describe("RsvpSection", () => {
     expect((container.querySelector("[data-rsvp-floating]") as HTMLElement).style.maxWidth).toBe(
       "568px"
     );
-    expect(screen.getByRole("link", { name: /Going/ }).style.minHeight).toBe("44px");
-    expect(screen.getByRole("link", { name: /Going/ }).style.flexDirection).toBe("row");
+    expect(screen.getByRole("link", { name: /Aanwezig/ }).style.minHeight).toBe("44px");
+    expect(screen.getByRole("link", { name: /Aanwezig/ }).style.flexDirection).toBe("row");
   });
 
   it("docks at its natural slot and floats again after the slot scrolls above the viewport", async () => {
@@ -129,9 +129,9 @@ describe("RsvpSection", () => {
   });
 
   it.each([
-    ["GOING", "You’re going"],
-    ["MAYBE", "Marked as maybe"],
-    ["NO", "Can’t make it"],
+    ["GOING", "Je bent aangemeld als aanwezig"],
+    ["MAYBE", "Je hebt misschien aangegeven"],
+    ["NO", "Je kunt niet komen"],
   ] as const)(
     "renders a compact %s response with its status icon and edit link",
     (status, label) => {
@@ -144,9 +144,9 @@ describe("RsvpSection", () => {
 
       expect(screen.getByText(label)).toBeTruthy();
       expect(container.querySelector(`[data-rsvp-status-icon="${status}"]`)).toBeTruthy();
-      expect(screen.getByRole("link", { name: "Edit my RSVP" }).getAttribute("href")).toBe(
-        "/e/summer-party/rsvp?token=edit-token"
-      );
+      expect(
+        screen.getByRole("link", { name: "Mijn aanmelding aanpassen" }).getAttribute("href")
+      ).toBe("/e/summer-party/rsvp?token=edit-token");
     }
   );
 
@@ -159,9 +159,9 @@ describe("RsvpSection", () => {
       rsvpApproved: false,
     });
 
-    expect(screen.getByText("RSVP received")).toBeTruthy();
-    expect(screen.getByText("Awaiting host approval")).toBeTruthy();
-    expect(screen.queryByText("You’re going")).toBeNull();
+    expect(screen.getByText("Aanmelding ontvangen")).toBeTruthy();
+    expect(screen.getByText("Wacht op goedkeuring van de organisator")).toBeTruthy();
+    expect(screen.queryByText("Je bent aangemeld als aanwezig")).toBeNull();
     expect(container.querySelector('[data-rsvp-status-icon="PENDING"]')).toBeTruthy();
   });
 
@@ -170,7 +170,7 @@ describe("RsvpSection", () => {
     const pastDeadline = new Date("2020-01-01T00:00:00Z");
     const unanswered = renderSection({}, { rsvpDeadline: pastDeadline });
 
-    expect(screen.getByText("RSVPs Closed")).toBeTruthy();
+    expect(screen.getByText("Aanmelden niet meer mogelijk")).toBeTruthy();
     expect(
       unanswered.container.querySelector("[data-rsvp-floating]")?.getAttribute("data-rsvp-floating")
     ).toBe("false");
@@ -180,8 +180,8 @@ describe("RsvpSection", () => {
       { guestEditToken: "edit-token", rsvpStatus: "NO", rsvpDone: true },
       { rsvpDeadline: pastDeadline }
     );
-    expect(screen.getByText("Can’t make it")).toBeTruthy();
-    expect(screen.queryByRole("link", { name: "Edit my RSVP" })).toBeNull();
+    expect(screen.getByText("Je kunt niet komen")).toBeTruthy();
+    expect(screen.queryByRole("link", { name: "Mijn aanmelding aanpassen" })).toBeNull();
     expect(
       submitted.container.querySelector("[data-rsvp-floating]")?.getAttribute("data-rsvp-floating")
     ).toBe("false");

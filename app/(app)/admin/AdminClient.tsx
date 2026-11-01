@@ -254,7 +254,8 @@ export default function AdminClient({
         setFeedback({ type: "success", message: "Back-upinstellingen bijgewerkt." });
       }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : "Bijwerken van back-upinstellingen is mislukt.";
+      const msg =
+        err instanceof Error ? err.message : "Bijwerken van back-upinstellingen is mislukt.";
       setFeedback({ type: "error", message: msg });
     } finally {
       setIsSavingBackupConfig(false);
@@ -404,7 +405,8 @@ export default function AdminClient({
         }));
         setFeedback({ type: "success", message: "Sms-instellingen opgeslagen." });
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Opslaan van sms-instellingen is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Opslaan van sms-instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -442,7 +444,8 @@ export default function AdminClient({
           setFeedback({ type: "success", message: "Gebruikersrol bijgewerkt!" });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Bijwerken van de gebruikersrol is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Bijwerken van de gebruikersrol is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -483,7 +486,8 @@ export default function AdminClient({
           });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Inplannen van verwijdering is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Inplannen van verwijdering is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -503,7 +507,8 @@ export default function AdminClient({
           setFeedback({ type: "success", message: `${name}'s account has been restored.` });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Annuleren van verwijdering is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Annuleren van verwijdering is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -559,7 +564,10 @@ export default function AdminClient({
         role: createUserRole,
       });
       if (res.success) {
-        setFeedback({ type: "success", message: "Gebruiker aangemaakt en welkomstmail verstuurd." });
+        setFeedback({
+          type: "success",
+          message: "Gebruiker aangemaakt en welkomstmail verstuurd.",
+        });
         setCreateUserOpen(false);
         setCreateUserName("");
         setCreateUserEmail("");
@@ -575,7 +583,9 @@ export default function AdminClient({
 
   const handleEventDelete = (eventId: string, title: string) => {
     if (
-      !confirm(`Weet je zeker dat je het evenement "${title}" wilt modereren en verwijderen? Dit kan niet ongedaan worden gemaakt.`)
+      !confirm(
+        `Weet je zeker dat je het evenement "${title}" wilt modereren en verwijderen? Dit kan niet ongedaan worden gemaakt.`
+      )
     ) {
       return;
     }
@@ -588,7 +598,8 @@ export default function AdminClient({
           setFeedback({ type: "success", message: "Evenement gemodereerd en verwijderd." });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Verwijderen van het evenement is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Verwijderen van het evenement is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -630,7 +641,8 @@ export default function AdminClient({
           setFeedback({ type: "success", message: "Uitnodigingscode ingetrokken." });
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Intrekken van de uitnodigingscode is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Intrekken van de uitnodigingscode is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -652,7 +664,8 @@ export default function AdminClient({
           ...prev,
           open_registration: nextVal === "true" ? "false" : "true",
         })); // Revert
-        const message = err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -674,7 +687,8 @@ export default function AdminClient({
           ...prev,
           email_enabled: nextVal === "true" ? "false" : "true",
         }));
-        const message = err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -696,7 +710,8 @@ export default function AdminClient({
           ...prev,
           sms_enabled: nextVal === "true" ? "false" : "true",
         }));
-        const message = err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
+        const message =
+          err instanceof Error ? err.message : "Bijwerken van de instellingen is mislukt.";
         setFeedback({ type: "error", message });
       }
     });
@@ -784,7 +799,11 @@ export default function AdminClient({
   };
 
   const handleDeleteThemePreset = async (id: string) => {
-    if (!confirm("Dit thema verwijderen? Evenementen die het gebruiken, behouden hun huidige kleuren."))
+    if (
+      !confirm(
+        "Dit thema verwijderen? Evenementen die het gebruiken, behouden hun huidige kleuren."
+      )
+    )
       return;
     try {
       await deleteThemePreset(id);
@@ -824,7 +843,8 @@ export default function AdminClient({
     },
     events: {
       title: "🎈 Evenementenbeheer",
-      description: "Controleer en modereer actieve evenementen. Verwijder evenementen die de platformregels overtreden.",
+      description:
+        "Controleer en modereer actieve evenementen. Verwijder evenementen die de platformregels overtreden.",
     },
     invites: {
       title: "🔑 Organisatie-instellingen",
@@ -850,7 +870,8 @@ export default function AdminClient({
     },
     docs: {
       title: "📚 Documentatie",
-      description: "Handleidingen voor installatie, configuratie en beheer van je eigen RSVP to Me-server.",
+      description:
+        "Handleidingen voor installatie, configuratie en beheer van je eigen RSVP to Me-server.",
     },
   };
 

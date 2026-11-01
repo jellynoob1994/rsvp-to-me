@@ -32,7 +32,11 @@ export function RsvpConfirmationEmail({
     </p>
   );
   return (
-    <EmailLayout theme={theme} preview={`Je aanmelding: ${dutchStatusLabel} — ${event.title}`} footer={footer}>
+    <EmailLayout
+      theme={theme}
+      preview={`Je aanmelding: ${dutchStatusLabel} — ${event.title}`}
+      footer={footer}
+    >
       <Hero
         theme={theme}
         kicker="Aanmelding bevestigd"

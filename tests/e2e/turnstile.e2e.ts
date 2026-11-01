@@ -15,6 +15,6 @@ test.describe("Cloudflare Turnstile E2E Verification", () => {
   }) => {
     await page.goto(`/e/${PUBLIC_EVENT_SLUG}`);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Going", exact: true })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Aanwezig", exact: true })).toBeVisible();
   });
 });

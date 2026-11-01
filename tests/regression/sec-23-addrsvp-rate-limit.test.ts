@@ -57,6 +57,8 @@ const validInput = {
   eventId: "evt-1",
   guestName: "Attacker",
   guestEmail: "victim@example.com",
+  guestPhone: "+31612345678",
+  guestAddress: "Dorpsstraat 12, 1234 AB",
   status: "GOING" as const,
   plusOneCount: 0,
 };

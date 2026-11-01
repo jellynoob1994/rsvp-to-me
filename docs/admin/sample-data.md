@@ -14,11 +14,11 @@ Gebruik de bestaande voorbeeldgegevens om een lokale testinstallatie te verkenne
 
 Het seedscript maakt drie accounts voor organisatoren, 20 voorbeeldgasten en 10 evenementen met verschillende thema’s en scenario’s voor gastenbeheer. De gegevens bevatten aanmeldingen, vragenlijsten, peilingen, toezeggingen op de meeneemlijst, reacties en check-ins.
 
-| Account | Rol | Gebruik |
-|---|---|---|
-| `host@test.com` | Organisator, met de naam Hoofdorganisator | Beheert de voorbeeldactiviteiten; gebruik dit account voor schermafbeeldingen van het dashboard, gastenbeheer en thema’s. |
-| `cohost@test.com` | Organisator | Mede-organisator van geselecteerde voorbeeldactiviteiten. |
-| `admin@test.com` | Beheerder | Om de beheertools te verkennen. |
+| Account           | Rol                                       | Gebruik                                                                                                                   |
+| ----------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `host@test.com`   | Organisator, met de naam Hoofdorganisator | Beheert de voorbeeldactiviteiten; gebruik dit account voor schermafbeeldingen van het dashboard, gastenbeheer en thema’s. |
+| `cohost@test.com` | Organisator                               | Mede-organisator van geselecteerde voorbeeldactiviteiten.                                                                 |
+| `admin@test.com`  | Beheerder                                 | Om de beheertools te verkennen.                                                                                           |
 
 De uitgebreide seed wordt alleen uitgevoerd wanneer `SEED_TEST_DATA=true` én de database nog geen evenementen bevat. Stel deze variabele in op de app-service vóór de eerste start van een afzonderlijke testinstallatie. Het broncode-Compose-bestand `docker-compose.yml` stelt deze al in op `true`; de releaseconfiguratie gebruikt standaard `false` via `.env.example`.
 
@@ -52,12 +52,12 @@ Gebruik `host@test.com` en de voorbeeldgegevens voor evenementen en gasten. Kies
 
 Vervang `<slug>` hieronder door de slug van het evenement. De seed bevat bijvoorbeeld `/e/launch-party-celebration`.
 
-| Schermafbeelding | Pagina en toestand | Wat erop moet staan | Locatie in de documentatie |
-|---|---|---|---|
-| Evenementpagina voor gasten | `/e/<slug>?preview=1` | Omslagafbeelding, thema, titel, datum/locatie en aanmeldknoppen. De voorbeeldmodus verbergt de bewerkingsbediening voor organisatoren. | Hoofd-README, evenementpagina voor gasten |
-| Dashboard voor organisatoren | `/dashboard`, ingelogd als organisator | Drie of vier voorbeeldkaarten met omslagafbeeldingen, aanwezigheidsaantallen en navigatie. | Hoofd-README, dashboard voor organisatoren |
-| Gastenbeheer | `/e/<slug>/guests`, ingelogd als organisator | Aanwezigheidsoverzicht, filters, meerdere voorbeeldgasten en check-inbediening. | [Handleiding voor gastenbeheer](https://github.com/joe-cole1/rsvp-to-me/blob/main/docs/host/guest-list.md#voorbeeld-van-gastenbeheer) |
-| Thema aanpassen | `/e/<slug>/settings?section=theme`, ingelogd als organisator | Thema’s en aanpassingsbediening. | [Handleiding voor het aanpassen van de pagina](https://github.com/joe-cole1/rsvp-to-me/blob/main/docs/host/customizing-your-page.md#voorbeeld-van-thema-aanpassing) |
+| Schermafbeelding             | Pagina en toestand                                           | Wat erop moet staan                                                                                                                    | Locatie in de documentatie                                                                                                                                          |
+| ---------------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Evenementpagina voor gasten  | `/e/<slug>?preview=1`                                        | Omslagafbeelding, thema, titel, datum/locatie en aanmeldknoppen. De voorbeeldmodus verbergt de bewerkingsbediening voor organisatoren. | Hoofd-README, evenementpagina voor gasten                                                                                                                           |
+| Dashboard voor organisatoren | `/dashboard`, ingelogd als organisator                       | Drie of vier voorbeeldkaarten met omslagafbeeldingen, aanwezigheidsaantallen en navigatie.                                             | Hoofd-README, dashboard voor organisatoren                                                                                                                          |
+| Gastenbeheer                 | `/e/<slug>/guests`, ingelogd als organisator                 | Aanwezigheidsoverzicht, filters, meerdere voorbeeldgasten en check-inbediening.                                                        | [Handleiding voor gastenbeheer](https://github.com/joe-cole1/rsvp-to-me/blob/main/docs/host/guest-list.md#voorbeeld-van-gastenbeheer)                               |
+| Thema aanpassen              | `/e/<slug>/settings?section=theme`, ingelogd als organisator | Thema’s en aanpassingsbediening.                                                                                                       | [Handleiding voor het aanpassen van de pagina](https://github.com/joe-cole1/rsvp-to-me/blob/main/docs/host/customizing-your-page.md#voorbeeld-van-thema-aanpassing) |
 
 Maak PNG-bestanden op normale browserzoom, met menu’s gesloten en zonder de browserranden. Een desktopvenster van ongeveer 1440 × 1000 is een goed startpunt. Zorg dat de smalle inhoudskolom van het evenement leesbaar blijft in plaats van een lange schermopname helemaal te verkleinen. Alle vier documentatieschermafbeeldingen zijn desktopweergaven.
 

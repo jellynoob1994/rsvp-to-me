@@ -44,11 +44,11 @@ Voordat je begint, heb je het volgende nodig:
 
 RSVP to Me draait als een set Docker-containers die zijn gedefinieerd in `docker-compose.release.yml`:
 
-| Container | Doel |
-|---|---|
-| `app` | De hoofdwebserver. Verzorgt de weergave van webpagina’s, responsieve afbeeldingsoptimalisatie, aanmeldingen van gasten, reacties en beheerdersacties. Draait ook de ingebouwde planner voor herinneringen en back-ups. Gebruikt poort `3000`. |
-| `postgres` | PostgreSQL 18-database met gebruikers, evenementen, aanmeldingen en applicatiegegevens. Alleen bereikbaar door andere containers op het interne Docker-netwerk; er wordt geen hostpoort gepubliceerd. |
-| `redis` | Redis voor sessiecache, snelheidslimieten en gedistribueerde vergrendeling van geplande taken. Alleen intern bereikbaar, net als `postgres`; er wordt geen hostpoort gepubliceerd. |
+| Container  | Doel                                                                                                                                                                                                                                          |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`      | De hoofdwebserver. Verzorgt de weergave van webpagina’s, responsieve afbeeldingsoptimalisatie, aanmeldingen van gasten, reacties en beheerdersacties. Draait ook de ingebouwde planner voor herinneringen en back-ups. Gebruikt poort `3000`. |
+| `postgres` | PostgreSQL 18-database met gebruikers, evenementen, aanmeldingen en applicatiegegevens. Alleen bereikbaar door andere containers op het interne Docker-netwerk; er wordt geen hostpoort gepubliceerd.                                         |
+| `redis`    | Redis voor sessiecache, snelheidslimieten en gedistribueerde vergrendeling van geplande taken. Alleen intern bereikbaar, net als `postgres`; er wordt geen hostpoort gepubliceerd.                                                            |
 
 ---
 

@@ -201,7 +201,8 @@ export default async function Home() {
                 );
                 const accent = resolved.accent;
                 const coverUrl = event.theme?.coverImageUrl;
-                const hostName = event.host?.name || event.host?.email?.split("@")[0] || "Organisator";
+                const hostName =
+                  event.host?.name || event.host?.email?.split("@")[0] || "Organisator";
                 const goingCount = event.rsvps.filter((r) => r.status === "GOING").length;
                 const commentCount = event.comments.length;
 

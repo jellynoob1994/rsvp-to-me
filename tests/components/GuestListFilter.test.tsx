@@ -28,6 +28,7 @@ const going = {
   guestName: "Ada Guest",
   guestEmail: "ada@example.com",
   guestPhone: "+15550001111",
+  guestAddress: "Dorpsstraat 12, 1234 AB",
   status: "GOING" as const,
   plusOneCount: 1,
   note: null,
@@ -78,19 +79,20 @@ describe("GuestListFilter attendance controls", () => {
   it("shows whole-party progress and searches host-only contact fields", () => {
     renderList();
 
-    expect(screen.getByText(/1 of 2 parties/)).toHaveTextContent(
-      "1 of 2 parties · 2 of 3 people arrived"
+    expect(screen.getByText(/1 van 2 gezelschappen/)).toHaveTextContent(
+      "1 van 2 gezelschappen · 2 van 3 personen aangekomen"
     );
-    fireEvent.change(screen.getByLabelText("Search guest list"), {
+    fireEvent.change(screen.getByLabelText("Gastenlijst doorzoeken"), {
       target: { value: "+15550001111" },
     });
     expect(screen.getByText("Ada Guest")).toBeInTheDocument();
+    expect(screen.getByText("Postadres: Dorpsstraat 12, 1234 AB")).toBeInTheDocument();
     expect(screen.queryByText("Maybe Guest")).not.toBeInTheDocument();
   });
 
   it("filters to eligible parties that have not arrived", () => {
     renderList();
-    fireEvent.click(screen.getByRole("button", { name: /Not arrived/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Nog niet aangekomen/ }));
 
     expect(screen.getByText("Maybe Guest")).toBeInTheDocument();
     expect(screen.queryByText("Ada Guest")).not.toBeInTheDocument();
@@ -106,9 +108,9 @@ describe("GuestListFilter attendance controls", () => {
     });
     renderList();
 
-    fireEvent.click(screen.getByRole("button", { name: "Check in" }));
-    expect(screen.getAllByText("✓ Arrived")).toHaveLength(2);
+    fireEvent.click(screen.getByRole("button", { name: "Inchecken" }));
+    expect(screen.getAllByText("✓ Aangekomen")).toHaveLength(2);
     await waitFor(() => expect(mocks.checkInRsvp).toHaveBeenCalledWith("maybe-1"));
-    await waitFor(() => expect(screen.getByText(/2 of 2 parties/)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/2 van 2 gezelschappen/)).toBeInTheDocument());
   });
 });

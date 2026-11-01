@@ -46,7 +46,8 @@ vi.mock("@/lib/db", () => ({
     },
     rSVPAnswer: { createMany: mockAnswerCreateMany, upsert: mockAnswerUpsert },
     plusOneGuest: { deleteMany: vi.fn(), createMany: vi.fn() },
-    user: { upsert: vi.fn() },
+    user: { upsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }) },
+    invitation: { updateMany: vi.fn().mockResolvedValue({ count: 0 }) },
   },
 }));
 vi.mock("@/lib/capacityLock", () => ({ withEventCapacityLock: mockWithLock }));
@@ -63,11 +64,11 @@ vi.mock("@/lib/activity", () => ({
 }));
 vi.mock("@/lib/crypto", () => ({ getUnlockSignature: vi.fn() }));
 vi.mock("@/lib/email", () => ({
-  sendRsvpConfirmationEmail: vi.fn(),
+  sendRsvpConfirmationEmail: vi.fn().mockResolvedValue(undefined),
   sendApprovalEmail: vi.fn(),
 }));
 vi.mock("@/lib/sms", () => ({
-  sendRsvpConfirmationSms: vi.fn(),
+  sendRsvpConfirmationSms: vi.fn().mockResolvedValue(undefined),
   sendApprovalSms: vi.fn(),
 }));
 
@@ -102,6 +103,9 @@ describe("SEC-38: answer value length cap", () => {
       AddRsvpSchema.parse({
         eventId: "evt-1",
         guestName: "Alice",
+        guestEmail: "alice@example.com",
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
         status: "GOING",
         plusOneCount: 0,
         answers: { "field-own": "x".repeat(2001) },
@@ -115,6 +119,9 @@ describe("SEC-38: answer keys scoped to the event's own questions", () => {
     await addRSVP({
       eventId: "evt-1",
       guestName: "Alice",
+      guestEmail: "alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       answers: { "field-own": "yes", "field-foreign": "injected" },
@@ -142,6 +149,8 @@ describe("SEC-38: answer keys scoped to the event's own questions", () => {
     await updateRSVP("tok-1", {
       status: "GOING",
       plusOneCount: 0,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       answers: { "field-own": "yes", "field-foreign": "injected" },
     });
 

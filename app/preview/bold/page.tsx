@@ -108,9 +108,9 @@ export default function BoldPreview() {
 
           {/* Description */}
           <p className="mb-5 leading-relaxed text-sm" style={{ color: t.textSecondary }}>
-            Maandelijkse wijnavond bij mij thuis! Neem een fles mee die je lekker vindt en vertel wat je
-            eraan waardeert. Ik zorg voor hapjes en voldoende glazen. Het thema van deze maand is
-            iets uit de Bourgogne. 🍇
+            Maandelijkse wijnavond bij mij thuis! Neem een fles mee die je lekker vindt en vertel
+            wat je eraan waardeert. Ik zorg voor hapjes en voldoende glazen. Het thema van deze
+            maand is iets uit de Bourgogne. 🍇
           </p>
 
           {/* RSVP section */}
@@ -176,7 +176,9 @@ export default function BoldPreview() {
           <div className="mb-5">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-black text-sm uppercase tracking-wide">Aanwezig (8)</h3>
-              <span style={{ color: t.textMuted, fontSize: "12px", fontWeight: 600 }}>3 misschien</span>
+              <span style={{ color: t.textMuted, fontSize: "12px", fontWeight: 600 }}>
+                3 misschien
+              </span>
             </div>
             <div className="flex gap-2 flex-wrap">
               {["Sarah", "Mike", "Emma", "James", "Priya", "Tom", "Leila", "Raj"].map((name) => (
@@ -200,8 +202,16 @@ export default function BoldPreview() {
             <h3 className="font-black text-sm uppercase tracking-wide mb-3">Sfeer 💬</h3>
             <div className="space-y-2 mb-3">
               {[
-                { name: "Sarah", msg: "Ik kan niet wachten! Ik neem een Pinot mee 🍷", time: "2 uur geleden" },
-                { name: "Mike", msg: "JA! Ik neem iets uit de Bourgogne mee!", time: "1 uur geleden" },
+                {
+                  name: "Sarah",
+                  msg: "Ik kan niet wachten! Ik neem een Pinot mee 🍷",
+                  time: "2 uur geleden",
+                },
+                {
+                  name: "Mike",
+                  msg: "JA! Ik neem iets uit de Bourgogne mee!",
+                  time: "1 uur geleden",
+                },
               ].map((c) => (
                 <div
                   key={c.name}

@@ -526,8 +526,8 @@ export function DashboardClient({
                   size={24}
                   style={{ display: "block", margin: "0 auto 8px", opacity: 0.5 }}
                 />
-                Er is nog geen activiteit. Wanneer gasten zich aanmelden of reacties plaatsen, verschijnen die
-                hier!
+                Er is nog geen activiteit. Wanneer gasten zich aanmelden of reacties plaatsen,
+                verschijnen die hier!
               </div>
             ) : (
               (() => {
@@ -1155,7 +1155,9 @@ function EventCard({
 
         {/* Hosted By & Avatars */}
         <div style={{ display: "flex", alignItems: "center", marginTop: "4px", gap: "6px" }}>
-          <span style={{ color: APP_SHELL.textSecondary, fontSize: "11px" }}>Georganiseerd door</span>
+          <span style={{ color: APP_SHELL.textSecondary, fontSize: "11px" }}>
+            Georganiseerd door
+          </span>
           <div style={{ display: "flex", alignItems: "center" }}>
             {/* Host avatar */}
             <AvatarBubble name={hostName} avatarUrl={item.host?.avatarUrl} accentColor={accent} />

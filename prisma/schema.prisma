@@ -312,6 +312,7 @@ model RSVP {
   guestName    String
   guestEmail   String?
   guestPhone   String?
+  guestAddress String?
   status       RSVPStatus
   plusOneCount Int        @default(0)
   // SEC-28: unguessable random token (v4 UUID, CSPRNG-backed). editToken is the

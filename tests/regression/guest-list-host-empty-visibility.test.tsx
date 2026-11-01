@@ -39,11 +39,11 @@ describe("host guest-list card visibility", () => {
   it("keeps the empty guest card and management links visible to hosts", () => {
     renderGuestList(emptyEvent, true);
 
-    expect(screen.getByText("Guests (0)")).not.toBeNull();
-    expect(screen.getByRole("link", { name: "View all →" }).getAttribute("href")).toBe(
+    expect(screen.getByText("Gasten (0)")).not.toBeNull();
+    expect(screen.getByRole("link", { name: "Alles bekijken →" }).getAttribute("href")).toBe(
       "/e/test-party/guests"
     );
-    expect(screen.getByRole("link", { name: "RSVP settings" }).getAttribute("href")).toBe(
+    expect(screen.getByRole("link", { name: "Aanmeldinstellingen" }).getAttribute("href")).toBe(
       "/e/test-party/settings?section=rsvp"
     );
   });
@@ -51,9 +51,9 @@ describe("host guest-list card visibility", () => {
   it("continues hiding an empty guest card from non-host viewers", () => {
     renderGuestList(emptyEvent, false);
 
-    expect(screen.queryByText("Guests (0)")).toBeNull();
-    expect(screen.queryByRole("link", { name: "View all →" })).toBeNull();
-    expect(screen.queryByRole("link", { name: "RSVP settings" })).toBeNull();
+    expect(screen.queryByText("Gasten (0)")).toBeNull();
+    expect(screen.queryByRole("link", { name: "Alles bekijken →" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Aanmeldinstellingen" })).toBeNull();
   });
 
   it("continues showing a non-empty public guest card without host settings", () => {
@@ -64,10 +64,10 @@ describe("host guest-list card visibility", () => {
 
     renderGuestList(publicEvent, false);
 
-    expect(screen.getByText("Guests (1)")).not.toBeNull();
-    expect(screen.getByRole("link", { name: "View all →" }).getAttribute("href")).toBe(
+    expect(screen.getByText("Gasten (1)")).not.toBeNull();
+    expect(screen.getByRole("link", { name: "Alles bekijken →" }).getAttribute("href")).toBe(
       "/e/test-party/guests"
     );
-    expect(screen.queryByRole("link", { name: "RSVP settings" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Aanmeldinstellingen" })).toBeNull();
   });
 });

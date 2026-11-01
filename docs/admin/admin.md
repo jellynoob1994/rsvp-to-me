@@ -79,13 +79,13 @@ Als er al een actieve beheerder is, kun je andere gebruikers promoveren:
 
 Het tabblad **Overzicht** toont een momentopname van je installatie:
 
-| Cijfer | Wat wordt geteld |
-| ---------------- | ------------------------------------------------------------- |
-| **Totaal aantal gebruikers** | Alle geregistreerde gasten, organisatoren en beheerders. |
-| **Totaal aantal evenementen** | Alle aangemaakte evenementpagina’s, zowel gepubliceerde als geannuleerde. |
-| **Totaal aantal aanmeldingen** | Het totaal van alle aanmeldingen van gasten voor alle evenementen. |
-| **Check-ins** | Actieve check-ins van complete gezelschappen die via de gastenlijsten zijn vastgelegd. |
-| **Uitnodigingscodes** | Het aantal actieve uitnodigingscodes voor registratie van organisatoren. |
+| Cijfer                         | Wat wordt geteld                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------- |
+| **Totaal aantal gebruikers**   | Alle geregistreerde gasten, organisatoren en beheerders.                               |
+| **Totaal aantal evenementen**  | Alle aangemaakte evenementpagina’s, zowel gepubliceerde als geannuleerde.              |
+| **Totaal aantal aanmeldingen** | Het totaal van alle aanmeldingen van gasten voor alle evenementen.                     |
+| **Check-ins**                  | Actieve check-ins van complete gezelschappen die via de gastenlijsten zijn vastgelegd. |
+| **Uitnodigingscodes**          | Het aantal actieve uitnodigingscodes voor registratie van organisatoren.               |
 
 ---
 
@@ -108,11 +108,11 @@ Wanneer je een gebruiker aanmaakt, wordt een eenmalige inloglink verstuurd die 4
 
 ### Gebruikersrollen
 
-| Rol | Beschrijving | Mogelijkheden |
-| ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `GUEST` | Standaard gastaccount. | Kan zich aanmelden, reageren op groepsupdates, reacties plaatsen, items op de meeneemlijst toezeggen en stemmen in peilingen. Kan geen evenementen organiseren. |
-| `HOST` | Standaard organisator van evenementen. | Alle gastmogelijkheden, plus evenementpagina’s aanmaken, gastenlijsten beheren, groepsupdates versturen, gasten uitnodigen en mede-organisatoren beheren. |
-| `ADMIN` | Systeembeheerder. | Alle mogelijkheden van organisatoren, plus toegang tot het beheerpaneel, alle evenementen zoeken en modereren, accounts verwijderen en systeeminstellingen beheren. |
+| Rol     | Beschrijving                           | Mogelijkheden                                                                                                                                                       |
+| ------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GUEST` | Standaard gastaccount.                 | Kan zich aanmelden, reageren op groepsupdates, reacties plaatsen, items op de meeneemlijst toezeggen en stemmen in peilingen. Kan geen evenementen organiseren.     |
+| `HOST`  | Standaard organisator van evenementen. | Alle gastmogelijkheden, plus evenementpagina’s aanmaken, gastenlijsten beheren, groepsupdates versturen, gasten uitnodigen en mede-organisatoren beheren.           |
+| `ADMIN` | Systeembeheerder.                      | Alle mogelijkheden van organisatoren, plus toegang tot het beheerpaneel, alle evenementen zoeken en modereren, accounts verwijderen en systeeminstellingen beheren. |
 
 > **Co-hosts:** a host can appoint other registered users as co-hosts of an individual event. Co-hosts are not a separate role — they get per-event management rights equivalent to the host's (edit event details, theme, cover image, settings and reminders; manage RSVPs, guest list, potluck, polls, questionnaire fields; send email/SMS blasts and updates; invite guests) with two exceptions that stay with the original host: **deleting the event** and **adding/removing co-hosts**. Server actions enforce this uniformly via a shared authorization check (SEC-30).
 
@@ -178,12 +178,12 @@ Wijzig de status naast een code in de tabel om deze meteen uit of weer in te sch
 
 ### Code uit een omgevingsvariabele versus codes uit het beheerpaneel
 
-| Eigenschap | `HOST_INVITE_CODE` (omgevingsvariabele) | Codes uit het beheerpaneel |
-| ---------------- | ---------------------------- | ------------------------ |
-| **Locatie** | Ingesteld in het bestand `.env` | Opgeslagen in de database |
-| **Vervaldatum** | Geen; altijd actief | Optionele vervaldatum |
-| **Gebruikslimiet** | Onbeperkt | Optioneel maximaal aantal gebruiken |
-| **Aantal** | Precies één code | Meerdere unieke codes |
+| Eigenschap         | `HOST_INVITE_CODE` (omgevingsvariabele) | Codes uit het beheerpaneel          |
+| ------------------ | --------------------------------------- | ----------------------------------- |
+| **Locatie**        | Ingesteld in het bestand `.env`         | Opgeslagen in de database           |
+| **Vervaldatum**    | Geen; altijd actief                     | Optionele vervaldatum               |
+| **Gebruikslimiet** | Onbeperkt                               | Optioneel maximaal aantal gebruiken |
+| **Aantal**         | Precies één code                        | Meerdere unieke codes               |
 
 ---
 

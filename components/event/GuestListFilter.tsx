@@ -29,6 +29,7 @@ type RSVP = {
   guestName: string;
   guestEmail: string | null;
   guestPhone: string | null;
+  guestAddress?: string | null;
   status: "GOING" | "MAYBE" | "NO" | "INVITED";
   plusOneCount: number;
   note: string | null;
@@ -165,7 +166,7 @@ export function GuestListFilter({
   const normalizedSearch = search.trim().toLowerCase();
   const displayedRsvps = normalizedSearch
     ? visibleRsvps.filter((r) =>
-        [r.guestName, r.guestEmail, r.guestPhone, ...r.plusOneGuests]
+        [r.guestName, r.guestEmail, r.guestPhone, r.guestAddress, ...r.plusOneGuests]
           .filter(Boolean)
           .some((value) => value!.toLowerCase().includes(normalizedSearch))
       )
@@ -374,7 +375,9 @@ export function GuestListFilter({
         await undoCheckIn(rsvp.id);
       } catch (error) {
         updateRsvp(rsvp.id, (item) => ({ ...item, checkIn: rsvp.checkIn }));
-        setAttendanceError(error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt.");
+        setAttendanceError(
+          error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt."
+        );
       } finally {
         setCheckInPendingId(null);
       }
@@ -425,7 +428,9 @@ export function GuestListFilter({
         await undoCheckIn(guest.rsvpId!);
       } catch (error) {
         updateInvitedRsvp(guest.rsvpId!, (item) => ({ ...item, checkIn: previousCheckIn }));
-        setAttendanceError(error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt.");
+        setAttendanceError(
+          error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt."
+        );
       } finally {
         setCheckInPendingId(null);
       }
@@ -446,7 +451,9 @@ export function GuestListFilter({
             : `Invite resent to ${guest.sentTo}.`
         );
       } catch (error) {
-        setInvitationMessage(error instanceof Error ? error.message : "Uitnodiging opnieuw versturen is mislukt.");
+        setInvitationMessage(
+          error instanceof Error ? error.message : "Uitnodiging opnieuw versturen is mislukt."
+        );
       } finally {
         setResendPendingId(null);
       }
@@ -507,7 +514,11 @@ export function GuestListFilter({
         setSearch(newRsvp.guestName);
         setHighlightedId(newRsvp.id);
       } catch (error) {
-        setAttendanceError(error instanceof Error ? error.message : "Deze gast ter plaatse kan niet worden toegevoegd.");
+        setAttendanceError(
+          error instanceof Error
+            ? error.message
+            : "Deze gast ter plaatse kan niet worden toegevoegd."
+        );
       }
     });
   };
@@ -825,13 +836,18 @@ export function GuestListFilter({
                     {r.note}
                   </p>
                 )}
-                {isHost && (r.guestEmail || r.guestPhone) && (
+                {isHost && (r.guestEmail || r.guestPhone || r.guestAddress) && (
                   <div style={{ marginTop: "4px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
                     {r.guestEmail && (
                       <span style={{ color: t.textMuted, fontSize: "12px" }}>{r.guestEmail}</span>
                     )}
                     {r.guestPhone && (
                       <span style={{ color: t.textMuted, fontSize: "12px" }}>{r.guestPhone}</span>
+                    )}
+                    {r.guestAddress && (
+                      <span style={{ color: t.textMuted, fontSize: "12px" }}>
+                        Postadres: {r.guestAddress}
+                      </span>
                     )}
                   </div>
                 )}
@@ -1164,7 +1180,9 @@ export function GuestListFilter({
                         fontFamily: "inherit",
                       }}
                     >
-                      {resendPendingId === inv.id ? "Bezig met verzenden…" : "Uitnodiging opnieuw versturen"}
+                      {resendPendingId === inv.id
+                        ? "Bezig met verzenden…"
+                        : "Uitnodiging opnieuw versturen"}
                     </button>
                     {inv.editToken && (
                       <>

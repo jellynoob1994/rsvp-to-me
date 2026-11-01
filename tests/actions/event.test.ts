@@ -16,6 +16,7 @@ const {
   mockCommentCreate,
   mockCommentFindFirst,
   mockUserFindUnique,
+  mockUserUpsert,
   mockInfoSectionCreate,
   mockInfoSectionFindUnique,
   mockInfoSectionDelete,
@@ -37,6 +38,7 @@ const {
   mockInvitationCreate,
   mockRsvpFindFirst,
   mockInvitationFindFirst,
+  mockInvitationUpdateMany,
   mockSendApprovalEmail,
   mockSendApprovalSms,
   mockInfoSectionUpdate,
@@ -63,6 +65,7 @@ const {
   mockCommentCreate: vi.fn(),
   mockCommentFindFirst: vi.fn(),
   mockUserFindUnique: vi.fn(),
+  mockUserUpsert: vi.fn().mockResolvedValue({ id: "guest-user-1" }),
   mockInfoSectionCreate: vi.fn(),
   mockInfoSectionFindUnique: vi.fn(),
   mockInfoSectionDelete: vi.fn(),
@@ -84,6 +87,7 @@ const {
   mockInvitationCreate: vi.fn(),
   mockRsvpFindFirst: vi.fn(),
   mockInvitationFindFirst: vi.fn(),
+  mockInvitationUpdateMany: vi.fn().mockResolvedValue({ count: 0 }),
   mockSendApprovalEmail: vi.fn().mockResolvedValue(undefined),
   mockSendApprovalSms: vi.fn().mockResolvedValue(undefined),
   mockInfoSectionUpdate: vi.fn(),
@@ -103,7 +107,12 @@ const {
 vi.mock("@/lib/db", () => ({
   db: {
     event: { findUnique: mockEventFindUnique, update: mockEventUpdate },
-    user: { findFirst: mockUserFindFirst, create: mockUserCreate, findUnique: mockUserFindUnique },
+    user: {
+      findFirst: mockUserFindFirst,
+      create: mockUserCreate,
+      findUnique: mockUserFindUnique,
+      upsert: mockUserUpsert,
+    },
     rSVP: {
       create: mockRsvpCreate,
       count: mockRsvpCount,
@@ -146,6 +155,7 @@ vi.mock("@/lib/db", () => ({
       createMany: mockInvitationCreateMany,
       create: mockInvitationCreate,
       findFirst: mockInvitationFindFirst,
+      updateMany: mockInvitationUpdateMany,
     },
     activityEvent: { create: vi.fn().mockResolvedValue({}) },
     rSVPAnswer: { createMany: mockRsvpAnswerCreateMany, upsert: mockRsvpAnswerUpsert },
@@ -253,6 +263,9 @@ const BASE_EVENT = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockUserUpsert.mockResolvedValue({ id: "guest-user-1" });
+  mockInvitationUpdateMany.mockResolvedValue({ count: 0 });
+  mockRsvpFindFirst.mockResolvedValue(null);
 });
 
 // ── assertHostOrCohost (exercised via saveEventField; SEC-30) ─────────────────
@@ -369,6 +382,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -380,6 +395,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -396,6 +413,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -412,6 +431,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -424,6 +445,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -439,6 +462,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -456,6 +481,8 @@ describe("addRSVP", () => {
         eventId: EVENT_ID,
         guestName: "Alice",
         guestEmail: "guest-alice@example.com",
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
         status: "GOING",
         plusOneCount: 0,
       })
@@ -473,6 +500,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -486,6 +515,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -509,6 +540,8 @@ describe("addRSVP", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -532,6 +565,25 @@ describe("updateRSVP", () => {
     expect(mockRsvpUpdate).toHaveBeenCalledWith({
       where: { editToken: EDIT_TOKEN },
       data: { status: "MAYBE", plusOneCount: 1, responded: true },
+    });
+  });
+
+  it("updates the phone number and postal address for a GOING RSVP", async () => {
+    const result = await updateRSVP(EDIT_TOKEN, {
+      status: "GOING",
+      plusOneCount: 0,
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+    });
+
+    expect(result).toEqual({ success: true });
+    expect(mockRsvpUpdate).toHaveBeenCalledWith({
+      where: { editToken: EDIT_TOKEN },
+      data: expect.objectContaining({
+        status: "GOING",
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
+      }),
     });
   });
 
@@ -565,7 +617,12 @@ describe("updateRSVP", () => {
   });
 
   it("revalidates the event page", async () => {
-    await updateRSVP(EDIT_TOKEN, { status: "GOING", plusOneCount: 0 });
+    await updateRSVP(EDIT_TOKEN, {
+      status: "GOING",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+      plusOneCount: 0,
+    });
     expect(revalidatePath).toHaveBeenCalledWith(`/e/${EVENT_SLUG}`);
   });
 });
@@ -602,9 +659,14 @@ describe("updateRsvpAsHost", () => {
   it("requires authentication before looking up an RSVP", async () => {
     mockGetSession.mockResolvedValue(null);
 
-    await expect(updateRsvpAsHost("rsvp-1", { status: "GOING", plusOneCount: 0 })).rejects.toThrow(
-      "Unauthorized"
-    );
+    await expect(
+      updateRsvpAsHost("rsvp-1", {
+        status: "GOING",
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
+        plusOneCount: 0,
+      })
+    ).rejects.toThrow("Unauthorized");
     expect(mockRsvpFindUnique).not.toHaveBeenCalled();
   });
 });
@@ -1111,6 +1173,8 @@ describe("addRSVP — note field", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       note: "Bringing wine!",
@@ -1127,6 +1191,8 @@ describe("addRSVP — note field", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       note: "",
@@ -1143,6 +1209,8 @@ describe("addRSVP — note field", () => {
       eventId: EVENT_ID,
       guestName: "Alice",
       guestEmail: "guest-alice@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
     });
@@ -1165,7 +1233,13 @@ describe("updateRSVP — note field", () => {
   });
 
   it("includes note in the update when provided", async () => {
-    await updateRSVP(EDIT_TOKEN, { status: "GOING", plusOneCount: 0, note: "Can't wait!" });
+    await updateRSVP(EDIT_TOKEN, {
+      status: "GOING",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+      plusOneCount: 0,
+      note: "Can't wait!",
+    });
     expect(mockRsvpUpdate).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({ note: "Can't wait!" }),
@@ -1174,7 +1248,12 @@ describe("updateRSVP — note field", () => {
   });
 
   it("passes undefined for note when omitted, leaving the existing value intact", async () => {
-    await updateRSVP(EDIT_TOKEN, { status: "GOING", plusOneCount: 0 });
+    await updateRSVP(EDIT_TOKEN, {
+      status: "GOING",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
+      plusOneCount: 0,
+    });
     const data = mockRsvpUpdate.mock.calls[0][0].data;
     expect(data.note).toBeUndefined();
   });
@@ -1889,6 +1968,8 @@ describe("addRSVP questionnaire answers", () => {
       eventId: EVENT_ID,
       guestName: "Charlie",
       guestEmail: "guest-charlie@example.com",
+      guestPhone: "+31612345678",
+      guestAddress: "Dorpsstraat 12, 1234 AB",
       status: "GOING",
       plusOneCount: 0,
       answers: { "field-1": "answer-1" },

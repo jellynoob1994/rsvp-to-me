@@ -111,8 +111,8 @@ export default function DarkPreview() {
 
         {/* Description */}
         <p className="mb-8 leading-relaxed" style={{ color: t.textSecondary }}>
-          Maandelijkse wijnavond bij mij thuis! Neem een fles mee die je lekker vindt en vertel wat je
-          eraan waardeert. Ik zorg voor hapjes en voldoende glazen. Het thema van deze maand is
+          Maandelijkse wijnavond bij mij thuis! Neem een fles mee die je lekker vindt en vertel wat
+          je eraan waardeert. Ik zorg voor hapjes en voldoende glazen. Het thema van deze maand is
           iets uit de Bourgogne. 🍇
         </p>
 
@@ -239,7 +239,11 @@ export default function DarkPreview() {
                 msg: "Ik kan niet wachten! Ik neem een Pinot mee die ik heb bewaard 🍷",
                 time: "2 uur geleden",
               },
-              { name: "Mike", msg: "JA! Ik neem iets uit de Bourgogne mee!", time: "1 uur geleden" },
+              {
+                name: "Mike",
+                msg: "JA! Ik neem iets uit de Bourgogne mee!",
+                time: "1 uur geleden",
+              },
             ].map((c) => (
               <div key={c.name} className="flex gap-3">
                 <div
