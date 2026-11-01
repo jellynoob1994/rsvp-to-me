@@ -88,7 +88,23 @@ describe("validation string length compatibility", () => {
     ["new RSVP", AddRsvpSchema],
     ["edited RSVP", UpdateRsvpSchema],
   ] as const)("%s preserves SEC-38 answer-key and value caps", (_name, schema) => {
-    const base = { eventId: "evt-1", guestName: "Guest", status: "GOING" };
+    const base =
+      schema === AddRsvpSchema
+        ? {
+            eventId: "evt-1",
+            guestName: "Guest",
+            guestEmail: "guest@example.com",
+            guestPhone: "+31612345678",
+            guestAddress: "Dorpsstraat 12, 1234 AB",
+            status: "GOING" as const,
+          }
+        : {
+            guestName: "Guest",
+            guestPhone: "+31612345678",
+            guestAddress: "Dorpsstraat 12, 1234 AB",
+            plusOneCount: 0,
+            status: "GOING" as const,
+          };
     const key = "😀".repeat(50);
     const answer = "😀".repeat(1000);
     expect(schema.safeParse({ ...base, answers: { [key]: answer } }).success).toBe(true);
@@ -129,6 +145,9 @@ describe("validation string length compatibility", () => {
       AddRsvpSchema.parse({
         eventId: "evt-1",
         guestName: "  " + name + "  ",
+        guestEmail: "guest@example.com",
+        guestPhone: "+31612345678",
+        guestAddress: "Dorpsstraat 12, 1234 AB",
         status: "GOING",
       }).guestName
     ).toBe(name);
