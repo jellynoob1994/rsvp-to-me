@@ -55,7 +55,7 @@ describe("orphaned invitation removal", () => {
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Remove" }));
+    fireEvent.click(screen.getByRole("button", { name: "Verwijderen" }));
 
     await waitFor(() =>
       expect(mocks.deleteInvitationAsHost).toHaveBeenCalledWith("invite-history-1")
