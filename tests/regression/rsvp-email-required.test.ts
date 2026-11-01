@@ -19,9 +19,7 @@ describe("public RSVP email requirement", () => {
     (status) => {
       expect(() => AddRsvpSchema.parse({ ...base, status })).toThrow();
       expect(() => AddRsvpSchema.parse({ ...base, status, guestEmail: "" })).toThrow();
-      expect(() =>
-        AddRsvpSchema.parse({ ...base, status, guestEmail: "not-an-email" })
-      ).toThrow();
+      expect(() => AddRsvpSchema.parse({ ...base, status, guestEmail: "not-an-email" })).toThrow();
 
       const parsed = AddRsvpSchema.parse({
         ...base,
@@ -42,9 +40,7 @@ describe("public RSVP email requirement", () => {
       guestEmail: "alice@example.com",
     };
     expect(() => AddRsvpSchema.parse(going)).toThrow();
-    expect(() =>
-      AddRsvpSchema.parse({ ...going, guestPhone: "+31612345678" })
-    ).toThrow();
+    expect(() => AddRsvpSchema.parse({ ...going, guestPhone: "+31612345678" })).toThrow();
     expect(() =>
       AddRsvpSchema.parse({ ...going, guestAddress: "Dorpsstraat 12, 1234 AB" })
     ).toThrow();

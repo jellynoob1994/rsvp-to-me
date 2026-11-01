@@ -58,7 +58,8 @@ export const EMAIL_TEMPLATE_META: Record<TemplateId, EmailTemplateMeta> = {
     description: "Wordt verstuurd wanneer een organisator iemand uitnodigt voor een evenement.",
     eventScoped: true,
     defaultSubject: "Je bent uitgenodigd: {eventTitle}",
-    defaultBody: "Hoi {guestName},\n{hostName} heeft je uitgenodigd voor {eventTitle}. Ben je erbij?",
+    defaultBody:
+      "Hoi {guestName},\n{hostName} heeft je uitgenodigd voor {eventTitle}. Ben je erbij?",
     bodyEditable: true,
     placeholders: ["guestName", "hostName", "eventTitle", "eventDate", "location"],
     toggles: ["showCoverImage", "showHostFlourish", "showMapLink", "showCalendarLinks"],
@@ -69,7 +70,8 @@ export const EMAIL_TEMPLATE_META: Record<TemplateId, EmailTemplateMeta> = {
     description: "Wordt verstuurd zodra een gast zijn of haar aanwezigheid doorgeeft.",
     eventScoped: true,
     defaultSubject: "Aanmelding bevestigd: {eventTitle}",
-    defaultBody: "Bedankt {guestName}! Je aanmelding voor {eventTitle} is ontvangen. Hieronder vind je de details.",
+    defaultBody:
+      "Bedankt {guestName}! Je aanmelding voor {eventTitle} is ontvangen. Hieronder vind je de details.",
     bodyEditable: true,
     placeholders: ["guestName", "eventTitle", "eventDate", "location", "status"],
     toggles: ["showCoverImage", "showMapLink", "showCalendarLinks"],
@@ -146,10 +148,12 @@ export const EMAIL_TEMPLATE_META: Record<TemplateId, EmailTemplateMeta> = {
   coHostInvite: {
     id: "coHostInvite",
     label: "Uitnodiging medeorganisator",
-    description: "Wordt verstuurd wanneer een organisator iemand uitnodigt om medeorganisator van een evenement te worden.",
+    description:
+      "Wordt verstuurd wanneer een organisator iemand uitnodigt om medeorganisator van een evenement te worden.",
     eventScoped: true,
     defaultSubject: "Je bent uitgenodigd als medeorganisator: {eventTitle}",
-    defaultBody: "Je bent door {hostName} uitgenodigd om medeorganisator te worden van {eventTitle}.",
+    defaultBody:
+      "Je bent door {hostName} uitgenodigd om medeorganisator te worden van {eventTitle}.",
     bodyEditable: true,
     placeholders: ["hostName", "eventTitle"],
     toggles: [],

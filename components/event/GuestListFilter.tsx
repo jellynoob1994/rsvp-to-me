@@ -375,7 +375,9 @@ export function GuestListFilter({
         await undoCheckIn(rsvp.id);
       } catch (error) {
         updateRsvp(rsvp.id, (item) => ({ ...item, checkIn: rsvp.checkIn }));
-        setAttendanceError(error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt.");
+        setAttendanceError(
+          error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt."
+        );
       } finally {
         setCheckInPendingId(null);
       }
@@ -426,7 +428,9 @@ export function GuestListFilter({
         await undoCheckIn(guest.rsvpId!);
       } catch (error) {
         updateInvitedRsvp(guest.rsvpId!, (item) => ({ ...item, checkIn: previousCheckIn }));
-        setAttendanceError(error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt.");
+        setAttendanceError(
+          error instanceof Error ? error.message : "Het ongedaan maken van de check-in is mislukt."
+        );
       } finally {
         setCheckInPendingId(null);
       }
@@ -447,7 +451,9 @@ export function GuestListFilter({
             : `Invite resent to ${guest.sentTo}.`
         );
       } catch (error) {
-        setInvitationMessage(error instanceof Error ? error.message : "Uitnodiging opnieuw versturen is mislukt.");
+        setInvitationMessage(
+          error instanceof Error ? error.message : "Uitnodiging opnieuw versturen is mislukt."
+        );
       } finally {
         setResendPendingId(null);
       }
@@ -508,7 +514,11 @@ export function GuestListFilter({
         setSearch(newRsvp.guestName);
         setHighlightedId(newRsvp.id);
       } catch (error) {
-        setAttendanceError(error instanceof Error ? error.message : "Deze gast ter plaatse kan niet worden toegevoegd.");
+        setAttendanceError(
+          error instanceof Error
+            ? error.message
+            : "Deze gast ter plaatse kan niet worden toegevoegd."
+        );
       }
     });
   };
@@ -1170,7 +1180,9 @@ export function GuestListFilter({
                         fontFamily: "inherit",
                       }}
                     >
-                      {resendPendingId === inv.id ? "Bezig met verzenden…" : "Uitnodiging opnieuw versturen"}
+                      {resendPendingId === inv.id
+                        ? "Bezig met verzenden…"
+                        : "Uitnodiging opnieuw versturen"}
                     </button>
                     {inv.editToken && (
                       <>

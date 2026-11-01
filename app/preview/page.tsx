@@ -13,7 +13,11 @@ export default function PreviewIndex() {
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
           {[
-            { href: "/preview/dark", label: "🌑 Donker en sfeervol", desc: "Diepe tinten met gloeiende paarse accenten" },
+            {
+              href: "/preview/dark",
+              label: "🌑 Donker en sfeervol",
+              desc: "Diepe tinten met gloeiende paarse accenten",
+            },
             {
               href: "/preview/soft",
               label: "🌸 Zacht en dromerig",

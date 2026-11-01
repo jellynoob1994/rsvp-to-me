@@ -17,7 +17,10 @@ export function CoHostInviteEmail({ theme, event, hostName, inviteUrl }: CoHostI
   const { date } = formatEventDateTime(event.startAt, event.endAt, event.timezone);
   const subtitle = event.locationName ? `${date} · ${event.locationName}` : date;
   return (
-    <EmailLayout theme={theme} preview={`${hostName} nodigt je uit als medeorganisator van ${event.title}`}>
+    <EmailLayout
+      theme={theme}
+      preview={`${hostName} nodigt je uit als medeorganisator van ${event.title}`}
+    >
       <Hero
         theme={theme}
         kicker="Uitnodiging voor medeorganisator"
@@ -86,7 +89,8 @@ export function CoHostInviteEmail({ theme, event, hostName, inviteUrl }: CoHostI
                   textAlign: "center" as const,
                 }}
               >
-                Had je deze uitnodiging niet verwacht? Dan kun je deze e-mail veilig negeren of verwijderen.
+                Had je deze uitnodiging niet verwacht? Dan kun je deze e-mail veilig negeren of
+                verwijderen.
               </p>
             </td>
           </tr>

@@ -63,7 +63,8 @@ export function BackupsTab({
             Back-upconfiguratie
           </h3>
           <p style={{ color: APP_SHELL.textSecondary, fontSize: "13px", marginTop: "4px" }}>
-            Stel geplande databaseback-ups in. Back-ups worden opgeslagen in het permanente applicatievolume.
+            Stel geplande databaseback-ups in. Back-ups worden opgeslagen in het permanente
+            applicatievolume.
           </p>
         </div>
 
@@ -170,8 +171,8 @@ export function BackupsTab({
                 }}
               />
               <span style={{ fontSize: "11px", color: APP_SHELL.textMuted }}>
-                Het maximale aantal back-upbestanden dat bewaard blijft. Oudere back-ups worden automatisch verwijderd
-                wanneer een nieuwe back-up wordt gemaakt.
+                Het maximale aantal back-upbestanden dat bewaard blijft. Oudere back-ups worden
+                automatisch verwijderd wanneer een nieuwe back-up wordt gemaakt.
               </span>
             </div>
           </div>
@@ -239,7 +240,8 @@ export function BackupsTab({
               margin: 0,
             }}
           >
-            Maak direct een databasesnapshot met <code>pg_dump</code> en sla deze op in het back-upvolume.
+            Maak direct een databasesnapshot met <code>pg_dump</code> en sla deze op in het
+            back-upvolume.
           </p>
         </div>
 
@@ -320,7 +322,8 @@ export function BackupsTab({
                       color: APP_SHELL.textMuted,
                     }}
                   >
-                    Geen back-uparchieven gevonden. Maak handmatig een back-up of stel een schema in.
+                    Geen back-uparchieven gevonden. Maak handmatig een back-up of stel een schema
+                    in.
                   </td>
                 </tr>
               ) : (

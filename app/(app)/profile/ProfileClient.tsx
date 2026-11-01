@@ -466,8 +466,8 @@ export default function ProfileClient({
                 Meldingsvoorkeuren
               </h3>
               <p style={{ color: APP_SHELL.textSecondary, fontSize: "13px", margin: "0 0 8px 0" }}>
-                Bepaal welke meldingen je wilt ontvangen. Transactional messages (like login
-                magic links and RSVP confirmations) are always sent.
+                Bepaal welke meldingen je wilt ontvangen. Transactional messages (like login magic
+                links and RSVP confirmations) are always sent.
               </p>
 
               {/* Preferred Channel (shown only when both email and SMS are enabled) */}
@@ -528,7 +528,8 @@ export default function ProfileClient({
                       margin: "8px 0 0 0",
                     }}
                   >
-                    Organisatoren gebruiken dit kanaal om gasten berichten over wijzigingen te sturen.
+                    Organisatoren gebruiken dit kanaal om gasten berichten over wijzigingen te
+                    sturen.
                   </p>
                 </div>
               )}
@@ -698,7 +699,9 @@ export default function ProfileClient({
                       setFeedback({
                         type: "error",
                         message:
-                          err instanceof Error ? err.message : "Het annuleren van het verwijderverzoek is mislukt.",
+                          err instanceof Error
+                            ? err.message
+                            : "Het annuleren van het verwijderverzoek is mislukt.",
                       });
                     }
                   });
@@ -723,7 +726,8 @@ export default function ProfileClient({
           ) : (
             <>
               <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "16px" }}>
-                Verwijder je account en alle bijbehorende gegevens definitief. Dit kan niet ongedaan worden gemaakt.
+                Verwijder je account en alle bijbehorende gegevens definitief. Dit kan niet ongedaan
+                worden gemaakt.
               </p>
               <button
                 onClick={() => setShowDeleteModal(true)}
@@ -778,7 +782,8 @@ export default function ProfileClient({
         {blockedEvents && blockedEvents.length > 0 ? (
           <>
             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", marginBottom: "16px" }}>
-              Je hebt gepubliceerde toekomstige evenementen. Verwijder die eerst voordat je je account verwijdert.
+              Je hebt gepubliceerde toekomstige evenementen. Verwijder die eerst voordat je je
+              account verwijdert.
             </p>
             <div
               style={{
@@ -840,15 +845,16 @@ export default function ProfileClient({
             </div>
             {blockedEvents.length === 0 && (
               <p style={{ color: "#22c55e", fontSize: "14px", marginBottom: "16px" }}>
-                Alle evenementen zijn verwijderd. Je kunt hieronder nu de verwijdering van je account bevestigen.
+                Alle evenementen zijn verwijderd. Je kunt hieronder nu de verwijdering van je
+                account bevestigen.
               </p>
             )}
           </>
         ) : (
           <>
             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", marginBottom: "8px" }}>
-              Je profielgegevens worden binnen 30 dagen geanonimiseerd. Je eerdere evenementgeschiedenis blijft behouden
-              for guests. You will be signed out immediately.
+              Je profielgegevens worden binnen 30 dagen geanonimiseerd. Je eerdere
+              evenementgeschiedenis blijft behouden for guests. You will be signed out immediately.
             </p>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", marginBottom: "16px" }}>
               Een beheerder kan dit binnen 30 dagen terugdraaien als je je bedenkt.

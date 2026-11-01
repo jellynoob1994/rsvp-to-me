@@ -53,8 +53,8 @@ export function ThemesTab({
                 marginBottom: 0,
               }}
             >
-              Beheer de thema's die organisatoren kunnen kiezen bij de evenementinstellingen. Inactieve thema's
-              zijn niet zichtbaar voor organisatoren.
+              Beheer de thema's die organisatoren kunnen kiezen bij de evenementinstellingen.
+              Inactieve thema's zijn niet zichtbaar voor organisatoren.
             </p>
           </div>
           <button

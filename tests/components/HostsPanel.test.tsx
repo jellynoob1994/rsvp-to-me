@@ -59,9 +59,7 @@ describe("HostsPanel — Dutch localization", () => {
     expect(screen.getByText("AANGEPASTE WEERGAVENAAM")).toBeInTheDocument();
     expect(screen.getByText("Eline Wimmers")).toBeInTheDocument();
     expect(screen.getByText("eline@example.com · Medeorganisator")).toBeInTheDocument();
-    expect(
-      screen.getByText("AANGEPASTE WEERGAVENAAM MEDEORGANISATOR")
-    ).toBeInTheDocument();
+    expect(screen.getByText("AANGEPASTE WEERGAVENAAM MEDEORGANISATOR")).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText("Pas de weergavenaam van deze medeorganisator aan...")
     ).toBeInTheDocument();
@@ -71,8 +69,6 @@ describe("HostsPanel — Dutch localization", () => {
     expect(screen.getByText("Uitgenodigd · Wacht op acceptatie")).toBeInTheDocument();
     expect(screen.getByTitle("Uitnodiging annuleren")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("medeorganisator@voorbeeld.nl")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Medeorganisator toevoegen" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Medeorganisator toevoegen" })).toBeInTheDocument();
   });
 });

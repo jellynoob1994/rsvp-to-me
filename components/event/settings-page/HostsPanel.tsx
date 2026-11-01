@@ -138,7 +138,11 @@ export function HostsPanel({
                     color: t.textMuted,
                     padding: "4px",
                   }}
-                  title={ch.user.id === sessionUser?.id ? "Jezelf als medeorganisator verwijderen" : "Medeorganisator verwijderen"}
+                  title={
+                    ch.user.id === sessionUser?.id
+                      ? "Jezelf als medeorganisator verwijderen"
+                      : "Medeorganisator verwijderen"
+                  }
                 >
                   <X size={16} />
                 </button>

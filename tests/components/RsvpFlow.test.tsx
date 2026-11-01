@@ -161,11 +161,15 @@ describe("RsvpFlow — new RSVP", () => {
     render(
       <RsvpFlow event={baseEvent} theme={testTheme} initialStatus="GOING" sessionUser={null} />
     );
-    expect(screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)")).toBeRequired();
+    expect(
+      screen.getByPlaceholderText("Telefoonnummer (verplicht bij aanwezigheid)")
+    ).toBeRequired();
     expect(screen.getByPlaceholderText("Straat huisnummer, postcode")).toBeRequired();
 
     fireEvent.click(screen.getByText("Misschien"));
-    expect(screen.getByPlaceholderText("Telefoonnummer (optioneel, voor sms-updates)")).not.toBeRequired();
+    expect(
+      screen.getByPlaceholderText("Telefoonnummer (optioneel, voor sms-updates)")
+    ).not.toBeRequired();
     expect(screen.getByPlaceholderText("Straat huisnummer, postcode")).not.toBeRequired();
   });
 

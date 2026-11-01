@@ -32,15 +32,15 @@ Sms-berichten in RSVP to Me worden verzorgd door Twilio en zijn volledig optione
 
 Zonder sms werkt de app volledig via e-mail. Met Twilio erbij krijg je de volgende mogelijkheden:
 
-| Functie | Beschrijving |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Inloggen met een link via sms** | Gebruikers kunnen inloggen door hun telefoonnummer in te voeren in plaats van hun e-mailadres. |
-| **Sms-uitnodigingen** | Verstuur evenementuitnodigingen rechtstreeks naar telefoonnummers van gasten. |
-| **Aanmeldbevestigingen** | Gasten ontvangen automatisch een sms ter bevestiging van hun status Aanwezig of Misschien. |
-| **Meldingen voor de organisator** | Organisatoren ontvangen een sms wanneer een gast reageert, met naam en status van de gast, diens notitie en een link naar de gastenlijst. |
-| **Meldingen over goedkeuring** | Gasten ontvangen een bericht wanneer hun aanmelding is goedgekeurd of afgewezen. |
-| **Groepsupdates over het evenement** | Verstuur direct sms-meldingen naar alle gasten met de status Aanwezig of Misschien. |
-| **Automatische herinneringen** | Plan sms-herinneringen 7 dagen, 1 dag of een zelfgekozen aantal uren vóór het evenement. |
+| Functie                              | Beschrijving                                                                                                                              |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Inloggen met een link via sms**    | Gebruikers kunnen inloggen door hun telefoonnummer in te voeren in plaats van hun e-mailadres.                                            |
+| **Sms-uitnodigingen**                | Verstuur evenementuitnodigingen rechtstreeks naar telefoonnummers van gasten.                                                             |
+| **Aanmeldbevestigingen**             | Gasten ontvangen automatisch een sms ter bevestiging van hun status Aanwezig of Misschien.                                                |
+| **Meldingen voor de organisator**    | Organisatoren ontvangen een sms wanneer een gast reageert, met naam en status van de gast, diens notitie en een link naar de gastenlijst. |
+| **Meldingen over goedkeuring**       | Gasten ontvangen een bericht wanneer hun aanmelding is goedgekeurd of afgewezen.                                                          |
+| **Groepsupdates over het evenement** | Verstuur direct sms-meldingen naar alle gasten met de status Aanwezig of Misschien.                                                       |
+| **Automatische herinneringen**       | Plan sms-herinneringen 7 dagen, 1 dag of een zelfgekozen aantal uren vóór het evenement.                                                  |
 
 Iedere gebruiker beheert de eigen meldingsvoorkeuren (e-mail of sms) via het profiel. Organisatoren kunnen per evenement hun meldingen over **Nieuwe aanmelding** in- of uitschakelen via **Evenementinstellingen → Aanmeldopties → Meldingsinstellingen**. E-mailmeldingen staan standaard aan; sms-meldingen staan standaard uit. De organisator en alle mede-organisatoren ontvangen deze meldingen.
 
@@ -82,11 +82,11 @@ Een proefaccount bevat één gratis telefoonnummer. Zo koop je een nummer:
 
 E.164 betekent: `+` gevolgd door de landcode en het volledige telefoonnummer, zonder spaties, streepjes of haakjes.
 
-| Land | Weergaveformaat | E.164-formaat |
-| -------------- | ---------------- | --------------- |
-| Verenigde Staten / Canada | `(555) 867-5309` | `+15558675309` |
-| Verenigd Koninkrijk | `07911 123456` | `+447911123456` |
-| Australië | `0412 345 678` | `+61412345678` |
+| Land                      | Weergaveformaat  | E.164-formaat   |
+| ------------------------- | ---------------- | --------------- |
+| Verenigde Staten / Canada | `(555) 867-5309` | `+15558675309`  |
+| Verenigd Koninkrijk       | `07911 123456`   | `+447911123456` |
+| Australië                 | `0412 345 678`   | `+61412345678`  |
 
 ---
 

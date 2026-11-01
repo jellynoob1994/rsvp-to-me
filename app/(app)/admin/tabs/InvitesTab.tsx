@@ -62,7 +62,8 @@ export function InvitesTab({
                 marginTop: "4px",
               }}
             >
-              Iedereen kan zich als organisator registreren zonder een uitnodigingscode in te voeren.
+              Iedereen kan zich als organisator registreren zonder een uitnodigingscode in te
+              voeren.
             </div>
           </div>
           <button
@@ -117,8 +118,8 @@ export function InvitesTab({
             Open registratie is actief
           </div>
           <div style={{ fontSize: "13px", color: APP_SHELL.textSecondary }}>
-            Uitnodigingscodes zijn niet nodig zolang open registratie is ingeschakeld. Schakel dit hierboven uit om
-            uitnodigingscodes te beheren.
+            Uitnodigingscodes zijn niet nodig zolang open registratie is ingeschakeld. Schakel dit
+            hierboven uit om uitnodigingscodes te beheren.
           </div>
         </div>
       ) : (

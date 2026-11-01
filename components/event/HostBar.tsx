@@ -16,9 +16,24 @@ const VISIBILITY_OPTIONS: {
   label: string;
   description: string;
 }[] = [
-  { value: "PUBLIC", icon: Globe, label: "Openbaar", description: "Iedereen kan dit evenement vinden" },
-  { value: "UNLISTED", icon: Link2, label: "Niet vermeld", description: "Alleen mensen met de link kunnen het bekijken" },
-  { value: "PRIVATE", icon: Lock, label: "Privé", description: "Alleen op uitnodiging, goedkeuring vereist" },
+  {
+    value: "PUBLIC",
+    icon: Globe,
+    label: "Openbaar",
+    description: "Iedereen kan dit evenement vinden",
+  },
+  {
+    value: "UNLISTED",
+    icon: Link2,
+    label: "Niet vermeld",
+    description: "Alleen mensen met de link kunnen het bekijken",
+  },
+  {
+    value: "PRIVATE",
+    icon: Lock,
+    label: "Privé",
+    description: "Alleen op uitnodiging, goedkeuring vereist",
+  },
 ];
 
 function visibilityIcon(v: Visibility) {
@@ -86,7 +101,10 @@ export function HostBar({
         inviteGuest(eventId, inviteInput.trim(), token)
       );
       if (result.success) {
-        setInviteStatus({ success: true, message: `Uitnodiging verstuurd naar ${result.emailOrPhone}!` });
+        setInviteStatus({
+          success: true,
+          message: `Uitnodiging verstuurd naar ${result.emailOrPhone}!`,
+        });
         setInviteInput("");
       }
     } catch (err: unknown) {
@@ -181,7 +199,9 @@ export function HostBar({
         setBlastResult("Bericht verzenden mislukt. Probeer het opnieuw.");
       }
     } catch (err: unknown) {
-      setBlastResult(err instanceof Error ? err.message : "Bericht verzenden mislukt. Probeer het opnieuw.");
+      setBlastResult(
+        err instanceof Error ? err.message : "Bericht verzenden mislukt. Probeer het opnieuw."
+      );
     } finally {
       setIsSending(false);
     }
@@ -320,7 +340,8 @@ export function HostBar({
                   lineHeight: 1.6,
                 }}
               >
-                Dit is een privé-evenement. Gasten moeten rechtstreeks per e-mail of sms worden uitgenodigd.
+                Dit is een privé-evenement. Gasten moeten rechtstreeks per e-mail of sms worden
+                uitgenodigd.
               </p>
               <a
                 href={`/e/${eventSlug}/settings?section=privacy`}
@@ -432,8 +453,8 @@ export function HostBar({
                 textAlign: "center",
               }}
             >
-              Berichten versturen is niet ingesteld op deze server. Deel de link hierboven om
-              gasten uit te nodigen.
+              Berichten versturen is niet ingesteld op deze server. Deel de link hierboven om gasten
+              uit te nodigen.
             </div>
           ) : (
             <div
@@ -525,8 +546,8 @@ export function HostBar({
                 color: "rgba(255,255,255,0.4)",
               }}
             >
-              Berichten versturen is niet ingesteld op deze server. Schakel e-mail of sms in bij de beheerinstellingen om
-              berichten aan gasten te versturen.
+              Berichten versturen is niet ingesteld op deze server. Schakel e-mail of sms in bij de
+              beheerinstellingen om berichten aan gasten te versturen.
             </div>
           ) : (
             <>
@@ -558,14 +579,10 @@ export function HostBar({
                     marginBottom: "12px",
                     padding: "8px 12px",
                     borderRadius: "8px",
-                    background:
-                      blastResult.toLowerCase().includes("verzonden")
-                        ? "rgba(74,222,128,0.1)"
-                        : "rgba(248,113,113,0.1)",
-                    color:
-                      blastResult.toLowerCase().includes("verzonden")
-                        ? "#4ade80"
-                        : "#f87171",
+                    background: blastResult.toLowerCase().includes("verzonden")
+                      ? "rgba(74,222,128,0.1)"
+                      : "rgba(248,113,113,0.1)",
+                    color: blastResult.toLowerCase().includes("verzonden") ? "#4ade80" : "#f87171",
                   }}
                 >
                   {blastResult}

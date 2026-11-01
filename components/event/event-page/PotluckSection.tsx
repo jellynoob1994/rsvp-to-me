@@ -72,7 +72,8 @@ export function PotluckSection({
             </div>
             {isPendingGuest && (
               <div style={pendingNoticeStyle}>
-                Je moet een goedgekeurde gast zijn om items toe te zeggen. Je aanmelding wacht op goedkeuring van de organisator.
+                Je moet een goedgekeurde gast zijn om items toe te zeggen. Je aanmelding wacht op
+                goedkeuring van de organisator.
               </div>
             )}
             <div

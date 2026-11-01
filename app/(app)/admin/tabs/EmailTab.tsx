@@ -242,8 +242,9 @@ function extractRawEmail(fromStr) {
                   maxWidth: "420px",
                 }}
               >
-                Als dit is uitgeschakeld, ontvangen gasten geen e-mails (aanmeldbevestigingen, groepsberichten, herinneringen
-                of uitnodigingen). Inloglinks voor organisatoren en beheerdersmails blijven wel werken.
+                Als dit is uitgeschakeld, ontvangen gasten geen e-mails (aanmeldbevestigingen,
+                groepsberichten, herinneringen of uitnodigingen). Inloglinks voor organisatoren en
+                beheerdersmails blijven wel werken.
               </div>
             </div>
             <button
@@ -301,8 +302,8 @@ function extractRawEmail(fromStr) {
               Serverconfiguratie en e-mailbezorging
             </h3>
             <p style={{ color: APP_SHELL.textSecondary, fontSize: "13px", marginTop: "4px" }}>
-              Kies je e-mailprovider en stel de bezorging in. Instellingen in de database hebben voorrang op
-              omgevingsvariabelen.
+              Kies je e-mailprovider en stel de bezorging in. Instellingen in de database hebben
+              voorrang op omgevingsvariabelen.
             </p>
           </div>
 
@@ -596,10 +597,11 @@ function extractRawEmail(fromStr) {
                 >
                   <span style={{ fontSize: "16px" }}>⚠️</span>
                   <div>
-                    <strong>Alleen uitgaande e-mail:</strong> Rechtstreeks verzenden via de API plaatst geen
-                    code op Cloudflare. Daardoor leiden antwoorden van gasten op uitnodigingsmails niet tot
-                    automatische antwoorden via een Worker. Antwoorden volgen alleen de gebruikelijke
-                    regels voor e-maildoorsturing en routering die je in het Cloudflare-dashboard hebt ingesteld.
+                    <strong>Alleen uitgaande e-mail:</strong> Rechtstreeks verzenden via de API
+                    plaatst geen code op Cloudflare. Daardoor leiden antwoorden van gasten op
+                    uitnodigingsmails niet tot automatische antwoorden via een Worker. Antwoorden
+                    volgen alleen de gebruikelijke regels voor e-maildoorsturing en routering die je
+                    in het Cloudflare-dashboard hebt ingesteld.
                   </div>
                 </div>
 
@@ -710,7 +712,8 @@ function extractRawEmail(fromStr) {
                       lineHeight: "1.4",
                     }}
                   >
-                    Een API-token met de machtiging <strong>Account &gt; Email Sending: Edit</strong>.
+                    Een API-token met de machtiging{" "}
+                    <strong>Account &gt; Email Sending: Edit</strong>.
                   </span>
                 </div>
 
@@ -755,23 +758,23 @@ function extractRawEmail(fromStr) {
                       .
                     </li>
                     <li style={{ marginBottom: "6px" }}>
-                      Klik in de linkerzijbalk op je domein (onder <strong>Websites</strong>),
-                      ga vervolgens naar{" "}
-                      <strong>Email &gt; Email Routing &gt; Destination addresses</strong> om te controleren
-                      of e-mailroutering is ingesteld.
+                      Klik in de linkerzijbalk op je domein (onder <strong>Websites</strong>), ga
+                      vervolgens naar{" "}
+                      <strong>Email &gt; Email Routing &gt; Destination addresses</strong> om te
+                      controleren of e-mailroutering is ingesteld.
                     </li>
                     <li style={{ marginBottom: "6px" }}>
-                      Ga naar het tabblad <strong>Email Sending</strong> op dezelfde pagina en klik op{" "}
-                      <strong>Configure</strong> of <strong>Get Started</strong>, en autoriseer de
-                      gegenereerde DNS-records (DKIM/SPF) om e-mails te kunnen verzenden.{" "}
+                      Ga naar het tabblad <strong>Email Sending</strong> op dezelfde pagina en klik
+                      op <strong>Configure</strong> of <strong>Get Started</strong>, en autoriseer
+                      de gegenereerde DNS-records (DKIM/SPF) om e-mails te kunnen verzenden.{" "}
                       <strong>
-                        (BELANGRIJK: als je dit overslaat, weigeren grote e-mailproviders zoals Gmail je
-                        e-mails vanwege het DMARC-beleid!)
+                        (BELANGRIJK: als je dit overslaat, weigeren grote e-mailproviders zoals
+                        Gmail je e-mails vanwege het DMARC-beleid!)
                       </strong>
                     </li>
                     <li style={{ marginBottom: "6px" }}>
-                      Ga naar <strong>My Profile &gt; API Tokens</strong> (pictogram van de gebruiker rechtsboven &gt; My
-                      Profile &gt; API Tokens).
+                      Ga naar <strong>My Profile &gt; API Tokens</strong> (pictogram van de
+                      gebruiker rechtsboven &gt; My Profile &gt; API Tokens).
                     </li>
                     <li style={{ marginBottom: "6px" }}>
                       Klik op <strong>Create Token</strong>. Scroll naar beneden en klik op{" "}
@@ -852,8 +855,9 @@ function extractRawEmail(fromStr) {
                     }}
                   >
                     Het openbare HTTP-eindpunt van je Worker. Dit heeft meestal deze vorm:{" "}
-                    <code>https://rsvp-email-worker.{suggestedSubdomain}.workers.dev</code>. Je vindt dit in het Cloudflare-dashboard onder de{" "}
-                    <strong>Triggers</strong> of <strong>Routes</strong>.
+                    <code>https://rsvp-email-worker.{suggestedSubdomain}.workers.dev</code>. Je
+                    vindt dit in het Cloudflare-dashboard onder de <strong>Triggers</strong> of{" "}
+                    <strong>Routes</strong>.
                   </span>
                 </div>
 
@@ -1045,10 +1049,11 @@ function extractRawEmail(fromStr) {
                       lineHeight: "1.4",
                     }}
                   >
-                    Standaard worden antwoorden van gasten automatisch doorgestuurd naar het e-mailadres van de organisator (via
-                    de Reply-To-header). Dit adres is een algemeen terugvaladres dat alleen wordt gebruikt als een gast
-                    rechtstreeks antwoordt op het afzenderadres (bijv. noreply@jouwdomein.nl). Omdat
-                    Cloudflare Email Routing alleen doorstuurt naar geverifieerde bestemmingsadressen, moet dit
+                    Standaard worden antwoorden van gasten automatisch doorgestuurd naar het
+                    e-mailadres van de organisator (via de Reply-To-header). Dit adres is een
+                    algemeen terugvaladres dat alleen wordt gebruikt als een gast rechtstreeks
+                    antwoordt op het afzenderadres (bijv. noreply@jouwdomein.nl). Omdat Cloudflare
+                    Email Routing alleen doorstuurt naar geverifieerde bestemmingsadressen, moet dit
                     terugvaladres zijn geverifieerd in je Cloudflare-instellingen.
                   </span>
                 </div>
@@ -1206,12 +1211,13 @@ function extractRawEmail(fromStr) {
                     }}
                   >
                     <li style={{ marginBottom: "6px" }}>
-                      Verwijder alle code in de Cloudflare-editor, plak de gekopieerde code en klik op{" "}
-                      <strong>Save and Deploy</strong>.
+                      Verwijder alle code in de Cloudflare-editor, plak de gekopieerde code en klik
+                      op <strong>Save and Deploy</strong>.
                     </li>
                     <li style={{ marginBottom: "6px" }}>
-                      Kopieer de openbare URL van je Worker (te vinden onder de instellingen van je Worker{" "}
-                      <strong>Overview</strong> of het tabblad <strong>Triggers</strong>, bijvoorbeeld{" "}
+                      Kopieer de openbare URL van je Worker (te vinden onder de instellingen van je
+                      Worker <strong>Overview</strong> of het tabblad <strong>Triggers</strong>,
+                      bijvoorbeeld{" "}
                       <code>https://rsvp-email-worker.{suggestedSubdomain}.workers.dev</code>) and
                       plak deze in het invoerveld <strong>Cloudflare Worker URL</strong> bij de
                       bovenaan deze instellingenpagina.
@@ -1219,7 +1225,8 @@ function extractRawEmail(fromStr) {
                     <li style={{ marginBottom: "6px" }}>
                       Ga naar het hoofddashboard van Cloudflare en klik op{" "}
                       <strong>Workers & Pages</strong> (linkerzijbalk) &gt; klik op je Worker (
-                      <code>rsvp-email-worker</code>) &gt; selecteer het tabblad <strong>Settings</strong>
+                      <code>rsvp-email-worker</code>) &gt; selecteer het tabblad{" "}
+                      <strong>Settings</strong>
                       &gt; selecteer <strong>Variables</strong> in het instellingenmenu.
                     </li>
                     <li style={{ marginBottom: "6px" }}>
@@ -1237,14 +1244,15 @@ function extractRawEmail(fromStr) {
                         </li>
                         <li style={{ marginBottom: "4px" }}>
                           Klik opnieuw op <strong>Add variable</strong> en stel Name in op{" "}
-                          <code>INBOUND_FORWARD_TO</code>, laat Type op <strong>Text</strong> staan en
-                          vul het <strong>terugvaladres voor beheerder</strong> in (bijvoorbeeld{" "}
+                          <code>INBOUND_FORWARD_TO</code>, laat Type op <strong>Text</strong> staan
+                          en vul het <strong>terugvaladres voor beheerder</strong> in (bijvoorbeeld{" "}
                           <code>{cfInboundForwardTo || "your-email@domain.com"}</code>).
                         </li>
                       </ul>
                     </li>
                     <li style={{ marginBottom: "6px" }}>
-                      Scroll naar beneden naar de sectie <strong>Bindings</strong> op dezelfde pagina:
+                      Scroll naar beneden naar de sectie <strong>Bindings</strong> op dezelfde
+                      pagina:
                       <ul style={{ paddingLeft: "16px", marginTop: "4px" }}>
                         <li style={{ marginBottom: "4px" }}>
                           Klik op <strong>Add binding</strong>.
@@ -1253,26 +1261,27 @@ function extractRawEmail(fromStr) {
                           Selecteer <strong>Email Service</strong> in de keuzelijst Type.
                         </li>
                         <li style={{ marginBottom: "4px" }}>
-                          Stel Name in op <code>EMAIL</code> (alle letters moeten hoofdletters zijn).
+                          Stel Name in op <code>EMAIL</code> (alle letters moeten hoofdletters
+                          zijn).
                         </li>
                         <li style={{ marginBottom: "4px" }}>
                           <em>
-                            Let op: vul niets in bij Value. Na het opslaan wordt een streepje weergegeven,
-                            wat correct is en zo hoort.
+                            Let op: vul niets in bij Value. Na het opslaan wordt een streepje
+                            weergegeven, wat correct is en zo hoort.
                           </em>
                         </li>
                       </ul>
                     </li>
                     <li style={{ marginBottom: "6px" }}>
-                      Klik onderaan de pagina op <strong>Save and deploy</strong> om
-                      alle variabelen en koppelingen toe te passen.
+                      Klik onderaan de pagina op <strong>Save and deploy</strong> om alle variabelen
+                      en koppelingen toe te passen.
                     </li>
                     <li style={{ marginBottom: "6px" }}>
                       Ga naar het dashboard van je domein bij{" "}
                       <strong>
                         Websites &gt; [Your Domain] &gt; Email &gt; Email Routing &gt; Routes
                       </strong>
-                       en klik op <strong>Add Route</strong>:
+                      en klik op <strong>Add Route</strong>:
                       <ul style={{ paddingLeft: "16px", marginTop: "4px" }}>
                         <li style={{ marginBottom: "4px" }}>
                           <strong>Aangepast adres</strong>: voer het gewenste afzenderadres in
@@ -1288,8 +1297,8 @@ function extractRawEmail(fromStr) {
                           <strong>Actie</strong>: selecteer <strong>Send to Worker</strong>.
                         </li>
                         <li style={{ marginBottom: "4px" }}>
-                          <strong>Bestemmingsworker</strong>: selecteer <code>rsvp-email-worker</code>
-                          .
+                          <strong>Bestemmingsworker</strong>: selecteer{" "}
+                          <code>rsvp-email-worker</code>.
                         </li>
                         <li style={{ marginBottom: "4px" }}>
                           Klik op <strong>Save</strong>.

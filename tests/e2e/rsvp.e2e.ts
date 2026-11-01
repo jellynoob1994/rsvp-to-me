@@ -149,8 +149,12 @@ test.describe("#712 personalized invitation details journey", () => {
             "true"
           );
           if (status === "GOING") {
-            await page.getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)").fill("+31612345678");
-            await page.getByPlaceholder("Straat huisnummer, postcode").fill("Dorpsstraat 12, 1234 AB");
+            await page
+              .getByPlaceholder("Telefoonnummer (verplicht bij aanwezigheid)")
+              .fill("+31612345678");
+            await page
+              .getByPlaceholder("Straat huisnummer, postcode")
+              .fill("Dorpsstraat 12, 1234 AB");
           }
           await page.getByRole("button", { name: "RSVP wijzigen", exact: true }).click();
           await expect(page.getByText("RSVP bijgewerkt!", { exact: true })).toBeVisible();

@@ -777,7 +777,11 @@ export function ThemePresetModal({
                   opacity: isSavingPreset ? 0.7 : 1,
                 }}
               >
-                {isSavingPreset ? "Opslaan…" : themePresetForm.id ? "Wijzigingen opslaan" : "Thema aanmaken"}
+                {isSavingPreset
+                  ? "Opslaan…"
+                  : themePresetForm.id
+                    ? "Wijzigingen opslaan"
+                    : "Thema aanmaken"}
               </button>
               {themePresetForm.id && (
                 <button

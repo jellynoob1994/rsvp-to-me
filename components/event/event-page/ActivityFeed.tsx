@@ -221,7 +221,8 @@ export function ActivityFeed({
           )}
           {event.commentsEnabled && !isHost && isPendingGuest && (
             <div style={pendingNoticeStyle}>
-              Je moet een goedgekeurde gast zijn om te reageren. Je aanmelding wacht op goedkeuring van de organisator.
+              Je moet een goedgekeurde gast zijn om te reageren. Je aanmelding wacht op goedkeuring
+              van de organisator.
             </div>
           )}
 

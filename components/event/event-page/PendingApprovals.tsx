@@ -35,7 +35,9 @@ export function PendingApprovalsCard({
         <EventCard theme={t} aria-label="Wachtende aanmeldingen">
           <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "16px" }}>
             <Users size={16} style={{ color: t.accent }} />
-            <span style={{ fontWeight: 700 }}>Aanmeldingen in afwachting ({event.pendingRsvps.length})</span>
+            <span style={{ fontWeight: 700 }}>
+              Aanmeldingen in afwachting ({event.pendingRsvps.length})
+            </span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
             {event.pendingRsvps.map((r, i) => (

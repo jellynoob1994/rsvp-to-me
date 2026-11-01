@@ -163,7 +163,8 @@ export function UsersTab({
                           {u.deletionRequestedAt
                             ? new Date(u.deletionRequestedAt).toLocaleDateString("nl-NL")
                             : "onbekend"}{" "}
-                          — gepland voor {new Date(u.deletionScheduledAt).toLocaleDateString("nl-NL")}
+                          — gepland voor{" "}
+                          {new Date(u.deletionScheduledAt).toLocaleDateString("nl-NL")}
                         </div>
                       )}
                     </td>
@@ -253,7 +254,10 @@ export function UsersTab({
                           </button>
                           <button
                             onClick={() =>
-                              handleUserDeleteImmediately(u.id, u.name || u.email || "Onbekende gebruiker")
+                              handleUserDeleteImmediately(
+                                u.id,
+                                u.name || u.email || "Onbekende gebruiker"
+                              )
                             }
                             style={{
                               backgroundColor: "transparent",

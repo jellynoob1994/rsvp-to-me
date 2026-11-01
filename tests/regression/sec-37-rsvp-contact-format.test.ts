@@ -27,8 +27,12 @@ describe("SEC-37: AddRsvpSchema contact format validation", () => {
   });
 
   it("rejects a non-phone guestPhone", () => {
-    expect(() => AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com", guestPhone: "call me maybe" })).toThrow();
-    expect(() => AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com", guestPhone: "123" })).toThrow();
+    expect(() =>
+      AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com", guestPhone: "call me maybe" })
+    ).toThrow();
+    expect(() =>
+      AddRsvpSchema.parse({ ...base, guestEmail: "alice@example.com", guestPhone: "123" })
+    ).toThrow();
   });
 
   it("accepts valid contact info, lowercasing email", () => {

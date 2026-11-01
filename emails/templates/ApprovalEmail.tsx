@@ -15,7 +15,9 @@ export function ApprovalEmail({
     <EmailLayout
       theme={theme}
       preview={
-        approved ? `Je aanmelding voor ${eventTitle} is goedgekeurd` : `Over je aanmelding voor ${eventTitle}`
+        approved
+          ? `Je aanmelding voor ${eventTitle} is goedgekeurd`
+          : `Over je aanmelding voor ${eventTitle}`
       }
     >
       <Hero

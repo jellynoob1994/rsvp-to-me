@@ -230,7 +230,7 @@ export function RsvpSection({
                     fontWeight: deadlinePassed ? 600 : 400,
                   }}
                 >
-Aanmelden kan tot {deadlineDate} · {deadlineCountdown}
+                  Aanmelden kan tot {deadlineDate} · {deadlineCountdown}
                 </div>
               )}
 

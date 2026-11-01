@@ -192,7 +192,9 @@ export function EmailTemplatesSection() {
     setStatus(null);
     try {
       const res = await sendEmailTemplateTestAction(selected.meta.id, sampleBase);
-      setStatus(res.success ? `Testmail verstuurd naar ${res.sentTo}` : (res.error ?? "Verzenden mislukt"));
+      setStatus(
+        res.success ? `Testmail verstuurd naar ${res.sentTo}` : (res.error ?? "Verzenden mislukt")
+      );
     } catch {
       setStatus("Verzenden mislukt");
     } finally {
@@ -210,9 +212,7 @@ export function EmailTemplatesSection() {
   };
 
   if (!selected) {
-    return (
-      <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>Sjablonen laden…</div>
-    );
+    return <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>Sjablonen laden…</div>;
   }
 
   return (
@@ -479,9 +479,7 @@ export function EmailTemplatesSection() {
               />
             </>
           ) : (
-            <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>
-              Voorbeeld laden…
-            </div>
+            <div style={{ color: APP_SHELL.textSecondary, fontSize: "13px" }}>Voorbeeld laden…</div>
           )}
         </div>
       </div>

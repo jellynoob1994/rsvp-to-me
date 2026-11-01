@@ -66,7 +66,8 @@ export function PollsSection({
 
           {isPendingGuest && (
             <div style={pendingNoticeStyle}>
-              Je moet een goedgekeurde gast zijn om te stemmen. Je aanmelding wacht op goedkeuring van de organisator.
+              Je moet een goedgekeurde gast zijn om te stemmen. Je aanmelding wacht op goedkeuring
+              van de organisator.
             </div>
           )}
 
@@ -325,7 +326,8 @@ export function PollsSection({
                         gap: "4px",
                       }}
                     >
-                      🔒 Meld je aan als aanwezig of misschien om te stemmen en opties voor te stellen!
+                      🔒 Meld je aan als aanwezig of misschien om te stemmen en opties voor te
+                      stellen!
                     </div>
                   )}
 

@@ -494,8 +494,8 @@ export async function updateRsvpAsHost(
       plusOneCount: data.status === "GOING" ? data.plusOneCount : 0,
       responded: true,
       ...(data.note !== undefined && { note: data.note || null }),
-        ...(data.guestPhone !== undefined && { guestPhone: data.guestPhone || null }),
-        ...(data.guestAddress !== undefined && { guestAddress: data.guestAddress || null }),
+      ...(data.guestPhone !== undefined && { guestPhone: data.guestPhone || null }),
+      ...(data.guestAddress !== undefined && { guestAddress: data.guestAddress || null }),
     },
   });
 

@@ -79,7 +79,11 @@ export function LocationFields({
               style={tabStyle(value.type === type)}
               onClick={() => set({ type })}
             >
-              {type === "PHYSICAL" ? "📍 Op locatie" : type === "VIRTUAL" ? "💻 Online" : "📌 Nog te bepalen"}
+              {type === "PHYSICAL"
+                ? "📍 Op locatie"
+                : type === "VIRTUAL"
+                  ? "💻 Online"
+                  : "📌 Nog te bepalen"}
             </button>
           ))}
         </div>

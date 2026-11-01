@@ -269,7 +269,11 @@ export default function ProfileDropdown({ user }: { user: DropdownUser | null })
                       textTransform: "uppercase",
                     }}
                   >
-                    {user.role === "ADMIN" ? "BEHEERDER" : user.role === "HOST" ? "ORGANISATOR" : "GAST"}
+                    {user.role === "ADMIN"
+                      ? "BEHEERDER"
+                      : user.role === "HOST"
+                        ? "ORGANISATOR"
+                        : "GAST"}
                   </span>
                 )}
               </div>

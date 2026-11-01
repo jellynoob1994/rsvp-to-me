@@ -49,7 +49,7 @@ For every bug fix merged to main:
 | `sec-46-invite-guest-activity-log.test.ts`           | Host/co-host `inviteGuest` issuance wrote no ActivityEvent — invite blasts were unattributable                        | SEC-46                         |
 | `sec-36-url-protocol-validation.test.ts`             | Host-supplied virtual link / info-section URLs stored a `javascript:`/`data:` URI rendered into guest `<a href>`      | SEC-36                         |
 | `sec-37-rsvp-contact-format.test.ts`                 | `guestEmail`/`guestPhone` accepted as any string — junk User upserts + skewed `linkRsvpsToUser` matching              | SEC-37                         |
-| `rsvp-email-required.test.ts`                         | Public guest RSVPs accepted missing/empty email addresses for GOING, MAYBE, and NO responses                              | RSVP email requirement         |
+| `rsvp-email-required.test.ts`                        | Public guest RSVPs accepted missing/empty email addresses for GOING, MAYBE, and NO responses                          | RSVP email requirement         |
 | `sec-38-answers-validation.test.ts`                  | RSVP questionnaire answers had no length cap and keys weren't verified against the event's own questions              | SEC-38                         |
 | `zod-string-length-compat.test.ts`                   | Zod's Unicode length change widened text caps and tightened the sign-in minimum                                       | bab32486                       |
 | `release-prerelease-tags.test.ts`                    | Prerelease publication could overwrite stable image aliases through explicit or implicit latest tags                  | f073ceaa                       |

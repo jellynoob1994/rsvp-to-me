@@ -299,7 +299,8 @@ export function RsvpFlow({
           >
             <div style={{ fontWeight: 700 }}>{existingRsvp.guestName}</div>
             <div style={{ color: t.textSecondary, marginTop: "4px", fontSize: "14px" }}>
-              {RSVP_STATUS_LABELS[existingRsvp.status]} · Aantal personen: {1 + existingRsvp.plusOneCount}
+              {RSVP_STATUS_LABELS[existingRsvp.status]} · Aantal personen:{" "}
+              {1 + existingRsvp.plusOneCount}
             </div>
             {existingRsvp.note && (
               <p style={{ color: t.textMuted, fontSize: "13px", margin: "10px 0 0" }}>
@@ -739,13 +740,18 @@ export function RsvpFlow({
                 type="text"
                 autoComplete="street-address"
                 required={status === "GOING"}
-                aria-label={status === "GOING" ? "Postadres (verplicht bij aanwezigheid)" : "Postadres (optioneel)"}
+                aria-label={
+                  status === "GOING"
+                    ? "Postadres (verplicht bij aanwezigheid)"
+                    : "Postadres (optioneel)"
+                }
                 placeholder="Straat huisnummer, postcode"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
               <p style={{ color: t.textMuted, fontSize: "11px", margin: "-4px 0 0" }}>
-                Dit adres gebruiken we om je fysieke kaart te versturen. Telefoonnummer en postadres zijn alleen verplicht wanneer je Aanwezig kiest.
+                Dit adres gebruiken we om je fysieke kaart te versturen. Telefoonnummer en postadres
+                zijn alleen verplicht wanneer je Aanwezig kiest.
               </p>
             </div>
           </div>
