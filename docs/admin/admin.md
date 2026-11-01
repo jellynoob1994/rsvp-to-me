@@ -151,6 +151,7 @@ Zoek evenementen op titel, slug of e-mailadres van de organisator en filter op s
 - Nadat toegang is verleend, gebruiken de openbare evenementpagina, het aanmeldformulier, de gastenlijst en de evenementinstellingen het achtergrondeffect dat de organisator heeft gekozen. Wachtwoord- en privacyschermen, dashboards, exports, sociale afbeeldingen en e-mails blijven statisch en tonen geen bewegende evenementeffecten.
 - Beheerders kunnen inchecken, check-ins ongedaan maken, gasten ter plaatse toevoegen, uitnodigingen opnieuw versturen, zoeken, het aanwezigheidsoverzicht bekijken en de gastenlijst naar CSV exporteren. Inchecken is mogelijk bij elke aanmeldstatus, ook voor gasten die niet hebben gereageerd, Afwezig hebben gekozen of nog op goedkeuring wachten. Deze handelingen worden geregistreerd in het activiteitenoverzicht dat alleen organisatoren kunnen zien.
 - Het filter **Iedereen** in de gastenlijst bevat zowel aanmeldingen als uitgenodigde gasten die nog niet hebben gereageerd.
+- Nieuwe publieke aanmeldingen vereisen altijd een geldig e-mailadres, ook wanneer e-mailmeldingen voor gasten zijn uitgeschakeld. Een telefoonnummer blijft optioneel.
 
 ---
 

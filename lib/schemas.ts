@@ -64,14 +64,7 @@ export const AddRsvpSchema = z.object({
   guestName: z.string().trim().min(1).check(maxCodeUnits(100)),
   // SEC-37: format-validated — guestEmail becomes a User upsert key and a mail
   // recipient in addRSVP; guestPhone is normalized into a User lookup key.
-  guestEmail: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .email()
-    .check(maxCodeUnits(100))
-    .optional()
-    .or(z.literal("")),
+  guestEmail: z.string().trim().toLowerCase().email().check(maxCodeUnits(100)),
   guestPhone: z
     .string()
     .trim()

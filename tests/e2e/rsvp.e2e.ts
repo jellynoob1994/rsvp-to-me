@@ -13,14 +13,15 @@ test.describe("Guest RSVP flow", () => {
     });
 
     // Click the Going button to enter RSVP flow
-    await page.getByRole("link", { name: "Going", exact: true }).click();
+    await page.getByRole("link", { name: "Aanwezig", exact: true }).click();
     await page.waitForURL(`**/e/${EVENT_SLUG}/rsvp**`);
 
-    // Fill in name
-    await page.getByPlaceholder("Your name (required)").fill("E2E Guest");
+    // Fill in the required name and email address.
+    await page.getByPlaceholder("Je naam (verplicht)").fill("E2E Guest");
+    await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-guest@example.com");
 
     // Submit
-    await page.getByText("Confirm RSVP").click();
+    await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
 
     // Should show confirmation
     await expect(page.getByText("You're in!")).toBeVisible({ timeout: 10_000 });
@@ -29,8 +30,9 @@ test.describe("Guest RSVP flow", () => {
   test("guest can edit RSVP via editToken in URL", async ({ page }) => {
     // First create an RSVP programmatically by going through the flow
     await page.goto(`/e/${EVENT_SLUG}/rsvp?status=GOING`);
-    await page.getByPlaceholder("Your name (required)").fill("Edit Test Guest");
-    await page.getByText("Confirm RSVP").click();
+    await page.getByPlaceholder("Je naam (verplicht)").fill("Edit Test Guest");
+    await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-edit@example.com");
+    await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
     await expect(page.getByText("You're in!")).toBeVisible({ timeout: 10_000 });
 
     // The URL should now contain an editToken
@@ -40,25 +42,34 @@ test.describe("Guest RSVP flow", () => {
 
     // Navigate back to edit the RSVP
     await page.goto(`/e/${EVENT_SLUG}/rsvp?token=${token}`);
-    await expect(page.getByRole("button", { name: "Update RSVP" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "RSVP wijzigen" })).toBeVisible();
 
     // Change status to Maybe
-    await page.getByText("Maybe").click();
-    await page.getByRole("button", { name: "Update RSVP" }).click();
-    await expect(page.getByText("RSVP updated!")).toBeVisible({ timeout: 10_000 });
+    await page.getByText("Misschien").click();
+    await page.getByRole("button", { name: "RSVP wijzigen" }).click();
+    await expect(page.getByText("RSVP bijgewerkt!")).toBeVisible({ timeout: 10_000 });
   });
 
-  test("guest name is required before RSVP submission", async ({ page }) => {
+  test("guest name and a valid email are required before RSVP submission", async ({ page }) => {
     await page.goto(`/e/${EVENT_SLUG}/rsvp?status=GOING`);
-    await expect(page.getByRole("button", { name: "Confirm RSVP" })).toBeDisabled();
-    await page.getByPlaceholder("Your name (required)").fill("   ");
-    await expect(page.getByRole("button", { name: "Confirm RSVP" })).toBeDisabled();
+    const submit = page.getByRole("button", { name: /RSVP bevestigen|Verder →/ });
+    await expect(submit).toBeDisabled();
+
+    await page.getByPlaceholder("Je naam (verplicht)").fill("E2E Guest");
+    await expect(submit).toBeDisabled();
+
+    const email = page.getByPlaceholder("E-mailadres (verplicht)");
+    await email.fill("not-an-email");
+    await expect(submit).toBeDisabled();
+
+    await email.fill("e2e-required@example.com");
+    await expect(submit).toBeEnabled();
   });
 
   test("invalid edit token does not expose an RSVP", async ({ page }) => {
     const response = await page.goto(`/e/${EVENT_SLUG}/rsvp?token=invalid-edit-token`);
     expect(response?.status()).toBe(404);
-    await expect(page.getByRole("button", { name: "Update RSVP" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "RSVP wijzigen" })).toHaveCount(0);
   });
 });
 
@@ -67,9 +78,9 @@ test.describe("#712 personalized invitation details journey", () => {
 
   for (const visibility of ["PUBLIC", "PRIVATE"] as const) {
     for (const [status, label] of [
-      ["GOING", "Going"],
-      ["MAYBE", "Maybe"],
-      ["NO", "Can't go"],
+      ["GOING", "Aanwezig"],
+      ["MAYBE", "Misschien"],
+      ["NO", "Afwezig"],
     ] as const) {
       test(`${visibility} invited guest responds ${status} through event details`, async ({
         page,
@@ -122,13 +133,13 @@ test.describe("#712 personalized invitation details journey", () => {
           expect(rsvpUrl.searchParams.get("status")).toBe(status);
           await expect(page.getByText("RSVP as", { exact: true })).toBeVisible();
           await expect(page.getByText(guestName, { exact: true })).toBeVisible();
-          await expect(page.getByPlaceholder("Your name (required)")).toHaveCount(0);
+          await expect(page.getByPlaceholder("Je naam (verplicht)")).toHaveCount(0);
           await expect(page.getByRole("button", { name: label, exact: true })).toHaveAttribute(
             "aria-pressed",
             "true"
           );
-          await page.getByRole("button", { name: "Update RSVP", exact: true }).click();
-          await expect(page.getByText("RSVP updated!", { exact: true })).toBeVisible();
+          await page.getByRole("button", { name: "RSVP wijzigen", exact: true }).click();
+          await expect(page.getByText("RSVP bijgewerkt!", { exact: true })).toBeVisible();
 
           const saved = await pool.query<{
             id: string;
