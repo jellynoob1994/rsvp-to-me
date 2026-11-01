@@ -69,6 +69,8 @@ type ExistingRsvp = {
   id: string;
   editToken: string;
   guestName: string;
+  guestPhone?: string | null;
+  guestAddress?: string | null;
   status: "GOING" | "MAYBE" | "NO";
   plusOneCount: number;
   note: string | null;
@@ -77,6 +79,7 @@ type ExistingRsvp = {
 };
 
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+const isValidPhone = (value: string) => /^\+?[0-9\s\-().]{7,}$/.test(value.trim());
 
 export function RsvpFlow({
   event,
@@ -110,7 +113,8 @@ export function RsvpFlow({
   );
   const [name, setName] = useState(existingRsvp?.guestName ?? "");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(existingRsvp?.guestPhone ?? "");
+  const [address, setAddress] = useState(existingRsvp?.guestAddress ?? "");
   const [note, setNote] = useState(existingRsvp?.note ?? "");
   const [plusOneNames, setPlusOneNames] = useState<string[]>(
     existingRsvp?.plusOneGuests
@@ -160,9 +164,12 @@ export function RsvpFlow({
   const canProceedStep1 =
     name.trim().length > 0 &&
     (isEdit || isValidEmail(email)) &&
+    (!phone.trim() || isValidPhone(phone)) &&
     (status !== "GOING" ||
-      !event.plusOneNamesRequired ||
-      plusOneNames.every((n) => n.trim().length > 0));
+      (isValidPhone(phone) &&
+        address.trim().length > 0 &&
+        address.trim().length <= 250 &&
+        (!event.plusOneNamesRequired || plusOneNames.every((n) => n.trim().length > 0))));
 
   const handleContinue = () => {
     if (step < maxStep) {
@@ -181,6 +188,8 @@ export function RsvpFlow({
             status,
             plusOneCount,
             plusOneGuestNames,
+            guestPhone: phone.trim(),
+            guestAddress: address.trim(),
             note: note.trim() || undefined,
             answers,
           };
@@ -200,7 +209,8 @@ export function RsvpFlow({
                 eventId: event.id,
                 guestName: name.trim(),
                 guestEmail: email.trim(),
-                guestPhone: phone.trim() || undefined,
+                guestPhone: phone.trim(),
+                guestAddress: address.trim(),
                 status,
                 plusOneCount,
                 plusOneGuestNames,
@@ -699,27 +709,44 @@ export function RsvpFlow({
                 />
               )}
               {!isEdit && (
-                <>
-                  <input
-                    style={S.inp}
-                    type="email"
-                    autoComplete="email"
-                    required
-                    placeholder="E-mailadres (verplicht)"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  {channelConfig.sms && (
-                    <input
-                      style={S.inp}
-                      type="tel"
-                      placeholder="Telefoonnummer (optioneel, voor sms-updates)"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  )}
-                </>
+                <input
+                  style={S.inp}
+                  type="email"
+                  autoComplete="email"
+                  required
+                  placeholder="E-mailadres (verplicht)"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               )}
+              <input
+                style={S.inp}
+                type="tel"
+                autoComplete="tel"
+                required={status === "GOING"}
+                placeholder={
+                  status === "GOING"
+                    ? "Telefoonnummer (verplicht bij aanwezigheid)"
+                    : channelConfig.sms
+                      ? "Telefoonnummer (optioneel, voor sms-updates)"
+                      : "Telefoonnummer (optioneel)"
+                }
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <input
+                style={S.inp}
+                type="text"
+                autoComplete="street-address"
+                required={status === "GOING"}
+                aria-label={status === "GOING" ? "Postadres (verplicht bij aanwezigheid)" : "Postadres (optioneel)"}
+                placeholder="Straat huisnummer, postcode"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <p style={{ color: t.textMuted, fontSize: "11px", margin: "-4px 0 0" }}>
+                Telefoonnummer en postadres zijn alleen verplicht wanneer je Aanwezig kiest.
+              </p>
             </div>
           </div>
 

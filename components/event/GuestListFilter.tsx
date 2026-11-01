@@ -29,6 +29,7 @@ type RSVP = {
   guestName: string;
   guestEmail: string | null;
   guestPhone: string | null;
+  guestAddress?: string | null;
   status: "GOING" | "MAYBE" | "NO" | "INVITED";
   plusOneCount: number;
   note: string | null;
@@ -165,7 +166,7 @@ export function GuestListFilter({
   const normalizedSearch = search.trim().toLowerCase();
   const displayedRsvps = normalizedSearch
     ? visibleRsvps.filter((r) =>
-        [r.guestName, r.guestEmail, r.guestPhone, ...r.plusOneGuests]
+        [r.guestName, r.guestEmail, r.guestPhone, r.guestAddress, ...r.plusOneGuests]
           .filter(Boolean)
           .some((value) => value!.toLowerCase().includes(normalizedSearch))
       )
@@ -825,13 +826,18 @@ export function GuestListFilter({
                     {r.note}
                   </p>
                 )}
-                {isHost && (r.guestEmail || r.guestPhone) && (
+                {isHost && (r.guestEmail || r.guestPhone || r.guestAddress) && (
                   <div style={{ marginTop: "4px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
                     {r.guestEmail && (
                       <span style={{ color: t.textMuted, fontSize: "12px" }}>{r.guestEmail}</span>
                     )}
                     {r.guestPhone && (
                       <span style={{ color: t.textMuted, fontSize: "12px" }}>{r.guestPhone}</span>
+                    )}
+                    {r.guestAddress && (
+                      <span style={{ color: t.textMuted, fontSize: "12px" }}>
+                        Postadres: {r.guestAddress}
+                      </span>
                     )}
                   </div>
                 )}

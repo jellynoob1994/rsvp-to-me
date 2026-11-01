@@ -11,6 +11,7 @@ export type GuestListRsvpInput = {
   guestName: string;
   guestEmail: string | null;
   guestPhone: string | null;
+  guestAddress?: string | null;
   status: RsvpStatus;
   plusOneCount: number;
   note: string | null;
@@ -27,6 +28,7 @@ export type SerializedGuestRsvp = {
   guestName: string;
   guestEmail: string | null;
   guestPhone: string | null;
+  guestAddress: string | null;
   status: RsvpStatus;
   plusOneCount: number;
   note: string | null;
@@ -141,6 +143,7 @@ export function serializeGuestRsvp(r: GuestListRsvpInput, isHost: boolean): Seri
     guestName: r.guestName,
     guestEmail: isHost ? r.guestEmail : null,
     guestPhone: isHost ? r.guestPhone : null,
+    guestAddress: isHost ? (r.guestAddress ?? null) : null,
     status: r.status,
     plusOneCount: r.plusOneCount,
     note: r.note,
