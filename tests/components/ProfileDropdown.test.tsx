@@ -71,6 +71,6 @@ describe("ProfileDropdown", () => {
     expect(window.localStorage.getItem("rsvp:hide-effects")).toBe("1");
 
     fireEvent.click(screen.getByRole("button", { name: "Menu openen" }));
-    expect(screen.getByRole("menuitem", { name: /Show effects/ })).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Effecten tonen/ })).toBeInTheDocument();
   });
 });
