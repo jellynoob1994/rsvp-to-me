@@ -19,17 +19,17 @@ describe("ProfileDropdown", () => {
   it("shows a hamburger menu with login and effects controls when logged out", () => {
     render(<ProfileDropdown user={null} />);
 
-    const trigger = screen.getByRole("button", { name: "Open menu" });
+    const trigger = screen.getByRole("button", { name: "Menu openen" });
     expect(trigger.querySelector("svg")).not.toBeNull();
 
     fireEvent.click(trigger);
 
-    expect(screen.getByRole("menuitem", { name: /Login/ })).toHaveAttribute(
+    expect(screen.getByRole("menuitem", { name: /Inloggen/ })).toHaveAttribute(
       "href",
       "/auth/sign-in"
     );
-    expect(screen.getByRole("menuitem", { name: /Hide effects/ })).toBeInTheDocument();
-    expect(screen.queryByRole("menuitem", { name: /Sign Out/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Effecten verbergen/ })).toBeInTheDocument();
+    expect(screen.queryByRole("menuitem", { name: /Uitloggen/ })).not.toBeInTheDocument();
   });
 
   it("keeps account links and adds the effects control for logged-in viewers", () => {
@@ -44,15 +44,15 @@ describe("ProfileDropdown", () => {
       />
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Open profile menu" }));
+    fireEvent.click(screen.getByRole("button", { name: "Profielmenu openen" }));
 
     expect(screen.getByText("Jamie Host")).toBeInTheDocument();
-    expect(screen.getByRole("menuitem", { name: /Event Dashboard/ })).toBeInTheDocument();
-    expect(screen.getByRole("menuitem", { name: /Profile Settings/ })).toBeInTheDocument();
-    expect(screen.getByRole("menuitem", { name: /Help & Guides/ })).toBeInTheDocument();
-    expect(screen.getByRole("menuitem", { name: /Hide effects/ })).toBeInTheDocument();
-    expect(screen.getByRole("menuitem", { name: /Sign Out/ })).toBeInTheDocument();
-    expect(screen.queryByRole("menuitem", { name: /Login/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Evenementenoverzicht/ })).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Profielinstellingen/ })).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Hulp & handleidingen/ })).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Effecten verbergen/ })).toBeInTheDocument();
+    expect(screen.getByRole("menuitem", { name: /Uitloggen/ })).toBeInTheDocument();
+    expect(screen.queryByRole("menuitem", { name: /Inloggen/ })).not.toBeInTheDocument();
   });
 
   it("uses the same effects preference as the particle layer", () => {
@@ -64,13 +64,13 @@ describe("ProfileDropdown", () => {
     );
 
     expect(container.querySelector(".rsvp-effect-layer")).not.toBeNull();
-    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
-    fireEvent.click(screen.getByRole("menuitem", { name: /Hide effects/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Menu openen" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: /Effecten verbergen/ }));
 
     expect(container.querySelector(".rsvp-effect-layer")).toBeNull();
     expect(window.localStorage.getItem("rsvp:hide-effects")).toBe("1");
 
-    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    fireEvent.click(screen.getByRole("button", { name: "Menu openen" }));
     expect(screen.getByRole("menuitem", { name: /Show effects/ })).toBeInTheDocument();
   });
 });
