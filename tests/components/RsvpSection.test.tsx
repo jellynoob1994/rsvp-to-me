@@ -108,8 +108,8 @@ describe("RsvpSection", () => {
     expect((container.querySelector("[data-rsvp-floating]") as HTMLElement).style.maxWidth).toBe(
       "568px"
     );
-    expect(screen.getByRole("link", { name: /Going/ }).style.minHeight).toBe("44px");
-    expect(screen.getByRole("link", { name: /Going/ }).style.flexDirection).toBe("row");
+    expect(screen.getByRole("link", { name: /Aanwezig/ }).style.minHeight).toBe("44px");
+    expect(screen.getByRole("link", { name: /Aanwezig/ }).style.flexDirection).toBe("row");
   });
 
   it("docks at its natural slot and floats again after the slot scrolls above the viewport", async () => {
@@ -161,7 +161,7 @@ describe("RsvpSection", () => {
 
     expect(screen.getByText("Aanmelding ontvangen")).toBeTruthy();
     expect(screen.getByText("Wacht op goedkeuring van de organisator")).toBeTruthy();
-    expect(screen.queryByText("You’re going")).toBeNull();
+    expect(screen.queryByText("Je bent aangemeld als aanwezig")).toBeNull();
     expect(container.querySelector('[data-rsvp-status-icon="PENDING"]')).toBeTruthy();
   });
 
@@ -180,7 +180,7 @@ describe("RsvpSection", () => {
       { guestEditToken: "edit-token", rsvpStatus: "NO", rsvpDone: true },
       { rsvpDeadline: pastDeadline }
     );
-    expect(screen.getByText("Can’t make it")).toBeTruthy();
+    expect(screen.getByText("Je kunt niet komen")).toBeTruthy();
     expect(screen.queryByRole("link", { name: "Mijn aanmelding aanpassen" })).toBeNull();
     expect(
       submitted.container.querySelector("[data-rsvp-floating]")?.getAttribute("data-rsvp-floating")
