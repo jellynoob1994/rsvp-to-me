@@ -53,13 +53,13 @@ vi.mock("@/lib/rateLimit", () => ({
 }));
 vi.mock("@/lib/clientIp", () => ({ getClientIp: vi.fn().mockResolvedValue("127.0.0.1") }));
 vi.mock("@/lib/email", () => ({
-  sendRsvpConfirmationEmail: vi.fn(),
+  sendRsvpConfirmationEmail: vi.fn().mockResolvedValue(undefined),
   sendBlastEmail: vi.fn(),
   sendEventInviteEmail: vi.fn(),
   sendApprovalEmail: vi.fn(),
 }));
 vi.mock("@/lib/sms", () => ({
-  sendRsvpConfirmationSms: vi.fn(),
+  sendRsvpConfirmationSms: vi.fn().mockResolvedValue(undefined),
   sendSmsBlast: vi.fn(),
   sendApprovalSms: vi.fn(),
   sendEventInviteSms: vi.fn(),
