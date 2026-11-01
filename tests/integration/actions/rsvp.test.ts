@@ -109,7 +109,12 @@ describe("addRSVP — real DB integration", () => {
     });
 
     // Third GOING RSVP should be rejected
-    const result = await addRSVP({ eventId: event.id, guestName: "Guest 3", guestEmail: "guest-guest-3@example.com", status: "GOING" });
+    const result = await addRSVP({
+      eventId: event.id,
+      guestName: "Guest 3",
+      guestEmail: "guest-guest-3@example.com",
+      status: "GOING",
+    });
     expect(result).toMatchObject({ success: false, error: "Event is at capacity" });
 
     // MAYBE should still be allowed
@@ -126,7 +131,12 @@ describe("addRSVP — real DB integration", () => {
     const host = await seedHost();
     const event = await seedEvent(host.id, { approvalRequired: true });
 
-    const result = await addRSVP({ eventId: event.id, guestName: "Bob", guestEmail: "guest-bob@example.com", status: "GOING" });
+    const result = await addRSVP({
+      eventId: event.id,
+      guestName: "Bob",
+      guestEmail: "guest-bob@example.com",
+      status: "GOING",
+    });
     expect(result).toMatchObject({ success: true });
     if (!result.success) throw new Error("Expected success");
 
@@ -212,7 +222,12 @@ describe("addRSVP — real DB integration", () => {
     const host = await seedHost();
     const event = await seedEvent(host.id);
 
-    const result = await addRSVP({ eventId: event.id, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "GOING" });
+    const result = await addRSVP({
+      eventId: event.id,
+      guestName: "Alice",
+      guestEmail: "guest-alice@example.com",
+      status: "GOING",
+    });
     if (!result.success) throw new Error("Expected success");
 
     const rsvp = await db.rSVP.findUnique({ where: { id: result.id } });
