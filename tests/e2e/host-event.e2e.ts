@@ -14,7 +14,7 @@ test.describe("Host event management", () => {
   test("authenticated host sees host controls on their event page", async ({ page }) => {
     await page.goto(`/e/${PUBLIC_EVENT_SLUG}`);
     await expect(page.getByText("E2E Test Event")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Instellingen" })).toBeVisible({
+    await expect(page.getByRole("link", { name: "Instellingen", exact: true })).toBeVisible({
       timeout: 10_000,
     });
   });
@@ -45,7 +45,7 @@ test.describe("Host event management", () => {
     await page.getByPlaceholder("Wijnavond bij Jan").fill(CREATED_EVENT_TITLE);
     await page.locator('input[name="startDate"]').fill("2031-06-15");
     await page.locator('input[name="startTime"]').fill("19:30");
-    await page.getByRole("button", { name: /TBD/ }).click();
+    await page.getByRole("button", { name: /Nog te bepalen/ }).click();
     await page.getByLabel("Openbaar").check();
     await page.getByRole("button", { name: /Evenement aanmaken/ }).click();
 
