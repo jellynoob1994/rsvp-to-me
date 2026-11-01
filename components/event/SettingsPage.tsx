@@ -906,12 +906,12 @@ export function SettingsPage({
           {activeSection ? (
             <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
               <span style={{ cursor: "pointer", opacity: 0.6 }} onClick={closeSection}>
-                Settings
+                Instellingen
               </span>
               <span style={{ opacity: 0.4 }}>/</span>
               <span>
                 {activeSection === "theme" && "Theme"}
-                {activeSection === "hosts" && "Hosts"}
+                {activeSection === "hosts" && "Organisatoren"}
                 {activeSection === "rsvp" && "RSVP Options"}
                 {activeSection === "questionnaire" && "Questionnaire"}
                 {activeSection === "polls" && "Polls"}
@@ -947,7 +947,7 @@ export function SettingsPage({
                 boxSizing: "border-box",
               }}
             />
-            Saving...
+            Opslaan...
           </div>
         )}
       </div>
@@ -977,7 +977,7 @@ export function SettingsPage({
           }}
         >
           {saveStatus === "SAVED" ? <Check size={16} color="#22c55e" /> : <span>⚠️</span>}
-          {saveStatus === "SAVED" ? "Changes saved" : "Error saving changes"}
+          {saveStatus === "SAVED" ? "Wijzigingen opgeslagen" : "Fout bij opslaan van wijzigingen"}
         </div>
       )}
 
