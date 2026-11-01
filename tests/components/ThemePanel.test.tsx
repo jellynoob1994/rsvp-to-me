@@ -65,8 +65,8 @@ function renderPanel(overrides: Partial<React.ComponentProps<typeof ThemePanel>>
 describe("ThemePanel tabs", () => {
   it("defaults to the Theme tab: presets + customize, no effect or font controls", () => {
     const { container, queryByText, getByPlaceholderText } = renderPanel();
-    expect(getByPlaceholderText("Search themes…")).toBeTruthy();
-    expect(queryByText("Customize colors")).toBeTruthy();
+    expect(getByPlaceholderText("Zoek thema’s…")).toBeTruthy();
+    expect(queryByText("Kleuren aanpassen")).toBeTruthy();
     expect(queryByText("Density")).toBeNull();
     expect(queryByText("Theme default")).toBeNull();
     expect(container.querySelector('input[type="range"]')).toBeNull();
@@ -75,8 +75,8 @@ describe("ThemePanel tabs", () => {
   it("Effects tab shows the picker with Density, Speed, and Size each on its own row", () => {
     const { container, getByText, queryByPlaceholderText } = renderPanel();
     fireEvent.click(getByText("✨ Effects"));
-    expect(queryByPlaceholderText("Search themes…")).toBeNull();
-    expect(getByText("None")).toBeTruthy();
+    expect(queryByPlaceholderText("Zoek thema’s…")).toBeNull();
+    expect(getByText("Geen")).toBeTruthy();
     // The three controls are stacked in a dedicated column container
     const density = getByText("Density");
     const speed = getByText("Speed");
@@ -96,15 +96,15 @@ describe("ThemePanel tabs", () => {
     expect(getByText("Theme default")).toBeTruthy();
     expect(getByText("Playfair Display")).toBeTruthy();
     expect(getByText("Summer Gala")).toBeTruthy();
-    expect(getByText("Event Title Font")).toBeTruthy();
+    expect(getByText("Lettertype van de evenementtitel")).toBeTruthy();
     expect(queryByText("Density")).toBeNull();
-    expect(queryByText("Customize colors")).toBeNull();
+    expect(queryByText("Kleuren aanpassen")).toBeNull();
   });
 
   it("the Customize colors accordion no longer contains the font picker", () => {
     const { queryByText } = renderPanel({ themeCustomizeOpen: true });
     // Accordion is open on the Theme tab: colors are there, fonts are not
-    expect(queryByText("Background Colors")).toBeTruthy();
+    expect(queryByText("Achtergrondkleuren")).toBeTruthy();
     expect(queryByText("Heading Font")).toBeNull();
     expect(queryByText("Theme default")).toBeNull();
   });
@@ -128,7 +128,7 @@ describe("event page font scope", () => {
         setShowShareQr={noop}
       />
     );
-    const title = getByText("Share this event");
+    const title = getByText("Deel dit evenement");
     expect(title.style.fontFamily).toBe("");
   });
 });
