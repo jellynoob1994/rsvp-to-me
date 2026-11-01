@@ -145,10 +145,10 @@ describe("EventHero", () => {
       />
     );
 
-    const coverButton = screen.getByText("📷 Cover");
+    const coverButton = screen.getByText("📷 Omslag");
     const coverContainer = coverButton.parentElement?.parentElement;
     expect(coverContainer).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "Test Party cover" })).toHaveAttribute(
+    expect(screen.getByRole("img", { name: "Test Party omslag" })).toHaveAttribute(
       "sizes",
       "(max-width: 600px) calc(100vw - 32px), 568px"
     );
@@ -198,6 +198,6 @@ describe("EventHero", () => {
     );
 
     expect(screen.getByText("Test Party").style.fontFamily).toContain("Test Heading Font");
-    expect(screen.getByRole("heading", { name: "Description" }).style.fontFamily).toBe("");
+    expect(screen.getByRole("heading", { name: "Beschrijving" }).style.fontFamily).toBe("");
   });
 });
