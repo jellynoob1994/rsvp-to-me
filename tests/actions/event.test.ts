@@ -376,7 +376,13 @@ describe("addRSVP", () => {
   });
 
   it("sets approved: true when approval is not required", async () => {
-    await addRSVP({ eventId: EVENT_ID, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "GOING", plusOneCount: 0 });
+    await addRSVP({
+      eventId: EVENT_ID,
+      guestName: "Alice",
+      guestEmail: "guest-alice@example.com",
+      status: "GOING",
+      plusOneCount: 0,
+    });
     expect(mockRsvpCreate).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({ approved: true }),
@@ -386,7 +392,13 @@ describe("addRSVP", () => {
 
   it("sets approved: false when approval is required", async () => {
     mockEventFindUnique.mockResolvedValue({ ...BASE_EVENT, approvalRequired: true });
-    await addRSVP({ eventId: EVENT_ID, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "GOING", plusOneCount: 0 });
+    await addRSVP({
+      eventId: EVENT_ID,
+      guestName: "Alice",
+      guestEmail: "guest-alice@example.com",
+      status: "GOING",
+      plusOneCount: 0,
+    });
     expect(mockRsvpCreate).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({ approved: false }),
@@ -440,7 +452,13 @@ describe("addRSVP", () => {
     });
 
     await expect(
-      addRSVP({ eventId: EVENT_ID, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "GOING", plusOneCount: 0 })
+      addRSVP({
+        eventId: EVENT_ID,
+        guestName: "Alice",
+        guestEmail: "guest-alice@example.com",
+        status: "GOING",
+        plusOneCount: 0,
+      })
     ).resolves.toEqual({
       success: false,
       error: "RSVPs are closed because this event has started",
@@ -476,12 +494,24 @@ describe("addRSVP", () => {
 
   it("skips the capacity check entirely for MAYBE status", async () => {
     mockEventFindUnique.mockResolvedValue({ ...BASE_EVENT, capacity: 10 });
-    await addRSVP({ eventId: EVENT_ID, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "MAYBE", plusOneCount: 0 });
+    await addRSVP({
+      eventId: EVENT_ID,
+      guestName: "Alice",
+      guestEmail: "guest-alice@example.com",
+      status: "MAYBE",
+      plusOneCount: 0,
+    });
     expect(mockRsvpCount).not.toHaveBeenCalled();
   });
 
   it("revalidates the event page", async () => {
-    await addRSVP({ eventId: EVENT_ID, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "GOING", plusOneCount: 0 });
+    await addRSVP({
+      eventId: EVENT_ID,
+      guestName: "Alice",
+      guestEmail: "guest-alice@example.com",
+      status: "GOING",
+      plusOneCount: 0,
+    });
     expect(revalidatePath).toHaveBeenCalledWith(`/e/${EVENT_SLUG}`);
   });
 });
@@ -1109,7 +1139,13 @@ describe("addRSVP — note field", () => {
   });
 
   it("stores null when note is omitted", async () => {
-    await addRSVP({ eventId: EVENT_ID, guestName: "Alice", guestEmail: "guest-alice@example.com", status: "GOING", plusOneCount: 0 });
+    await addRSVP({
+      eventId: EVENT_ID,
+      guestName: "Alice",
+      guestEmail: "guest-alice@example.com",
+      status: "GOING",
+      plusOneCount: 0,
+    });
     expect(mockRsvpCreate).toHaveBeenCalledWith(
       expect.objectContaining({
         data: expect.objectContaining({ note: null }),

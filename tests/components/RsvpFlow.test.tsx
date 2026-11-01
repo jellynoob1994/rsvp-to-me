@@ -144,9 +144,9 @@ describe("RsvpFlow — new RSVP", () => {
     fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Alice" },
     });
-      fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
-        target: { value: "alice@example.com" },
-      });
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "alice@example.com" },
+    });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
@@ -164,9 +164,9 @@ describe("RsvpFlow — new RSVP", () => {
     fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Bob" },
     });
-      fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
-        target: { value: "bob@example.com" },
-      });
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "bob@example.com" },
+    });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
@@ -183,9 +183,9 @@ describe("RsvpFlow — new RSVP", () => {
     fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Carol" },
     });
-      fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
-        target: { value: "carol@example.com" },
-      });
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "carol@example.com" },
+    });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
 
     await waitFor(() => {
@@ -212,9 +212,9 @@ describe("RsvpFlow — confirmation heading race (create → RSC refresh)", () =
     fireEvent.change(screen.getByPlaceholderText("Je naam (verplicht)"), {
       target: { value: "Alice" },
     });
-      fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
-        target: { value: "alice@example.com" },
-      });
+    fireEvent.change(screen.getByPlaceholderText("E-mailadres (verplicht)"), {
+      target: { value: "alice@example.com" },
+    });
     fireEvent.click(screen.getByText("RSVP bevestigen"));
     await waitFor(() => {
       expect(screen.getByText("You're in!")).toBeInTheDocument();

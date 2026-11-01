@@ -95,8 +95,18 @@ describe("addRSVP — real DB integration", () => {
     const event = await seedEvent(host.id, { capacity: 2 });
 
     // Fill capacity
-    await addRSVP({ eventId: event.id, guestName: "Guest 1", guestEmail: "guest-guest-1@example.com", status: "GOING" });
-    await addRSVP({ eventId: event.id, guestName: "Guest 2", guestEmail: "guest-guest-2@example.com", status: "GOING" });
+    await addRSVP({
+      eventId: event.id,
+      guestName: "Guest 1",
+      guestEmail: "guest-guest-1@example.com",
+      status: "GOING",
+    });
+    await addRSVP({
+      eventId: event.id,
+      guestName: "Guest 2",
+      guestEmail: "guest-guest-2@example.com",
+      status: "GOING",
+    });
 
     // Third GOING RSVP should be rejected
     const result = await addRSVP({ eventId: event.id, guestName: "Guest 3", guestEmail: "guest-guest-3@example.com", status: "GOING" });
