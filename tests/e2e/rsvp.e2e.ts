@@ -24,7 +24,7 @@ test.describe("Guest RSVP flow", () => {
     await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
 
     // Should show confirmation
-    await expect(page.getByText("You're in!")).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText("Je bent erbij!")).toBeVisible({ timeout: 10_000 });
   });
 
   test("guest can edit RSVP via editToken in URL", async ({ page }) => {
@@ -33,7 +33,7 @@ test.describe("Guest RSVP flow", () => {
     await page.getByPlaceholder("Je naam (verplicht)").fill("Edit Test Guest");
     await page.getByPlaceholder("E-mailadres (verplicht)").fill("e2e-edit@example.com");
     await page.getByRole("button", { name: /RSVP bevestigen|Verder →/ }).click();
-    await expect(page.getByText("You're in!")).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText("Je bent erbij!")).toBeVisible({ timeout: 10_000 });
 
     // The URL should now contain an editToken
     const url = new URL(page.url());
@@ -131,7 +131,7 @@ test.describe("#712 personalized invitation details journey", () => {
           const rsvpUrl = new URL(page.url());
           expect(rsvpUrl.searchParams.get("token")).toBe(editToken);
           expect(rsvpUrl.searchParams.get("status")).toBe(status);
-          await expect(page.getByText("RSVP as", { exact: true })).toBeVisible();
+          await expect(page.getByText("Aanmelden als", { exact: true })).toBeVisible();
           await expect(page.getByText(guestName, { exact: true })).toBeVisible();
           await expect(page.getByPlaceholder("Je naam (verplicht)")).toHaveCount(0);
           await expect(page.getByRole("button", { name: label, exact: true })).toHaveAttribute(
