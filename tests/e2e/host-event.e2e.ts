@@ -14,8 +14,9 @@ test.describe("Host event management", () => {
   test("authenticated host sees host controls on their event page", async ({ page }) => {
     await page.goto(`/e/${PUBLIC_EVENT_SLUG}`);
     await expect(page.getByText("E2E Test Event")).toBeVisible();
-    // Host bar or settings link should be visible for the host
-    await expect(page.getByText(/settings/i).first()).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByRole("link", { name: "Instellingen" })).toBeVisible({
+      timeout: 10_000,
+    });
   });
 
   test("dashboard shows the host's events", async ({ page }) => {
@@ -29,7 +30,7 @@ test.describe("Host event management", () => {
   test("host can open event settings", async ({ page }) => {
     await page.goto(`/e/${PUBLIC_EVENT_SLUG}/settings`);
     await expect(page.getByRole("heading", { name: "Event Settings" })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Display Options/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Weergaveopties/ })).toBeVisible();
   });
 
   test("host sees Dutch co-host management labels", async ({ page }) => {
@@ -41,12 +42,12 @@ test.describe("Host event management", () => {
 
   test("host can create an event and see the published page", async ({ page }) => {
     await page.goto("/dashboard/events/new");
-    await page.getByPlaceholder("Wine Night at Jane's").fill(CREATED_EVENT_TITLE);
+    await page.getByPlaceholder("Wijnavond bij Jan").fill(CREATED_EVENT_TITLE);
     await page.locator('input[name="startDate"]').fill("2031-06-15");
     await page.locator('input[name="startTime"]').fill("19:30");
     await page.getByRole("button", { name: /TBD/ }).click();
-    await page.getByLabel("Public").check();
-    await page.getByRole("button", { name: /Create Event/ }).click();
+    await page.getByLabel("Openbaar").check();
+    await page.getByRole("button", { name: /Evenement aanmaken/ }).click();
 
     await page.waitForURL(`**/e/${CREATED_EVENT_SLUG}`);
     await expect(page.getByRole("heading", { name: CREATED_EVENT_TITLE })).toBeVisible();
